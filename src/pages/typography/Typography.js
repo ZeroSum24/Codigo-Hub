@@ -8,7 +8,7 @@ import Widget from '../../components/Widget';
 
 const Typography = () => (
     <div>
-        <h1 className="page-title">Devices - <span className="fw-semi-bold">Texts & Display</span></h1>
+        <h1 className="page-title">Devices - <span className="fw-semi-bold"></span></h1>
         <Row>
             <Col xs={12} md={6}>
                 <Widget
