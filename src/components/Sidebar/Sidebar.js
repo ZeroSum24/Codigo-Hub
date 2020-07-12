@@ -109,7 +109,7 @@ class Sidebar extends React.Component {
                         header="Add Device"
                         isHeader
                         iconName="flaticon-network"
-                        link="/app/addDevice"
+                        link="/app/notifications"
                         index="core"
                     />
                     <LinksGroup
@@ -118,7 +118,7 @@ class Sidebar extends React.Component {
                         header="Notifications"
                         isHeader
                         iconName="flaticon-layers"
-                        link="/app/notifications"
+                        link="/app/somethingelse"
                         index="ui"
                     />
                     <LinksGroup

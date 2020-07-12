@@ -2,12 +2,16 @@ import React from 'react';
 import {
   Row, Col, Button,
 } from 'reactstrap';
+import { withRouter, Redirect, Link } from 'react-router-dom';
 
+import { Container, Alert, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label } from 'reactstrap';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import uuid from 'uuid/v4'
 import Widget from '../../components/Widget';
 import s from './Notifications.module.scss';
+import microsoft from '../../images/microsoft.png';
+import Login from '../login';
 
 class Notifications extends React.Component {
 
@@ -22,13 +26,7 @@ class Notifications extends React.Component {
   }
 
   componentDidMount() {
-    toast.success('Thanks for checking out Messenger!', {
-      position: "bottom-right",
-      autoClose: 5000,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true
-    });
+
   }
 
   addSuccessNotification = () => toast.success('Showing success message was successful!', this.state.options);
@@ -70,81 +68,57 @@ class Notifications extends React.Component {
 
   render() {
     return (
-      <div className={s.root}>
-        <h1 className="page-title">Messages - <span className="fw-semi-bold">Notifications</span>
-        </h1>
+      <Container>
+          <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Login to your Web App</h3>}>
+              <p className="widget-auth-info">
+                  Please fill all fields below.
+              </p>
+              <form onSubmit={this.doRegister}>
+                  {
+                      this.props.errorMessage && (
+                          <Alert className="alert-sm widget-middle-overflow rounded-0" color="danger">
+                              {this.props.errorMessage}
+                          </Alert>
+                      )
+                  }
+                  <FormGroup className="mt">
+                      <Label for="email">Device Name</Label>
+                      <InputGroup className="input-group-no-border">
+                          <Input id="deviceName" className="input-transparent pl-3" value={this.state.email}
+                                 onChange={this.changeEmail} type="email"
+                                 required name="Device Name" placeholder="E.g. Arduino"/>
+                      </InputGroup>
+                  </FormGroup>
 
-        <Widget title={<h6> Messenger </h6>} close collapse settings>
-          <Row>
-            <Col lg="4" xs="12">
-              <h5 className="m-t-1">Layout options</h5>
-              <p>There are few position options available for notifications. You can click any of
-                them
-                to change notifications position:</p>
-              <div className="location-selector">
-                <div
-                  className="bit top left" onClick={() => {
-                    this.toggleLocation('top-left');
-                  }}
-                />
-                <div
-                  className="bit top right" onClick={() => {
-                    this.toggleLocation('top-right');
-                  }}
-                />
-                <div
-                  className="bit top" onClick={() => {
-                    this.toggleLocation('top-center');
-                  }}
-                />
-                <div
-                  className="bit bottom left" onClick={() => {
-                    this.toggleLocation('bottom-left');
-                  }}
-                />
-                <div
-                  className="bit bottom right" onClick={() => {
-                    this.toggleLocation('bottom-right');
-                  }}
-                />
-                <div
-                  className="bit bottom" onClick={() => {
-                    this.toggleLocation('bottom-center');
-                  }}
-                />
-              </div>
-            </Col>
+                  <FormGroup className="mt">
+                      <Label for="email">Device Type</Label>
+                      <InputGroup className="input-group-no-border">
+                          <Input id="deviceType" className="input-transparent pl-3" value={this.state.email}
+                                 onChange={this.changeEmail} type="email"
+                                 required name="Device Name" placeholder="E.g. Uno"/>
+                      </InputGroup>
+                  </FormGroup>
 
-            <Col lg="4" xs="12">
-              <h5 className="m-t-1">Notification Types</h5>
-              <p>Different types of notifications for lost of use cases. Custom classes are also
-                supported.</p>
-              <p><Button color="info" id="show-info-message" onClick={this.addInfoNotification}>Info
-                Message</Button></p>
-              <p><Button color="danger" id="show-error-message" onClick={this.addErrorNotification}>Error
-                + Retry Message</Button></p>
-              <p><Button
-                color="success" id="show-success-message" onClick={this.addSuccessNotification}
-              >Success
-                Message</Button></p>
-            </Col>
+                  <FormGroup className="mt">
+                      <Label for="email">Device Serial Number</Label>
+                      <InputGroup className="input-group-no-border">
+                          <Input id="serialNumber" className="input-transparent pl-3" value={this.state.email}
+                                 onChange={this.changeEmail} type="email"
+                                 required name="Device Serial Number" placeholder="E.g. Device Serial Number"/>
+                      </InputGroup>
+                  </FormGroup>
 
-            <Col lg="4" xs="12">
-              <h5 className="m-t-1">Dead Simple Usage</h5>
-              <p>Just few lines of code to instantiate a notifications object. Does not require
-                passing any options:</p>
-              <pre className={s.notificationsCode}><code>{'toast("Thanks for checking out Messenger!");'}</code></pre>
-              <p>More complex example:</p>
-              <pre className={s.notificationsCode}>
-                <code>{'\ntoast.success( \'There was an explosion while processing your request.\', { \n position: location,\n autoClose: 5000, \n hideProgressBar: false, \n closeOnClick: true,\n pauseOnHover: true, \n draggable: true \n});\n\n'}
-                </code>
-              </pre>
-            </Col>
-          </Row>
-        </Widget>
-      </div>
-    );
-  }
+                  <div className="bg-widget-transparent auth-widget-footer">
+                      <Button type="submit" color="danger" className="auth-btn"
+                              size="sm" style={{color: '#fff'}}>{this.props.isFetching ? 'Loading...' : 'Add Device'}</Button>
+                      <p className="widget-auth-info mt-4">
+                      </p>
+                  </div>
+              </form>
+          </Widget>
+      </Container>
+     );
+   }
 }
 
 export default Notifications;
