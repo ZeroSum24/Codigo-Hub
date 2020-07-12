@@ -14,7 +14,7 @@ const Typography = () => (
                 <Widget
                     title={<h5>Device Name: <small className="text-muted">Device 1</small></h5>}
                     close collapse >
-                    <h4>Deview Details</h4>
+                    <h4>Device Details</h4>
                     <p></p>
                     <div className="widget-padding-md w-100 h-100 text-left border rounded">
                         <Row>
@@ -27,7 +27,7 @@ const Typography = () => (
                             </Col>
                             <Col sm={6}>
                             <h3>01</h3>
-                            <h3>Arudiono</h3>
+                            <h3>Arduino</h3>
                             <h3>Uno</h3>
                             <h3>Online</h3>
                             <h3>1.4.5.7</h3>
@@ -40,7 +40,7 @@ const Typography = () => (
                 <Widget
                     title={<h5>Device Name: <small className="text-muted">Device 1</small></h5>}
                     close collapse >
-                    <h4>Deview Details</h4>
+                    <h4>Device Details</h4>
                     <p></p>
                     <div className="widget-padding-md w-100 h-100 text-left border rounded">
                         <Row>
@@ -53,7 +53,7 @@ const Typography = () => (
                             </Col>
                             <Col sm={6}>
                             <h3>02</h3>
-                            <h3>Arudiono</h3>
+                            <h3>Arduino</h3>
                             <h3>Uno</h3>
                             <h3>Online</h3>
                             <h3>1.4.5.7</h3>
@@ -68,7 +68,7 @@ const Typography = () => (
                 <Widget
                     title={<h5>Device Name: <small className="text-muted">Device 1</small></h5>}
                     close collapse >
-                    <h4>Deview Details</h4>
+                    <h4>Device Details</h4>
                     <p></p>
                     <div className="widget-padding-md w-100 h-100 text-left border rounded">
                         <Row>
@@ -81,7 +81,7 @@ const Typography = () => (
                             </Col>
                             <Col sm={6}>
                             <h3>03</h3>
-                            <h3>Arudiono</h3>
+                            <h3>Arduino</h3>
                             <h3>Uno</h3>
                             <h3>Online</h3>
                             <h3>1.4.5.7</h3>
@@ -94,7 +94,7 @@ const Typography = () => (
                 <Widget
                     title={<h5>Device Name: <small className="text-muted">Device 1</small></h5>}
                     close collapse >
-                    <h4>Deview Details</h4>
+                    <h4>Device Details</h4>
                     <p></p>
                     <div className="widget-padding-md w-100 h-100 text-left border rounded">
                         <Row>
@@ -107,7 +107,7 @@ const Typography = () => (
                             </Col>
                             <Col sm={6}>
                             <h3>04</h3>
-                            <h3>Arudiono</h3>
+                            <h3>Arduino</h3>
                             <h3>Uno</h3>
                             <h3>Online</h3>
                             <h3>1.4.5.7</h3>
@@ -122,7 +122,7 @@ const Typography = () => (
                 <Widget
                     title={<h5>Device Name: <small className="text-muted">Device 1</small></h5>}
                     close collapse >
-                    <h4>Deview Details</h4>
+                    <h4>Device Details</h4>
                     <p></p>
                     <div className="widget-padding-md w-100 h-100 text-left border rounded">
                         <Row>
@@ -135,7 +135,7 @@ const Typography = () => (
                             </Col>
                             <Col sm={6}>
                             <h3>05</h3>
-                            <h3>Arudiono</h3>
+                            <h3>Arduino</h3>
                             <h3>Uno</h3>
                             <h3>Online</h3>
                             <h3>1.4.5.7</h3>
@@ -148,7 +148,7 @@ const Typography = () => (
                 <Widget
                     title={<h5>Device Name: <small className="text-muted">Device 1</small></h5>}
                     close collapse >
-                    <h4>Deview Details</h4>
+                    <h4>Device Details</h4>
                     <p></p>
                     <div className="widget-padding-md w-100 h-100 text-left border rounded">
                         <Row>
@@ -161,7 +161,7 @@ const Typography = () => (
                             </Col>
                             <Col sm={6}>
                             <h3>06</h3>
-                            <h3>Arudiono</h3>
+                            <h3>Arduino</h3>
                             <h3>Uno</h3>
                             <h3>Online</h3>
                             <h3>1.4.5.7</h3>
