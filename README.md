@@ -1,68 +1,89 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# 🤘 Light Blue React Template
 
-## Available Scripts
+Free and open-source admin dashboard template built with React and Bootstrap 4. Developed with ❤️ by [Flatlogic](https://flatlogic.com/). If you love our project please star ⭐️ our repo!
 
-In the project directory, you can run:
+**Development at risk! Our developer wants to eat and accepted a job offer from McDonalds! Buy a [full version of Light Blue React](https://flatlogic.com/templates/light-blue-react) to help us hire him again!** *
 
-### `yarn start`
+[View Demo](https://flatlogic.github.io/light-blue-react-template/) | [Download](https://github.com/flatlogic/light-blue-react-template.git) | [More templates](https://flatlogic.com/templates)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[![image](https://user-images.githubusercontent.com/43149862/78150582-270b4380-7440-11ea-826a-64e99b77d06d.png)](https://flatlogic.github.io/light-blue-react-template/)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+This dashboard is a lite version (containing only few components) of our [Light Blue React](https://flatlogic.com/templates/light-blue-react). There are all ready-to-use components, that are in full version. It is built on the top of React 16, so it well supported along the web. You can easy customize template by changing SCSS variables. All paddings and colors are in _variables.scss file.
 
-### `yarn test`
+## Features
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Light Blue React Template is a great template to quick-start development of SAAS, CMS, IoT Dashboard, E-Commerce apps, etc  
+Lite version of a Light Blue includes following features and pages:
 
-### `yarn build`
+* Bootstrap 4+ & SCSS
+* Responsive layout
+* React Chart.js
+* Simple login / logout 
+* Error page
+* Styled Bootstrap components like buttons, modals, etc
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Pages
+We have implemented some basic pages, so you can see our template in action.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Dashboard sample
+* Typography
+* Tables
+* Notifications
+* Charts
+* Icons
+* Maps
+* Chat
+* Login
+* Error page
 
-### `yarn eject`
+## Instalation 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Clone repository
+```shell
+git clone https://github.com/flatlogic/light-blue-react-template.git
+```
+2. Get in the project folder
+```shell
+cd light-blue-react-template
+```
+3. Install dependencies via npm or yarn
+```shell
+npm install
+```
+```shell
+yarn
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Quick start
+Run development server
+```shell
+yarn run
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Support
+For any additional information please refer to [Flatlogic homepage](https://flatlogic.com).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## How can I support developers?
+- Star our GitHub repo :star:
+- [Tweet about it](https://twitter.com/intent/tweet?text=Amazing%20dashboard%20built%20with%20%23VueJS%20and%20%23Bootstrap!&url=https://github.com/flatlogic/light-blue-vue-admin&via=flatlogic).
+- Create pull requests, submit bugs, suggest new features or documentation updates :wrench:
+- Follow [@flatlogic on Twitter](https://twitter.com/flatlogic).
+- Subscribe to Flatlogic newsletter at [flatlogic.com](https://flatlogic.com/)
+- Like our page on [Facebook](https://www.facebook.com/flatlogic/) :thumbsup:
 
-## Learn More
+## More from Flatlogic
+- [Awesome Bootstrap Checkboxes & Radios](https://github.com/flatlogic/awesome-bootstrap-checkbox) - ✅ Pure css way to make inputs look prettier
+- [React Native Starter](https://github.com/flatlogic/react-native-starter) - 🚀 A powerful react native starter template that bootstraps development of your mobile application
+- [React Dashboard](https://github.com/flatlogic/react-dashboard) - 🔥 React Dashboard - isomorphic admin dashboard template with GraphQL
+- [Sing App](https://github.com/flatlogic/sing-app) - 💥 Free and open-source admin dashboard template built with Bootstrap 4
+- [Light Blue Dashboard](https://github.com/flatlogic/light-blue-dashboard) - 💦 Free and open-source (no frameworks) admin dashboard template built with Bootstrap
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Premium themes
+Looking for premium themes and templates? Check out our other template at [flatlogic.com](https://flatlogic.com/admin-dashboards).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## License
 
-### Code Splitting
+Light Blue React Template version is [MIT](https://github.com/flatlogic/light-blue-react-template/blob/master/LICENCE)-licensed.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* that's a joke actually, but we would really appreciate if you support us by buying a premium version. Anyways free is just free and is limited to only few components, while premium one has more and comes with premium support.
