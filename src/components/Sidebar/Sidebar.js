@@ -73,7 +73,7 @@ class Sidebar extends React.Component {
                 <header className={s.logo}>
                     <a href="https://demo.flatlogic.com/light-blue-react/">Codigo <span
                         className="fw-bold">Admin Panel</span></a>
-                </header>/app/main
+                </header>
                 <ul className={s.nav}>
                     <LinksGroup
                         onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
@@ -99,9 +99,18 @@ class Sidebar extends React.Component {
                         activeItem={this.props.activeItem}
                         header="Device Status"
                         isHeader
-                        iconName="flaticon-map-location"
+                        iconName="flaticon-list"
                         link="/app/tables"
                         index="tables"
+                    />
+                    <LinksGroup
+                        onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
+                        activeItem={this.props.activeItem}
+                        header="Add Device"
+                        isHeader
+                        iconName="flaticon-network"
+                        link="/app/notifications"
+                        index="core"
                     />
                     <LinksGroup
                         onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
@@ -109,7 +118,7 @@ class Sidebar extends React.Component {
                         header="Notifications"
                         isHeader
                         iconName="flaticon-layers"
-                        link="/app/notifications"
+                        link="/app/somethingelse"
                         index="ui"
                     />
                     <LinksGroup

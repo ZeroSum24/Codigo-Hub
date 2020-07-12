@@ -207,7 +207,7 @@ class Register extends React.Component {
                     {/*</Widget>*/}
                 </Container>
                 <footer className="auth-footer">
-                    2020 &copy; Sing App - React Admin Dashboard Template.
+                    2020 &copy;Codigo Admin Dashboard.
                 </footer>
             </div>
         );
@@ -222,4 +222,3 @@ function mapStateToProps(state) {
 }
 
 export default withRouter(connect(mapStateToProps)(Register));
-
