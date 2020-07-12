@@ -73,7 +73,7 @@ class Sidebar extends React.Component {
                 <header className={s.logo}>
                     <a href="https://demo.flatlogic.com/light-blue-react/">Codigo <span
                         className="fw-bold">Admin Panel</span></a>
-                </header>/app/main
+                </header>
                 <ul className={s.nav}>
                     <LinksGroup
                         onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
