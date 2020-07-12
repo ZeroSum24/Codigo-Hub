@@ -69,6 +69,7 @@
     "bootstrap": "4.5.0",
     "bootstrap_calendar": "https://github.com/xero/bootstrap_calendar.git#1.0.1",
     "classnames": "^2.2.6",
+    "cross-env": "^7.0.2",
     "echarts": "^4.8.0",
     "echarts-for-react": "^2.0.16",
     "font-awesome": "4.7.0",
