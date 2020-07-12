@@ -79,11 +79,6 @@ class Static extends React.Component {
       <div className={s.root}>
         <h2 className="page-title">Device Status <span className="fw-semi-bold"></span></h2>
         <Row>
-          <Col>
-
-          </Col>
-        </Row>
-        <Row>
           <Col lg={6}>
             <Widget
               title={<h5><span className="fw-semi-bold"></span></h5>} settings close>
