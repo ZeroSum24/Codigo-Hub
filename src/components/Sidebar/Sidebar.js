@@ -91,7 +91,7 @@ class Sidebar extends React.Component {
                         header="Device Overview"
                         isHeader
                         iconName="flaticon-network"
-                        link="/app/typography"
+                        link="/app/deviceOverview"
                         index="core"
                     />
                     <LinksGroup
