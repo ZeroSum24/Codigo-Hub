@@ -158,7 +158,7 @@ class Header extends React.Component {
                 <img src={avatar} alt="..."/>
               </span>
               <span className={`small ${s.accountCheck}`}>Philip Schofield</span>
-              <Badge className={s.badge} color="primary">1</Badge>
+              <Badge className={s.badge} color="primary"></Badge>
             </DropdownToggle>
             <DropdownMenu right className={`${s.notificationsWrapper} py-0 animate__animated animate__faster animate__fadeInUp`}>
               <Notifications />
@@ -170,9 +170,7 @@ class Header extends React.Component {
             </NavLink>
           </NavItem>
           <Dropdown nav isOpen={this.state.messagesOpen} toggle={this.toggleMessagesDropdown}>
-            <DropdownToggle nav className={`${s.navItem} text-white`}>
-              <i className="glyphicon glyphicon-comments" />
-            </DropdownToggle>
+
             <DropdownMenu className={`${s.dropdownMenu} ${s.messages}`}>
             </DropdownMenu>
           </Dropdown>
@@ -195,10 +193,6 @@ class Header extends React.Component {
             </DropdownMenu>
           </Dropdown>
           <Dropdown nav isOpen={this.state.supportOpen} toggle={this.toggleSupportDropdown}>
-            <DropdownToggle nav className={`${s.navItem} text-white`}>
-              <i className="glyphicon glyphicon-globe" />
-              <span className={s.count}>19</span>
-            </DropdownToggle>
             <DropdownMenu right className={`${s.dropdownMenu} ${s.support}`}>
             </DropdownMenu>
           </Dropdown>

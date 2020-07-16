@@ -61,6 +61,7 @@ class Sidebar extends React.Component {
     doLogout() {
         this.props.dispatch(logoutUser());
     }
+    //Add devices was notifications
 
     render() {
         return (
@@ -68,8 +69,7 @@ class Sidebar extends React.Component {
                 className={cx(s.root)}
                 ref={(nav) => {
                     this.element = nav;
-                }}
-            >
+                }} >
                 <header className={s.logo}>
                     <a href="https://demo.flatlogic.com/light-blue-react/">Código <span
                         className="fw-bold">User Panel</span></a>
@@ -82,9 +82,7 @@ class Sidebar extends React.Component {
                         isHeader
                         iconName="flaticon-home"
                         link="/app/main"
-                        index="main"
-                    />
-                    <h5 className={[s.navTitle, s.groupTitle].join(' ')}>Devices</h5>
+                        index="main" />
                     <LinksGroup
                         onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
                         activeItem={this.props.activeItem}
@@ -92,17 +90,7 @@ class Sidebar extends React.Component {
                         isHeader
                         iconName="flaticon-network"
                         link="/app/deviceOverview"
-                        index="core"
-                    />
-                    <LinksGroup
-                        onActiveSidebarItemChange={t => this.props.dispatch(changeActiveSidebarItem(t))}
-                        activeItem={this.props.activeItem}
-                        header="Device Status"
-                        isHeader
-                        iconName="flaticon-list"
-                        link="/app/tables"
-                        index="tables"
-                    />
+                        index="core" />
                     <LinksGroup
                         onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
                         activeItem={this.props.activeItem}
@@ -110,37 +98,23 @@ class Sidebar extends React.Component {
                         isHeader
                         iconName="flaticon-network"
                         link="/app/notifications"
-                        index="core"
-                    />
+                        index="core" />
+                    <LinksGroup
+                        onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
+                        activeItem={this.props.activeItem}
+                        header="Earnings"
+                        isHeader
+                        iconName="flaticon-list"
+                        link="/app/charts"
+                        index="main" />
                     <LinksGroup
                         onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
                         activeItem={this.props.activeItem}
                         header="Notifications"
                         isHeader
                         iconName="flaticon-layers"
-                        link="/app/somethingelse"
-                        index="ui"
-                    />
-                    <LinksGroup
-                        onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
-                        activeItem={this.props.activeItem}
-                        header="Firmware Update"
-                        isHeader
-                        iconName="flaticon-list"
-                        link="/app/forms"
-                        index="forms"
-                        childrenLinks={[
-                            {
-                                header: 'Search by Device ', link: '/app/charts',
-                            },
-                            {
-                                header: 'Search by Developer', link: '/app/icons',
-                            },
-                            {
-                                //header: 'Maps', link: '/app/maps',
-                            },
-                        ]}
-                    />
+                        link="/app/UserRequests"
+                        index="ui" />
                 </ul>
 
                 {}

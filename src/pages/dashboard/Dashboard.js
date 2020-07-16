@@ -64,7 +64,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className={s.root}>
-        <h1 className="page-title">Welcome to the Codigo Admin Panel &nbsp;
+        <h1 className="page-title">Welcome to the Código Admin Panel &nbsp;
           <small>
             <small></small>
           </small>
