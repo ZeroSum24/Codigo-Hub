@@ -9,7 +9,7 @@ import UIIcons from '../../pages/components/icons';
 import UINotifications from '../../pages/notifications';
 import TablesStatic from '../../pages/tables/static';
 import MapsGoogle from '../../pages/components/maps/google';
-import CoreTypography from '../../pages/typography';
+import CoredeviceOverview from '../../pages/deviceOverview';
 import Charts from '../../pages/components/charts/Charts';
 import Dashboard from '../../pages/dashboard';
 
@@ -84,12 +84,12 @@ class Layout extends React.Component {
                     <Route path="/app/charts" exact component={Charts} />
                     <Route path="/app/tables" exact component={TablesStatic} />
                     <Route path="/app/maps" exact component={MapsGoogle} />
-                    <Route path="/app/typography" exact component={CoreTypography} />
+                    <Route path="/app/deviceOverview" exact component={CoredeviceOverview} />
                   </Switch>
                 </CSSTransition>
               </TransitionGroup>
               <footer className={s.contentFooter}>
-                Light Blue React Template - React admin template made by <a href="https://flatlogic.com" >Flatlogic</a>
+                Codigo Admin Panel
               </footer>
             </main>
           </Hammer>
