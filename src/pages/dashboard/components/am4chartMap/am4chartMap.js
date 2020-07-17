@@ -90,7 +90,7 @@ class Am4chartMap extends Component {
 						<i className="fa fa-map-marker" />
 					</p>
 				</div>
-				<div className={s.map} id="map">
+				<div style={{ 'padding-top': '90px' }} className={s.map} id="map">
 					<span>Alternative content for the map</span>
 				</div>
 			</div>
