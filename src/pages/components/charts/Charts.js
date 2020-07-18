@@ -97,7 +97,6 @@ class Charts extends React.Component {
 										</tr>
 									</thead>
 									<tbody>
-
 										<tr>
 											<td/>
 											<td>Last 7 days : </td>
