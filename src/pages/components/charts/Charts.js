@@ -99,30 +99,18 @@ class Charts extends React.Component {
 									<tbody>
 										<tr>
 											<td/>
-											<td>Last 7 days : </td>
+											<td>Earnings Last 7 days : </td>
 											<td className="text-align-right fw-semi-bold">$100.10</td>
-											<td>Last 7 days : </td>
-											<td className="text-align-right fw-semi-bold">$20.10</td>
-											<td>Last 7 days : </td>
-											<td className="text-align-right fw-semi-bold">$80.00</td>
 										</tr>
 										<tr>
 											<td/>
-											<td>Last 30 days : </td>
+											<td>Earnings Last 30 days : </td>
 											<td className="text-align-right fw-semi-bold">$500.10</td>
-											<td>Last 30 days : </td>
-											<td className="text-align-right fw-semi-bold">$100.10</td>
-											<td>Last 30 days : </td>
-											<td className="text-align-right fw-semi-bold">$400.00</td>
 										</tr>
 										<tr>
 											<td/>
-											<td>Last 90 days : </td>
+											<td>Earnings Last 90 days : </td>
 											<td className="text-align-right fw-semi-bold">$1000.10</td>
-											<td>Last 90 days : </td>
-											<td className="text-align-right fw-semi-bold">$100.10</td>
-											<td>Last 90 days : </td>
-											<td className="text-align-right fw-semi-bold">$900.00</td>
 										</tr>
 									</tbody>
 								</Table>
