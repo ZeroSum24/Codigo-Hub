@@ -63,6 +63,7 @@
   "dependencies": {
     "@amcharts/amcharts4": "^4.9.28",
     "@amcharts/amcharts4-geodata": "^4.1.16",
+    "@metamask/detect-provider": "^1.1.0",
     "animate.css": "4.1.0",
     "apexcharts": "^3.19.3",
     "awesome-bootstrap-checkbox": "1.0.1",
