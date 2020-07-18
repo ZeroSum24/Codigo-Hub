@@ -78,6 +78,7 @@
     "highcharts-react-official": "^3.0.0",
     "line-awesome": "^1.3.0",
     "moment": "^2.27.0",
+    "profile-hover": "^1.1.2",
     "rc-hammerjs": "^0.6.10",
     "react": "^16.13.1",
     "react-animate-height": "^2.0.21",
