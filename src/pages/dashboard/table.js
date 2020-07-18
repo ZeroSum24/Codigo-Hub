@@ -32,10 +32,8 @@ function createData(name, calories, fat, carbs, protein, price) {
     protein,
     price,
     history: [
-      { date: '2020-01-05', customerId: 'WiFI Update', amount: 90 },
-      { date: '2020-01-02', customerId: 'BLE Compatabilitiy', amount: 213 },
-      { date: '2020-01-06', customerId: 'NFC Compatabilitiy', amount: 213 },
-
+      { date: '2020-01-05', customerId: '11091700', amount: 3 },
+      { date: '2020-01-02', customerId: 'Anonymous', amount: 1 },
     ],
   };
 }
@@ -59,20 +57,22 @@ function Row(props) {
         <TableCell align="right">{row.calories}</TableCell>
         <TableCell align="right">{row.fat}</TableCell>
         <TableCell align="right">{row.carbs}</TableCell>
+        <TableCell align="right">{row.protein}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
-                Requests
+                History
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Last request date</TableCell>
-                    <TableCell>Feature</TableCell>
-                    <TableCell align="right">Number of Requests</TableCell>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Customer</TableCell>
+                    <TableCell align="right">Amount</TableCell>
+                    <TableCell align="right">Total price ($)</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -83,7 +83,9 @@ function Row(props) {
                       </TableCell>
                       <TableCell>{historyRow.customerId}</TableCell>
                       <TableCell align="right">{historyRow.amount}</TableCell>
-
+                      <TableCell align="right">
+                        {Math.round(historyRow.amount * row.price * 100) / 100}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -115,11 +117,11 @@ Row.propTypes = {
 };
 
 const rows = [
-  createData('#1', "Uno", 4212),
-  createData('#2', "Nordic", 902),
-  createData('#3', "GL-04", 423),
-  createData('#4', "SR-04", 3432),
-  createData('#5', "PI 3", 1423),
+  createData('', 159, 6.0, 24, 4.0, 3.99),
+  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
+  createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
+  createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
+  createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
 ];
 
 export default function CollapsibleTable() {
@@ -129,9 +131,11 @@ export default function CollapsibleTable() {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Ranking</TableCell>
-            <TableCell align="right">Device</TableCell>
-            <TableCell align="right">Number of Requests</TableCell>
+            <TableCell>Dessert (100g serving)</TableCell>
+            <TableCell align="right">Calories</TableCell>
+            <TableCell align="right">Fat&nbsp;(g)</TableCell>
+            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+            <TableCell align="right">Protein&nbsp;(g)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

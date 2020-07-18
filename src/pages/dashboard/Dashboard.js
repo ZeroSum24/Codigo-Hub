@@ -82,7 +82,9 @@ class Dashboard extends React.Component {
         </Row>
         <Row>
         </Row>
+      <Demo />
       </div>
+
     );
   }
 }
