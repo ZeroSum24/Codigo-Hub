@@ -1,3 +1,5 @@
+// Login Management
+
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
@@ -38,6 +40,7 @@ export function logoutUser() {
 }
 
 export function loginUser(creds) {
+    // TODO this is where we implement an actual login implementation
     return (dispatch) => {
 
         dispatch(receiveLogin());
@@ -46,6 +49,48 @@ export function loginUser(creds) {
             localStorage.setItem('authenticated', true)
         } else {
             dispatch(loginError('Something was wrong. Try again'));
+        }
+    }
+}
+
+// Ethereum Management
+
+export const ETHEREUM_SUCCESS = 'ETHEREUM_SUCCESS';
+export const ETHEREUM_FAILURE = 'ETHEREUM_FAILURE';
+
+
+export function enableEthereum() {
+    return {
+        type: ETHEREUM_SUCCESS,
+    };
+}
+
+function ethereumEnableError(payload) {
+    return {
+        type: ETHEREUM_FAILURE,
+        payload,
+    };
+}
+
+/**
+ * Trys to enable the users Ethereum Account and returns the address if successful.
+ * @returns {function(...[*]=)}
+ */
+export function enableUserEthereum() {
+
+    return (dispatch) => {
+
+        dispatch(enableEthereum());
+
+        try {
+            // Request account access if needed
+            let ethereumAddress = window.ethereum.enable();
+            // Accounts now exposed
+            localStorage.setItem('ethereumEnabled', true);
+            localStorage.setItem('ethereumAddress', ethereumAddress);
+        } catch (error) {
+            // User denied account access...
+            dispatch(ethereumEnableError(error));
         }
     }
 }

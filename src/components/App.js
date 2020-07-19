@@ -12,8 +12,11 @@ import '../styles/theme.scss';
 import LayoutComponent from '../components/Layout';
 import Login from '../pages/login';
 import Register from '../pages/register';
-import { logoutUser } from '../actions/user';
+import {loginUser, logoutUser} from '../actions/user';
 import Loader from "./Loader";
+
+import { enableUserEthereum } from '../actions/user';
+
 
 const PrivateRoute = ({dispatch, component, ...rest }) => {
     if (!Login.isAuthenticated(JSON.parse(localStorage.getItem('authenticated')))) {
@@ -32,27 +35,18 @@ class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.handleEthereumEnable = this.handleEthereumEnable.bind(this);
-    this.state = {isEthereumEnabled: false, wasEthereumError: false};
   }
 
-  handleEthereumEnable() {
-      try {
-          // Request account access if needed
-          window.ethereum.enable();
-          // Accounts now exposed
-          this.setState({isEthereumEnabled: true});
-      } catch (error) {
-          // User denied account access...
-          this.setState({wasEthereumError: false});
-      }
-    }
+  handleEthereumEnable(e) {
+    e.preventDefault();
+    this.props.dispatch(enableUserEthereum());
+  }
 
   render() {
-    const isEthereumEnabled = this.state.isEthereumEnabled;
-    const wasEthereumError = this.state.wasEthereumError;
+
     let appView;
-    if (isEthereumEnabled) {
-      console.log("EthereumEnabledState", isEthereumEnabled);
+    if (this.props.isEthereumEnabled) {
+      // the user has successfully authenticated with ethereum
       appView = (<HashRouter>
                   <Switch>
                     <Route path="/" exact render={() => <Redirect to="/app/main"/>}/>
@@ -65,13 +59,15 @@ class App extends React.PureComponent {
                     <Redirect from="*" to="/app/main/dashboard"/>
                   </Switch>
                 </HashRouter>);
-    } else if (wasEthereumError) {
-    appView = (<div>
-                {/*TODO add in the logo here later*/}
-                <div>Ethereum Account Access Denied</div>
-                <button onClick={this.handleEthereumEnable}>Enable Ethereum</button>
-               </div>);
+    } else if (!this.props.isEthereumEnabled && this.props.errorMessage !== '') {
+      //  An error has occurred logging users in with ethereum
+      appView = (<div>
+                  {/*TODO add in the logo here later*/}
+                  <div>Ethereum Account Access Denied</div>
+                  <button onClick={this.handleEthereumEnable}>Enable Ethereum</button>
+                 </div>);
     } else {
+      // the user has not been logged in without an error having occurred (base application state)
       {/*TODO make sure the loader is centered in the middle of the screen*/}
       appView = (<Loader/>);
       this.handleEthereumEnable()
@@ -92,6 +88,8 @@ class App extends React.PureComponent {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  isEthereumEnabled: state.ethereum.isEthereumEnabled,
+  errorMessage: state.ethereum.errorMessage
 });
 
 export default connect(mapStateToProps)(App);

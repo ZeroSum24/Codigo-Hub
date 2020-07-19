@@ -1,5 +1,5 @@
 import {
-     LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS,
+     LOGIN_SUCCESS, LOGIN_FAILURE
 } from '../actions/user';
 
 const authenticated = localStorage.getItem('authenticated');
@@ -19,10 +19,6 @@ export default function auth(state = {
                 isFetching: false,
                 isAuthenticated: false,
                 errorMessage: action.payload,
-            });
-        case LOGOUT_SUCCESS:
-            return Object.assign({}, state, {
-                isAuthenticated: false,
             });
         default:
             return state;
