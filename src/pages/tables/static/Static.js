@@ -91,13 +91,13 @@ class Static extends React.Component {
                   <div className="widget-padding-md w-100 h-100 text-left border rounded">
                   <Row>
                       <Col sm={6}>
-                          <h3>Firmware ID: </h3>
-                          <h3>Developer ID: </h3>
-                          <h3>Block Number: </h3>
-                          <h3>Firmware Version: </h3>
-                          <h3>Number of downloads: </h3>
-                          <h3>Trust Rank: </h3>
-                          <h4>Description: </h4>
+                          <h3><span className="fw-semi-bold">Firmware ID:</span> </h3>
+                          <h3><span className="fw-semi-bold">Developer ID:</span> </h3>
+                          <h3><span className="fw-semi-bold">Block Number:</span> </h3>
+                          <h3><span className="fw-semi-bold">Firmware Version:</span> </h3>
+                          <h3><span className="fw-semi-bold">Number of downloads:</span> </h3>
+                          <h3><span className="fw-semi-bold">Trust Rank:</span> </h3>
+                          <h4><span className="fw-semi-bold">Description:</span> </h4>
                           <h3>&nbsp;</h3>
                           <Button type="submit" color="success" className="auth-btn" size="sm" style={{ color: '#fff' }}>
                             {
