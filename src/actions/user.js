@@ -1,5 +1,7 @@
 // Login Management
 
+import Box from '3box';
+
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
@@ -55,17 +57,26 @@ export function loginUser(creds) {
 
 // Ethereum Management
 
+export const ETHEREUM_FETCHING = 'ETHEREUM_FETCHING';
 export const ETHEREUM_SUCCESS = 'ETHEREUM_SUCCESS';
 export const ETHEREUM_FAILURE = 'ETHEREUM_FAILURE';
 
 
-export function enableEthereum() {
+export function fetchEthereumAuth() {
+    // console.log('fetching ethereum auth');
     return {
-        type: ETHEREUM_SUCCESS,
+        type: ETHEREUM_FETCHING
     };
 }
 
-function ethereumEnableError(payload) {
+export function ethereumAuthSuccess(payload) {
+    return {
+        type: ETHEREUM_SUCCESS,
+        payload
+    };
+}
+
+function ethereumAuthError(payload) {
     return {
         type: ETHEREUM_FAILURE,
         payload,
@@ -81,15 +92,26 @@ export function enableUserEthereum() {
 
     return (dispatch) => {
 
+        dispatch(fetchEthereumAuth());
+        // console.log('changed')
         try {
             // Request account access if needed
             let ethereumAddress = window.ethereum.enable();
+
+            // // Authenticate and the users 3box and app space
+            const userBox = Box.openBox(ethereumAddress, window.ethereum);
+            const userSpace = userBox.openSpace('codigo-user-space');
+
             // Accounts now exposed
-            localStorage.setItem('ethereumAddress', ethereumAddress);
-            dispatch(enableEthereum());
+            dispatch(ethereumAuthSuccess({
+                ethereumAddress: ethereumAddress,
+                user3Box: userBox,
+                user3Space: userSpace
+            }));
         } catch (error) {
             // User denied account access...
-            dispatch(ethereumEnableError(error));
+            // console.log('error caught')
+            dispatch(ethereumAuthError(error));
         }
     }
 }

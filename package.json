@@ -61,6 +61,8 @@
     "websocket-extensions": "^0.1.4"
   },
   "dependencies": {
+    "3box": "^1.20.3",
+    "3box-profile-edit-react": "^0.0.9",
     "@amcharts/amcharts4": "^4.9.28",
     "@amcharts/amcharts4-geodata": "^4.1.16",
     "@metamask/detect-provider": "^1.1.0",

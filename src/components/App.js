@@ -35,41 +35,50 @@ class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.handleEthereumEnable = this.handleEthereumEnable.bind(this);
-    this.handleEthereumEnable(); // Run ether
   }
 
   handleEthereumEnable() {
+    // console.log('enabling ethereum');
     this.props.dispatch(enableUserEthereum());
+  }
+
+  componentDidMount() {
+    if (this.props.isFetching && !this.props.isEthereumEnabled) {
+      // this represents the loading state
+      this.handleEthereumEnable();
+    }
   }
 
   render() {
 
     let appView;
+
     if (this.props.isEthereumEnabled) {
       // the user has successfully authenticated with ethereum
       appView = (<HashRouter>
-                  <Switch>
-                    <Route path="/" exact render={() => <Redirect to="/app/main"/>}/>
-                    <Route path="/app" exact render={() => <Redirect to="/app/main"/>}/>
-                    <PrivateRoute path="/app" dispatch={this.props.dispatch} component={LayoutComponent}/>
-                    <Route path="/register" exact component={Register}/>
-                    <Route path="/login" exact component={Login}/>
-                    <Route path="/error" exact component={ErrorPage}/>
-                    <Route component={ErrorPage}/>
-                    <Redirect from="*" to="/app/main/dashboard"/>
-                  </Switch>
-                </HashRouter>);
-    } else if (!this.props.isEthereumEnabled && this.props.errorMessage !== '') {
+        <Switch>
+          <Route path="/" exact render={() => <Redirect to="/app/main"/>}/>
+          <Route path="/app" exact render={() => <Redirect to="/app/main"/>}/>
+          <PrivateRoute path="/app" dispatch={this.props.dispatch} component={LayoutComponent}/>
+          <Route path="/register" exact component={Register}/>
+          <Route path="/login" exact component={Login}/>
+          <Route path="/error" exact component={ErrorPage}/>
+          <Route component={ErrorPage}/>
+          <Redirect from="*" to="/app/main/dashboard"/>
+        </Switch>
+      </HashRouter>);
+    } else if (this.props.isFetching && !this.props.isEthereumEnabled) {
+      // begin enable ethereum process (default application state at beginning of user flow)
+      // console.log('loading fetching')
+      appView = (<Loader/>); {/*TODO make sure the loader is centered in the middle of the screen*/}
+    } else {
       //  An error has occurred logging users in with ethereum
+      // console.log("Ethereum enable error", this.props.errorMessage);
       appView = (<div>
                   {/*TODO add in the logo here later*/}
                   <div>Ethereum Account Access Denied</div>
                   <button onClick={this.handleEthereumEnable}>Enable Ethereum</button>
                  </div>);
-    } else {
-      // begin enable ethereum process (default application state at beginning of user flow)
-      appView = (<Loader/>); {/*TODO make sure the loader is centered in the middle of the screen*/}
-      this.handleEthereumEnable()
     }
 
     return (
@@ -88,7 +97,7 @@ class App extends React.PureComponent {
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   isEthereumEnabled: state.ethereum.isEthereumEnabled,
-  errorMessage: state.ethereum.errorMessage
+  isFetching: state.ethereum.isFetching
 });
 
 export default connect(mapStateToProps)(App);
