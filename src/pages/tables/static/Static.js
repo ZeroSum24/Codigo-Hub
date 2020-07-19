@@ -3,6 +3,7 @@ import {
   Row,
   Col,
   Table,
+  Button,
   Progress,
   UncontrolledButtonDropdown,
   DropdownMenu,
@@ -12,7 +13,7 @@ import {
   Label,
   Badge,
 } from 'reactstrap';
-import { Button, Comment, Form } from 'semantic-ui-react'
+import { Comment, Form } from 'semantic-ui-react'
 
 import { Container, Header, List } from "semantic-ui-react";
 import { Sparklines, SparklinesBars } from 'react-sparklines';
@@ -90,12 +91,40 @@ class Static extends React.Component {
                   <div className="widget-padding-md w-100 h-100 text-left border rounded">
                   <Row>
                       <Col sm={6}>
-                          <h3>ID: </h3>
+                          <h3>Firmware ID: </h3>
+                          <h3>Developer ID: </h3>
+                          <h3>Block Number: </h3>
                           <h3>Firmware Version: </h3>
+                          <h3>Number of downloads: </h3>
+                          <h3>Trust Rank: </h3>
+                          <h4>Description: </h4>
+                          <h3>&nbsp;</h3>
+                          <Button type="submit" color="success" className="auth-btn" size="sm" style={{ color: '#fff' }}>
+                            {
+                              'Download Firmware'
+                            }
+                          </Button>
+                          <h3>&nbsp;</h3>
+                          <h3>&nbsp;</h3>
                       </Col>
                       <Col sm={6}>
                       <h3>01</h3>
+                      <h3>01</h3>
+                      <h3>01</h3>
                       <h3>v1</h3>
+                      <h3>300</h3>
+                      <h3>678</h3>
+                      <h4>Description</h4>
+                      <h3>&nbsp;</h3>
+
+                      <Button type="submit" color="danger" className="auth-btn" size="sm" style={{ color: '#fff' }}>
+                        {
+                          'Donate to developer'
+                        }
+                      </Button>
+                      <h3>&nbsp;</h3>
+                      <h3>&nbsp;</h3>
+
                       </Col>
                       <Col>
                       <Comment.Group>
@@ -111,12 +140,11 @@ class Static extends React.Component {
                             </Comment.Actions>
                             <Form reply>
                               <Form.TextArea />
-                              <Button
-                                content='Add Reply'
-                                labelPosition='left'
-                                icon='edit'
-                                primary
-                              />
+                              <Button type="submit" color="warning" className="auth-btn" size="sm" style={{ color: '#fff' }}>
+                                {
+                                  'Submit Reply'
+                                }
+                              </Button>
                             </Form>
                           </Comment.Content>
                         </Comment>
@@ -133,12 +161,11 @@ class Static extends React.Component {
                             </Comment.Actions>
                             <Form reply>
                               <Form.TextArea />
-                              <Button
-                                content='Add Comment'
-                                labelPosition='left'
-                                icon='edit'
-                                primary
-                              />
+                              <Button type="submit" color="warning" className="auth-btn" size="sm" style={{ color: '#fff' }}>
+                                {
+                                  'Post Comment'
+                                }
+                              </Button>
                             </Form>
                           </Comment.Content>
                         </Comment>
@@ -148,197 +175,8 @@ class Static extends React.Component {
                   </div>
               </Widget>
           </Col>
-          <Col xs={12} md={6}>
-              <Widget
-              title={<h5>Firmware: <small className="text-muted">v2</small></h5>}
-              close collapse >
-              <p></p>
-              <div className="widget-padding-md w-100 h-100 text-left border rounded">
-              <Row>
-                  <Col sm={6}>
-                      <h3>ID: </h3>
-                      <h3>Firmware Version: </h3>
-                  </Col>
-                  <Col sm={6}>
-                  <h3>02</h3>
-                  <h3>v2</h3>
-                  </Col>
-                  <Col>
-                  <Comment.Group>
-                    <Comment>
-                      <Comment.Avatar as='a' src='https://react.semantic-ui.com/images/avatar/small/joe.jpg' />
-                      <Comment.Content>
-                        <Comment.Metadata>
-                          <div>3 days ago</div>
-                        </Comment.Metadata>
-                        <Comment.Text>Small issue on boot</Comment.Text>
-                        <Comment.Actions>
-                          <Comment.Action active>Reply</Comment.Action>
-                        </Comment.Actions>
-                        <Form reply>
-                          <Form.TextArea />
-                          <Button
-                            content='Add Reply'
-                            labelPosition='left'
-                            icon='edit'
-                            primary
-                          />
-                        </Form>
-                      </Comment.Content>
-                    </Comment>
-                  </Comment.Group>
-                  </Col>
-                  <Col>
-                  <Comment.Group>
-                    <Comment>
-                      <Comment.Content>
-                        <Comment.Metadata>
-                        </Comment.Metadata>
-                        <Comment.Actions>
-                          <Comment.Action active>New Comment</Comment.Action>
-                        </Comment.Actions>
-                        <Form reply>
-                          <Form.TextArea />
-                          <Button
-                            content='Add Comment'
-                            labelPosition='left'
-                            icon='edit'
-                            primary
-                          />
-                        </Form>
-                      </Comment.Content>
-                    </Comment>
-                  </Comment.Group>
-                  </Col>
-              </Row>
-              </div>
-              </Widget>
-          </Col>
 
-          <Col xs={12} md={6}>
-              <Widget
-              title={<h5>Firmware: <small className="text-muted">v3</small></h5>}
-              close collapse >
-              <p></p>
-              <div className="widget-padding-md w-100 h-100 text-left border rounded">
-              <Row>
-                  <Col sm={6}>
-                      <h3>ID: </h3>
-                      <h3>Firmware Version: </h3>
-                  </Col>
-                  <Col sm={6}>
-                  <h3>03</h3>
-                  <h3>v3</h3>
-                  </Col>
-                  <Col>
-                  <Comment.Group>
-                    <Comment>
-                      <Comment.Content>
-                        <Comment.Metadata>
-                        </Comment.Metadata>
-                        <Comment.Actions>
-                          <Comment.Action active>New Comment</Comment.Action>
-                        </Comment.Actions>
-                        <Form reply>
-                          <Form.TextArea />
-                          <Button
-                            content='Add Comment'
-                            labelPosition='left'
-                            icon='edit'
-                            primary
-                          />
-                        </Form>
-                      </Comment.Content>
-                    </Comment>
-                  </Comment.Group>
-                  </Col>
-              </Row>
-              </div>
-              </Widget>
-          </Col>
-      <Col xs={12} md={6}>
-          <Widget
-          title={<h5>Firmware: <small className="text-muted">v4</small></h5>}
-          close collapse >
-          <p></p>
-          <div className="widget-padding-md w-100 h-100 text-left border rounded">
-          <Row>
-              <Col sm={6}>
-                  <h3>ID: </h3>
-                  <h3>Firmware Version: </h3>
-              </Col>
-              <Col sm={6}>
-              <h3>04</h3>
-              <h3>v4</h3>
-              </Col>
-              <Col>
-              <Comment.Group>
-                <Comment>
-                  <Comment.Content>
-                    <Comment.Metadata>
-                    </Comment.Metadata>
-                    <Comment.Actions>
-                      <Comment.Action active>New Comment</Comment.Action>
-                    </Comment.Actions>
-                    <Form reply>
-                      <Form.TextArea />
-                      <Button
-                        content='Add Comment'
-                        labelPosition='left'
-                        icon='edit'
-                        primary
-                      />
-                    </Form>
-                  </Comment.Content>
-                </Comment>
-              </Comment.Group>
-              </Col>
-          </Row>
-          </div>
-          </Widget>
-      </Col>
 
-  <Col xs={12} md={6}>
-      <Widget
-      title={<h5>Firmware: <small className="text-muted">v5</small></h5>}
-      close collapse >
-      <p></p>
-      <div className="widget-padding-md w-100 h-100 text-left border rounded">
-      <Row>
-          <Col sm={6}>
-              <h3>ID: </h3>
-              <h3>Firmware Version: </h3>
-          </Col>
-          <Col sm={6}>
-          <h3>05</h3>
-          <h3>v5</h3>
-          </Col>
-          <Col>
-          <Comment.Group>
-            <Comment>
-              <Comment.Content>
-                <Comment.Metadata>
-                </Comment.Metadata>
-                <Comment.Actions>
-                  <Comment.Action active>New Comment</Comment.Action>
-                </Comment.Actions>
-                <Form reply>
-                  <Form.TextArea />
-                  <Button
-                    content='Add Comment'
-                    labelPosition='left'
-                    icon='edit'
-                    primary
-                  />
-                </Form>
-              </Comment.Content>
-            </Comment>
-          </Comment.Group>
-          </Col>
-      </Row>
-      </div>
-      </Widget>
-  </Col>
 </Row>
 </div>
     );
