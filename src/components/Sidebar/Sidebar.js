@@ -8,7 +8,7 @@ import { dismissAlert } from '../../actions/alerts';
 import s from './Sidebar.module.scss';
 import LinksGroup from './LinksGroup';
 
-import avatar from '../../images/rsz_codigo-01.png';
+import avatar from '../../images/rsz_4rsz_codigo-01.png';
 import { changeActiveSidebarItem } from '../../actions/navigation';
 import { logoutUser } from '../../actions/user';
 
