@@ -1,4 +1,5 @@
 import { currentAccount, web3, ethereum } from './client';
+import Firmware from '../model/Firmware';
 
 export const firmwareRepoAddress = '0x3691B2BE18f186b475e81342585790DcBaC43A0b';
 export const abiFR = [
@@ -295,112 +296,6 @@ export const abiFR = [
     'payable': false,
     'stateMutability': 'nonpayable',
     'type': 'constructor'
-  }
-];
-export const abiPQ = [
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "get_min_node",
-    "outputs": [
-      {
-        "components": [
-          {
-            "name": "key",
-            "type": "int256"
-          },
-          {
-            "name": "value",
-            "type": "address"
-          }
-        ],
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "i",
-        "type": "uint8"
-      }
-    ],
-    "name": "get_specific_node",
-    "outputs": [
-      {
-        "components": [
-          {
-            "name": "key",
-            "type": "int256"
-          },
-          {
-            "name": "value",
-            "type": "address"
-          }
-        ],
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "i",
-        "type": "uint8"
-      }
-    ],
-    "name": "get_specific_key",
-    "outputs": [
-      {
-        "name": "",
-        "type": "int256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "get_min_key",
-    "outputs": [
-      {
-        "name": "",
-        "type": "int256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "key",
-        "type": "int256"
-      },
-      {
-        "name": "addr",
-        "type": "address"
-      }
-    ],
-    "name": "insert",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
   }
 ];
 export const abiWOT = [
@@ -701,12 +596,19 @@ export const abiWOT = [
 ];
 
 let firmwareRepo = null;
-let pq = null;
 let wot = null;
+
+
+/**
+ * Hardcoded constants to define all possible developers and device types. Please add your account address and favorite
+ * devices here
+ */
+export const hardcoded_developers = ['0x6d2f650eb7d7dce957c9fb19ca79adf535a93dde'];
+export const hardcoded_device_types = ['RPI4', 'Uno'];
 
 /**
  * Retrieve instance of firmware repo contract
- * @return {web3.eth.Contract} `firmwareRepo` returns the firmware Repo deployed contract
+ * @return {Contract} `firmwareRepo` returns the firmware Repo deployed contract
  */
 export function getFirmwareRepo() {
   if (firmwareRepo == null) {
@@ -715,18 +617,22 @@ export function getFirmwareRepo() {
   return firmwareRepo;
 }
 
-export async function getPQ() {
-  if (pq == null) {
-    // pq = new web3.eth.Contract(abiPQ, pqAddress);
-  }
-  return pq;
-}
-
+/**
+ * Retrieve instance of web of trust contract
+ * @return {Promise<Contract>} `wot` web of trust deployed contract
+ */
 export async function getWOT() {
   if (wot == null) {
-    // wot = new web3.eth.Contract(abiWOT, wotAddress);
+    getWOTAddress().then(address => {
+      wot = new web3.eth.Contract(abiWOT, address);
+      return wot;
+    })
   }
-  return wot;
+  return Promise.resolve(wot);
+}
+
+function getWOTAddress() {
+  return getFirmwareRepo().methods.trust_address().call();
 }
 
 /**
@@ -735,19 +641,36 @@ export async function getWOT() {
  * @param {String} `IPFS_link`
  * @param {String} `description`
  * @param {String} `device_type`
- * @param {boolean} `stable`
  * @return {Promise<string>} `tx_hash` hash of transaction
  */
-export function registerFirmware(firmware_hash, IPFS_link, description, device_type, stable) {
+export function registerFirmware(firmware_hash, IPFS_link, description, device_type) {
   if (currentAccount == null) throw Error('Initialize account first');
   return sendTransaction(firmwareRepoAddress,
-    getFirmwareRepo().methods.add_firmware(firmware_hash, IPFS_link, description, device_type, stable).encodeABI())
+    getFirmwareRepo().methods.add_firmware(firmware_hash, IPFS_link, description, device_type, true).encodeABI())
 }
 
-export function retrieveFirmwareFrom(firmware_hash, IPFS_link, description, device_type, stable) {
-  if (currentAccount == null) throw Error('Initialize account first');
-  return getFirmwareRepo().methods.add_firmware(firmware_hash, IPFS_link, description, device_type, stable)
-    .send({from: currentAccount});
+/**
+ * polls firmware repo for firmware for all hardcoded device types and hardcoded developers
+ * @return {Promise<Firmware[]>} `promises`
+ */
+export function retrieveAllAvailableFirmware() {
+  const promises = [];
+  hardcoded_device_types.forEach(dev_type => hardcoded_developers
+    .forEach(dev_addr => promises.push(retrieveFirmware(dev_type, dev_addr))));
+  return Promise.all(promises).then(responses => responses.filter(f => f != null));
+}
+
+export function retrieveFirmware(device_type, developer_address) {
+  return getFirmwareRepo().methods.get_firmware(device_type, developer_address, true).call().then(result => {
+    return new Firmware(result[0], result[1], result[2], result[3], developer_address, device_type);
+  }, () => null);
+}
+
+// doesn't work yet, overflows for some reason
+export function retrieveMostTrustedFirmwareForDevice(device_type) {
+  return getFirmwareRepo().methods.get_most_trusted_firmware(device_type, true).call().then(result => {
+    return {fw: new Firmware(result[0], result[1], result[2], result[3]), dev: result[4], trusted: result[5]};
+  });
 }
 
 /**
