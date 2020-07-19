@@ -14,12 +14,12 @@ import {
 	UncontrolledAlert,
 	Dropdown,
 	Collapse,
+	Button,
 	DropdownToggle,
 	DropdownMenu,
 	DropdownItem,
 	Badge,
 	ButtonGroup,
-	Button,
 	Form,
 	FormGroup
 } from 'reactstrap';
