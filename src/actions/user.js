@@ -63,7 +63,7 @@ export const ETHEREUM_FAILURE = 'ETHEREUM_FAILURE';
 
 
 export function fetchEthereumAuth() {
-    // console.log('fetching ethereum auth');
+    console.log('fetching ethereum auth');
     return {
         type: ETHEREUM_FETCHING
     };
@@ -90,27 +90,33 @@ function ethereumAuthError(payload) {
  */
 export function enableUserEthereum() {
 
-    return (dispatch) => {
+    return async (dispatch) => {
 
         dispatch(fetchEthereumAuth());
-        // console.log('changed')
+
         try {
             // Request account access if needed
-            let ethereumAddress = window.ethereum.enable();
+            const ethereumAddress = await window.ethereum.enable();
 
-            // // Authenticate and the users 3box and app space
-            const userBox = Box.openBox(ethereumAddress, window.ethereum);
-            const userSpace = userBox.openSpace('codigo-user-space');
+            console.log('ethereum address', ethereumAddress, typeof ethereumAddress, ethereumAddress[0],
+              typeof ethereumAddress[0]);
+
+            // Authenticate and the users 3box and app space
+            const box = await Box.create(window.ethereum);
+            const spaces = ['código-user-space'];
+            await box.auth(spaces, {address: ethereumAddress[0]});
+            await box.syncDone;
 
             // Accounts now exposed
             dispatch(ethereumAuthSuccess({
                 ethereumAddress: ethereumAddress,
-                user3Box: userBox,
-                user3Space: userSpace
+                user3Box: box,
+                user3Spaces: spaces
             }));
+
         } catch (error) {
             // User denied account access...
-            // console.log('error caught')
+            console.log('error caught', error)
             dispatch(ethereumAuthError(error));
         }
     }

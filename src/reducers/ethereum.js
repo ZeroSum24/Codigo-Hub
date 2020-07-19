@@ -7,7 +7,7 @@ export default function ethereum(state = {
     isEthereumEnabled: false,
     ethereumAddress: '',
     user3Box: null,
-    user3Space: null,
+    user3Spaces: null,
     errorMessage: ''
 }, action) {
     switch (action.type) {
@@ -21,7 +21,7 @@ export default function ethereum(state = {
                 isEthereumEnabled: true,
                 ethereumAddress: action.payload.ethereumAddress,
                 user3Box: action.payload.user3Box,
-                user3Space: action.payload.user3Space,
+                user3Spaces: action.payload.user3Spaces,
                 errorMessage: ''
             });
         case ETHEREUM_FAILURE:
@@ -30,7 +30,7 @@ export default function ethereum(state = {
                 isEthereumEnabled: false,
                 ethereumAddress: '',
                 user3Box: null,
-                user3Space: null,
+                user3Spaces: null,
                 errorMessage: action.payload
             });
         default:

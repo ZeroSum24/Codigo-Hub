@@ -38,7 +38,7 @@ class App extends React.PureComponent {
   }
 
   handleEthereumEnable() {
-    // console.log('enabling ethereum');
+    console.log('enabling ethereum');
     this.props.dispatch(enableUserEthereum());
   }
 
@@ -69,11 +69,10 @@ class App extends React.PureComponent {
       </HashRouter>);
     } else if (this.props.isFetching && !this.props.isEthereumEnabled) {
       // begin enable ethereum process (default application state at beginning of user flow)
-      // console.log('loading fetching')
+      console.log('loading fetching')
       appView = (<Loader/>); {/*TODO make sure the loader is centered in the middle of the screen*/}
     } else {
       //  An error has occurred logging users in with ethereum
-      // console.log("Ethereum enable error", this.props.errorMessage);
       appView = (<div>
                   {/*TODO add in the logo here later*/}
                   <div>Ethereum Account Access Denied</div>
@@ -97,7 +96,7 @@ class App extends React.PureComponent {
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   isEthereumEnabled: state.ethereum.isEthereumEnabled,
-  isFetching: state.ethereum.isFetching
+  isFetching: state.ethereum.isFetching,
 });
 
 export default connect(mapStateToProps)(App);
