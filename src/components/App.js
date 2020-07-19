@@ -35,10 +35,10 @@ class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.handleEthereumEnable = this.handleEthereumEnable.bind(this);
+    this.handleEthereumEnable(); // Run ether
   }
 
-  handleEthereumEnable(e) {
-    e.preventDefault();
+  handleEthereumEnable() {
     this.props.dispatch(enableUserEthereum());
   }
 
@@ -67,9 +67,8 @@ class App extends React.PureComponent {
                   <button onClick={this.handleEthereumEnable}>Enable Ethereum</button>
                  </div>);
     } else {
-      // the user has not been logged in without an error having occurred (base application state)
-      {/*TODO make sure the loader is centered in the middle of the screen*/}
-      appView = (<Loader/>);
+      // begin enable ethereum process (default application state at beginning of user flow)
+      appView = (<Loader/>); {/*TODO make sure the loader is centered in the middle of the screen*/}
       this.handleEthereumEnable()
     }
 

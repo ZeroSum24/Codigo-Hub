@@ -73,21 +73,20 @@ function ethereumEnableError(payload) {
 }
 
 /**
- * Trys to enable the users Ethereum Account and returns the address if successful.
+ * Tries to enable the users Ethereum Account and returns the address if successful. The enabled status of ethereum
+ * is false by default to allow for setting by external provider.
  * @returns {function(...[*]=)}
  */
 export function enableUserEthereum() {
 
     return (dispatch) => {
 
-        dispatch(enableEthereum());
-
         try {
             // Request account access if needed
             let ethereumAddress = window.ethereum.enable();
             // Accounts now exposed
-            localStorage.setItem('ethereumEnabled', true);
             localStorage.setItem('ethereumAddress', ethereumAddress);
+            dispatch(enableEthereum());
         } catch (error) {
             // User denied account access...
             dispatch(ethereumEnableError(error));
