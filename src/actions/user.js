@@ -62,14 +62,14 @@ export const ETHEREUM_SUCCESS = 'ETHEREUM_SUCCESS';
 export const ETHEREUM_FAILURE = 'ETHEREUM_FAILURE';
 
 
-export function fetchEthereumAuth() {
+function fetchEthereumAuth() {
     // console.log('fetching ethereum auth');
     return {
         type: ETHEREUM_FETCHING
     };
 }
 
-export function ethereumAuthSuccess(payload) {
+function ethereumAuthSuccess(payload) {
     return {
         type: ETHEREUM_SUCCESS,
         payload
@@ -126,7 +126,7 @@ export function enableUserEthereum() {
 export const FIRMWARE_SUCCESS = 'FIRMWARE_SUCCESS';
 export const FIRMWARE_FAILURE = 'FIRMWARE_FAILURE';
 
-export function firmwareLinkSuccess(payload) {
+function firmwareLinkSuccess(payload) {
     return {
         type: FIRMWARE_SUCCESS,
         payload

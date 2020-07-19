@@ -6,8 +6,8 @@ export default function ethereum(state = {
     isFetching: true,
     isEthereumEnabled: false,
     ethereumAddress: '',
-    user3Box: null,
-    user3Spaces: null,
+    userBox: null,
+    userSpace: null,
     errorMessage: ''
 }, action) {
     switch (action.type) {
@@ -20,8 +20,8 @@ export default function ethereum(state = {
                 isFetching: false,
                 isEthereumEnabled: true,
                 ethereumAddress: action.payload.ethereumAddress,
-                user3Box: action.payload.user3Box,
-                user3Spaces: action.payload.user3Spaces,
+                userBox: action.payload.user3Box,
+                userSpace: action.payload.user3Spaces,
                 errorMessage: ''
             });
         case ETHEREUM_FAILURE:
@@ -29,8 +29,8 @@ export default function ethereum(state = {
                 isFetching: false,
                 isEthereumEnabled: false,
                 ethereumAddress: '',
-                user3Box: null,
-                user3Spaces: null,
+                userBox: null,
+                userSpace: null,
                 errorMessage: action.payload
             });
         default:
