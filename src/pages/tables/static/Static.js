@@ -4,7 +4,6 @@ import {
   Col,
   Table,
   Progress,
-  Button,
   UncontrolledButtonDropdown,
   DropdownMenu,
   DropdownToggle,
@@ -13,10 +12,14 @@ import {
   Label,
   Badge,
 } from 'reactstrap';
+import { Button, Comment, Form } from 'semantic-ui-react'
+
+import { Container, Header, List } from "semantic-ui-react";
 import { Sparklines, SparklinesBars } from 'react-sparklines';
 
 import Widget from '../../../components/Widget';
 import s from './Static.module.scss';
+import Example from "./example";
 
 class Static extends React.Component {
 
@@ -76,67 +79,268 @@ class Static extends React.Component {
 
   render() {
     return (
-      <div className={s.root}>
-        <h2 className="page-title">Device Status <span className="fw-semi-bold"></span></h2>
-        <Row>
-          <Col lg={6}>
-            <Widget
-              title={<h5><span className="fw-semi-bold"></span></h5>} settings close>
-              <Table className="table-striped">
-              </Table>
-              <br /><br />
-              <p>{'The status of each device'}<code></code></p>
-              <div className="table-responsive">
-                <Table className="table-hover">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  {/* eslint-disable */}
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Arduino A</td>
-                      <td><Badge color="success" className="text-secondary" pill>Online</Badge></td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Arduino B</td>
-                      <td><Badge color="success" className="text-secondary" pill>Online</Badge></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Arduino C</td>
-                      <td><Badge color="success" className="text-secondary" pill>Online</Badge></td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Arduino D</td>
-                      <td><Badge color="success" className="text-secondary" pill>Online</Badge></td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Arduino E</td>
-                      <td><Badge color="success" className="text-secondary" pill>Online</Badge></td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Arduino F</td>
-                      <td><Badge color="success" className="text-secondary" pill>Online</Badge></td>
-                    </tr>
-                  </tbody>
-                  {/* eslint-enable */}
-                </Table>
+      <div>
+
+      <Row>
+          <Col xs={12} md={6}>
+              <Widget
+                  title={<h5>Firmware: <small className="text-muted">v1</small></h5>}
+                  close collapse >
+                  <p></p>
+                  <div className="widget-padding-md w-100 h-100 text-left border rounded">
+                  <Row>
+                      <Col sm={6}>
+                          <h3>ID: </h3>
+                          <h3>Firmware Version: </h3>
+                      </Col>
+                      <Col sm={6}>
+                      <h3>01</h3>
+                      <h3>v1</h3>
+                      </Col>
+                      <Col>
+                      <Comment.Group>
+                        <Comment>
+                          <Comment.Avatar as='a' src='https://react.semantic-ui.com/images/avatar/small/steve.jpg' />
+                          <Comment.Content>
+                            <Comment.Metadata>
+                              <div>2 days ago</div>
+                            </Comment.Metadata>
+                            <Comment.Text>Revolutionary!</Comment.Text>
+                            <Comment.Actions>
+                              <Comment.Action active>Reply</Comment.Action>
+                            </Comment.Actions>
+                            <Form reply>
+                              <Form.TextArea />
+                              <Button
+                                content='Add Reply'
+                                labelPosition='left'
+                                icon='edit'
+                                primary
+                              />
+                            </Form>
+                          </Comment.Content>
+                        </Comment>
+                      </Comment.Group>
+                      </Col>
+                      <Col>
+                      <Comment.Group>
+                        <Comment>
+                          <Comment.Content>
+                            <Comment.Metadata>
+                            </Comment.Metadata>
+                            <Comment.Actions>
+                              <Comment.Action active>New Comment</Comment.Action>
+                            </Comment.Actions>
+                            <Form reply>
+                              <Form.TextArea />
+                              <Button
+                                content='Add Comment'
+                                labelPosition='left'
+                                icon='edit'
+                                primary
+                              />
+                            </Form>
+                          </Comment.Content>
+                        </Comment>
+                      </Comment.Group>
+                      </Col>
+                  </Row>
+                  </div>
+              </Widget>
+          </Col>
+          <Col xs={12} md={6}>
+              <Widget
+              title={<h5>Firmware: <small className="text-muted">v2</small></h5>}
+              close collapse >
+              <p></p>
+              <div className="widget-padding-md w-100 h-100 text-left border rounded">
+              <Row>
+                  <Col sm={6}>
+                      <h3>ID: </h3>
+                      <h3>Firmware Version: </h3>
+                  </Col>
+                  <Col sm={6}>
+                  <h3>02</h3>
+                  <h3>v2</h3>
+                  </Col>
+                  <Col>
+                  <Comment.Group>
+                    <Comment>
+                      <Comment.Avatar as='a' src='https://react.semantic-ui.com/images/avatar/small/joe.jpg' />
+                      <Comment.Content>
+                        <Comment.Metadata>
+                          <div>3 days ago</div>
+                        </Comment.Metadata>
+                        <Comment.Text>Small issue on boot</Comment.Text>
+                        <Comment.Actions>
+                          <Comment.Action active>Reply</Comment.Action>
+                        </Comment.Actions>
+                        <Form reply>
+                          <Form.TextArea />
+                          <Button
+                            content='Add Reply'
+                            labelPosition='left'
+                            icon='edit'
+                            primary
+                          />
+                        </Form>
+                      </Comment.Content>
+                    </Comment>
+                  </Comment.Group>
+                  </Col>
+                  <Col>
+                  <Comment.Group>
+                    <Comment>
+                      <Comment.Content>
+                        <Comment.Metadata>
+                        </Comment.Metadata>
+                        <Comment.Actions>
+                          <Comment.Action active>New Comment</Comment.Action>
+                        </Comment.Actions>
+                        <Form reply>
+                          <Form.TextArea />
+                          <Button
+                            content='Add Comment'
+                            labelPosition='left'
+                            icon='edit'
+                            primary
+                          />
+                        </Form>
+                      </Comment.Content>
+                    </Comment>
+                  </Comment.Group>
+                  </Col>
+              </Row>
               </div>
-            </Widget>
+              </Widget>
           </Col>
-          <Col lg={6}>
+
+          <Col xs={12} md={6}>
+              <Widget
+              title={<h5>Firmware: <small className="text-muted">v3</small></h5>}
+              close collapse >
+              <p></p>
+              <div className="widget-padding-md w-100 h-100 text-left border rounded">
+              <Row>
+                  <Col sm={6}>
+                      <h3>ID: </h3>
+                      <h3>Firmware Version: </h3>
+                  </Col>
+                  <Col sm={6}>
+                  <h3>03</h3>
+                  <h3>v3</h3>
+                  </Col>
+                  <Col>
+                  <Comment.Group>
+                    <Comment>
+                      <Comment.Content>
+                        <Comment.Metadata>
+                        </Comment.Metadata>
+                        <Comment.Actions>
+                          <Comment.Action active>New Comment</Comment.Action>
+                        </Comment.Actions>
+                        <Form reply>
+                          <Form.TextArea />
+                          <Button
+                            content='Add Comment'
+                            labelPosition='left'
+                            icon='edit'
+                            primary
+                          />
+                        </Form>
+                      </Comment.Content>
+                    </Comment>
+                  </Comment.Group>
+                  </Col>
+              </Row>
+              </div>
+              </Widget>
           </Col>
-        </Row>
+      <Col xs={12} md={6}>
+          <Widget
+          title={<h5>Firmware: <small className="text-muted">v4</small></h5>}
+          close collapse >
+          <p></p>
+          <div className="widget-padding-md w-100 h-100 text-left border rounded">
+          <Row>
+              <Col sm={6}>
+                  <h3>ID: </h3>
+                  <h3>Firmware Version: </h3>
+              </Col>
+              <Col sm={6}>
+              <h3>04</h3>
+              <h3>v4</h3>
+              </Col>
+              <Col>
+              <Comment.Group>
+                <Comment>
+                  <Comment.Content>
+                    <Comment.Metadata>
+                    </Comment.Metadata>
+                    <Comment.Actions>
+                      <Comment.Action active>New Comment</Comment.Action>
+                    </Comment.Actions>
+                    <Form reply>
+                      <Form.TextArea />
+                      <Button
+                        content='Add Comment'
+                        labelPosition='left'
+                        icon='edit'
+                        primary
+                      />
+                    </Form>
+                  </Comment.Content>
+                </Comment>
+              </Comment.Group>
+              </Col>
+          </Row>
+          </div>
+          </Widget>
+      </Col>
+
+  <Col xs={12} md={6}>
+      <Widget
+      title={<h5>Firmware: <small className="text-muted">v5</small></h5>}
+      close collapse >
+      <p></p>
+      <div className="widget-padding-md w-100 h-100 text-left border rounded">
+      <Row>
+          <Col sm={6}>
+              <h3>ID: </h3>
+              <h3>Firmware Version: </h3>
+          </Col>
+          <Col sm={6}>
+          <h3>05</h3>
+          <h3>v5</h3>
+          </Col>
+          <Col>
+          <Comment.Group>
+            <Comment>
+              <Comment.Content>
+                <Comment.Metadata>
+                </Comment.Metadata>
+                <Comment.Actions>
+                  <Comment.Action active>New Comment</Comment.Action>
+                </Comment.Actions>
+                <Form reply>
+                  <Form.TextArea />
+                  <Button
+                    content='Add Comment'
+                    labelPosition='left'
+                    icon='edit'
+                    primary
+                  />
+                </Form>
+              </Comment.Content>
+            </Comment>
+          </Comment.Group>
+          </Col>
+      </Row>
       </div>
+      </Widget>
+  </Col>
+</Row>
+</div>
     );
   }
 

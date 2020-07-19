@@ -65,7 +65,6 @@ class Sidebar extends React.Component {
 	doLogout() {
 		this.props.dispatch(logoutUser());
 	}
-	//Add devices was notifications
 
 	render() {
 		return (
@@ -118,7 +117,7 @@ class Sidebar extends React.Component {
 						header="Firmware Comments"
 						isHeader
 						iconName="flaticon-layers"
-						link="/app/notifications"
+						link="/app/tables"
 						index="ui"
 					/>
 				</ul>
