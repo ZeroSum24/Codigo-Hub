@@ -122,6 +122,14 @@ class Sidebar extends React.Component {
 						link="/app/tables"
 						index="ui"
 					/>
+          <LinksGroup
+            onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
+            activeItem={this.props.activeItem}
+            header="Developer"
+            isHeader
+            iconName="flaticon-menu"
+            link="/app/developer"
+            index="developer" />
 				</ul>
 
 				{}

@@ -18,6 +18,7 @@ import Sidebar from '../Sidebar';
 import BreadcrumbHistory from '../BreadcrumbHistory';
 import { openSidebar, closeSidebar } from '../../actions/navigation';
 import s from './Layout.module.scss';
+import DeveloperView from '../../pages/developer';
 
 class Layout extends React.Component {
   static propTypes = {
@@ -85,6 +86,7 @@ class Layout extends React.Component {
                     <Route path="/app/tables" exact component={TablesStatic} />
                     <Route path="/app/maps" exact component={MapsGoogle} />
                     <Route path="/app/deviceOverview" exact component={CoredeviceOverview} />
+                    <Route path="/app/developer" exact component={DeveloperView} />
                   </Switch>
                 </CSSTransition>
               </TransitionGroup>
