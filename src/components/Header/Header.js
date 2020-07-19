@@ -2,6 +2,9 @@ import { connect } from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
+import ProfileHover from "profile-hover";
+import AutoCompleteText from './AutoCompleteText';
 import {
 	Navbar,
 	Nav,
@@ -23,14 +26,13 @@ import {
 	Form,
 	FormGroup
 } from 'reactstrap';
+
 import Notifications from '../Notifications';
 import { logoutUser } from '../../actions/user';
 import { openSidebar, closeSidebar, changeSidebarPosition, changeSidebarVisibility } from '../../actions/navigation';
-import { Link } from 'react-router-dom';
-
+import 'animate.css';
 import s from './Header.module.scss';
 import 'animate.css';
-import ProfileHover from "profile-hover";
 
 class Header extends React.Component {
 	static propTypes = {
@@ -111,35 +113,20 @@ class Header extends React.Component {
 	}
 
 	render() {
+		const Firmwares = [
+			{ title: 'Uno' },
+			{ title: 'Nordic' },
+			{ title: 'GL-04' },
+			{ title: 'SR-04' },
+			{ title: 'PI 3' }
+		];
 		return (
 			<Navbar className={`d-print-none ${s.root}`}>
 				<Collapse className={`${s.searchCollapse} ml-lg-0 mr-md-3`} isOpen={this.state.searchOpen}>
-					<InputGroup className={`${s.navbarForm} ${this.state.searchFocused ? s.navbarFormFocused : ''}`}>
-						<InputGroupAddon addonType="prepend" className={s.inputAddon}>
-							<InputGroupText>
-								<i className="fa fa-search" />
-							</InputGroupText>
-						</InputGroupAddon>
-						<Input
-							id="search-input-2"
-							placeholder="Search..."
-							className="input-transparent"
-							onFocus={() => this.setState({ searchFocused: true })}
-							onBlur={() => this.setState({ searchFocused: false })}
-						/>
-					</InputGroup>
+					<InputGroup className={`${s.navbarForm} ${this.state.searchFocused ? s.navbarFormFocused : ''}`} />
 				</Collapse>
 				<Form className="d-md-down-none mr-3 ml-3" inline>
-					<FormGroup>
-						<InputGroup className="input-group-no-border">
-							<InputGroupAddon addonType="prepend">
-								<InputGroupText>
-									<i className="fa fa-search text-white" />
-								</InputGroupText>
-							</InputGroupAddon>
-							<Input id="search-input" className="input-transparent" placeholder="Search" />
-						</InputGroup>
-					</FormGroup>
+					<AutoCompleteText firmwares={Firmwares} />
 				</Form>
 
 				<Nav className="ml-md-0 d-flex nav-responsive">

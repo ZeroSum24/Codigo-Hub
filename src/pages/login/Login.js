@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import avatar from '../../images/rsz_4rsz_codigo-01.png';
 import {
 	Container,
 	Alert,

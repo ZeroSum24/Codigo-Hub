@@ -1,4 +1,7 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import Demo from './demo';
+
 import {
   Row,
   Col,
@@ -64,13 +67,13 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className={s.root}>
-        <h1 className="page-title">Welcome to the Código Admin Panel &nbsp;
+        <h1 align="centre" className="page-title">Welcome to the Código Admin Panel &nbsp;
           <small>
             <small></small>
           </small>
         </h1>
         <Row>
-          <Col lg={7}>
+          <Col lg={9}>
             <Widget className="bg-transparent">
               <Map />
             </Widget>
@@ -79,7 +82,14 @@ class Dashboard extends React.Component {
         </Row>
         <Row>
         </Row>
+        <h2 className="page-title">Most popular user firmware requests &nbsp;
+          <small>
+            <small></small>
+          </small>
+        </h2>
+      <Demo />
       </div>
+
     );
   }
 }

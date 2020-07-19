@@ -69,7 +69,7 @@ class Notifications extends React.Component {
   render() {
     return (
       <Container>
-          <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Add a device</h3>}>
+          <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Deploy new firmware</h3>}>
               <p className="widget-auth-info">
                   Please fill all fields below.
               </p>
@@ -107,9 +107,12 @@ class Notifications extends React.Component {
                                  required name="Device Serial Number" placeholder="E.g. Device Serial Number"/>
                       </InputGroup>
                   </FormGroup>
+                  <Button type="submit" color="green" className="auth-btn"
+                          size="sm" style={{color: '#fff'}}>{this.props.isFetching ? 'Loading...' : 'Upload Binary'}
+                  </Button>
 
                   <div className="bg-widget-transparent auth-widget-footer">
-                      <Button type="submit" color="danger" className="auth-btn"
+                      <Button type="submit" color="warning" className="auth-btn"
                               size="sm" style={{color: '#fff'}}>{this.props.isFetching ? 'Loading...' : 'Add Device'}</Button>
                       <p className="widget-auth-info mt-4">
                       </p>
