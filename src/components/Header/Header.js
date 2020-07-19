@@ -27,14 +27,11 @@ import Notifications from '../Notifications';
 import { logoutUser } from '../../actions/user';
 import { openSidebar, closeSidebar, changeSidebarPosition, changeSidebarVisibility } from '../../actions/navigation';
 
-import sender1 from '../../images/1.png';
-import sender2 from '../../images/2.png';
-import sender3 from '../../images/3.png';
-
 import avatar from '../../images/people/a5.jpg';
 
 import s from './Header.module.scss';
 import 'animate.css';
+import AutoCompleteText from './AutoCompleteText';
 
 class Header extends React.Component {
 	static propTypes = {
@@ -115,35 +112,20 @@ class Header extends React.Component {
 	}
 
 	render() {
+		const Firmwares = [
+			{ title: 'Uno' },
+			{ title: 'Nordic' },
+			{ title: 'GL-04' },
+			{ title: 'SR-04' },
+			{ title: 'PI 3' }
+		];
 		return (
 			<Navbar className={`d-print-none ${s.root}`}>
 				<Collapse className={`${s.searchCollapse} ml-lg-0 mr-md-3`} isOpen={this.state.searchOpen}>
-					<InputGroup className={`${s.navbarForm} ${this.state.searchFocused ? s.navbarFormFocused : ''}`}>
-						<InputGroupAddon addonType="prepend" className={s.inputAddon}>
-							<InputGroupText>
-								<i className="fa fa-search" />
-							</InputGroupText>
-						</InputGroupAddon>
-						<Input
-							id="search-input-2"
-							placeholder="Search..."
-							className="input-transparent"
-							onFocus={() => this.setState({ searchFocused: true })}
-							onBlur={() => this.setState({ searchFocused: false })}
-						/>
-					</InputGroup>
+					<InputGroup className={`${s.navbarForm} ${this.state.searchFocused ? s.navbarFormFocused : ''}`} />
 				</Collapse>
 				<Form className="d-md-down-none mr-3 ml-3" inline>
-					<FormGroup>
-						<InputGroup className="input-group-no-border">
-							<InputGroupAddon addonType="prepend">
-								<InputGroupText>
-									<i className="fa fa-search text-white" />
-								</InputGroupText>
-							</InputGroupAddon>
-							<Input id="search-input" className="input-transparent" placeholder="Search" />
-						</InputGroup>
-					</FormGroup>
+					<AutoCompleteText firmwares={Firmwares} />
 				</Form>
 
 				<Nav className="ml-md-0 d-flex nav-responsive">
