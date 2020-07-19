@@ -105,16 +105,6 @@ class Sidebar extends React.Component {
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
-						header="Add Device"
-						isHeader
-						iconName="flaticon-network"
-						link="/app/notifications"
-						index="core"
-					/>
-					<LinksGroup
-						onActiveSidebarItemChange={(activeItem) =>
-							this.props.dispatch(changeActiveSidebarItem(activeItem))}
-						activeItem={this.props.activeItem}
 						header="Earnings"
 						isHeader
 						iconName="flaticon-list"
@@ -125,10 +115,10 @@ class Sidebar extends React.Component {
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
-						header="Notifications"
+						header="Firmware Comments"
 						isHeader
 						iconName="flaticon-layers"
-						link="/app/UserRequests"
+						link="/app/notifications"
 						index="ui"
 					/>
 				</ul>

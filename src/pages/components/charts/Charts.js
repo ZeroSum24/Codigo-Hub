@@ -75,7 +75,7 @@ class Charts extends React.Component {
 							title={
 								<h6>
 									{' '}
-									Market <span className="fw-semi-bold">Stats</span>
+									Firmware <span className="fw-semi-bold">Net Earnings</span>
 								</h6>
 							}
 							close
@@ -98,24 +98,23 @@ class Charts extends React.Component {
 									</thead>
 									<tbody>
 										<tr>
-											<td />
+											<td/>
 											<td>Earnings Last 7 days : </td>
 											<td className="text-align-right fw-semi-bold">$100.10</td>
 										</tr>
 										<tr>
-											<td />
+											<td/>
 											<td>Earnings Last 30 days : </td>
-											<td className="text-align-right fw-semi-bold">$1000.00</td>
+											<td className="text-align-right fw-semi-bold">$500.10</td>
 										</tr>
 										<tr>
-											<td />
+											<td/>
 											<td>Earnings Last 90 days : </td>
-											<td className="text-align-right fw-semi-bold">$2500.00</td>
+											<td className="text-align-right fw-semi-bold">$1000.10</td>
 										</tr>
 									</tbody>
 								</Table>
 							</div>
-
 							<Row xs="2">
 								<Col sm={{ size: 'auto', offset: 1 }}>
 									{' '}
@@ -125,6 +124,8 @@ class Charts extends React.Component {
 											<DropdownItem>Firmware v1</DropdownItem>
 											<DropdownItem>Firmware v2</DropdownItem>
 											<DropdownItem>Firmware v3</DropdownItem>
+											<DropdownItem>Firmware v4</DropdownItem>
+											<DropdownItem>Firmware v5</DropdownItem>
 										</DropdownMenu>
 									</Dropdown>
 								</Col>
