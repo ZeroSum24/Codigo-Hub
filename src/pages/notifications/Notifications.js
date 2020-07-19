@@ -13,7 +13,15 @@ import s from './Notifications.module.scss';
 import microsoft from '../../images/microsoft.png';
 import Login from '../login';
 
+
 class Notifications extends React.Component {
+
+    constructor(props) {
+      super(props);
+      this.state = {
+      //  comments: commentsData,
+      };
+    }
 
   state = {
     options: {
@@ -69,53 +77,10 @@ class Notifications extends React.Component {
   render() {
     return (
       <Container>
-          <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Add a device</h3>}>
-              <p className="widget-auth-info">
-                  Please fill all fields below.
-              </p>
-              <form onSubmit={this.doRegister}>
-                  {
-                      this.props.errorMessage && (
-                          <Alert className="alert-sm widget-middle-overflow rounded-0" color="danger">
-                              {this.props.errorMessage}
-                          </Alert>
-                      )
-                  }
-                  <FormGroup className="mt">
-                      <Label for="email">Device Name</Label>
-                      <InputGroup className="input-group-no-border">
-                          <Input id="deviceName" className="input-transparent pl-3" value={this.state.email}
-                                 onChange={this.changeEmail} type="email"
-                                 required name="Device Name" placeholder="E.g. Arduino"/>
-                      </InputGroup>
-                  </FormGroup>
+      <div>
+      
+      </div>
 
-                  <FormGroup className="mt">
-                      <Label for="email">Device Type</Label>
-                      <InputGroup className="input-group-no-border">
-                          <Input id="deviceType" className="input-transparent pl-3" value={this.state.email}
-                                 onChange={this.changeEmail} type="email"
-                                 required name="Device Name" placeholder="E.g. Uno"/>
-                      </InputGroup>
-                  </FormGroup>
-
-                  <FormGroup className="mt">
-                      <Label for="email">Device Serial Number</Label>
-                      <InputGroup className="input-group-no-border">
-                          <Input id="serialNumber" className="input-transparent pl-3" value={this.state.email}
-                                 onChange={this.changeEmail} type="email"
-                                 required name="Device Serial Number" placeholder="E.g. Device Serial Number"/>
-                      </InputGroup>
-                  </FormGroup>
-
-                  <div className="bg-widget-transparent auth-widget-footer">
-                      <Button type="submit" color="danger" className="auth-btn"
-                              size="sm" style={{color: '#fff'}}>{this.props.isFetching ? 'Loading...' : 'Add Device'}</Button>
-                      <p className="widget-auth-info mt-4">
-                      </p>
-                  </div>
-              </form>
-          </Widget>
       </Container>
      );
    }

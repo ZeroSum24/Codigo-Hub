@@ -63,6 +63,9 @@
   "dependencies": {
     "@amcharts/amcharts4": "^4.9.28",
     "@amcharts/amcharts4-geodata": "^4.1.16",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "animate.css": "4.1.0",
     "apexcharts": "^3.19.3",
     "awesome-bootstrap-checkbox": "1.0.1",
@@ -98,6 +101,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "rickshaw": "1.7.1",
+    "semantic-ui-react": "^0.88.2",
+    "simple-react-comments": "^1.1.0",
     "tabler-icons": "^1.10.0"
   },
   "devDependencies": {
@@ -114,7 +119,7 @@
     "bfj": "6.1.1",
     "bundle-loader": "0.5.6",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
-    "chalk": "4.1.0",
+    "chalk": "^4.1.0",
     "css-loader": "2.1.1",
     "dotenv": "8.0.0",
     "dotenv-expand": "5.1.0",

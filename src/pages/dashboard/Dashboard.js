@@ -1,4 +1,7 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import Demo from './demo';
+
 import {
   Row,
   Col,
@@ -79,7 +82,9 @@ class Dashboard extends React.Component {
         </Row>
         <Row>
         </Row>
+      <Demo />
       </div>
+
     );
   }
 }

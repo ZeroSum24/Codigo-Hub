@@ -1,89 +1,149 @@
 import React from 'react';
 import {
-  ButtonGroup,
-  Button,
+  Row, Col, Button,
 } from 'reactstrap';
-import classnames from 'classnames';
-import NotificationsDemo from './notifications-demo/Notifications';
-import NewNotificationsDemo from './notifications-demo/NewNotifications';
-import MessagesDemo from './notifications-demo/Messages';
-import ProgressDemo from './notifications-demo/Progress';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import uuid from 'uuid/v4'
+import Widget from '../../components/Widget';
 import s from './Notifications.module.scss';
+import { Container, Header, List } from "semantic-ui-react";
 
 class Notifications extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      notificationsTabSelected: 1,
-      newNotifications: null,
-      isLoad: false,
-    };
+  state = {
+    options: {
+      position: "top-right",
+      autoClose: 5000,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true
+    }
   }
 
-  changeNotificationsTab(tab) {
-    this.setState({
-      notificationsTabSelected: tab,
-      newNotifications: null,
+  componentDidMount() {
+    toast.success('Thanks for checking out Messenger!', {
+      position: "bottom-right",
+      autoClose: 5000,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true
     });
   }
 
-  loadNotifications() {
-    this.setState({
-      isLoad: true,
-    });
+  addSuccessNotification = () => toast.success('Showing success message was successful!', this.state.options);
 
-    setTimeout(() => {
-      this.setState({
-        newNotifications: (<NewNotificationsDemo />),
-        isLoad: false,
-      });
-    }, 1500);
+  toggleLocation = (location) => {
+    this.setState(prevState => ({
+      options: {
+        ...prevState.options,
+        position: location
+      }
+    }));
   }
+
+  addInfoNotification = () => {
+    let id = uuid();
+    toast.info(
+    <div>
+      Launching thermonuclear war...
+      <Button onClick={() => this.launchNotification(id)} outline size="xs" className="width-100 mb-xs mr-xs mt-1">Cancel launch</Button>
+    </div>,
+    {...this.state.options,toastId: id},
+    );
+  }
+
+  launchNotification = (id) => toast.update(id, { ...this.state.options, render: "Thermonuclear war averted", type: toast.TYPE.SUCCESS });
+
+  addErrorNotification = () => {
+    let id = uuid();
+    toast.error(
+    <div>
+      Error destroying alien planet <br/>
+      <Button onClick={() => this.retryNotification(id)} outline size="xs" className="width-100 mb-xs mr-xs mt-1">Retry</Button>
+    </div>,
+    {...this.state.options,toastId: id}
+    );
+  }
+
+  retryNotification = (id) =>  toast.update(id, {...this.state.options, render: 'Alien planet destroyed!', type: toast.TYPE.SUCCESS });
 
   render() {
-    let notificationsTab;
-
-    switch (this.state.notificationsTabSelected) {
-      case 1:
-        notificationsTab = (<NotificationsDemo />);
-        break;
-      case 2:
-        notificationsTab = (<MessagesDemo />);
-        break;
-      case 3:
-        notificationsTab = (<ProgressDemo />);
-        break;
-      default:
-        notificationsTab = (<NotificationsDemo />);
-        break;
-    }
     return (
-      <section className={`${s.notifications} navbar-notifications`}>
-        <header className={[s.cardHeader, 'card-header'].join(' ')}>
-          <div className="text-center mb-sm">
-            <strong>You have 13 notifications</strong>
-          </div>
-          <ButtonGroup className={s.notificationButtons}>
-            <Button outline color="default" size="sm" className={s.notificationButton} onClick={() => this.changeNotificationsTab(1)} active={this.state.notificationsTabSelected === 1}>Notifications</Button>
-            <Button outline color="default" size="sm" className={s.notificationButton} onClick={() => this.changeNotificationsTab(2)} active={this.state.notificationsTabSelected === 2}>Messages</Button>
-            <Button outline color="default" size="sm" className={s.notificationButton} onClick={() => this.changeNotificationsTab(3)} active={this.state.notificationsTabSelected === 3}>Progress</Button>
-          </ButtonGroup>
-        </header>
-        {this.state.newNotifications || notificationsTab}
-        <footer className={[s.cardFooter, 'text-sm', 'card-footer'].join(' ')}>
-          <Button
-            color="link"
-            className={classnames({ disabled: this.state.isLoad }, s.btnNotificationsReload, 'btn-xs', 'float-right', 'py-0')}
-            onClick={() => this.loadNotifications()}
-            id="load-notifications-btn"
-          >
-            {this.state.isLoad ? <span><i className="la la-refresh la-spin" /> Loading...</span> : <i className="la la-refresh" />}
-          </Button>
-          <span className="fs-mini"></span>
-        </footer>
-      </section>
+      <div className={s.root}>
+        <h1 className="page-title">Messages - <span className="fw-semi-bold">Notifications</span>
+        </h1>
+
+        <Widget title={<h6> Messenger </h6>} close collapse settings>
+          <Row>
+            <Col lg="4" xs="12">
+              <h5 className="m-t-1">Layout options</h5>
+              <p>There are few position options available for notifications. You can click any of
+                them
+                to change notifications position:</p>
+              <div className="location-selector">
+                <div
+                  className="bit top left" onClick={() => {
+                    this.toggleLocation('top-left');
+                  }}
+                />
+                <div
+                  className="bit top right" onClick={() => {
+                    this.toggleLocation('top-right');
+                  }}
+                />
+                <div
+                  className="bit top" onClick={() => {
+                    this.toggleLocation('top-center');
+                  }}
+                />
+                <div
+                  className="bit bottom left" onClick={() => {
+                    this.toggleLocation('bottom-left');
+                  }}
+                />
+                <div
+                  className="bit bottom right" onClick={() => {
+                    this.toggleLocation('bottom-right');
+                  }}
+                />
+                <div
+                  className="bit bottom" onClick={() => {
+                    this.toggleLocation('bottom-center');
+                  }}
+                />
+              </div>
+            </Col>
+
+            <Col lg="4" xs="12">
+              <h5 className="m-t-1">Notification Types</h5>
+              <p>Different types of notifications for lost of use cases. Custom classes are also
+                supported.</p>
+              <p><Button color="info" id="show-info-message" onClick={this.addInfoNotification}>Info
+                Message</Button></p>
+              <p><Button color="danger" id="show-error-message" onClick={this.addErrorNotification}>Error
+                + Retry Message</Button></p>
+              <p><Button
+                color="success" id="show-success-message" onClick={this.addSuccessNotification}
+              >Success
+                Message</Button></p>
+            </Col>
+
+            <Col lg="4" xs="12">
+              <h5 className="m-t-1">Dead Simple Usage</h5>
+              <p>Just few lines of code to instantiate a notifications object. Does not require
+                passing any options:</p>
+              <pre className={s.notificationsCode}><code>{'toast("Thanks for checking out Messenger!");'}</code></pre>
+              <p>More complex example:</p>
+              <pre className={s.notificationsCode}>
+                <code>{'\ntoast.success( \'There was an explosion while processing your request.\', { \n position: location,\n autoClose: 5000, \n hideProgressBar: false, \n closeOnClick: true,\n pauseOnHover: true, \n draggable: true \n});\n\n'}
+                </code>
+              </pre>
+            </Col>
+          </Row>
+        </Widget>
+      </div>
     );
   }
 }
