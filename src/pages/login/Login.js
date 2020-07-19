@@ -49,7 +49,6 @@ class Login extends React.Component {
 
 	doLogin(e) {
 		e.preventDefault();
-		// await window.ethereum.enable()
 		this.props.dispatch(loginUser({ email: this.state.email, password: this.state.password }));
 	}
 

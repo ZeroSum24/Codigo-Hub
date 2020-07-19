@@ -18,13 +18,12 @@ const store = createStore(
 
 function startApp(provider) {
 
-
     if (provider) {
         // From now on, this should always be true:
         // provider === window.ethereum
         ReactDOM.render(
             <Provider store={store}>
-                <App />
+                <App/>
             </Provider>,
             document.getElementById('root')
         );
