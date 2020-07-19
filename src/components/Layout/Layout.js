@@ -12,6 +12,7 @@ import MapsGoogle from '../../pages/components/maps/google';
 import CoredeviceOverview from '../../pages/deviceOverview';
 import Charts from '../../pages/components/charts/Charts';
 import Dashboard from '../../pages/dashboard';
+import Profile from '../../pages/profile';
 
 import Header from '../Header';
 import Sidebar from '../Sidebar';
@@ -84,6 +85,7 @@ class Layout extends React.Component {
                     <Route path="/app/charts" exact component={Charts} />
                     <Route path="/app/tables" exact component={TablesStatic} />
                     <Route path="/app/maps" exact component={MapsGoogle} />
+                    <Route path="/app/profile" exact component={Profile} />
                     <Route path="/app/deviceOverview" exact component={CoredeviceOverview} />
                   </Switch>
                 </CSSTransition>

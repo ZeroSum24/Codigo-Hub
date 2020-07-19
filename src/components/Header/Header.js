@@ -26,12 +26,7 @@ import {
 import Notifications from '../Notifications';
 import { logoutUser } from '../../actions/user';
 import { openSidebar, closeSidebar, changeSidebarPosition, changeSidebarVisibility } from '../../actions/navigation';
-
-import sender1 from '../../images/1.png';
-import sender2 from '../../images/2.png';
-import sender3 from '../../images/3.png';
-
-import avatar from '../../images/people/a5.jpg';
+import { Link } from 'react-router-dom';
 
 import s from './Header.module.scss';
 import 'animate.css';
@@ -157,13 +152,14 @@ class Header extends React.Component {
 						style={{ marginRight: 'auto' }}
 					>
 						<DropdownToggle nav caret style={{ color: '#f4f4f5', padding: 0 }}>
-							<ProfileHover
-								address={'0xa8ee0...'}
-								orientation="bottom"
-								noCoverImg
-								showName
-								url="https://3box.io/"
-							/>
+							<Link to="/app/profile">
+								<ProfileHover
+									address={this.props.ethereumAddress}
+									orientation="bottom"
+									noCoverImg
+									showName>
+								</ProfileHover>
+							</Link>
 						</DropdownToggle>
 					</Dropdown>
 					<NavItem className="d-lg-none d-md-block d-sm-none">
@@ -221,7 +217,8 @@ function mapStateToProps(store) {
 	return {
 		isSidebarOpened: store.navigation.sidebarOpened,
 		sidebarVisibility: store.navigation.sidebarVisibility,
-		sidebarPosition: store.navigation.sidebarPosition
+		sidebarPosition: store.navigation.sidebarPosition,
+		ethereumAddress: store.ethereum.ethereumAddress
 	};
 }
 
