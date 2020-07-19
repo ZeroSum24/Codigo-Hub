@@ -116,7 +116,7 @@ class Sidebar extends React.Component {
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
-						header="Firmware Comments"
+						header="Available Firmware"
 						isHeader
 						iconName="flaticon-layers"
 						link="/app/tables"
