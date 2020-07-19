@@ -1,9 +1,9 @@
-import detectEthereumProvider from '@metamask/detect-provider';
 import Web3 from 'web3';
 
 export let currentAccount = null;
 export const ethereum = window.ethereum;
-export let web3 = window.web3;
+export let web3 = null;
+
 /**********************************************************/
 /* Handle chain (network) and chainChanged (per EIP-1193) */
 /**********************************************************/
@@ -13,13 +13,19 @@ function handleChainChanged(_chainId) {
   window.location.reload();
 }
 
-export function init() {
-  return detectEthereumProvider().then(provider => {
-    if (provider == null) {
+export function getWeb3() {
+  // init web3 for read only access on load
+    if (ethereum == null) {
       throw Error('Unable to detect ethereum wallet');
     }
-    return provider;
-  }).then(connect);
+    web3 = new Web3(ethereum);
+    window.web3 = web3;
+    return web3;
+}
+
+export function initWallet() {
+  if (web3 == null) getWeb3();
+  return connect();
 }
 
 /***********************************************************/
@@ -50,8 +56,7 @@ function handleAccountsChanged(accounts) {
 // Otherwise, you popup-spam the user like it's 1999.
 // If you fail to retrieve the user's account(s), you should encourage the user
 // to initiate the attempt.
-export function connect(provider) {
-  web3 = new Web3(provider);
+export function connect() {
   ethereum.on('chainChanged', handleChainChanged);
   ethereum.on('accountsChanged', handleAccountsChanged);
   return ethereum
