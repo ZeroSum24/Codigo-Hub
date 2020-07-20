@@ -15,14 +15,10 @@ import {
 } from 'reactstrap';
 import { Comment, Form } from 'semantic-ui-react'
 
-import { Container, Header, List } from "semantic-ui-react";
-import { Sparklines, SparklinesBars } from 'react-sparklines';
+import Widget from '../../components/Widget';
+import s from './AvailableFirmware.module.scss';
 
-import Widget from '../../../components/Widget';
-import s from './Static.module.scss';
-import Example from "./example";
-
-class Static extends React.Component {
+class AvailableFirmware extends React.Component {
 
   constructor(props) {
     super(props);
@@ -31,7 +27,7 @@ class Static extends React.Component {
       tableStyles: [
         {
           id: 5,
-          picture: require('../../../images/tables/5.png'), // eslint-disable-line global-require
+          picture: require('../../images/tables/5.png'), // eslint-disable-line global-require
           description: 'Fortress',
           info: {
             type: 'JPEG',
@@ -184,4 +180,4 @@ class Static extends React.Component {
 
 }
 
-export default Static;
+export default AvailableFirmware;
