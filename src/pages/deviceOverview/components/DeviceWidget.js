@@ -13,23 +13,21 @@ class DeviceWidget extends React.PureComponent {
     const device = this.props.device;
     return (
       <Widget
-        title={<h5>Device Name: <small className="text-muted">Device 1</small></h5>}
+        title={<h5>Device Name: <small className="text-muted">{device.name}</small></h5>}
         close collapse >
-        <h6>Device Details</h6>
         <p></p>
         <div className="widget-padding-md w-100 h-100 text-left border rounded">
+          {/*TODO there is a bug with all the text being displayed as a single line, please display as a table*/}
           <Row>
             <Col sm={6}>
-              <h7>Name: </h7>
-              <h7>Brand: </h7>
-              <h7>Model: </h7>
-              <h7>Serial Number: </h7>
+              <h6>Brand: </h6>
+              <h6>Model: </h6>
+              <h6>Serial Number: </h6>
             </Col>
             <Col sm={6}>
-              <h8>{device.name}</h8>
-              <h8>{device.brand}</h8>
-              <h8>{device.model}</h8>
-              <h8>{device.serialNumber}</h8>
+              <h7>{device.brand}</h7>
+              <h7>{device.model}</h7>
+              <h7>{device.serialNumber}</h7>
             </Col>
           </Row>
         </div>

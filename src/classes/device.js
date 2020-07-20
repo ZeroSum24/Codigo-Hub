@@ -8,3 +8,5 @@ class Device {
   }
   // TODO need to add in device location to make it tonally consistent with the dashboard
 }
+
+export default Device

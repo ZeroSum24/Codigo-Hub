@@ -1,28 +1,14 @@
-export const DEVICES_CREATE = 'DEVICES_CREATE';
-export const DEVICES_UPDATE = 'DEVICES_GET';
-export const DEVICES_DELETE = 'DEVICES_ADD';
+
 export const DEVICES_SET = 'DEVICES_SET';
 export const DEVICES_ADDING_DEVICE = 'DEVICES_ADDING_DEVICE';
 
 
 
-function removeDevice(payload) {
-  return {
-    type: DEVICES_DELETE,
-    payload
-  };
-}
+function setDevices(payload) {
+  // TODO update orbit DB datastore
 
-function addDevice(payload) {
   return {
-    type: DEVICES_CREATE,
-    payload,
-  };
-}
-
-function updateDevice(payload) {
-  return {
-    type: DEVICES_UPDATE,
+    type: DEVICES_SET,
     payload
   };
 }
@@ -33,47 +19,71 @@ function changeAddDeviceView() {
   };
 }
 
-export function setUserDevices(device) {
+/**
+ * Sets the users devices without preforming any operation on it. Called at login once retrieving
+ * the users profile details.
+ * //TODO implement retrieval of data at login
+ * @param devices
+ * @returns {function(...[*]=)}
+ */
+export function setUserDevices(devices) {
   return (dispatch) => {
-
-    // TODO update orbit DB datastore
-
-    dispatch(addDevice(device));
+    dispatch(setDevices(devices));
   }
 }
 
-export function createUserDevice(device) {
+/**
+ * Add to the device list.
+ * TODO implement UI binding and functionality
+ * @param devices the list of the users devices
+ * @param device the device to be added to the list of devices
+ * @returns {function(...[*]=)}
+ */
+export function createUserDevice(devices, device) {
   return (dispatch) => {
 
-    // TODO update orbit DB datastore
-
-    dispatch(addDevice(device));
+    devices.push(device);
+    dispatch(setDevices(devices));
   }
 }
 
-export function updateUserDevice(device) {
+/**
+ * Replaces an item in the device list.
+ * TODO implement UI binding and functionality
+ * @param device
+ * @returns {function(...[*]=)}
+ */
+export function updateUserDevice(devices) {
   return (dispatch) => {
 
     // TODO update orbit DB datastore
 
     // need to check the device is unique based on naming convention first
 
-    dispatch(updateDevice(device));
+    dispatch(setDevices(devices));
   }
 }
 
-export function deleteUserDevice(device) {
+/**
+ * Remove a device from the list based on index.
+ * TODO implement UI binding and functionality
+ * @param device
+ * @returns {function(...[*]=)}
+ */
+export function deleteUserDevice(devices) {
   return (dispatch) => {
-
-    // TODO update orbit DB datastore
 
     // need to check it is possible to delete that device
 
-    dispatch(removeDevice(device));
+    dispatch(setDevices(devices));
   }
 }
 
-
+/**
+ * Interacts with the device view by setting a flag in the store to indicate whether the UI component
+ * should be open or closed.
+ * @returns {function(...[*]=)}
+ */
 export function interactAddDeviceView() {
   console.log('have clicked open device view');
   return (dispatch) => {

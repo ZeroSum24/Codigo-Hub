@@ -47,11 +47,12 @@ class DeviceOverview extends React.PureComponent {
 }
 
 function DeviceListView(props) {
+  console.log("Device List Props", props);
 
     let view;
 
     if (props.deviceList.length > 0) {
-      view = (this.props.deviceList.map((item) =>
+      view = (props.deviceList.map((item) =>
         <DeviceWidget device={item}/>)
       );
     } else {

@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Widget from '../../../components/Widget';
 
 import { createUserDevice } from "../../../actions/profile"
-import Device from '../../../classes/device'
+import Device from '../../../classes/Device'
 import Toast from "reactstrap/lib/Toast";
 import {connect} from "react-redux";
 
@@ -29,20 +29,20 @@ class AddDevicePopup extends React.PureComponent  {
       serialNumber: '',
       addDeviceSuccess: false
     };
+
     this.handleAddDevice = this.handleAddDevice.bind(this);
+    this.changeDeviceName = this.changeDeviceName.bind(this)
+    this.changeDeviceBrand = this.changeDeviceBrand.bind(this)
+    this.changeDeviceModel = this.changeDeviceModel.bind(this)
+    this.changeSerialNumber = this.changeSerialNumber.bind(this)
   }
 
   handleAddDevice(e) {
     e.preventDefault();
 
     // dispatches a new message to redux to add a new user device and to close the add device screen
-    this.props.dispatch(
-      createUserDevice(new Device(
-        this.deviceName,
-        this.deviceBrand,
-        this.deviceModel,
-        this.serialNumber)
-      ));
+    let newDevice = new Device(this.state.deviceName, this.state.deviceBrand, this.state.deviceModel, this.state.serialNumber);
+    this.props.dispatch(createUserDevice(this.props.deviceList, newDevice));
   }
 
   changeDeviceName(e) {
@@ -54,7 +54,7 @@ class AddDevicePopup extends React.PureComponent  {
   }
 
   changeDeviceModel(e) {
-    this.setState({deviceBrand: e.target.value})
+    this.setState({deviceModel: e.target.value})
   }
 
   changeSerialNumber(e) {
@@ -96,8 +96,8 @@ class AddDevicePopup extends React.PureComponent  {
                       <Label for="text">Name</Label>
                       <InputGroup className="input-group-no-border">
                           <Input id="deviceName" className="input-transparent pl-3" value={this.state.deviceName}
-                                 onChange={this.changeDeviceName} type="email"
-                                 required name="Device Name" placeholder="E.g. Arduino"/>
+                                 onChange={this.changeDeviceName} type="text"
+                                 required name="Device Name" placeholder="E.g. Garden Monitor"/>
                       </InputGroup>
                   </FormGroup>
 
@@ -105,8 +105,8 @@ class AddDevicePopup extends React.PureComponent  {
                       <Label for="text">Brand</Label>
                       <InputGroup className="input-group-no-border">
                           <Input id="deviceType" className="input-transparent pl-3" value={this.state.deviceBrand}
-                                 onChange={this.changeDeviceBrand} type="email"
-                                 required name="Device Name" placeholder="E.g. Uno"/>
+                                 onChange={this.changeDeviceBrand} type="text"
+                                 required name="Device Name" placeholder="E.g. Arduino"/>
                       </InputGroup>
                   </FormGroup>
 
@@ -114,7 +114,7 @@ class AddDevicePopup extends React.PureComponent  {
                   <Label for="text">Model</Label>
                   <InputGroup className="input-group-no-border">
                     <Input id="deviceModel" className="input-transparent pl-3" value={this.state.deviceModel}
-                           onChange={this.changeDeviceModel} type="email"
+                           onChange={this.changeDeviceModel} type="text"
                            required name="Device Name" placeholder="E.g. Uno"/>
                   </InputGroup>
                 </FormGroup>
@@ -123,7 +123,7 @@ class AddDevicePopup extends React.PureComponent  {
                       <Label for="text">Serial Number</Label>
                       <InputGroup className="input-group-no-border">
                           <Input id="serialNumber" className="input-transparent pl-3" value={this.state.serialNumber}
-                                 onChange={this.changeSerialNumber} type="email"
+                                 onChange={this.changeSerialNumber} type="text"
                                  required name="Device Serial Number" placeholder="E.g. Device Serial Number"/>
                       </InputGroup>
                   </FormGroup>
@@ -143,7 +143,8 @@ class AddDevicePopup extends React.PureComponent  {
 
 
 const mapStateToProps = state => ({
-  showAddDevice: state.devices.showAddDevice
+  showAddDevice: state.devices.showAddDevice,
+  deviceList: state.devices.deviceList
 });
 
 export default connect(mapStateToProps)(AddDevicePopup);

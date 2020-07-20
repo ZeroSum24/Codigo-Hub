@@ -16,22 +16,6 @@ export default function devices(state = {
         showAddDevice: !state.showAddDevice,
         deviceList: state.deviceList
       });
-    case DEVICES_CREATE:
-      return Object.assign({}, state, {
-        showAddDevice: false,
-        deviceList: state.deviceList.push(action.payload),
-      });
-    case DEVICES_UPDATE:
-      return Object.assign({}, state, {
-        showAddDevice: false,
-        deviceList: action.payload,
-      });
-    case DEVICES_DELETE:
-      return Object.assign({}, state, {
-        showAddDevice: false,
-        deviceList: action.payload,
-      });
-
     default:
       return state;
   }
