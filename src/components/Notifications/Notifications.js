@@ -23,16 +23,9 @@ class Notifications extends React.Component {
   }
 
   componentDidMount() {
-    toast.success('Thanks for checking out Messenger!', {
-      position: "bottom-right",
-      autoClose: 5000,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true
-    });
+
   }
 
-  addSuccessNotification = () => toast.success('Showing success message was successful!', this.state.options);
 
   toggleLocation = (location) => {
     this.setState(prevState => ({
@@ -125,7 +118,7 @@ class Notifications extends React.Component {
               <p><Button color="danger" id="show-error-message" onClick={this.addErrorNotification}>Error
                 + Retry Message</Button></p>
               <p><Button
-                color="success" id="show-success-message" onClick={this.addSuccessNotification}
+                color="success" id="show-success-message"
               >Success
                 Message</Button></p>
             </Col>
