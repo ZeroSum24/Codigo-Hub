@@ -20,9 +20,9 @@ class DeviceWidget extends React.PureComponent {
           {/*TODO there is a bug with all the text being displayed as a single line, please display as a table*/}
           <Row>
             <Col sm={6}>
-              <h6>Brand: </h6>
-              <h6>Model: </h6>
-              <h6>Serial Number: </h6>
+              <h6><span className="fw-semi-bold">Brand: </span></h6>
+              <h6><span className="fw-semi-bold">Model: </span></h6>
+              <h6><span className="fw-semi-bold">Serial Number: </span></h6>
             </Col>
             <Col sm={6}>
               <h6>{device.brand}</h6>
