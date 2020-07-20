@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect, Provider} from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router';
 import { HashRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -18,6 +18,7 @@ import { enableUserEthereum } from '../actions/user';
 
 import { logoutUser } from '../actions/user';
 import { getWeb3 } from '../blockchain/client';
+import AuthErrorView from "../pages/error/AuthErrorView";
 
 // init blockchain read only access on load
 getWeb3();
@@ -59,30 +60,17 @@ class App extends React.PureComponent {
 
     if (this.props.isEthereumEnabled) {
       // the user has successfully authenticated with ethereum
-      appView = (<HashRouter>
-        <Switch>
-          <Route path="/" exact render={() => <Redirect to="/app/main"/>}/>
-          <Route path="/app" exact render={() => <Redirect to="/app/main"/>}/>
-          <PrivateRoute path="/app" dispatch={this.props.dispatch} component={LayoutComponent}/>
-          <Route path="/register" exact component={Register}/>
-          <Route path="/login" exact component={Login}/>
-          <Route path="/error" exact component={ErrorPage}/>
-          <Route component={ErrorPage}/>
-          <Redirect from="*" to="/app/main/dashboard"/>
-        </Switch>
-      </HashRouter>);
+      appView = (<MainAppView />);
     } else if (this.props.isFetching && !this.props.isEthereumEnabled) {
       // begin enable ethereum process (default application state at beginning of user flow)
       // console.log('loading fetching')
-      appView = (<Loader/>); {/*TODO make sure the loader is centered in the middle of the screen*/}
+      {/*TODO make sure the loader is centered in the middle of the screen*/}
+      appView = (<Loader/>);
     } else {
       //  An error has occurred logging users in with ethereum
-      appView = (<div>
-                  {/*TODO add in the logo here later*/}
-                  <div>Ethereum Account Access Denied</div>
-                  <button onClick={this.handleEthereumEnable}>Enable Ethereum</button>
-                 </div>);
+      appView = (<AuthErrorView onClick={this.handleEthereumEnable} title={"Ethereum Account Access Denied"}/>);
     }
+
 
     return (
         <div>
@@ -95,6 +83,28 @@ class App extends React.PureComponent {
         </div>
     );
   }
+}
+
+/**
+ * Defines the primary route paths of the application.
+ * @param props
+ * @returns {*}
+ * @constructor
+ */
+function MainAppView(props) {
+  return (
+    <HashRouter>
+      <Switch>
+        <Route path="/" exact render={() => <Redirect to="/app/main"/>}/>
+        <Route path="/app" exact render={() => <Redirect to="/app/main"/>}/>
+        <PrivateRoute path="/app" dispatch={this.props.dispatch} component={LayoutComponent}/>
+        <Route path="/register" exact component={Register}/>
+        <Route path="/login" exact component={Login}/>
+        <Route path="/error" exact component={ErrorPage}/>
+        <Route component={ErrorPage}/>
+        <Redirect from="*" to="/app/main/dashboard"/>
+      </Switch>
+    </HashRouter>);
 }
 
 const mapStateToProps = state => ({

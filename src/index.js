@@ -10,32 +10,33 @@ import detectEthereumProvider from '@metamask/detect-provider';
 
 import App from './components/App';
 import reducers from './reducers';
+import AuthErrorView from "./pages/error/AuthErrorView";
 
 const store = createStore(
   reducers,
   applyMiddleware(ReduxThunk)
 );
 
-function startApp(provider) {
+function EthereumApp(props) {
+    let ethereumApp;
 
-    if (provider) {
-        // From now on, this should always be true:
-        // provider === window.ethereum
-        ReactDOM.render(
-            <Provider store={store}>
-                <App/>
-            </Provider>,
-            document.getElementById('root')
-        );
+    if (props.provider) {
+        ethereumApp = (<App/>);
     } else {
-        ReactDOM.render(
-            <Provider store={store}>
-                <div>Please install MetaMask!</div>
-            </Provider>,
-            document.getElementById('root')
-        );
+        // TODO update this div to have a fancier presentation
+        ethereumApp = (<AuthErrorView title={"Please install MetaMask!"}/>);
         console.log('Please install MetaMask!');
     }
+    return ethereumApp
+}
+
+function startApp(provider) {
+    ReactDOM.render(
+        <Provider store={store}>
+            <EthereumApp provider={provider} />
+        </Provider>,
+        document.getElementById('root')
+    );
 }
 
 detectEthereumProvider().then(provider => startApp(provider));
