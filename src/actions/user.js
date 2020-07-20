@@ -96,13 +96,18 @@ export function enableUserEthereum() {
 
         try {
             // Request account access if needed
-            const ethereumAddress = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const ethereumAddress = (await window.ethereum.request({ method: 'eth_requestAccounts' }))[0];
 
-            // Authenticate and the users 3box and app space
-            const box = await Box.create(window.ethereum);
-            const spaces = ['código-user-space'];
-            await box.auth(spaces, {address: ethereumAddress[0]});
-            await box.syncDone;
+
+            // TODO commented out whilst waiting on 3box patch
+            // // Authenticate and the users 3box and app space
+            // const box = await Box.create(window.ethereum);
+            // const spaces = ['código-user-space'];
+            // await box.auth(spaces, {address: ethereumAddress});
+            // await box.syncDone;
+
+            let box = null;
+            let spaces = [null];
 
             // Accounts now exposed
             dispatch(ethereumAuthSuccess({

@@ -60,7 +60,7 @@ class App extends React.PureComponent {
 
     if (this.props.isEthereumEnabled) {
       // the user has successfully authenticated with ethereum
-      appView = (<MainAppView />);
+      appView = (<MainAppView dispatch={this.props.dispatch}/>);
     } else if (this.props.isFetching && !this.props.isEthereumEnabled) {
       // begin enable ethereum process (default application state at beginning of user flow)
       // console.log('loading fetching')
@@ -97,7 +97,7 @@ function MainAppView(props) {
       <Switch>
         <Route path="/" exact render={() => <Redirect to="/app/main"/>}/>
         <Route path="/app" exact render={() => <Redirect to="/app/main"/>}/>
-        <PrivateRoute path="/app" dispatch={this.props.dispatch} component={LayoutComponent}/>
+        <PrivateRoute path="/app" dispatch={props.dispatch} component={LayoutComponent}/>
         <Route path="/register" exact component={Register}/>
         <Route path="/login" exact component={Login}/>
         <Route path="/error" exact component={ErrorPage}/>
