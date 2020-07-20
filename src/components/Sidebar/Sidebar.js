@@ -8,6 +8,7 @@ import { dismissAlert } from '../../actions/alerts';
 import s from './Sidebar.module.scss';
 import LinksGroup from './LinksGroup';
 
+import avatar from '../../images/rsz_4rsz_codigo-01.png';
 import { changeActiveSidebarItem } from '../../actions/navigation';
 import { logoutUser } from '../../actions/user';
 
@@ -65,7 +66,6 @@ class Sidebar extends React.Component {
 	doLogout() {
 		this.props.dispatch(logoutUser());
 	}
-	//Add devices was notifications
 
 	render() {
 		return (
@@ -76,6 +76,7 @@ class Sidebar extends React.Component {
 				}}
 			>
 				<header className={s.logo}>
+				<img src={avatar} alt="..." />
 					<a href="/">
 						Código <span className="fw-bold">User Panel</span>
 					</a>
@@ -115,12 +116,20 @@ class Sidebar extends React.Component {
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
-						header="Firmware Comments"
+						header="Available Firmware"
 						isHeader
 						iconName="flaticon-layers"
-						link="/app/notifications"
+						link="/app/tables"
 						index="ui"
 					/>
+          <LinksGroup
+            onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
+            activeItem={this.props.activeItem}
+            header="Developer"
+            isHeader
+            iconName="flaticon-menu"
+            link="/app/developer"
+            index="developer" />
 				</ul>
 
 				{}

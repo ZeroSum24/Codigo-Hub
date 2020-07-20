@@ -3,8 +3,8 @@ import {
   Row,
   Col,
   Table,
-  Progress,
   Button,
+  Progress,
   UncontrolledButtonDropdown,
   DropdownMenu,
   DropdownToggle,
@@ -13,10 +13,14 @@ import {
   Label,
   Badge,
 } from 'reactstrap';
+import { Comment, Form } from 'semantic-ui-react'
+
+import { Container, Header, List } from "semantic-ui-react";
 import { Sparklines, SparklinesBars } from 'react-sparklines';
 
 import Widget from '../../../components/Widget';
 import s from './Static.module.scss';
+import Example from "./example";
 
 class Static extends React.Component {
 
@@ -76,67 +80,105 @@ class Static extends React.Component {
 
   render() {
     return (
-      <div className={s.root}>
-        <h2 className="page-title">Device Status <span className="fw-semi-bold"></span></h2>
-        <Row>
-          <Col lg={6}>
-            <Widget
-              title={<h5><span className="fw-semi-bold"></span></h5>} settings close>
-              <Table className="table-striped">
-              </Table>
-              <br /><br />
-              <p>{'The status of each device'}<code></code></p>
-              <div className="table-responsive">
-                <Table className="table-hover">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  {/* eslint-disable */}
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Arduino A</td>
-                      <td><Badge color="success" className="text-secondary" pill>Online</Badge></td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Arduino B</td>
-                      <td><Badge color="success" className="text-secondary" pill>Online</Badge></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Arduino C</td>
-                      <td><Badge color="success" className="text-secondary" pill>Online</Badge></td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Arduino D</td>
-                      <td><Badge color="success" className="text-secondary" pill>Online</Badge></td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Arduino E</td>
-                      <td><Badge color="success" className="text-secondary" pill>Online</Badge></td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Arduino F</td>
-                      <td><Badge color="success" className="text-secondary" pill>Online</Badge></td>
-                    </tr>
-                  </tbody>
-                  {/* eslint-enable */}
-                </Table>
-              </div>
-            </Widget>
+      <div>
+
+      <Row>
+          <Col xs={12} md={6}>
+              <Widget
+                  title={<h5>Firmware: <small className="text-muted">v1</small></h5>}
+                  close collapse >
+                  <p></p>
+                  <div className="widget-padding-md w-100 h-100 text-left border rounded">
+                  <Row>
+                      <Col sm={6}>
+                          <h3><span className="fw-semi-bold">Firmware ID:</span> </h3>
+                          <h3><span className="fw-semi-bold">Developer ID:</span> </h3>
+                          <h3><span className="fw-semi-bold">Block Number:</span> </h3>
+                          <h3><span className="fw-semi-bold">Firmware Version:</span> </h3>
+                          <h3><span className="fw-semi-bold">Number of downloads:</span> </h3>
+                          <h3><span className="fw-semi-bold">Trust Rank:</span> </h3>
+                          <h4><span className="fw-semi-bold">Description:</span> </h4>
+                          <h3>&nbsp;</h3>
+                          <Button type="submit" color="success" className="auth-btn" size="sm" style={{ color: '#fff' }}>
+                            {
+                              'Download Firmware'
+                            }
+                          </Button>
+                          <h3>&nbsp;</h3>
+                          <h3>&nbsp;</h3>
+                      </Col>
+                      <Col sm={6}>
+                      <h3>01</h3>
+                      <h3>01</h3>
+                      <h3>01</h3>
+                      <h3>v1</h3>
+                      <h3>300</h3>
+                      <h3>678</h3>
+                      <h4>Description</h4>
+                      <h3>&nbsp;</h3>
+
+                      <Button type="submit" color="danger" className="auth-btn" size="sm" style={{ color: '#fff' }}>
+                        {
+                          'Donate to developer'
+                        }
+                      </Button>
+                      <h3>&nbsp;</h3>
+                      <h3>&nbsp;</h3>
+
+                      </Col>
+                      <Col>
+                      <Comment.Group>
+                        <Comment>
+                          <Comment.Avatar as='a' src='https://react.semantic-ui.com/images/avatar/small/steve.jpg' />
+                          <Comment.Content>
+                            <Comment.Metadata>
+                              <div>2 days ago</div>
+                            </Comment.Metadata>
+                            <Comment.Text>Revolutionary!</Comment.Text>
+                            <Comment.Actions>
+                              <Comment.Action active>Reply</Comment.Action>
+                            </Comment.Actions>
+                            <Form reply>
+                              <Form.TextArea />
+                              <Button type="submit" color="warning" className="auth-btn" size="sm" style={{ color: '#fff' }}>
+                                {
+                                  'Submit Reply'
+                                }
+                              </Button>
+                            </Form>
+                          </Comment.Content>
+                        </Comment>
+                      </Comment.Group>
+                      </Col>
+                      <Col>
+                      <Comment.Group>
+                        <Comment>
+                          <Comment.Content>
+                            <Comment.Metadata>
+                            </Comment.Metadata>
+                            <Comment.Actions>
+                              <Comment.Action active>New Comment</Comment.Action>
+                            </Comment.Actions>
+                            <Form reply>
+                              <Form.TextArea />
+                              <Button type="submit" color="warning" className="auth-btn" size="sm" style={{ color: '#fff' }}>
+                                {
+                                  'Post Comment'
+                                }
+                              </Button>
+                            </Form>
+                          </Comment.Content>
+                        </Comment>
+                      </Comment.Group>
+                      </Col>
+                  </Row>
+                  </div>
+              </Widget>
           </Col>
-          <Col lg={6}>
-          </Col>
-        </Row>
-      </div>
+
+
+</Row>
+</div>
     );
   }
 
