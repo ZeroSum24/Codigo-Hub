@@ -25,9 +25,9 @@ class DeviceWidget extends React.PureComponent {
               <h6>Serial Number: </h6>
             </Col>
             <Col sm={6}>
-              <h7>{device.brand}</h7>
-              <h7>{device.model}</h7>
-              <h7>{device.serialNumber}</h7>
+              <h6>{device.brand}</h6>
+              <h6>{device.model}</h6>
+              <h6>{device.serialNumber}</h6>
             </Col>
           </Row>
         </div>
