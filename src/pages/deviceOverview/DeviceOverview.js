@@ -9,6 +9,14 @@ import DeviceWidget from './components/DeviceWidget'
 import AddDevicePopup from "./components/AddDevicePopup";
 
 import { interactAddDeviceView } from '../../actions/profile'
+var buttonStyle = {
+    backgroundColor: "#00ff99",
+    backgroundImage: "linear-gradient(to bottom, #23a1d1, #1f90bb)",
+    backgroundRepeat: "repeat-x",
+    borderColor: "#1f90bb #1f90bb #145e7a",
+    color: "#ffffff",
+    textShadow: "0 -1px 0 rgba(0, 0, 0, 0.25)"
+}
 
 class DeviceOverview extends React.PureComponent {
 
@@ -29,11 +37,10 @@ class DeviceOverview extends React.PureComponent {
           <Col >
             <h1 className="page-title">Devices<span className="fw-semi-bold"></span></h1>
           </Col>
-          <Col >
-            <button onClick={this.handleOpenDeviceView}>
-              {/* TODO this button would be nicer if it were differently styled, maybe in a different location too */}
-              {!this.props.showAddDevice ? "Add Device" : "Cancel"}
-            </button>
+          <Col>
+          <button align="centre" style={buttonStyle} onClick={this.handleOpenDeviceView}>
+            {!this.props.showAddDevice ? "Add Device" : "Cancel"}
+          </button>
           </Col>
         </Row>
 
