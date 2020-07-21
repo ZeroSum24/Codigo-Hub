@@ -21,7 +21,7 @@ const idleButtonText = 'Add firmware to Codigo'
 const ipfsUploadText = 'Uploading to IPFS'
 const ethPerform = 'Registering firmware to repository'
 
-class DeveloperView extends React.Component {
+class AddFirmware extends React.Component {
 
   constructor(props) {
     super(props);
@@ -148,4 +148,4 @@ class DeveloperView extends React.Component {
   }
 }
 
-export default DeveloperView;
+export default AddFirmware;
