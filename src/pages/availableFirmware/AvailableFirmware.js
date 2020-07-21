@@ -17,6 +17,8 @@ import { Comment, Form } from 'semantic-ui-react'
 
 import Widget from '../../components/Widget';
 import s from './AvailableFirmware.module.scss';
+import { retrieveAllAvailableFirmware } from '../../blockchain/contracts';
+import { downloadFirmware } from '../../ipfs/client';
 
 class AvailableFirmware extends React.Component {
 
@@ -44,9 +46,15 @@ class AvailableFirmware extends React.Component {
       checkboxes1: [false, true, false, false],
       checkboxes2: [false, false, false, false, false, false],
       checkboxes3: [false, false, false, false, false, false],
+      availableFirmware: [],
     };
 
     this.checkAll = this.checkAll.bind(this);
+  }
+
+  componentDidMount() {
+    retrieveAllAvailableFirmware().then(af => this.setState({availableFirmware: af}));
+    // set el height and width etc.
   }
 
   parseDate(date) {
@@ -80,37 +88,40 @@ class AvailableFirmware extends React.Component {
 
       <Row>
           <Col xs={12} md={6}>
+            {this.state.availableFirmware.map(firmware =>
               <Widget
-                  title={<h5>Firmware: <small className="text-muted">v1</small></h5>}
-                  close collapse >
-                  <p></p>
-                  <div className="widget-padding-md w-100 h-100 text-left border rounded">
+                key={firmware.block}
+                title={<h5>Firmware: <small className="text-muted">v1</small></h5>}
+                close collapse >
+                <p></p>
+                <div className="widget-padding-md w-100 h-100 text-left border rounded">
                   <Row>
-                      <Col sm={6}>
-                          <h3><span className="fw-semi-bold">Firmware ID:</span> </h3>
-                          <h3><span className="fw-semi-bold">Developer ID:</span> </h3>
-                          <h3><span className="fw-semi-bold">Block Number:</span> </h3>
-                          <h3><span className="fw-semi-bold">Firmware Version:</span> </h3>
-                          <h3><span className="fw-semi-bold">Number of downloads:</span> </h3>
-                          <h3><span className="fw-semi-bold">Trust Rank:</span> </h3>
-                          <h4><span className="fw-semi-bold">Description:</span> </h4>
-                          <h3>&nbsp;</h3>
-                          <Button type="submit" color="success" className="auth-btn" size="sm" style={{ color: '#fff' }}>
-                            {
-                              'Download Firmware'
-                            }
-                          </Button>
-                          <h3>&nbsp;</h3>
-                          <h3>&nbsp;</h3>
-                      </Col>
-                      <Col sm={6}>
-                      <h3>01</h3>
-                      <h3>01</h3>
-                      <h3>01</h3>
-                      <h3>v1</h3>
-                      <h3>300</h3>
-                      <h3>678</h3>
-                      <h4>Description</h4>
+                    <Col sm={6}>
+                      <h3><span className="fw-semi-bold">Firmware ID:</span> </h3>
+                      <h3><span className="fw-semi-bold">Developer ID:</span> </h3>
+                      <h3><span className="fw-semi-bold">Block Number:</span> </h3>
+                      <h3><span className="fw-semi-bold">Firmware Version:</span> </h3>
+                      <h3><span className="fw-semi-bold">Number of downloads:</span> </h3>
+                      <h3><span className="fw-semi-bold">Trust Rank:</span> </h3>
+                      <h4><span className="fw-semi-bold">Description:</span> </h4>
+                      <h3>&nbsp;</h3>
+                      <Button type="submit" color="success" className="auth-btn" size="sm" style={{ color: '#fff' }}
+                              onClick={() => downloadFirmware(firmware.IPFS_link, 'firmware')}>
+                        {
+                          'Download Firmware'
+                        }
+                      </Button>
+                      <h3>&nbsp;</h3>
+                      <h3>&nbsp;</h3>
+                    </Col>
+                    <Col sm={6}>
+                      <h3>{firmware.hash}</h3>
+                      <h3>{firmware.developer}</h3>
+                      <h3>{firmware.block}</h3>
+                      <h3>NOT_YET_IMPL</h3>
+                      <h3>NOT_YET_IMPL</h3>
+                      <h3>NOT_YET_IMPL</h3>
+                      <h4>{firmware.description}</h4>
                       <h3>&nbsp;</h3>
 
                       <Button type="submit" color="danger" className="auth-btn" size="sm" style={{ color: '#fff' }}>
@@ -121,8 +132,8 @@ class AvailableFirmware extends React.Component {
                       <h3>&nbsp;</h3>
                       <h3>&nbsp;</h3>
 
-                      </Col>
-                      <Col>
+                    </Col>
+                    <Col>
                       <Comment.Group>
                         <Comment>
                           <Comment.Avatar as='a' src='https://react.semantic-ui.com/images/avatar/small/steve.jpg' />
@@ -145,8 +156,8 @@ class AvailableFirmware extends React.Component {
                           </Comment.Content>
                         </Comment>
                       </Comment.Group>
-                      </Col>
-                      <Col>
+                    </Col>
+                    <Col>
                       <Comment.Group>
                         <Comment>
                           <Comment.Content>
@@ -166,10 +177,10 @@ class AvailableFirmware extends React.Component {
                           </Comment.Content>
                         </Comment>
                       </Comment.Group>
-                      </Col>
+                    </Col>
                   </Row>
-                  </div>
-              </Widget>
+                </div>
+              </Widget>)}
           </Col>
 
 
