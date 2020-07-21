@@ -98,16 +98,11 @@ export function enableUserEthereum() {
             // Request account access if needed
             const ethereumAddress = (await window.ethereum.request({ method: 'eth_requestAccounts' }))[0];
 
-
-            // TODO commented out whilst waiting on 3box patch
-            // // Authenticate and the users 3box and app space
-            // const box = await Box.create(window.ethereum);
-            // const spaces = ['código-user-space'];
-            // await box.auth(spaces, {address: ethereumAddress});
-            // await box.syncDone;
-
-            let box = null;
-            let spaces = [null];
+            // Authenticate and the users 3box and app space
+            const box = await Box.create(window.ethereum);
+            const spaces = ['código-user-space'];
+            await box.auth(spaces, {address: ethereumAddress});
+            await box.syncDone;
 
             // Accounts now exposed
             dispatch(ethereumAuthSuccess({
@@ -115,8 +110,7 @@ export function enableUserEthereum() {
                 userBox: box,
                 userSpace: spaces[0]
             }));
-
-
+            
         } catch (error) {
             // User denied account access...
             console.log('error caught', error);
