@@ -1,10 +1,13 @@
 import React from 'react';
-import EthereumLogo from '../../images/eth_225.png';
+import { Grid } from '@material-ui/core';
+
+import CodigoLogo from '../../images/rsz_codigo-01.png';
+
 import {
     Row,
     Col,
 } from 'reactstrap';
-import Widget from '../../components/Widget';
+
 /**
  * Implements a standard auth error view with adjustable onclick button
  */
@@ -27,24 +30,29 @@ class AuthErrorView extends React.PureComponent {
 
 
   render() {
-  return (
-    <div>
-    <h3 className="page-title" align="center">{this.props.title}<span className="fw-semi-bold"></span></h3>
-        <Row align="center">
+    return (
+        <Grid
+          style={{
+            position: 'absolute',
+            top: '33%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems:'center'
+          }}
+          container
+        >
+          <img src={CodigoLogo} align="center" />
+          <h4 className="page-title" align="center">{this.props.title}</h4>
+          <Row align="center">
             <Col>
-            <img align="center" class="center" src={EthereumLogo} alt="..." />
+              {this.props.onClick !== undefined ?
+                (<button style={buttonStyle} onClick={this.props.onClick}>Enable Ethereum</button>) : null}
             </Col>
-        </Row>
-        <Row align="center">
-            <Col>
-            {this.props.onClick !== undefined ?
-              (<button style={buttonStyle} onClick={this.props.onClick}>Enable Ethereum</button>): null}
-            </Col>
-        </Row>
-
-    </div>
-  )
-}
+          </Row>
+        </Grid>
+    );
+  }
 }
 
 export default AuthErrorView;
