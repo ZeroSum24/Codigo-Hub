@@ -99,7 +99,7 @@ class Sidebar extends React.Component {
 						header="Device Overview"
 						isHeader
 						iconName="flaticon-network"
-						link="/app/device_overview"
+						link="/app/deviceOverview"
 						index="core"
 					/>
 					<LinksGroup
@@ -109,7 +109,7 @@ class Sidebar extends React.Component {
 						header="Earnings"
 						isHeader
 						iconName="flaticon-list"
-						link="/app/earnings"
+						link="/app/charts"
 						index="main"
 					/>
 					<LinksGroup
@@ -119,7 +119,7 @@ class Sidebar extends React.Component {
 						header="Available Firmware"
 						isHeader
 						iconName="flaticon-layers"
-						link="/app/available_firmware"
+						link="/app/tables"
 						index="ui"
 					/>
           <LinksGroup

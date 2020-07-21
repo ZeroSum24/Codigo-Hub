@@ -5,9 +5,12 @@ import { Switch, Route, withRouter, Redirect } from 'react-router';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Hammer from 'rc-hammerjs';
 
-import AvailableFirmware from '../../pages/availableFirmware/AvailableFirmware';
-import DeviceOverview from '../../pages/deviceOverview/DeviceOverview';
-import Earnings from '../../pages/earnings/Earnings';
+import UIIcons from '../../pages/components/icons';
+import UINotifications from '../../pages/notifications';
+import TablesStatic from '../../pages/tables/static';
+import MapsGoogle from '../../pages/components/maps/google';
+import CoredeviceOverview from '../../pages/deviceOverview';
+import Charts from '../../pages/components/charts/Charts';
 import Dashboard from '../../pages/dashboard';
 
 import Header from '../Header';
@@ -77,9 +80,12 @@ class Layout extends React.Component {
                   <Switch>
                     <Route path="/app/main" exact render={() => <Redirect to="/app/main/dashboard" />} />
                     <Route path="/app/main/dashboard" exact component={Dashboard} />
-                    <Route path="/app/earnings" exact component={Earnings} />
-                    <Route path="/app/available_firmware" exact component={AvailableFirmware} />
-                    <Route path="/app/device_overview" exact component={DeviceOverview} />
+                    <Route path="/app/icons" exact component={UIIcons} />
+                    <Route path="/app/notifications" exact component={UINotifications} />
+                    <Route path="/app/charts" exact component={Charts} />
+                    <Route path="/app/tables" exact component={TablesStatic} />
+                    <Route path="/app/maps" exact component={MapsGoogle} />
+                    <Route path="/app/deviceOverview" exact component={CoredeviceOverview} />
                     <Route path="/app/developer" exact component={DeveloperView} />
                   </Switch>
                 </CSSTransition>

@@ -20,45 +20,42 @@ import {
 	ModalFooter
 } from 'reactstrap';
 import { Comment, Form } from 'semantic-ui-react';
-import Widget from '../../components/Widget';
-import s from './AvailableFirmware.module.scss';
 
-class AvailableFirmware extends React.Component {
+import { Container, Header, List } from 'semantic-ui-react';
+import { Sparklines, SparklinesBars } from 'react-sparklines';
 
-  constructor(props) {
-    super(props);
+import Widget from '../../../components/Widget';
+import s from './Static.module.scss';
+import Example from './example';
 
-    this.state = {
-      tableStyles: [
-        {
-          id: 5,
-          picture: require('../../images/tables/5.png'), // eslint-disable-line global-require
-          description: 'Fortress',
-          info: {
-            type: 'JPEG',
-            dimensions: '1452x1320',
-          },
-          date: new Date('October 1, 2012'),
-          size: '2.3 MB',
-          progress: {
-            percent: 41,
-            colorClass: 'primary',
-          },
-        },
-      ],
-      checkboxes1: [false, true, false, false],
-      checkboxes2: [false, false, false, false, false, false],
-      checkboxes3: [false, false, false, false, false, false],
-    };
+class Static extends React.Component {
+	constructor(props) {
+		super(props);
 
-    this.checkAll = this.checkAll.bind(this);
-  }
+		this.state = {
+			tableStyles: [
+				{
+					id: 5,
+					picture: require('../../../images/tables/5.png'), // eslint-disable-line global-require
+					description: 'Fortress',
+					info: {
+						type: 'JPEG',
+						dimensions: '1452x1320'
+					},
+					date: new Date('October 1, 2012'),
+					size: '2.3 MB',
+					progress: {
+						percent: 41,
+						colorClass: 'primary'
+					}
+				}
+			],
+			checkboxes1: [ false, true, false, false ],
+			checkboxes2: [ false, false, false, false, false, false ],
+			checkboxes3: [ false, false, false, false, false, false ],
+			modal: false
+		};
 
-  parseDate(date) {
-    this.dateSet = date.toDateString().split(' ');
-
-    return `${date.toLocaleString('en-us', { month: 'long' })} ${this.dateSet[2]}, ${this.dateSet[3]}`;
-  }
 		this.checkAll = this.checkAll.bind(this);
 	}
 	toggle = () => this.setState({ modal: !this.state.modal });
@@ -267,4 +264,4 @@ class AvailableFirmware extends React.Component {
 	}
 }
 
-export default AvailableFirmware;
+export default Static;

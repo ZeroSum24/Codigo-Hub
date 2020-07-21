@@ -1,6 +1,6 @@
 {
-  "name": "static",
+  "name": "GoogleMap",
   "version": "0.0.0",
   "private": true,
-  "main": "Static.js"
+  "main": "Google.js"
 }

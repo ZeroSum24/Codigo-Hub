@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Container, Table, Label, Row, Col } from 'reactstrap';
 
-import Widget from '../../components/Widget';
+import Widget from '../../../components/Widget';
 import ApexChart from 'react-apexcharts';
 
-import s from './Earnings.module.scss';
+import s from './Charts.module.scss';
 import { chartData, liveChart, liveChartInterval } from './mock';
 import Rickshaw from './rickshaw/Rickshaw';
+
+import echarts from 'echarts/lib/echarts';
 
 import 'echarts/lib/chart/line';
 import 'echarts/lib/chart/pie';
@@ -16,13 +18,14 @@ import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/legend';
 
 import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
 import exporting from 'highcharts/modules/exporting';
 import exportData from 'highcharts/modules/export-data';
 
 exporting(Highcharts);
 exportData(Highcharts);
 
-class Earnings extends React.Component {
+class Charts extends React.Component {
 	state = {
 		cd: chartData,
 		ld: liveChart,
@@ -154,4 +157,4 @@ class Earnings extends React.Component {
 	}
 }
 
-export default Earnings;
+export default Charts;
