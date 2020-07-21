@@ -1,6 +1,6 @@
 // Login Management
 
-import Box from '3box';
+import Box from '3box'
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -110,7 +110,9 @@ export function enableUserEthereum() {
                 userBox: box,
                 userSpace: spaces[0]
             }));
-            
+
+            console.log('eth auth success', ethereumAddress, box, spaces)
+
         } catch (error) {
             // User denied account access...
             console.log('error caught', error);
