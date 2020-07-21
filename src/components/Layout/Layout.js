@@ -5,17 +5,20 @@ import { Switch, Route, withRouter, Redirect } from 'react-router';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Hammer from 'rc-hammerjs';
 
-import AvailableFirmware from '../../pages/availableFirmware/AvailableFirmware';
-import DeviceOverview from '../../pages/deviceOverview/DeviceOverview';
-import Earnings from '../../pages/earnings/Earnings';
 import Dashboard from '../../pages/dashboard';
+import TopFirmware from '../../pages/topFirmware';
+import DeviceOverview from '../../pages/deviceOverview';
+import Earnings from '../../pages/earnings';
+import AddFirmware from '../../pages/addFirmware';
+import AddBounty from '../../pages/addBounty'
+import AddDevice from '../../pages/addDevice'
+import TopBounties from '../../pages/topBounties'
 
 import Header from '../Header';
 import Sidebar from '../Sidebar';
 import BreadcrumbHistory from '../BreadcrumbHistory';
 import { openSidebar, closeSidebar } from '../../actions/navigation';
 import s from './Layout.module.scss';
-import DeveloperView from '../../pages/developer';
 
 class Layout extends React.Component {
   static propTypes = {
@@ -75,12 +78,15 @@ class Layout extends React.Component {
                   timeout={200}
                 >
                   <Switch>
-                    <Route path="/app/main" exact render={() => <Redirect to="/app/main/dashboard" />} />
-                    <Route path="/app/main/dashboard" exact component={Dashboard} />
-                    <Route path="/app/earnings" exact component={Earnings} />
-                    <Route path="/app/available_firmware" exact component={AvailableFirmware} />
-                    <Route path="/app/device_overview" exact component={DeviceOverview} />
-                    <Route path="/app/developer" exact component={DeveloperView} />
+                    <Route path="/app/main" exact render={() => <Redirect to="/app/main/dashboard"/>}/>
+                    <Route path="/app/main/dashboard" exact component={Dashboard}/>
+                    <Route path="/app/device_overview" exact component={DeviceOverview}/>
+                    <Route path="/app/add_device" exact component={AddDevice}/>
+                    <Route path="/app/top_firmware" exact component={TopFirmware}/>
+                    <Route path="/app/add_firmware" exact component={AddFirmware}/>
+                    <Route path="/app/earnings" exact component={Earnings}/>
+                    <Route path="/app/top_bounties" exact component={TopBounties}/>
+                    <Route path="/app/add_bounty" exact component={AddBounty}/>
                   </Switch>
                 </CSSTransition>
               </TransitionGroup>

@@ -1,6 +1,6 @@
 {
-  "name": "Typography",
+  "name": "DeviceOverview",
   "version": "1.0.0",
-  "main": "Typography.js",
+  "main": "DeviceOverview.js",
   "license": "MIT"
 }

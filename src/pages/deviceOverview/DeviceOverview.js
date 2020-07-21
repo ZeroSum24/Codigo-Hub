@@ -6,41 +6,19 @@ import {
 import {connect} from "react-redux";
 
 import DeviceWidget from './components/DeviceWidget'
-import AddDevicePopup from "./components/AddDevicePopup";
-
-import { interactAddDeviceView } from '../../actions/profile'
 
 class DeviceOverview extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this.handleOpenDeviceView = this.handleOpenDeviceView.bind(this)
-  }
-
-  handleOpenDeviceView() {
-    this.props.dispatch(interactAddDeviceView());
   }
 
   render() {
 
     return (
       <div>
-        <Row>
-          <Col >
-            <h1 className="page-title">Devices<span className="fw-semi-bold"></span></h1>
-          </Col>
-          <Col >
-            <button onClick={this.handleOpenDeviceView}>
-              {/* TODO this button would be nicer if it were differently styled, maybe in a different location too */}
-              {!this.props.showAddDevice ? "Add Device" : "Cancel"}
-            </button>
-          </Col>
-        </Row>
-
-        {this.props.showAddDevice ?
-          <AddDevicePopup />
-          : <DeviceListView deviceList={this.props.deviceList}/>
-        }
+        <h1 className="page-title">Devices<span className="fw-semi-bold"></span></h1>
+          <DeviceListView deviceList={this.props.deviceList}/>
       </div>
     );
   }

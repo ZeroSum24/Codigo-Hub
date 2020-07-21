@@ -16,11 +16,11 @@ import {
 import { Comment, Form } from 'semantic-ui-react'
 
 import Widget from '../../components/Widget';
-import s from './AvailableFirmware.module.scss';
+import s from './TopFirmware.module.scss';
 import { retrieveAllAvailableFirmware } from '../../blockchain/contracts';
 import { downloadFirmware } from '../../ipfs/client';
 
-class AvailableFirmware extends React.Component {
+class TopFirmware extends React.Component {
 
   constructor(props) {
     super(props);
@@ -126,7 +126,7 @@ class AvailableFirmware extends React.Component {
 
                       <Button type="submit" color="danger" className="auth-btn" size="sm" style={{ color: '#fff' }}>
                         {
-                          'Donate to developer'
+                          'Donate to Developer'
                         }
                       </Button>
                       <h3>&nbsp;</h3>
@@ -191,4 +191,4 @@ class AvailableFirmware extends React.Component {
 
 }
 
-export default AvailableFirmware;
+export default TopFirmware;

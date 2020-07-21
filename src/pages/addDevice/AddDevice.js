@@ -4,14 +4,14 @@ import { Redirect } from 'react-router-dom';
 
 import { Container, Alert, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label } from 'reactstrap';
 import 'react-toastify/dist/ReactToastify.css';
-import Widget from '../../../components/Widget';
+import Widget from '../../components/Widget';
 
-import { createUserDevice } from "../../../actions/profile"
-import Device from '../../../classes/Device'
+import { createUserDevice } from "../../actions/profile"
+import Device from '../../classes/Device'
 import Toast from "reactstrap/lib/Toast";
 import {connect} from "react-redux";
 
-class AddDevicePopup extends React.PureComponent  {
+class AddDevice extends React.PureComponent  {
 
   constructor(props) {
     super(props);
@@ -63,21 +63,16 @@ class AddDevicePopup extends React.PureComponent  {
 
   render() {
 
-    if (!this.props.showAddDevice) {
-      // Throws a toast to inform user of success state and then redirects the user
-      return (
-        <div>
-          <Toast>
-              <Toast.Header>
-                <img src="../../../images/rsz_4rsz_codigo-01.png" className="rounded mr-2" alt="" />
-                <strong className="mr-auto">Código Hub</strong>
-              </Toast.Header>
-              <Toast.Body>Device successfully added: {this.state.deviceName}</Toast.Body>
-             </Toast>/>
-        </div>
-      );
-    }
-
+    // {this.props.addDeviceSuccess ?
+    //   (<Toast>
+    //       <Toast.Header>
+    //         <img src="../../../images/rsz_4rsz_codigo-01.png" className="rounded mr-2" alt="" />
+    //         <strong className="mr-auto">Código Hub</strong>
+    //       </Toast.Header>
+    //       <Toast.Body>Device successfully added: {this.state.deviceName}</Toast.Body>
+    //    </Toast>): null
+    // }
+    
     return (
       <Container>
           <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Add a Device</h3>}>
@@ -141,10 +136,9 @@ class AddDevicePopup extends React.PureComponent  {
    }
 }
 
-
 const mapStateToProps = state => ({
-  showAddDevice: state.devices.showAddDevice,
+  addDeviceSuccess: state.devices.addDeviceSuccess,
   deviceList: state.devices.deviceList
 });
 
-export default connect(mapStateToProps)(AddDevicePopup);
+export default connect(mapStateToProps)(AddDevice);

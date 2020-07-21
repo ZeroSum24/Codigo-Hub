@@ -1,7 +1,4 @@
-
 export const DEVICES_SET = 'DEVICES_SET';
-export const DEVICES_ADDING_DEVICE = 'DEVICES_ADDING_DEVICE';
-
 
 
 function setDevices(payload) {
@@ -10,12 +7,6 @@ function setDevices(payload) {
   return {
     type: DEVICES_SET,
     payload
-  };
-}
-
-function changeAddDeviceView() {
-  return {
-    type: DEVICES_ADDING_DEVICE
   };
 }
 
@@ -76,17 +67,5 @@ export function deleteUserDevice(devices) {
     // need to check it is possible to delete that device
 
     dispatch(setDevices(devices));
-  }
-}
-
-/**
- * Interacts with the device view by setting a flag in the store to indicate whether the UI component
- * should be open or closed.
- * @returns {function(...[*]=)}
- */
-export function interactAddDeviceView() {
-  console.log('have clicked open device view');
-  return (dispatch) => {
-    dispatch(changeAddDeviceView());
   }
 }
