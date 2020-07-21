@@ -1,8 +1,4 @@
 import React from 'react';
-import {
-    Row,
-    Col,
-} from 'reactstrap';
 import {connect} from "react-redux";
 
 import DeviceWidget from './components/DeviceWidget'
@@ -18,7 +14,7 @@ class DeviceOverview extends React.PureComponent {
     return (
       <div>
         <h1 className="page-title">Devices<span className="fw-semi-bold"></span></h1>
-          <DeviceListView deviceList={this.props.deviceList}/>
+        <DeviceListView deviceList={this.props.deviceList}/>
       </div>
     );
   }
