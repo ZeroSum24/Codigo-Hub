@@ -17,6 +17,10 @@ import { encodeAndAddFirmware } from '../../ipfs/client.js';
 import { initWallet } from '../../blockchain/client';
 import { hardcoded_device_types, registerFirmware } from '../../blockchain/contracts';
 
+const idleButtonText = 'Add firmware to Codigo'
+const ipfsUploadText = 'Uploading to IPFS'
+const ethPerform = 'Registering firmware to repository'
+
 class DeveloperView extends React.Component {
 
   constructor(props) {
@@ -34,7 +38,7 @@ class DeveloperView extends React.Component {
       hash: '',
       file: null,
       filetype: '',
-      isLoading: false,
+      buttonText: idleButtonText
     };
     this.changeDescription = this.changeDescription.bind(this);
     this.changeFile = this.changeFile.bind(this);
@@ -66,13 +70,16 @@ class DeveloperView extends React.Component {
       const hash = Web3.utils.sha3(Buffer.from(buffer).toString('hex'));
       initWallet()
         .then(() => encodeAndAddFirmware(buffer))
-        .then(cid => registerFirmware(hash, cid, this.state.description, this.state.deviceType))
+        .then(cid => {
+          this.setState({buttonText: ethPerform})
+          return registerFirmware(hash, cid, this.state.description, this.state.deviceType)
+        })
         .then(tx_hash => alert('Yas transaction succeeded with hash: '+ tx_hash))
         .catch(e => alert('Failed: '+e))
-        .finally(() => this.setState({ isLoading: false }));
+        .finally(() => this.setState({ buttonText: idleButtonText }));
     };
     reader.readAsArrayBuffer(this.state.file);
-    this.setState({ isLoading: true });
+    this.setState({ buttonText: ipfsUploadText });
   }
 
   render() {
@@ -119,9 +126,8 @@ class DeveloperView extends React.Component {
 
             <div className="bg-widget-transparent auth-widget-footer">
               <Button type="submit" color="danger" className="auth-btn" size="sm" style={{ color: '#fff' }}>
-                {this.state.isLoading ?
-                  <>
-                    <span>Loading...</span>
+                {this.state.buttonText}
+                {this.state.buttonText !== idleButtonText ?
                     <Spinner
                       as="span"
                       animation="border"
@@ -129,9 +135,7 @@ class DeveloperView extends React.Component {
                       role="status"
                       aria-hidden="true"
                     />
-                  </>
-                  :
-                  'Add Firmware'
+                    : null
                 }
               </Button>
               <p className="widget-auth-info mt-4">
