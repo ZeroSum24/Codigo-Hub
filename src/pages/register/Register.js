@@ -207,7 +207,7 @@ class Register extends React.Component {
                     {/*</Widget>*/}
                 </Container>
                 <footer className="auth-footer">
-                    2020 &copy;Codigo Admin Dashboard.
+                    2020 &copy;Còdigo Admin Dashboard.
                 </footer>
             </div>
         );
