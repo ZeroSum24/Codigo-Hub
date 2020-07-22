@@ -5,8 +5,29 @@ import { Row, Col, Container, Card, CardTitle, CardText, CardImg, CardBody, Butt
 
 class Results extends React.PureComponent {
 
+
 	constructor(props) {
 		super(props);
+		const users = {
+  	name: 'Ross',
+		};
+
+		const firmwaresObj = {
+			name: '',
+			version: '',
+			author: ''
+		};
+
+		const requests = {
+
+
+		};
+
+		this.state = {
+			users:[],
+			firmwares: [],
+			requests: []
+		};
 	}
 
 	render() {
@@ -33,6 +54,7 @@ class Results extends React.PureComponent {
 						</Col>
 						<Col xs={12} sm={12} md={9}>
 								<h1 className="page-title">Available Firmware<span className="fw-semi-bold"></span></h1>
+								{this.DeviceListView()}
 						</Col>
 					</Row>
 					<Row />
@@ -40,6 +62,9 @@ class Results extends React.PureComponent {
 			</div>
 		);
 	}
+}
+
+function DeviceListView() {
 
 
 }
