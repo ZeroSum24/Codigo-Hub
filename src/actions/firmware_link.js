@@ -1,3 +1,6 @@
+import { web3 } from '../blockchain/client';
+import { getChallenge } from '../blockchain/contracts';
+
 // Firmware Management
 
 export const FIRMWARE_SUCCESS = 'FIRMWARE_SUCCESS';
@@ -22,19 +25,16 @@ function firmwareLinkFailure(payload) {
  * is false by default to allow for setting by external provider.
  * @returns {function(...[*]=)}
  */
-export function linkUserToFirmware() {
+export async function linkUserToFirmware(devAddress, privateKey) {
 
   return async (dispatch) => {
 
     try {
 
-      // Call contract.challenge(address_to_claim) generates a random challenge, stores it in the smart contract and returns it
-      // Sign the challenge with web3.eth.sign(challenge, address_to_claim) to produce the response, as far as I understand it goes to the attached wallet to look up the associated private key
-      // Call contract.response(response) to return the response, the smart contract checks the signature and if correct stores a mapping sender_address -> claimed_address
-      // Any client can call contract.get_paired_address(address) to see if there is an associated address
+      const challenge = await getChallenge(devAddress);
+      const response = await web3.eth.accounts.sign(challenge, privateKey); // Requires devAddress to be in metamask I think
       const networkAddress = '';
 
-      // Accounts now exposed
       dispatch(firmwareLinkSuccess(networkAddress));
 
     } catch (error) {
