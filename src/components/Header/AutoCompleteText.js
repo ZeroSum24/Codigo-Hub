@@ -59,7 +59,7 @@ const AutoCompleteText = (props) => {
 				)}
 			/>
 			<div>
-				<Link to={'/app/' + `${inputValue}`}>
+				<Link to={'/app/top_firmware/' + `${inputValue}`}>
 					<IconButton color="inherit" aria-label="add an alarm">
 						<SearchIcon style={{ fontSize: 35 }} />
 					</IconButton>
