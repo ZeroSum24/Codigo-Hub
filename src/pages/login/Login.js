@@ -68,11 +68,13 @@ class Login extends React.Component {
 		return (
 			<div className="auth-page">
 				<Container>
-					<Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Login to your Codigo Panel</h3>}>
-
-					<div className="d-block text-center mb-4">
-					<img src={avatar} alt="..." />
-					</div>
+					<Widget
+						className="widget-auth mx-auto"
+						title={<h3 className="mt-0">Login to your Còdigo Panel</h3>}
+					>
+						<div className="d-block text-center mb-4">
+							<img src={avatar} alt="..." />
+						</div>
 
 						<p className="widget-auth-info">Use your email to sign in.</p>
 						<form onSubmit={this.doLogin}>
@@ -142,7 +144,7 @@ class Login extends React.Component {
 						</form>
 					</Widget>
 				</Container>
-				<footer className="auth-footer">2020 &copy; Codigo Admin Panel.</footer>
+				<footer className="auth-footer">2020 &copy; Còdigo Admin Panel.</footer>
 			</div>
 		);
 	}
