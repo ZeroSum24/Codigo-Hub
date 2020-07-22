@@ -13,6 +13,7 @@ import AddFirmware from '../../pages/addFirmware';
 import AddBounty from '../../pages/addBounty';
 import AddDevice from '../../pages/addDevice';
 import TopBounties from '../../pages/topBounties';
+import Firmware from '../../pages/firmware';
 
 import Header from '../Header';
 import Sidebar from '../Sidebar';
@@ -86,6 +87,7 @@ class Layout extends React.Component {
 										<Route path="/app/earnings" exact component={Earnings} />
 										<Route path="/app/top_bounties" exact component={TopBounties} />
 										<Route path="/app/add_bounty" exact component={AddBounty} />
+										<Route path="/app/firmware" exact component={Firmware} />
 									</Switch>
 								</CSSTransition>
 							</TransitionGroup>
