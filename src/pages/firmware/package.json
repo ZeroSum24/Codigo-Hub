@@ -1,0 +1,6 @@
+{
+  "name": "firmware",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Firmware.js"
+}
