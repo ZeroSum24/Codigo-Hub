@@ -594,9 +594,54 @@ export const abiWOT = [
     "type": "constructor"
   }
 ];
+export const identityAddress = "0x65E89EE5C2FEB5B0F205F3D2553D1958D49D910A";
+export const identityABI = [
+  {
+    "type": "event",
+    "name": "Challenge",
+    "inputs": [{"indexed": false, "name": "challenge", "type": "bytes32"}]
+  },
+  {
+    "type": "function",
+    "name": "challenge",
+    "constant": false,
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "inputs": [{"name": "address_to_claim", "type": "address"}],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "response",
+    "constant": false,
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "inputs": [{"name": "response_value", "type": "bytes"}],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "get_codigo_address",
+    "constant": false,
+    "payable": false,
+    "stateMutability": "view",
+    "inputs": [{"name": "addr", "type": "address"}],
+    "outputs": [{"name": "", "type": "address"}]
+  },
+  {
+    "type": "function",
+    "name": "get_3box_address",
+    "constant": false,
+    "payable": false,
+    "stateMutability": "view",
+    "inputs": [{"name": "addr", "type": "address"}],
+    "outputs": [{"name": "", "type": "address"}]
+  }
+];
 
 let firmwareRepo = null;
 let wot = null;
+let identity = null;
 
 
 /**
@@ -636,6 +681,17 @@ function getWOTAddress() {
 }
 
 /**
+ * Retrieve instance of the identity contract
+ * @return {Contract} the identity contract
+ */
+function getIdentity() {
+  if (identity == null) {
+    identity = new web3.eth.Contract(identityABI, identityAddress);
+  }
+  return identity;
+}
+
+/**
  * register IPFS uploaded firmware to firmware repo smart contract
  * @param {String} `firmware_hash` SHA3 hash of firmware binary file
  * @param {String} `IPFS_link`
@@ -670,6 +726,19 @@ export function retrieveFirmware(device_type, developer_address) {
 export function retrieveMostTrustedFirmwareForDevice(device_type) {
   return getFirmwareRepo().methods.get_most_trusted_firmware(device_type, true).call().then(result => {
     return {fw: new Firmware(result[0], result[1], result[2], result[3]), dev: result[4], trusted: result[5]};
+  });
+}
+
+/**
+ * challenge method on identity contract
+ * @param {String} The address to associate with the current address
+ * @returns {Promise<String>} The challenge, should be signed by web3.eth.sign then passed to sendResponse
+ */
+export async function getChallenge(addressToClaim) {
+  return new Promise((resolve, _) => {
+    getIdentity().methods.challenge(addressToClaim).send({from: ethereum.selectedAddress}).on('receipt', r => {
+      resolve(r.events.Challenge.returnValues.challenge);
+    });
   });
 }
 
