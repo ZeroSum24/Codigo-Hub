@@ -7,21 +7,13 @@ import {
 	Nav,
 	NavItem,
 	NavLink,
-	InputGroupAddon,
-	InputGroupText,
 	InputGroup,
-	Input,
-	UncontrolledAlert,
 	Dropdown,
 	Collapse,
-	Button,
 	DropdownToggle,
 	DropdownMenu,
-	DropdownItem,
 	Badge,
-	ButtonGroup,
-	Form,
-	FormGroup
+	Form
 } from 'reactstrap';
 import Notifications from '../Notifications';
 import { logoutUser } from '../../actions/user';

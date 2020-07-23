@@ -2,7 +2,6 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Progress, Alert } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { dismissAlert } from '../../actions/alerts';
 import s from './Sidebar.module.scss';
@@ -76,7 +75,7 @@ class Sidebar extends React.Component {
 				}}
 			>
 				<header className={s.logo}>
-				<img src={avatar} alt="..." />
+					<img src={avatar} alt="..." />
 					<a href="/">
 						Código <span className="fw-bold">User Panel</span>
 					</a>
@@ -92,7 +91,7 @@ class Sidebar extends React.Component {
 						link="/app/main"
 						index="main"
 					/>
-					<h5 className={[s.navTitle, s.groupTitle].join(' ')}>Devices</h5>
+					<h5 className={[ s.navTitle, s.groupTitle ].join(' ')}>Devices</h5>
 					<LinksGroup
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
@@ -113,7 +112,7 @@ class Sidebar extends React.Component {
 						link="/app/add_device"
 						index="core"
 					/>
-					<h5 className={[s.navTitle, s.groupTitle].join(' ')}>Developer</h5>
+					<h5 className={[ s.navTitle, s.groupTitle ].join(' ')}>Developer</h5>
 					<LinksGroup
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
@@ -125,13 +124,15 @@ class Sidebar extends React.Component {
 						index="ui"
 					/>
 					<LinksGroup
-						onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
+						onActiveSidebarItemChange={(activeItem) =>
+							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
 						header="Add Firmware"
 						isHeader
 						iconName="flaticon-menu"
 						link="/app/add_firmware"
-						index="add_firmware" />
+						index="add_firmware"
+					/>
 					<LinksGroup
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
@@ -142,7 +143,7 @@ class Sidebar extends React.Component {
 						link="/app/earnings"
 						index="main"
 					/>
-					<h5 className={[s.navTitle, s.groupTitle].join(' ')}>Community</h5>
+					<h5 className={[ s.navTitle, s.groupTitle ].join(' ')}>Community</h5>
 					<LinksGroup
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
@@ -154,13 +155,15 @@ class Sidebar extends React.Component {
 						index="ui"
 					/>
 					<LinksGroup
-						onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
+						onActiveSidebarItemChange={(activeItem) =>
+							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
 						header="Add a Bounty"
 						isHeader
 						iconName="flaticon-menu"
 						link="/app/add_bounty"
-						index="add_bounty" />
+						index="add_bounty"
+					/>
 				</ul>
 
 				{}
