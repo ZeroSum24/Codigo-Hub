@@ -594,7 +594,7 @@ export const abiWOT = [
     "type": "constructor"
   }
 ];
-export const identityAddress = "0x65E89EE5C2FEB5B0F205F3D2553D1958D49D910A";
+export const identityAddress = "0xF665D2AA03aeA414522f684f14543b15DDbbE9F0";
 export const identityABI = [
   {
     "type": "event",
