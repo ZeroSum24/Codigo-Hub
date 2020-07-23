@@ -630,7 +630,7 @@ export const identityABI = [
       {"name": "s", "type": "bytes32"},
       {"name": "v", "type": "uint8"}
     ]
-  }
+  },
   {
     "type": "function",
     "name": "get_codigo_address",
