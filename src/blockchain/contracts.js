@@ -621,6 +621,18 @@ export const identityABI = [
   },
   {
     "type": "function",
+    "name": "response_decomposed",
+    "constant": false,
+    "payable": false,
+    "stateMutablilty": "nonpayable",
+    "inputs": [
+      {"name": "r", "type": "bytes32"},
+      {"name": "s", "type": "bytes32"},
+      {"name": "v", "type": "uint8"}
+    ]
+  }
+  {
+    "type": "function",
     "name": "get_codigo_address",
     "constant": false,
     "payable": false,
@@ -732,14 +744,24 @@ export function retrieveMostTrustedFirmwareForDevice(device_type) {
 /**
  * challenge method on identity contract
  * @param {String} The address to associate with the current address
- * @returns {Promise<String>} The challenge, should be signed by web3.eth.sign then passed to sendResponse
+ * @returns {Promise<String>} The challenge, should be signed by web3.eth.accounts.sign then passed to sendResponse
  */
-export async function getChallenge(addressToClaim) {
+export function getChallenge(addressToClaim) {
   return new Promise((resolve, _) => {
     getIdentity().methods.challenge(addressToClaim).send({from: ethereum.selectedAddress}).on('receipt', r => {
       resolve(r.events.Challenge.returnValues.challenge);
     });
   });
+}
+
+/**
+ * response_decomposed method on identity contract
+ * @param {String} The response value
+ * @return {Promise<String>} hash of transaction
+ */
+export function sendResponse(response) {
+    return sendTransaction(identityAddress,
+      getIdentity().methods.response_decomposed(response.r, response.s, response.v).encodeABI());
 }
 
 /**

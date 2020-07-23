@@ -1,5 +1,5 @@
 import { web3 } from '../blockchain/client';
-import { getChallenge } from '../blockchain/contracts';
+import { getChallenge, sendResponse } from '../blockchain/contracts';
 
 // Firmware Management
 
@@ -32,10 +32,10 @@ export async function linkUserToFirmware(devAddress, privateKey) {
     try {
 
       const challenge = await getChallenge(devAddress);
-      const response = await web3.eth.accounts.sign(challenge, privateKey); // Requires devAddress to be in metamask I think
-      const networkAddress = '';
+      const response = await web3.eth.accounts.sign(challenge, privateKey);
+      await sendResponse(response);
 
-      dispatch(firmwareLinkSuccess(networkAddress));
+      dispatch(firmwareLinkSuccess(devAddress));
 
     } catch (error) {
       // User denied account access...
