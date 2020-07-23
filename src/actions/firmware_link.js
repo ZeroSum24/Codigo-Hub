@@ -1,15 +1,23 @@
+// Firmware Management
+
 import { web3 } from '../blockchain/client';
 import { getChallenge, sendResponse } from '../blockchain/contracts';
 
-// Firmware Management
 
 export const FIRMWARE_SUCCESS = 'FIRMWARE_SUCCESS';
 export const FIRMWARE_FAILURE = 'FIRMWARE_FAILURE';
+export const FIRMWARE_PENDING = 'FIRMWARE_PENDING';
 
 function firmwareLinkSuccess(payload) {
   return {
     type: FIRMWARE_SUCCESS,
     payload
+  };
+}
+
+function firmwareLinkPending() {
+  return {
+    type: FIRMWARE_PENDING
   };
 }
 
@@ -25,7 +33,7 @@ function firmwareLinkFailure(payload) {
  * is false by default to allow for setting by external provider.
  * @returns {function(...[*]=)}
  */
-export async function linkUserToFirmware(devAddress, privateKey) {
+export function linkUserToFirmware(devAddress, privateKey) {
 
   return async (dispatch) => {
 
