@@ -21,7 +21,8 @@ class Register extends React.Component {
             password: '',
             confirmPassword: '',
             linkDeveloperCheckBox: false,
-            developerAddress: ''
+            developerAddress: '',
+            developerKey: ''
         };
 
         this.doRegister = this.doRegister.bind(this);
@@ -47,6 +48,9 @@ class Register extends React.Component {
     }
     changeDeveloperAddress(event) {
         this.setState({developerAddress: event.target.value});
+    }
+    changeDeveloperKey(event) {
+        this.setState({developerKey: event.target.value});
     }
 
     checkPassword() {
@@ -80,7 +84,7 @@ class Register extends React.Component {
             }));
             if (this.state.developerAddress !== '') {
                 // TODO then trigger the loading screen w/o upsetting current register process
-                this.props.dispatch(linkUserToFirmware(this.state.developerAddress))
+                this.props.dispatch(linkUserToFirmware(this.state.developerAddress, this.state.developerKey))
             }
         }
     }
@@ -177,6 +181,19 @@ class Register extends React.Component {
                                     <Input id="developerAddress" className="input-transparent pl-3" value={this.state.developerAddress}
                                            onChange={this.changeDeveloperAddress} onBlur={this.changeDeveloperAddress}
                                            type="text" required name="developerAddress" placeholder="0x8B2D35..."/>
+                                </InputGroup>
+                              </FormGroup>
+                              <FormGroup>
+                                <Label for="developerKey">Código Developer Private Key</Label>
+                                <InputGroup className="input-group-no-border">
+                                    <InputGroupAddon addonType="prepend">
+                                        <InputGroupText>
+                                            <i className="la la-link text-white"/>
+                                        </InputGroupText>
+                                    </InputGroupAddon>
+                                    <Input id="developerKey" className="input-transparent pl-3" value={this.state.developerKey}
+                                           onChange={this.changeDeveloperKey} onBlur={this.changeDeveloperKey}
+                                           type="text" required name="developerKey" placeholder="0x8B2D35..."/>
                                 </InputGroup>
                             </FormGroup>): null}
                             <div className="bg-widget-transparent auth-widget-footer">
