@@ -182,7 +182,8 @@ class Register extends React.Component {
                                            onChange={this.changeDeveloperAddress} onBlur={this.changeDeveloperAddress}
                                            type="text" required name="developerAddress" placeholder="0x8B2D35..."/>
                                 </InputGroup>
-                              </FormGroup>
+                              </FormGroup>): null}
+                            {this.state.linkDeveloperCheckbox ? (
                               <FormGroup>
                                 <Label for="developerKey">Código Developer Private Key</Label>
                                 <InputGroup className="input-group-no-border">
@@ -195,7 +196,7 @@ class Register extends React.Component {
                                            onChange={this.changeDeveloperKey} onBlur={this.changeDeveloperKey}
                                            type="text" required name="developerKey" placeholder="0x8B2D35..."/>
                                 </InputGroup>
-                            </FormGroup>): null}
+                              </FormGroup>): null}
                             <div className="bg-widget-transparent auth-widget-footer">
                                 <Button type="submit" color="danger" className="auth-btn"
                                         size="sm" style={{color: '#fff'}}>{this.props.isFetching ? 'Loading...' : 'Register'}</Button>
