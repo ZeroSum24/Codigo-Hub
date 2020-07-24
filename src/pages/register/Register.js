@@ -49,6 +49,7 @@ class Register extends React.Component {
     changeDeveloperAddress(event) {
         this.setState({developerAddress: event.target.value});
     }
+
     changeDeveloperKey(event) {
         this.setState({developerKey: event.target.value});
     }
@@ -155,7 +156,7 @@ class Register extends React.Component {
                                 </InputGroup>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="linkDeveloperCheckBox">Link Codigo Developer Account</Label>
+                                <Label for="linkDeveloperCheckBox">Link Código Developer Account</Label>
                                 <InputGroup className="input-group-no-border">
                                     <InputGroupAddon addonType="prepend">
                                         <InputGroupText>
@@ -170,33 +171,34 @@ class Register extends React.Component {
                                 </InputGroup>
                             </FormGroup>
                             {this.state.linkDeveloperCheckBox ? (
-                              <FormGroup>
-                                <Label for="developerAddress">Código Developer Address</Label>
-                                <InputGroup className="input-group-no-border">
-                                    <InputGroupAddon addonType="prepend">
-                                        <InputGroupText>
-                                            <i className="la la-link text-white"/>
-                                        </InputGroupText>
-                                    </InputGroupAddon>
-                                    <Input id="developerAddress" className="input-transparent pl-3" value={this.state.developerAddress}
-                                           onChange={this.changeDeveloperAddress} onBlur={this.changeDeveloperAddress}
-                                           type="text" required name="developerAddress" placeholder="0x8B2D35..."/>
-                                </InputGroup>
-                              </FormGroup>): null}
-                            {this.state.linkDeveloperCheckbox ? (
-                              <FormGroup>
-                                <Label for="developerKey">Código Developer Private Key</Label>
-                                <InputGroup className="input-group-no-border">
-                                    <InputGroupAddon addonType="prepend">
-                                        <InputGroupText>
-                                            <i className="la la-link text-white"/>
-                                        </InputGroupText>
-                                    </InputGroupAddon>
-                                    <Input id="developerKey" className="input-transparent pl-3" value={this.state.developerKey}
-                                           onChange={this.changeDeveloperKey} onBlur={this.changeDeveloperKey}
-                                           type="text" required name="developerKey" placeholder="0x8B2D35..."/>
-                                </InputGroup>
-                              </FormGroup>): null}
+                              <div>
+                                <FormGroup>
+                                  <Label for="developerAddress">Developer Address</Label>
+                                  <InputGroup className="input-group-no-border">
+                                      <InputGroupAddon addonType="prepend">
+                                          <InputGroupText>
+                                              <i className="la la-link text-white"/>
+                                          </InputGroupText>
+                                      </InputGroupAddon>
+                                      <Input id="developerAddress" className="input-transparent pl-3" value={this.state.developerAddress}
+                                             onChange={this.changeDeveloperAddress} onBlur={this.changeDeveloperAddress}
+                                             type="text" required name="developerAddress" placeholder="0x8B2D35..."/>
+                                  </InputGroup>
+                                </FormGroup>
+                                <FormGroup>
+                                  <Label for="developerKey">Developer Private Key</Label>
+                                  <InputGroup className="input-group-no-border">
+                                      <InputGroupAddon addonType="prepend">
+                                          <InputGroupText>
+                                              <i className="la la-link text-white"/>
+                                          </InputGroupText>
+                                      </InputGroupAddon>
+                                      <Input id="developerKey" className="input-transparent pl-3" value={this.state.developerKey}
+                                             onChange={this.changeDeveloperKey} onBlur={this.changeDeveloperKey}
+                                             type="text" required name="developerKey" placeholder="MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjT"/>
+                                  </InputGroup>
+                                </FormGroup>
+                              </div>): null}
                             <div className="bg-widget-transparent auth-widget-footer">
                                 <Button type="submit" color="danger" className="auth-btn"
                                         size="sm" style={{color: '#fff'}}>{this.props.isFetching ? 'Loading...' : 'Register'}</Button>
