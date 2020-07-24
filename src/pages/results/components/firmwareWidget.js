@@ -2,11 +2,10 @@ import Widget from "../../../components/Widget";
 import {Col, Row} from "reactstrap";
 import React from "react";
 
-class DeviceWidget extends React.PureComponent {
+class FirmwareWIdget extends React.PureComponent {
 
   constructor(props) {
     super(props);
-
   }
 
   render() {
@@ -20,12 +19,10 @@ class DeviceWidget extends React.PureComponent {
           {/*TODO there is a bug with all the text being displayed as a single line, please display as a table*/}
           <Row>
             <Col sm={6}>
-              <h6><span className="fw-semi-bold">Device Name: </span></h6>
               <h6><span className="fw-semi-bold">Author: </span></h6>
               <h6><span className="fw-semi-bold">Version: </span></h6>
             </Col>
             <Col sm={6}>
-              <h6>{request.brand}</h6>
               <h6>{request.model}</h6>
               <h6>{request.serialNumber}</h6>
             </Col>
@@ -43,7 +40,7 @@ function DeviceListView(props) {
 
     if (props.deviceList.length > 0) {
       view = (props.deviceList.map((item) =>
-        <DeviceWidget device={item}/>)
+        <FirmwareWIdget device={item}/>)
       );
     } else {
       // TODO this div would be prettier were it centered
@@ -53,4 +50,4 @@ function DeviceListView(props) {
 }
 
 
-export default DeviceWidget;
+export default FirmwareWIdget;
