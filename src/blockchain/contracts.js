@@ -765,6 +765,26 @@ export function sendResponse(response) {
 }
 
 /**
+ * Map the user (3box) address to the developer (codigo) address
+ * @param {String} the user address
+ * @return {Promise<String>} the developer address (if there is no mapping it
+ * returns an all zero address, e.g "0x000...")
+ */
+export function getDeveloperAddress(userAddress) {
+    return getIdentity().methods.get_codigo_address(userAddress).call();
+}
+
+/**
+ * Map the developer (codigo) address to the user (3box) address
+ * @param {String} the developer address
+ * @return {Promise<String>} the user address (if there is no mapping it returns
+ * an all zero address, e.g "0x0000...")
+ */
+export function getUserAddress(developerAddress) {
+    return getIdentity().methods.get_3box_address(developerAddress).call();
+}
+
+/**
  * data is only necessary for contract transactions, it can be computed with encodeABI from web3
  * @param {String} `to` address
  * @param {String} `data` abi encoded dats
