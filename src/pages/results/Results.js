@@ -69,13 +69,11 @@ class Results extends React.PureComponent {
 					          {/*TODO there is a bug with all the text being displayed as a single line, please display as a table*/}
 					          <Row>
 					            <Col sm={6}>
-					              <h6><span className="fw-semi-bold">Device Name: </span></h6>
 					              <h6><span className="fw-semi-bold">Author: </span></h6>
 					              <h6><span className="fw-semi-bold">Version: </span></h6>
 					            </Col>
 					            <Col sm={6}>
-					              <h6>Brand</h6>
-					              <h6>Model</h6>
+					              <h6>Author Name</h6>
 					              <h6>123456</h6>
 					            </Col>
 					          </Row>
@@ -89,13 +87,11 @@ class Results extends React.PureComponent {
 					          {/*TODO there is a bug with all the text being displayed as a single line, please display as a table*/}
 					          <Row>
 					            <Col sm={6}>
-					              <h6><span className="fw-semi-bold">Device Name: </span></h6>
 					              <h6><span className="fw-semi-bold">Author: </span></h6>
 					              <h6><span className="fw-semi-bold">Version: </span></h6>
 					            </Col>
 					            <Col sm={6}>
-					              <h6>Brand</h6>
-					              <h6>Model</h6>
+					              <h6>Author Name</h6>
 					              <h6>123456</h6>
 					            </Col>
 					          </Row>
@@ -109,19 +105,16 @@ class Results extends React.PureComponent {
 					          {/*TODO there is a bug with all the text being displayed as a single line, please display as a table*/}
 					          <Row>
 					            <Col sm={6}>
-					              <h6><span className="fw-semi-bold">Device Name: </span></h6>
 					              <h6><span className="fw-semi-bold">Author: </span></h6>
 					              <h6><span className="fw-semi-bold">Version: </span></h6>
 					            </Col>
 					            <Col sm={6}>
-					              <h6>Brand</h6>
-					              <h6>Model</h6>
+					              <h6>Author Name</h6>
 					              <h6>123456</h6>
 					            </Col>
 					          </Row>
 					        </div>
 					      </Widget>
-
 						</Col>
 					</Row>
 					<Row />
