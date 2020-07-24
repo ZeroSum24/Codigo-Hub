@@ -90,7 +90,7 @@ class Widget extends React.Component {
   }
 
   handleClose = () => {
-    this.setState({ hideWidget: !this.state.hideWidget})
+    //this.setState({ hideWidget: !this.state.hideWidget})
   }
 
   handleCollapse = () => {
