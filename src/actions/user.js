@@ -47,7 +47,7 @@ export function loginUser(creds) {
 
         dispatch(receiveLogin());
 
-        if (creds.email.length > 0 && creds.password.length > 0) {
+        if (creds.password.length > 0) {
             localStorage.setItem('authenticated', true)
         } else {
             dispatch(loginError('Something was wrong. Try again'));
@@ -99,11 +99,14 @@ export function enableUserEthereum() {
             const ethereumAddress = (await window.ethereum.request({ method: 'eth_requestAccounts' }))[0];
 
             // Authenticate and the users 3box and app space
-            const box = await Box.create(window.ethereum);
-            const spaces = ['código-user-space'];
-            await box.auth(spaces, {address: ethereumAddress});
-            await box.syncDone;
+            // const box = await Box.create(window.ethereum);
+            // const spaces = ['código-user-space'];
+            // await box.auth(spaces, {address: ethereumAddress});
+            // await box.syncDone;
 
+            let box = null;
+            let spaces = [null];
+            
             // Accounts now exposed
             dispatch(ethereumAuthSuccess({
                 ethereumAddress: ethereumAddress,
