@@ -12,7 +12,7 @@ import Earnings from '../../pages/earnings';
 import AddFirmware from '../../pages/addFirmware';
 import AddBounty from '../../pages/addBounty';
 import AddDevice from '../../pages/addDevice';
-import TopBounties from '../../pages/topBounties';
+import AvailableBounties from '../../pages/availableBounties';
 import Firmware from '../../pages/firmware';
 import Search from '../../pages/search';
 import Results from '../../pages/results';
@@ -89,7 +89,7 @@ class Layout extends React.Component {
 										<Route path="/app/top_firmware" exact component={TopFirmware} />
 										<Route path="/app/add_firmware" exact component={AddFirmware} />
 										<Route path="/app/earnings" exact component={Earnings} />
-										<Route path="/app/top_bounties" exact component={TopBounties} />
+										<Route path="/app/availableBounties" exact component={AvailableBounties} />
 										<Route path="/app/add_bounty" exact component={AddBounty} />
 										<Route path="/app/firmware" exact component={Firmware} />
 										<Route path="/app/search" exact component={Search} />

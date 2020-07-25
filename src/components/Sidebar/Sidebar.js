@@ -149,7 +149,7 @@ class Sidebar extends React.Component {
 						header="Available Bounties"
 						isHeader
 						iconName="flaticon-layers"
-						link="/app/top_bounties"
+						link="/app/availableBounties"
 						index="ui"
 					/>
 					<LinksGroup

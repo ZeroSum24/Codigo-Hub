@@ -10,7 +10,7 @@ class TopBounties extends React.PureComponent  {
   render() {
 
     return (
-      <div></div>
+      <div>Available Bounties</div>
      );
    }
 }
