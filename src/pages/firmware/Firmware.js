@@ -1,9 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-import { Row, Col, Container, Card, CardTitle, CardText, CardImg, CardBody, Button } from 'reactstrap';
+import { Row, Col, Container, Card, CardTitle, CardText, CardBody, Button } from 'reactstrap';
 
 class Firmware extends React.Component {
 	constructor(props) {

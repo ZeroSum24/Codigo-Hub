@@ -90,7 +90,7 @@ class Widget extends React.Component {
   }
 
   handleClose = () => {
-    this.setState({ hideWidget: !this.state.hideWidget})
+    //this.setState({ hideWidget: !this.state.hideWidget})
   }
 
   handleCollapse = () => {
@@ -256,7 +256,7 @@ class Widget extends React.Component {
                 <button onClick={this.handleClose} id={`closeId-${randomId}`}>
                   {typeof close === 'string' ?
                     <strong className="text-gray-light">{close}</strong> :
-                    <i className="la la-remove" />}
+                    <i className="" />}
                   {showTooltip && (
                     <UncontrolledTooltip
                       placement={tooltipPlacement}
