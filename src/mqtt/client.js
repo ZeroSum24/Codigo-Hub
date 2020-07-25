@@ -8,7 +8,7 @@ export const client = new Paho.Client(broker, Number(port), clientID);
 // set callback handlers
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
-client.connect({ onSuccess: onConnect, onFailure: onFailureConnect });
+client.connect({ onSuccess: onConnect, onFailure: onFailureConnect, reconnect: true });
 
 // map deviceName -> timestamp of last ping received
 const activeDevicesMap = {};
@@ -20,12 +20,13 @@ function onFailureConnect(e) {
 // called when the client connects
 function onConnect() {
   console.log('connected');
-  client.subscribe("codigo/active");
+  client.subscribe("codigo/active", {qos: 2});
 }
 
 function publish(stringMessage, topic) {
   const message = new Paho.Message(stringMessage);
   message.destinationName = topic;
+  message.qos = 2
   client.send(message);
 }
 
@@ -38,8 +39,8 @@ function onConnectionLost(responseObject) {
 function onMessageArrived(message) {
   const topic = message.destinationName;
   const payload = message.payloadString;
-  console.log("mqtt message arrived:"+payload+ 'on topic '+ topic);
   if (topic === 'codigo/active') {
+    console.log("Device "+payload+ ' is active!');
     activeDevicesMap[payload] = Date.now();
   }
 }
