@@ -72,7 +72,7 @@ class AddDevice extends React.PureComponent  {
     //       <Toast.Body>Device successfully added: {this.state.deviceName}</Toast.Body>
     //    </Toast>): null
     // }
-    
+
     return (
       <Container>
           <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Add a Device</h3>}>

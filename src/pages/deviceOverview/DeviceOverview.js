@@ -10,7 +10,6 @@ class DeviceOverview extends React.PureComponent {
   }
 
   render() {
-
     return (
       <div>
         <h1 className="page-title">Devices<span className="fw-semi-bold"></span></h1>
@@ -21,13 +20,11 @@ class DeviceOverview extends React.PureComponent {
 }
 
 function DeviceListView(props) {
-  console.log("Device List Props", props);
-
+  console.log("Fimrware List Props", props);
     let view;
-
     if (props.deviceList.length > 0) {
       view = (props.deviceList.map((item) =>
-        <DeviceWidget device={item}/>)
+        <DeviceWidget firmware={item}/>)
       );
     } else {
       view = (<div align ="center">Sorry, there is no firmware currently available for this device.</div>);
