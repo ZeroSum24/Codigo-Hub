@@ -3,7 +3,6 @@
 import { web3 } from '../blockchain/client';
 import { getChallenge, sendResponse } from '../blockchain/contracts';
 
-
 export const FIRMWARE_SUCCESS = 'FIRMWARE_SUCCESS';
 export const FIRMWARE_FAILURE = 'FIRMWARE_FAILURE';
 export const FIRMWARE_PENDING = 'FIRMWARE_PENDING';
@@ -16,6 +15,7 @@ function firmwareLinkSuccess(payload) {
 }
 
 function firmwareLinkPending() {
+  console.log("function call - firmware link pending");
   return {
     type: FIRMWARE_PENDING
   };
@@ -26,6 +26,13 @@ function firmwareLinkFailure(payload) {
     type: FIRMWARE_FAILURE,
     payload,
   };
+}
+
+export function startFirmwareLink() {
+  console.log("start firmware link");
+  return (dispatch) => {
+    dispatch(firmwareLinkPending);
+  }
 }
 
 /**

@@ -5,6 +5,11 @@ import s from './Loader.module.scss';
 import { Grid } from '@material-ui/core';
 
 class Loader extends React.Component {
+
+	constructor(props) {
+		super(props);
+	}
+
 	static propTypes = {
 		size: PropTypes.number.isRequired
 	};
@@ -25,7 +30,7 @@ class Loader extends React.Component {
 			>
 				<div className={cx(s.root, this.props.className)}>
 					<i className="la la-spinner la-spin" style={{ fontSize: this.props.size }} />
-					<a style={{ fontSize: '36px' }}> Loading Código </a>
+					<a style={{ fontSize: '36px' }}>{this.props.loadingText} </a>
 				</div>
 			</Grid>
 		);

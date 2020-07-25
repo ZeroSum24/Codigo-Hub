@@ -65,7 +65,7 @@ class App extends React.PureComponent {
       // begin enable ethereum process (default application state at beginning of user flow)
       // console.log('loading fetching')
       {/*TODO make sure the loader is centered in the middle of the screen*/}
-      appView = (<Loader/>);
+      appView = (<Loader loadingText={"Loading Código"}/>);
     } else {
       //  An error has occurred logging users in with ethereum
       appView = (<AuthErrorView onClick={this.handleEthereumEnable} title={"Ethereum Account Access Denied"}/>);
