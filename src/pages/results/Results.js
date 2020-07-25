@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from "react-redux";
-import Widget from "../../components/Widget";
 import FirmwareWidget from './components/firmwareWidget'
 
 
@@ -13,22 +12,6 @@ class Results extends React.PureComponent {
 		super(props);
 		const users = {
   	name: 'Ross',
-		};
-
-		const firmwaresObj = {
-			name: '',
-			version: '',
-			author: ''
-		};
-
-		const requestsObj = {
-
-
-		};
-
-	  const usersObj = {
-			name: ''
-
 		};
 
 		this.state = {
@@ -82,7 +65,7 @@ function FirmwareListView(props) {
     if (props.firmwares.length > 0) {
       		view = (props.firmwares.map((item) => <FirmwareWidget firmware={item}/>));
     } else {
-      view = (<div align ="center">Sorry, no firmware has currently been found, why not many a bounty?</div>);
+      view = (<div align ="center">Sorry, no firmware has been found, why not propose a bounty?</div>);
     }
   return view
 }
