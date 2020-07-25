@@ -62,23 +62,7 @@ class Results extends React.PureComponent {
 						</Col>
 						<Col xs={12} sm={12} md={9}>
 								<h1 className="page-title">Available Firmware<span className="fw-semi-bold"></span></h1>
-								<Widget
-									title={<h5>Firmware Name: <small className="text-muted">Firmware Name</small></h5>}
-									close collapse >
-									<p></p>
-									<div className="widget-padding-md w-100 h-100 text-left border rounded">
-										<Row>
-											<Col sm={6}>
-												<h6><span className="fw-semi-bold">Author: </span></h6>
-												<h6><span className="fw-semi-bold">Version: </span></h6>
-											</Col>
-											<Col sm={6}>
-												<h6>Author Name</h6>
-												<h6>123456</h6>
-											</Col>
-										</Row>
-									</div>
-								</Widget>
+								      <DeviceListView firmwares={this.state.firmwares}/>
 								</Col>
 					</Row>
 					<Row />
@@ -88,8 +72,19 @@ class Results extends React.PureComponent {
 	}
 }
 
-function DeviceListView() {
+function DeviceListView(props) {
+  console.log("Device List Props", props);
 
+    let view;
+
+    if (props.firmwares.length > 0) {
+    //  view = (props.deviceList.map((item) =>
+    //    <DeviceWidget device={item}/>)
+    //  );
+    } else {
+      view = (<div align ="center">No devices currently registered with account.</div>);
+    }
+  return view
 }
 
 export default Results;

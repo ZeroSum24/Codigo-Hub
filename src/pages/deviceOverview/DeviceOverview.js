@@ -30,8 +30,7 @@ function DeviceListView(props) {
         <DeviceWidget device={item}/>)
       );
     } else {
-      // TODO this div would be prettier were it centered
-      view = (<div>No devices currently registered with account.</div>);
+      view = (<div align ="center">Sorry, there is no firmware currently available for this device.</div>);
     }
   return view
 }
