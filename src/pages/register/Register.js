@@ -2,12 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Container, Alert, Button, FormGroup, FormControl, InputGroup, InputGroupAddon, InputGroupText, Input, Label } from 'reactstrap';
+import {
+    Container,
+    Alert,
+    Button,
+    FormGroup,
+    FormControl,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText,
+    Input,
+    Label,
+    NavItem, Nav
+} from 'reactstrap';
 
 import Widget from '../../components/Widget';
 import { registerUser, registerError } from '../../actions/register';
 import Login from '../login';
-import { linkUserToFirmware } from '../../actions/firmware_link'
+import { startFirmwareLink, linkUserToFirmware } from '../../actions/firmwareLink'
+import s from "./Register.module.scss";
+import Loader from "../../components/Loader";
 
 class Register extends React.Component {
     static propTypes = {
@@ -31,7 +45,8 @@ class Register extends React.Component {
         this.checkPassword = this.checkPassword.bind(this);
         this.isPasswordValid = this.isPasswordValid.bind(this);
         this.changeLinkDeveloperCheckBox = this.changeLinkDeveloperCheckBox.bind(this);
-        this.changeDeveloperAddress = this.changeDeveloperAddress.bind(this)
+        this.changeDeveloperAddress = this.changeDeveloperAddress.bind(this);
+        this.changeDeveloperKey = this.changeDeveloperKey.bind(this)
     }
 
     changePassword(event) {
@@ -67,8 +82,34 @@ class Register extends React.Component {
         }
     }
 
+    checkDeveloperLink() {
+        if (this.state.developerAddress !== '') {
+            this.props.dispatch(registerError("The developer address field is empty."));
+        } else {
+            this.props.dispatch(registerError("The developer key field is empty."));
+        }
+    }
+
     isPasswordValid() {
        return this.state.password && this.state.password === this.state.confirmPassword;
+    }
+
+    /**
+     * Triggers the link of the developer account providing the requisite information is available in the UI.
+     */
+    doDeveloperAccountLink() {
+      if (this.state.linkDeveloperCheckBox) {
+        if (this.state.developerAddress === '' || this.state.developerKey === '') {
+          this.checkDeveloperLink()
+        } else {
+          // Triggers a loading screen whilst the user registers their account
+          console.log("trigger link user");
+          this.props.dispatch(startFirmwareLink());
+          console.log("firmwareLink", this.props.linkingDeveloperAccount);
+
+          this.props.dispatch(linkUserToFirmware(this.state.developerAddress, this.state.developerKey))
+        }
+      }
     }
 
     doRegister(e) {
@@ -76,16 +117,17 @@ class Register extends React.Component {
         if (!this.isPasswordValid()) {
             this.checkPassword();
         } else {
-            this.props.dispatch(registerUser({
-                creds: {
-                    email: this.state.email,
-                    password: this.state.password
-                },
-                history: this.props.history
-            }));
-            if (this.state.developerAddress !== '') {
-                // TODO then trigger the loading screen w/o upsetting current register process
-                this.props.dispatch(linkUserToFirmware(this.state.developerAddress, this.state.developerKey))
+            this.doDeveloperAccountLink();
+
+            // trigger user registration following the developer account link
+            if (!this.props.linkingDeveloperAccount) {
+              // TODO fix this
+              // this.props.dispatch(registerUser({
+              //   creds: {
+              //     password: this.state.password
+              //   },
+              //   history: this.props.history
+              // }));
             }
         }
     }
@@ -102,6 +144,7 @@ class Register extends React.Component {
 
         return (
             <div className="auth-page">
+              {this.props.linkingDeveloperAccount ? <Loader loadingText={"Linking Developer Account"}/>:
                 <Container>
                     <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Register with Código</h3>}>
                         <p className="widget-auth-info">
@@ -155,6 +198,7 @@ class Register extends React.Component {
                                            required name="confirmPassword" placeholder="Confirm Password"/>
                                 </InputGroup>
                             </FormGroup>
+                            <hr className={`${s.divider} text-white`} />
                             <FormGroup>
                                 <Label for="linkDeveloperCheckBox">Link Código Developer Account</Label>
                                 <InputGroup className="input-group-no-border">
@@ -209,9 +253,9 @@ class Register extends React.Component {
                             </div>
                         </form>
                     </Widget>
-                </Container>
+                </Container>}
                 <footer className="auth-footer">
-                    2020 &copy; Codigo Admin Dashboard.
+                    2020 &copy; Código Admin Dashboard.
                 </footer>
             </div>
         );
@@ -222,7 +266,8 @@ function mapStateToProps(state) {
     return {
         isFetching: state.register.isFetching,
         errorMessage: state.register.errorMessage,
-        ethereumAddress: state.ethereum.ethereumAddress
+        ethereumAddress: state.ethereum.ethereumAddress,
+        linkingDeveloperAccount: state.firmware.linkingDeveloperAccount
     };
 }
 
