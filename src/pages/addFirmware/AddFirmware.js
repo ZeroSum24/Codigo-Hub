@@ -8,7 +8,7 @@ import { encodeAndAddFirmware } from '../../ipfs/client.js';
 import { initWallet } from '../../blockchain/client';
 import { hardcoded_device_types, registerFirmware } from '../../blockchain/contracts';
 
-const idleButtonText = 'Add firmware to Còdigo';
+const idleButtonText = 'Add Firmware to Còdigo';
 const ipfsUploadText = 'Uploading to IPFS';
 const ethPerform = 'Registering firmware to repository';
 
@@ -74,7 +74,7 @@ class AddFirmware extends React.Component {
   render() {
 		return (
 			<Container>
-				<Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Add firmware</h3>}>
+				<Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Add Firmware</h3>}>
 					<p className="widget-auth-info">Please fill all fields below.</p>
 					<form onSubmit={this.onSubmit}>
 						{this.props.errorMessage && (

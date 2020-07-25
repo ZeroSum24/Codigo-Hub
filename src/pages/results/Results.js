@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import Widget from "../../components/Widget";
+import FirmwareWidget from './components/firmwareWidget'
 
 
 import { Row, Col, Container, Card, CardTitle, CardText, CardImg, CardBody, Button } from 'reactstrap';
@@ -14,25 +14,13 @@ class Results extends React.PureComponent {
   	name: 'Ross',
 		};
 
-		const firmwaresObj = {
-			name: '',
-			version: '',
-			author: ''
-		};
-
-		const requestsObj = {
-
-
-		};
-
-	  const usersObj = {
-			name: ''
-
-		};
-
 		this.state = {
 			users:[],
-			firmwares: [],
+			firmwares: [
+				{id:'name', value: 'Name'},
+				{id:'author', value: 'author'},
+				{id:'version', value: 'version'}
+			],
 			requests: []
 		};
 
@@ -62,7 +50,7 @@ class Results extends React.PureComponent {
 						</Col>
 						<Col xs={12} sm={12} md={9}>
 								<h1 className="page-title">Available Firmware<span className="fw-semi-bold"></span></h1>
-								      <DeviceListView firmwares={this.state.firmwares}/>
+								      <FirmwareListView firmwares={this.state.firmwares}/>
 								</Col>
 					</Row>
 					<Row />
@@ -72,17 +60,12 @@ class Results extends React.PureComponent {
 	}
 }
 
-function DeviceListView(props) {
-  console.log("Device List Props", props);
-
+function FirmwareListView(props) {
     let view;
-
     if (props.firmwares.length > 0) {
-    //  view = (props.deviceList.map((item) =>
-    //    <DeviceWidget device={item}/>)
-    //  );
+      		view = (props.firmwares.map((item) => <FirmwareWidget firmware={item}/>));
     } else {
-      view = (<div align ="center">No devices currently registered with account.</div>);
+      view = (<div align ="center">Sorry, no firmware has been found, why not propose a bounty?</div>);
     }
   return view
 }
