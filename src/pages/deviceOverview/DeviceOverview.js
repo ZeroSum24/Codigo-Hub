@@ -8,7 +8,7 @@ class DeviceOverview extends React.PureComponent {
 		return (
 			<div>
 				<h1 className="page-title">
-					Devices<span className="fw-semi-bold" />
+					Devices<h1 className="fw-semi-bold" />
 				</h1>
 				<DeviceListView deviceList={this.props.deviceList} />
 			</div>
