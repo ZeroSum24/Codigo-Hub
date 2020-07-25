@@ -1,21 +1,16 @@
 import React from 'react';
-import {connect} from "react-redux";
+import { connect } from 'react-redux';
 
-class TopFirmware extends React.PureComponent  {
+class TopFirmware extends React.PureComponent {
+	constructor(props) {
+		super(props);
+	}
 
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-
-    return (
-      <div></div>
-     );
-   }
+	render() {
+		return <div />;
+	}
 }
 
-
-const mapStateToProps = state => ({});
+const mapStateToProps = (state) => ({});
 
 export default connect(mapStateToProps)(TopFirmware);

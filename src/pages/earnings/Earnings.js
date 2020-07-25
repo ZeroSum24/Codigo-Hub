@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Container, Table, Label, Row, Col } from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Container, Table, Row, Col } from 'reactstrap';
 
 import Widget from '../../components/Widget';
-import ApexChart from 'react-apexcharts';
 
 import s from './Earnings.module.scss';
 import { chartData, liveChart, liveChartInterval } from './mock';
@@ -60,7 +59,6 @@ class Earnings extends React.Component {
 	}
 
 	render() {
-		const { cd, ld, initEchartsOptions, sparklineData } = this.state;
 		return (
 			<Container fluid={true}>
 				<div>
@@ -95,17 +93,17 @@ class Earnings extends React.Component {
 									</thead>
 									<tbody>
 										<tr>
-											<td/>
+											<td />
 											<td>Earnings Last 7 days : </td>
 											<td className="text-align-right fw-semi-bold">$100.10</td>
 										</tr>
 										<tr>
-											<td/>
+											<td />
 											<td>Earnings Last 30 days : </td>
 											<td className="text-align-right fw-semi-bold">$500.10</td>
 										</tr>
 										<tr>
-											<td/>
+											<td />
 											<td>Earnings Last 90 days : </td>
 											<td className="text-align-right fw-semi-bold">$1000.10</td>
 										</tr>

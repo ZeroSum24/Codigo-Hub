@@ -18,10 +18,6 @@ const AutoCompleteText = (props) => {
 	const classes = useStyles();
 	const [ inputValue, setInputValue ] = React.useState('');
 
-	const fontIconClick = (e, props) => {
-		e.preventDefault();
-	};
-
 	return (
 		<React.Fragment>
 			<Autocomplete
@@ -59,7 +55,7 @@ const AutoCompleteText = (props) => {
 				)}
 			/>
 			<div>
-				<Link to={'/app/top_firmware/' + `${inputValue}`}>
+				<Link to={`/app/firmware/${inputValue}`}>
 					<IconButton color="inherit" aria-label="add an alarm">
 						<SearchIcon style={{ fontSize: 35 }} />
 					</IconButton>
