@@ -7,7 +7,7 @@ import { dismissAlert } from '../../actions/alerts';
 import s from './Sidebar.module.scss';
 import LinksGroup from './LinksGroup';
 
-import avatar from '../../images/rsz_4rsz_codigo-01.png';
+import logo from '../../images/rsz_4rsz_codigo-01.png';
 import { changeActiveSidebarItem } from '../../actions/navigation';
 import { logoutUser } from '../../actions/user';
 
@@ -29,7 +29,6 @@ class Sidebar extends React.Component {
 
 	constructor(props) {
 		super(props);
-
 		this.doLogout = this.doLogout.bind(this);
 	}
 
@@ -72,10 +71,9 @@ class Sidebar extends React.Component {
 				className={cx(s.root)}
 				ref={(nav) => {
 					this.element = nav;
-				}}
-			>
+				}}>
 				<header className={s.logo}>
-					<img src={avatar} alt="..." />
+					<img src={logo} alt="..." />
 					<a href="/">
 						Código <span className="fw-bold">User Panel</span>
 					</a>
@@ -138,10 +136,10 @@ class Sidebar extends React.Component {
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
-						header="Top Bounties"
+						header="Available Bounties"
 						isHeader
 						iconName="flaticon-layers"
-						link="/app/top_bounties"
+						link="/app/availableBounties"
 						index="ui"
 					/>
 					<LinksGroup
@@ -155,8 +153,6 @@ class Sidebar extends React.Component {
 						index="add_bounty"
 					/>
 				</ul>
-
-				{}
 			</nav>
 		);
 	}
