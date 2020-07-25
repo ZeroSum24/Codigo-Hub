@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Container, Table, Row, Col } from 'reactstrap';
+import { Col, Container, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Row, Table } from 'reactstrap';
 
 import Widget from '../../components/Widget';
 
@@ -17,6 +17,9 @@ import 'echarts/lib/component/legend';
 import Highcharts from 'highcharts';
 import exporting from 'highcharts/modules/exporting';
 import exportData from 'highcharts/modules/export-data';
+import BalanceSheet from '../filecoin/balance';
+import CreateFilecoinAddressDialog from '../filecoin/createAddress';
+import { getPowerGateInfo } from '../../filecoin/client';
 
 exporting(Highcharts);
 exportData(Highcharts);
@@ -30,6 +33,7 @@ class Earnings extends React.Component {
 		initEchartsOptions: {
 			renderer: 'canvas'
 		},
+    showCreate: false,
 		sparklineData: {
 			series: [ { data: [ 1, 7, 3, 5, 7, 8 ] } ],
 			options1: {
@@ -54,14 +58,35 @@ class Earnings extends React.Component {
 	toggle = () => this.setState({ dropdownOpen: !this.state.dropdownOpen });
 	toggle2 = () => this.setState({ dropdownOpen2: !this.state.dropdownOpen2 });
 
+	onCloseCreateDialog = () => {
+	  this.setState({showCreate: false});
+  }
+
 	componentWillUnmount() {
 		clearInterval(liveChartInterval);
 	}
+
+	componentDidMount = () => {
+	  this._refresh();
+  }
+
+  _refresh = async () => {
+    const newInfo = await getPowerGateInfo();
+    this.setState({balancesList: newInfo.info.balancesList });
+  };
+
 
 	render() {
 		return (
 			<Container fluid={true}>
 				<div>
+          <h1 className="page-title" style={{display: 'inline', paddingRight: '10px'}}>Filecoin Wallets</h1>
+          <i className="fa fa-plus-circle" style={{fontSize: '24px', paddingRight: '10px'}} title="Add new device" aria-hidden="true" onClick={() => this.setState({showCreate: true})}/>
+          <i className="fa fa-refresh" style={{ fontSize: '24px' }} title="Refresh device status" onClick={this._refresh} aria-hidden="true"/>
+          <Col>
+            <CreateFilecoinAddressDialog show={this.state.showCreate} onClose={this.onCloseCreateDialog} />
+            <BalanceSheet balancesList={this.state.balancesList} />
+          </Col>
 					<h1 className="page-title">
 						Firmware <span className="fw-semi-bold">Earnings</span>
 					</h1>{' '}
