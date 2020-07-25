@@ -1,6 +1,10 @@
 import React from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import { IconButton } from '@material-ui/core';
+import ThreeBoxComments from '3box-comments-react';
 
 import { Row, Col, Container, Card, CardTitle, CardText, CardBody, Button } from 'reactstrap';
 
@@ -9,7 +13,11 @@ class Firmware extends React.Component {
 		super(props);
 		this.state = {
 			code: '',
-			checkedArr: [ false, false, false ]
+			checkedArr: [ false, false, false ],
+			score: '123',
+			adminEthAddr: '0xf7367F3abDB31428Ed56032AbC14B245fCC95BA2',
+			box: '123',
+			myAddress: '0xf7367F3abDB31428Ed56032AbC14B245fCC95BA2'
 		};
 	}
 
@@ -85,6 +93,24 @@ void loop() {
 							>
 								{codeString}
 							</SyntaxHighlighter>{' '}
+							<br />
+							<br />
+							<br />
+							<Row>
+								<Col xs="2" sm="2" />{' '}
+								<Col xs="auto" sm="auto" md="auto">
+									<ThreeBoxComments
+										// required
+										spaceName="mySpaceName"
+										threadName="myThreadName"
+										adminEthAddr={this.state.adminEthAddr}
+										// Required props for auth A. & B.
+										box={this.state.box}
+										currentUserAddr={this.state.myAddress}
+									/>{' '}
+								</Col>
+								<Col xs="2" sm="2" />
+							</Row>
 						</Col>
 						<Col xs={12} sm={12} md={3}>
 							<Card body outline color="primary">
@@ -134,8 +160,16 @@ void loop() {
 							<br />
 							<Card>
 								<CardBody>
-									<CardTitle>612</CardTitle>
-									<CardText>Community Score ammount of D/L </CardText>
+									<CardTitle>
+										{' '}
+										<IconButton color="inherit">
+											<ThumbUpIcon />{' '}
+										</IconButton>
+										<IconButton color="inherit">
+											<ThumbDownIcon />
+										</IconButton>
+									</CardTitle>
+									<CardText>Community Score ammount of {this.state.score} </CardText>
 								</CardBody>
 							</Card>
 						</Col>
