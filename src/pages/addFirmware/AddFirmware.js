@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from 'reactstrap';
-
 import { Container, Alert, FormGroup, InputGroup, Input, Label, Spinner } from 'reactstrap';
 import 'react-toastify/dist/ReactToastify.css';
 import Widget from '../../components/Widget';
@@ -72,7 +71,7 @@ class AddFirmware extends React.Component {
 		this.setState({ buttonText: ipfsUploadText });
 	}
 
-	render() {
+  render() {
 		return (
 			<Container>
 				<Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Add firmware</h3>}>
@@ -118,6 +117,17 @@ class AddFirmware extends React.Component {
 
 						<FormGroup className="mt">
 							<Label for="file">Binary file</Label>
+              {this.state.file ?
+                <div style={{ marginBottom: 24 }}>
+                  <div>
+                    <div>Name: {this.state.file.name}</div>
+                  </div>
+
+                  <div>
+                    <div>File size: {this.state.file.size}</div>
+                  </div>
+                </div>
+              : null}
 							<InputGroup>
 								<Input id="file" type="file" required onChange={this.changeFile} />
 							</InputGroup>

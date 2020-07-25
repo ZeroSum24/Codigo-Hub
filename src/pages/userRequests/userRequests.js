@@ -1,17 +1,9 @@
 import React from 'react';
-import {
-  Row, Col, Button,
-} from 'reactstrap';
-import { withRouter, Redirect, Link } from 'react-router-dom';
-
-import { Container, Alert, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label } from 'reactstrap';
+import { Alert, Button, Container, FormGroup, Input, InputGroup, Label, } from 'reactstrap';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import uuid from 'uuid/v4'
+import uuid from 'uuid/v4';
 import Widget from '../../components/Widget';
-import s from './Notifications.module.scss';
-import microsoft from '../../images/microsoft.png';
-import Login from '../login';
 
 class UserRequests extends React.Component {
 
