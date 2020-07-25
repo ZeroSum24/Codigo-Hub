@@ -17,9 +17,8 @@ import {
 } from 'reactstrap';
 
 import Widget from '../../components/Widget';
-import { registerUser, registerError } from '../../actions/register';
+import { registerUser, registerError, linkUserToFirmware } from '../../actions/register';
 import Login from '../login';
-import { startFirmwareLink, linkUserToFirmware } from '../../actions/firmwareLink'
 import s from "./Register.module.scss";
 import Loader from "../../components/Loader";
 
@@ -94,41 +93,25 @@ class Register extends React.Component {
        return this.state.password && this.state.password === this.state.confirmPassword;
     }
 
-    /**
-     * Triggers the link of the developer account providing the requisite information is available in the UI.
-     */
-    doDeveloperAccountLink() {
-      if (this.state.linkDeveloperCheckBox) {
-        if (this.state.developerAddress === '' || this.state.developerKey === '') {
-          this.checkDeveloperLink()
-        } else {
-          // Triggers a loading screen whilst the user registers their account
-          console.log("trigger link user");
-          this.props.dispatch(startFirmwareLink());
-          console.log("firmwareLink", this.props.linkingDeveloperAccount);
-
-          this.props.dispatch(linkUserToFirmware(this.state.developerAddress, this.state.developerKey))
-        }
-      }
-    }
-
     doRegister(e) {
         e.preventDefault();
         if (!this.isPasswordValid()) {
             this.checkPassword();
         } else {
-            this.doDeveloperAccountLink();
 
-            // trigger user registration following the developer account link
-            if (!this.props.linkingDeveloperAccount) {
-              // TODO fix this
-              // this.props.dispatch(registerUser({
-              //   creds: {
-              //     password: this.state.password
-              //   },
-              //   history: this.props.history
-              // }));
+          // Triggers the link of the developer account providing the requisite information is available in the UI.
+          if (this.state.linkDeveloperCheckBox) {
+            if (this.state.developerAddress === '' || this.state.developerKey === '') {
+              this.checkDeveloperLink()
+            } else {
+              // Triggers a loading screen whilst the user registers their account
+              this.props.dispatch(linkUserToFirmware(this.state.developerAddress, this.state.developerKey,
+                {creds: {password: this.state.password}, history: this.props.history}));
             }
+          } else {
+            this.props.dispatch(registerUser(
+              {creds: {password: this.state.password}, history: this.props.history}));
+          }
         }
     }
 
@@ -237,6 +220,7 @@ class Register extends React.Component {
                                               <i className="la la-link text-white"/>
                                           </InputGroupText>
                                       </InputGroupAddon>
+                                      {/*TODO updae placeholder to hex*/}
                                       <Input id="developerKey" className="input-transparent pl-3" value={this.state.developerKey}
                                              onChange={this.changeDeveloperKey} onBlur={this.changeDeveloperKey}
                                              type="text" required name="developerKey" placeholder="MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjT"/>
@@ -267,7 +251,7 @@ function mapStateToProps(state) {
         isFetching: state.register.isFetching,
         errorMessage: state.register.errorMessage,
         ethereumAddress: state.ethereum.ethereumAddress,
-        linkingDeveloperAccount: state.firmware.linkingDeveloperAccount
+        linkingDeveloperAccount: state.register.linkingDeveloperAccount
     };
 }
 
