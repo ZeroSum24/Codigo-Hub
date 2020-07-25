@@ -100,16 +100,6 @@ class Sidebar extends React.Component {
 						link="/app/device_overview"
 						index="core"
 					/>
-					<LinksGroup
-						onActiveSidebarItemChange={(activeItem) =>
-							this.props.dispatch(changeActiveSidebarItem(activeItem))}
-						activeItem={this.props.activeItem}
-						header="Add a Device"
-						isHeader
-						iconName="flaticon-network"
-						link="/app/add_device"
-						index="core"
-					/>
 					<h5 className={[ s.navTitle, s.groupTitle ].join(' ')}>Developer</h5>
 					<LinksGroup
 						onActiveSidebarItemChange={(activeItem) =>
