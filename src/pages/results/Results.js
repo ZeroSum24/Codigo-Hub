@@ -20,11 +20,15 @@ class Results extends React.PureComponent {
 			author: ''
 		};
 
-		const requests = {
+		const requestsObj = {
 
 
 		};
 
+	  const usersObj = {
+			name: ''
+
+		};
 		this.state = {
 			users:[],
 			firmwares: [],
@@ -43,17 +47,17 @@ class Results extends React.PureComponent {
 						<Col xs={12} sm={12} md={2}>
 						<Card body outline color="primary">
 						{/*Bernard: Please make this so it displays number of firmwares programatically*/}
-							<CardTitle align="center">Firmware (3)</CardTitle>
+							<CardTitle align="center">Firmware ({this.state.firmwares.length})</CardTitle>
 						</Card>
 						<br />
 						<Card body outline color="primary">
 						{/*Bernard: Please make this so it displays number of users programatically*/}
-							<CardTitle align="center">Users (4)</CardTitle>
+							<CardTitle align="center">Users ({this.state.users.length})</CardTitle>
 						</Card>
 						<br />
 						<Card body outline color="primary">
 						{/*Bernard: Please Make this so it displays number of requests programatically*/ }
-							<CardTitle align="center">Requests (4)</CardTitle>
+							<CardTitle align="center">Requests ({this.state.requests.length})</CardTitle>
 						</Card>
 						<br />
 						</Col>
