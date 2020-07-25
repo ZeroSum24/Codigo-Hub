@@ -21,13 +21,12 @@ function DeviceListView(props) {
 
 	let view;
 
-	if (props.deviceList.length > 0) {
-		view = props.deviceList.map((item) => <DeviceWidget device={item} />);
-	} else {
-		// TODO this div would be prettier were it centered
-		view = <div>No devices currently registered with account.</div>;
-	}
-	return view;
+  if (props.deviceList.length > 0) {
+    view = (props.deviceList.map((item) => <DeviceWidget device={item}/>));
+  } else {
+    view = (<div align ="center">Sorry, there is no firmware currently available for this device.</div>);
+  }
+  return view
 }
 
 const mapStateToProps = (state) => ({

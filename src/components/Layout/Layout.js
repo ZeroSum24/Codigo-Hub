@@ -14,6 +14,10 @@ import AddBounty from '../../pages/addBounty';
 import AddDevice from '../../pages/addDevice';
 import TopBounties from '../../pages/topBounties';
 import Firmware from '../../pages/firmware';
+import Search from '../../pages/search';
+import Results from '../../pages/results';
+
+
 
 import Header from '../Header';
 import Sidebar from '../Sidebar';
@@ -88,6 +92,9 @@ class Layout extends React.Component {
 										<Route path="/app/top_bounties" exact component={TopBounties} />
 										<Route path="/app/add_bounty" exact component={AddBounty} />
 										<Route path="/app/firmware" exact component={Firmware} />
+										<Route path="/app/search" exact component={Search} />
+										<Route path="/app/results" exact component={Results} />
+
 									</Switch>
 								</CSSTransition>
 							</TransitionGroup>
