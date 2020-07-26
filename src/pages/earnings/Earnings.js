@@ -81,8 +81,8 @@ class Earnings extends React.Component {
 			<Container fluid={true}>
 				<div>
           <h1 className="page-title" style={{display: 'inline', paddingRight: '10px'}}>Filecoin Wallets</h1>
-          <i className="fa fa-plus-circle" style={{fontSize: '24px', paddingRight: '10px'}} title="Add new device" aria-hidden="true" onClick={() => this.setState({showCreate: true})}/>
-          <i className="fa fa-refresh" style={{ fontSize: '24px' }} title="Refresh device status" onClick={this._refresh} aria-hidden="true"/>
+          <span className="glyphicon glyphicon-plus" style={{fontSize: '24px', marginBottom: '10px', paddingRight: '10px'}} title="Add new address" aria-hidden="true" onClick={() => this.setState({showCreate: true})} />
+          <span className="glyphicon glyphicon-refresh" style={{ fontSize: '24px', marginBottom: '10px' }} title="Refresh wallet" onClick={this._refresh} aria-hidden="true" />
           <Col>
             <CreateFilecoinAddressDialog show={this.state.showCreate} onClose={this.onCloseCreateDialog} />
             <BalanceSheet balancesList={this.state.balancesList} />
