@@ -21,7 +21,7 @@ class TopFirmware extends React.PureComponent {
 		return (
 			<div>
 				<h1 align="centre" className="page-title">
-					Available Bounties &nbsp;
+					Available Firmware &nbsp;
 				</h1>
 				<Container fluid={true}>
 					<Row>

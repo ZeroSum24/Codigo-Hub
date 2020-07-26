@@ -6,7 +6,7 @@ import { Container, Alert, FormGroup, InputGroup, Input, Label } from 'reactstra
 import 'react-toastify/dist/ReactToastify.css';
 
 import Widget from '../../components/Widget';
-import Bounty from '../../classes/Bounty'
+import Bounty from '../../model/Bounty'
 
 class AddBounty extends React.PureComponent  {
 
@@ -77,7 +77,7 @@ class AddBounty extends React.PureComponent  {
 
     return (
       <Container>
-        <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Add a Device</h3>}>
+        <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Add a bounty</h3>}>
           <p className="widget-auth-info">
             Please fill all fields below.
           </p>
@@ -86,8 +86,7 @@ class AddBounty extends React.PureComponent  {
               this.props.errorMessage && (
                 <Alert className="alert-sm widget-middle-overflow rounded-0" color="danger">
                   {this.props.errorMessage}
-                </Alert>
-              )
+                </Alert> )
             }
             <FormGroup className="mt">
               <Label for="text">Title</Label>
@@ -128,7 +127,7 @@ class AddBounty extends React.PureComponent  {
               <Label for="text">Firmware Version</Label>
               <InputGroup className="input-group-no-border">
                 <Input id="firmwareVersion" className="input-transparent pl-3" value={this.state.firmwareVersion}
-                       onChange={this.changeDeviceModel} type="text"
+                       onChange={this.changeFirmwareVersion} type="text"
                        required name="Firmware Version" placeholder="E.g. 19.4.4"/>
               </InputGroup>
             </FormGroup>

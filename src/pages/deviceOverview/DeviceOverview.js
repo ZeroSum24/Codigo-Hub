@@ -3,7 +3,7 @@ import React from 'react';
 import DeviceWidget from './components/DeviceWidget'
 import AddDeviceDialog from './components/AddDevice';
 import { connect } from 'react-redux';
-import { DeviceWithStatus } from '../../classes/Device';
+import { DeviceWithStatus } from '../../model/Device';
 import { isDeviceActive } from '../../mqtt/client';
 
 class DeviceOverview extends React.Component {
@@ -49,7 +49,8 @@ function DeviceListView(props) {
         <DeviceWidget key={item.serialNumber} device={item}/>)
       );
     } else {
-      view = (<div align ="center">Sorry, there is no firmware currently available for this device.</div>);
+      view = (
+        <div align ="center">Why not add some devices so you can manage them</div>);
     }
   return view
 }

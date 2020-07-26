@@ -101,11 +101,7 @@ class Earnings extends React.Component {
 							close
 						>
 							<div className="widget-body">
-								<h3>$720 Earned</h3>
-								<p className="fs-mini text-muted mb mt-sm">
-									Target <span className="fw-semi-bold">$820</span> day earnings is{' '}
-									<span className="fw-semi-bold">96%</span> reached.
-								</p>
+								<h3><span className="fw-semi-bold">$720 </span>Earned</h3>
 							</div>
 							<div style={{ paddingBottom: '40px' }} className={`widget-table-overflow ${s.table}`}>
 								<Table striped size="sm">
