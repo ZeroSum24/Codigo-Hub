@@ -1,3 +1,4 @@
+import Profile from "../model/Profile";
 
 
 export function retrieveProfileDetails(targetAddress, currentUserAddr) {
@@ -7,5 +8,5 @@ export function retrieveProfileDetails(targetAddress, currentUserAddr) {
 
 
 function getProfileDetails(address) {
-  return {'address': address}
+  return new Profile(address, '', '', '')
 }
