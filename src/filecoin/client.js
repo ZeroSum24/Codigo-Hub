@@ -23,7 +23,7 @@ export async function getPowerGateInfo() {
 export async function upload(fileAsUint8Array) {
   const { cid } = await PG.ffs.stage(fileAsUint8Array);
   const { jobId } = await PG.ffs.pushStorageConfig(cid);
-  const jobsCancel = PG.ffs.watchJobs((job) => {
+  PG.ffs.watchJobs((job) => {
     if (job.status === ffsTypes.JOB_STATUS_CANCELED) {
       console.log("job canceled")
     } else if (job.status === ffsTypes.JOB_STATUS_FAILED) {

@@ -1,7 +1,6 @@
 import React from 'react';
-import {connect} from "react-redux";
 import AvailableBountiesWidget from './components/AvailableBountyWidget'
-import { Row, Col, Container, Button } from 'reactstrap';
+import { Row, Col, Container } from 'reactstrap';
 
 class TopFirmware extends React.PureComponent {
 	constructor(props) {

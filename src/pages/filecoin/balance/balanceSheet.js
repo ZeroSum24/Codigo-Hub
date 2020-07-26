@@ -21,9 +21,6 @@ const columns = [
 ]
 
 export default class BalanceSheet extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render = () => {
     if (this.props.balancesList == null) return <div>"You have no Filecoin addresses :("</div>;

@@ -4,14 +4,9 @@ import React from "react";
 
 class AvailableBountiesWidget extends React.PureComponent {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     /*Need to adjust according to the details of add bounty*/
     const request = this.props.bounty;
-    console.log(request);
     return (
       <Widget
         title={<h5>Bounty Title: <small className="text-muted">{request.name}</small></h5>}
