@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import time
 
 import paho.mqtt.client as mqtt
@@ -31,9 +32,10 @@ def send_keepalive(client):
 
 
 if __name__ == "__main__":
-    client = mqtt.Client(client_id=client_name, clean_session=True, userdata=None, protocol=mqtt.MQTTv311, transport="websockets")
+    client = mqtt.Client(client_id=client_name, clean_session=True, userdata=None, protocol=mqtt.MQTTv311, transport="websockets", )
     client.on_connect = on_connect
-    client.connect("broker.mqttdashboard.com", 8000, 60)
+    client.tls_set_context(context=None)
+    client.connect("test.mosquitto.org", 8081, 60)
     client.loop_start()
     try:
         while True:
