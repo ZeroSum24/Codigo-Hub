@@ -12,7 +12,6 @@ import Earnings from '../../pages/earnings';
 import AddFirmware from '../../pages/addFirmware';
 import AddBounty from '../../pages/addBounty';
 import AvailableBounties from '../../pages/availableBounties';
-import AddDevice from '../../pages/deviceOverview/components/AddDevice';
 import Firmware from '../../pages/firmware';
 import Search from '../../pages/search';
 import Results from '../../pages/results';
@@ -25,7 +24,6 @@ import Sidebar from '../Sidebar';
 import BreadcrumbHistory from '../BreadcrumbHistory';
 import { openSidebar, closeSidebar } from '../../actions/navigation';
 import s from './Layout.module.scss';
-import BalanceSheet from '../../pages/filecoin/balance';
 
 class Layout extends React.Component {
 	static propTypes = {

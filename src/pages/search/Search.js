@@ -3,10 +3,6 @@ import {connect} from "react-redux";
 
 class Search extends React.PureComponent  {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
 
     return (

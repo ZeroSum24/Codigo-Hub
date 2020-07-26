@@ -1,14 +1,10 @@
 import React from 'react';
-import {connect} from "react-redux";
 import AvailableBountiesWidget from './components/AvailableBountyWidget'
-import { Row, Col, Container, Button } from 'reactstrap';
+import { Row, Col, Container } from 'reactstrap';
 
 class AvailableBounties extends React.PureComponent {
 	constructor(props) {
 		super(props);
-		const users = {
-  	name: 'Ross',
-		};
 
 		this.state = {
 			users:[],

@@ -85,7 +85,7 @@ class Sidebar extends React.Component {
 						activeItem={this.props.activeItem}
 						header="Home"
 						isHeader
-						iconName="flaticon-home"
+						iconName="fi flaticon-home"
 						link="/app/main"
 						index="main"
 					/>
@@ -96,7 +96,7 @@ class Sidebar extends React.Component {
 						activeItem={this.props.activeItem}
 						header="Overview"
 						isHeader
-						iconName="flaticon-network"
+						iconName="fi flaticon-network"
 						link="/app/device_overview"
 						index="core"
 					/>
@@ -107,7 +107,7 @@ class Sidebar extends React.Component {
 						activeItem={this.props.activeItem}
 						header="Top Firmware"
 						isHeader
-						iconName="flaticon-star"
+						iconName="fi flaticon-star"
 						link="/app/top_firmware"
 						index="ui"
 					/>
@@ -117,7 +117,7 @@ class Sidebar extends React.Component {
 						activeItem={this.props.activeItem}
 						header="Add Firmware"
 						isHeader
-						iconName="flaticon-plus"
+						iconName="fi flaticon-plus"
 						link="/app/add_firmware"
 						index="add_firmware"
 					/>
@@ -127,7 +127,7 @@ class Sidebar extends React.Component {
 						activeItem={this.props.activeItem}
 						header="Earnings"
 						isHeader
-						iconName="glyphicon-usd"
+						iconName="glyphicon glyphicon-usd"
 						link="/app/earnings"
 						index="main"
 					/>
@@ -138,7 +138,7 @@ class Sidebar extends React.Component {
 						activeItem={this.props.activeItem}
 						header="Available Bounties"
 						isHeader
-						iconName="flaticon-layers"
+						iconName="fi flaticon-layers"
 						link="/app/availableBounties"
 						index="ui"
 					/>
@@ -148,7 +148,7 @@ class Sidebar extends React.Component {
 						activeItem={this.props.activeItem}
 						header="Add a Bounty"
 						isHeader
-						iconName="flaticon-plus"
+						iconName="fi flaticon-plus"
 						link="/app/add_bounty"
 						index="add_bounty"
 					/>

@@ -4,10 +4,6 @@ import React from "react";
 
 class AvailableBountiesWidget extends React.PureComponent {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const request = this.props.bounty;
     console.log(request);

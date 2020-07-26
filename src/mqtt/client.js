@@ -1,14 +1,18 @@
 import * as Paho from 'paho-mqtt';
 
 // Create a client instance
-const broker = 'broker.mqttdashboard.com';
-const port = '8000';
+const broker = 'test.mosquitto.org';
+const port = '8081';
 const clientID = 'master32r4r'
 export const client = new Paho.Client(broker, Number(port), clientID);
 // set callback handlers
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
-client.connect({ onSuccess: onConnect, onFailure: onFailureConnect, reconnect: true });
+client.connect({ onSuccess: onConnect,
+  onFailure: onFailureConnect,
+  reconnect: true,
+  useSSL: true,
+});
 
 // map deviceName -> timestamp of last ping received
 const activeDevicesMap = {};

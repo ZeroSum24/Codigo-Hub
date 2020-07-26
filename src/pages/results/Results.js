@@ -1,19 +1,14 @@
 import React from 'react';
-import {connect} from "react-redux";
 import FirmwareWidget from './components/firmwareWidget'
 
 
-import { Row, Col, Container, Card, CardTitle, CardText, CardImg, CardBody, Button } from 'reactstrap';
+import { Row, Col, Container, Card, CardTitle } from 'reactstrap';
 
 class Results extends React.PureComponent {
 
 
 	constructor(props) {
 		super(props);
-		const users = {
-  	name: 'Ross',
-		};
-
 		this.state = {
 			users:[],
 			firmwares: [
