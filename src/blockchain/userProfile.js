@@ -2,11 +2,10 @@
 
 export function retrieveProfileDetails(targetAddress, currentUserAddr) {
   // TODO return profile details -- consult the redux state if current user
-  let address = '';
-  return getProfileDetails(address)
+  return getProfileDetails(targetAddress)
 }
 
 
 function getProfileDetails(address) {
-  return []
+  return {'address': address}
 }

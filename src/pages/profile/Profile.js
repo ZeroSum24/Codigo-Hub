@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { useLocation } from "react-router-dom";
+import { parse }  from 'qs';
 
 import s from './Profile.module.scss';
 import {Grid} from "@material-ui/core";
@@ -8,19 +8,25 @@ import UserProfile from "./components/UserProfile";
 import FirmwareHistory from "./components/FirmwareHistory";
 import {retrieveProfileDetails} from "../../blockchain/userProfile";
 import {retrieveFirmwareHistory} from "../../blockchain/firmwareHistory";
+import {Button} from "reactstrap";
+
 
 class Profile extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      "viewState": viewStates.USER_DETAILS,
-      "profileDetails": retrieveProfileDetails(this.props.targetAddress, this.props.currentUserAddr),
-      "firmwareHistory": retrieveFirmwareHistory(this.props.targetAddress)
-    };
+    this.getProfileID = this.getProfileID.bind(this);
     this.changeToUserView = this.changeToUserView.bind(this);
     this.changeToFirmwareView = this.changeToFirmwareView.bind(this);
+
+    let targetAddress = this.getProfileID();
+    this.state = {
+      "viewState": viewStates.USER_DETAILS,
+      "targetAddress": targetAddress,
+      "profileDetails": retrieveProfileDetails(targetAddress, this.props.currentUserAddr),
+      "firmwareHistory": retrieveFirmwareHistory(targetAddress)
+    };
   }
 
   changeToUserView() {
@@ -32,7 +38,7 @@ class Profile extends React.Component {
   }
 
   getProfileID() {
-    return (new URLSearchParams(useLocation().search).get("id"));
+    return parse(this.props.location.search, {ignoreQueryPrefix: true}).id
   }
 
   render() {
@@ -42,14 +48,14 @@ class Profile extends React.Component {
 
     return (
       <div className={s.root}>
-        <h1 className="page-title">Profile: {this.props.targetAddress}</h1>
+        <h1 className="page-title">Profile: <small>{this.state.targetAddress}</small></h1>
         {/*TODO update the User Profile title above to give the users name (ideally) or address*/}
         <Grid container={true} style={{justifyContent: 'center', paddingBottom: '20px'}}>
           <Grid item xs={2}>
-            <div className={userButton} onClick={this.changeToUserView}>User Profile</div>
+            <Button className={userButton} color="link" onClick={this.changeToUserView}>User Profile</Button>
           </Grid>
           <Grid item xs={2}>
-            <div className={firmwareButton} onClick={this.changeToFirmwareView}>Firmware History</div>
+            <Button className={firmwareButton} color="link" onClick={this.changeToFirmwareView}>Firmware History</Button>
           </Grid>
         </Grid>
         {this.state.viewState === viewStates.USER_DETAILS ? (<UserProfile profile={this.state.profileDetails} />):
@@ -66,7 +72,6 @@ const viewStates = {
 };
 
 const mapStateToProps = state => ({
-  targetAddress: state.navigation.targetProfileAddress,
   currentUserAddr: state.ethereum.ethereumAddress,
 });
 

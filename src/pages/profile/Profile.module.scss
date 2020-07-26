@@ -27,14 +27,18 @@
   font-weight: bold;
   font-size: 16px;
   text-decoration: underline;
-  cursor: pointer;
+  color: white;
 }
 
 .normalButton {
   font-weight: normal;
   font-size: 16px;
   text-decoration: underline;
-  cursor: pointer;
+  color: white;
+}
+
+.EditButton {
+  color: white;
 }
 
 .table {

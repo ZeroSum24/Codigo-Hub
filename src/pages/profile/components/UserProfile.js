@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {Grid} from "@material-ui/core";
+import EditIcon from '@material-ui/icons/EditRounded';
+import {Button} from 'reactstrap';
 
 import s from '../Profile.module.scss';
 import EditProfileDialog from "./EditProfileDialog";
@@ -9,7 +11,7 @@ class UserProfile extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log("User Profile addresses", this.props.currentUserAddr, 'temp', this.props.targetAddress, 'out');
+    console.log("User Profile addresses", this.props.profile);
     this.state = {showEditDialog: false};
   }
 
@@ -23,21 +25,22 @@ class UserProfile extends React.Component {
 
   render() {
 
-    const isCurrentUser = (this.props.targetAddress === this.props.currentUserAddr);
+    const isCurrentUser = (this.props.profile.address === this.props.currentUserAddr);
 
     return (
       <div className={s.root}>
         <Grid container={true}>
           <Grid item xs={11}>
-            ......................................
+            {/*TODO add in user profile display*/}
           </Grid>
           <Grid item xs={1}>
             {isCurrentUser ? (
-              <button onClick={this.showEditProfileDialog}>Edit Profile</button>): null}
-            {/*  TODO update this button to have an edit profile icon */}
+              <Button className={s.EditButton} color="link" onClick={this.showEditProfileDialog}>
+                <EditIcon/>
+              </Button>): null}
           </Grid>
         </Grid>
-        <EditProfileDialog show={this.state.showEditDialog}/>
+        <EditProfileDialog show={this.state.showEditDialog}  onClose={this.closeEditProfileDialog} />
       </div>
     );
   }
@@ -45,8 +48,7 @@ class UserProfile extends React.Component {
 
 
 const mapStateToProps = state => ({
-  targetAddress: state.navigation.targetProfileAddress,
-  currentUserAddr: state.ethereum.ethereumAddress,
+  currentUserAddr: state.ethereum.ethereumAddress
 });
 
 export default connect(mapStateToProps)(UserProfile);
