@@ -16,6 +16,7 @@ import AddDevice from '../../pages/deviceOverview/components/AddDevice';
 import Firmware from '../../pages/firmware';
 import Search from '../../pages/search';
 import Results from '../../pages/results';
+import Bounty from '../../pages/bounty';
 
 
 
@@ -94,7 +95,7 @@ class Layout extends React.Component {
 										<Route path="/app/firmware" exact component={Firmware} />
 										<Route path="/app/search" exact component={Search} />
 										<Route path="/app/results" exact component={Results} />
-
+										<Route path="/app/bounty" exact component={Bounty} />
 									</Switch>
 								</CSSTransition>
 							</TransitionGroup>
