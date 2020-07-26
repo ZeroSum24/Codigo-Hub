@@ -12,15 +12,21 @@ import DeviceOverview from '../../pages/deviceOverview';
 import Earnings from '../../pages/earnings';
 import AddFirmware from '../../pages/addFirmware';
 import AddBounty from '../../pages/addBounty';
-import AddDevice from '../../pages/addDevice';
-import TopBounties from '../../pages/topBounties';
+import AvailableBounties from '../../pages/availableBounties';
+import AddDevice from '../../pages/deviceOverview/components/AddDevice';
 import Firmware from '../../pages/firmware';
+import Search from '../../pages/search';
+import Results from '../../pages/results';
+import Bounty from '../../pages/bounty';
+
+
 
 import Header from '../Header';
 import Sidebar from '../Sidebar';
 import BreadcrumbHistory from '../BreadcrumbHistory';
 import { openSidebar, closeSidebar } from '../../actions/navigation';
 import s from './Layout.module.scss';
+import BalanceSheet from '../../pages/filecoin/balance';
 
 class Layout extends React.Component {
 	static propTypes = {
@@ -82,14 +88,16 @@ class Layout extends React.Component {
 										/>
 										<Route path="/app/main/dashboard" exact component={Dashboard} />
 										<Route path="/app/device_overview" exact component={DeviceOverview} />
-										<Route path="/app/add_device" exact component={AddDevice} />
 										<Route path="/app/top_firmware" exact component={TopFirmware} />
 										<Route path="/app/add_firmware" exact component={AddFirmware} />
 										<Route path="/app/profile" exact component={Profile} />
 										<Route path="/app/earnings" exact component={Earnings} />
-										<Route path="/app/top_bounties" exact component={TopBounties} />
+										<Route path="/app/availableBounties" exact component={AvailableBounties} />
 										<Route path="/app/add_bounty" exact component={AddBounty} />
 										<Route path="/app/firmware" exact component={Firmware} />
+										<Route path="/app/search" exact component={Search} />
+										<Route path="/app/results" exact component={Results} />
+										<Route path="/app/bounty" exact component={Bounty} />
 									</Switch>
 								</CSSTransition>
 							</TransitionGroup>

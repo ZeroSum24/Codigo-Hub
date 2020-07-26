@@ -1,17 +1,13 @@
 import React from 'react';
-import { Button } from 'reactstrap';
-import { Redirect } from 'react-router-dom';
-
-import { Container, Alert, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label } from 'reactstrap';
+import { Alert, Button, FormGroup, Input, InputGroup, Label, Modal, ModalBody } from 'reactstrap';
 import 'react-toastify/dist/ReactToastify.css';
-import Widget from '../../components/Widget';
+import Widget from '../../../components/Widget';
 
-import { createUserDevice } from "../../actions/profile"
-import Device from '../../classes/Device'
-import Toast from "reactstrap/lib/Toast";
-import {connect} from "react-redux";
+import { createUserDevice } from '../../../actions/profile';
+import Device from '../../../classes/Device';
+import { connect } from 'react-redux';
 
-class AddDevice extends React.PureComponent  {
+class AddDeviceDialog extends React.PureComponent  {
 
   constructor(props) {
     super(props);
@@ -27,7 +23,6 @@ class AddDevice extends React.PureComponent  {
       deviceBrand: '',
       deviceModel: '',
       serialNumber: '',
-      addDeviceSuccess: false
     };
 
     this.handleAddDevice = this.handleAddDevice.bind(this);
@@ -39,10 +34,15 @@ class AddDevice extends React.PureComponent  {
 
   handleAddDevice(e) {
     e.preventDefault();
-
-    // dispatches a new message to redux to add a new user device and to close the add device screen
     let newDevice = new Device(this.state.deviceName, this.state.deviceBrand, this.state.deviceModel, this.state.serialNumber);
     this.props.dispatch(createUserDevice(this.props.deviceList, newDevice));
+    this.setState({
+      deviceName: '',
+      deviceBrand: '',
+      deviceModel: '',
+      serialNumber: '',
+    })
+    this.props.onClose();
   }
 
   changeDeviceName(e) {
@@ -72,9 +72,10 @@ class AddDevice extends React.PureComponent  {
     //       <Toast.Body>Device successfully added: {this.state.deviceName}</Toast.Body>
     //    </Toast>): null
     // }
-    
+    if (!this.props.show) return null;
     return (
-      <Container>
+      <Modal isOpen={this.props.show} toggle={() => this.props.onClose()}>
+        <ModalBody>
           <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Add a Device</h3>}>
               <p className="widget-auth-info">
                   Please fill all fields below.
@@ -131,14 +132,15 @@ class AddDevice extends React.PureComponent  {
                   </div>
               </form>
           </Widget>
-      </Container>
+        </ModalBody>
+      </Modal>
      );
    }
 }
 
 const mapStateToProps = state => ({
-  addDeviceSuccess: state.devices.addDeviceSuccess,
-  deviceList: state.devices.deviceList
+    addDeviceSuccess: state.devices.addDeviceSuccess,
+    deviceList: state.devices.deviceList
 });
 
-export default connect(mapStateToProps)(AddDevice);
+export default connect(mapStateToProps)(AddDeviceDialog);
