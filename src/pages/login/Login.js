@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import avatar from '../../images/rsz_4rsz_codigo-01.png';
+import appLogo from '../../images/rsz_4rsz_codigo-01.png';
 import {
 	Container,
 	Alert,
@@ -62,7 +62,13 @@ class Login extends React.Component {
 		return (
 			<div className="auth-page">
 				<Container>
-					<Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Login to Codigo Hub</h3>}>
+					<Widget
+						className="widget-auth mx-auto"
+						title={<h3 className="mt-0">Login to your Código Panel</h3>}
+					>
+						<div className="d-block text-center mb-4">
+							<img src={appLogo} alt="..." />
+						</div>
 						<p className="widget-auth-info">Use your password to sign in.</p>
 						<form onSubmit={this.doLogin}>
 							{this.props.errorMessage && (
@@ -125,7 +131,7 @@ class Login extends React.Component {
 						</form>
 					</Widget>
 				</Container>
-				<footer className="auth-footer">2020 &copy; Codigo Admin Panel.</footer>
+				<footer className="auth-footer">2020 &copy; Código Admin Panel.</footer>
 			</div>
 		);
 	}

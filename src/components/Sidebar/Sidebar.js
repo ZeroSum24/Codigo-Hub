@@ -92,16 +92,46 @@ class Sidebar extends React.Component {
 						link="/app/main"
 						index="main"
 					/>
+					<h5 className={[s.navTitle, s.groupTitle].join(' ')}>Devices</h5>
 					<LinksGroup
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
-						header="Device Overview"
+						header="Overview"
 						isHeader
 						iconName="flaticon-network"
-						link="/app/deviceOverview"
+						link="/app/device_overview"
 						index="core"
 					/>
+					<LinksGroup
+						onActiveSidebarItemChange={(activeItem) =>
+							this.props.dispatch(changeActiveSidebarItem(activeItem))}
+						activeItem={this.props.activeItem}
+						header="Add a Device"
+						isHeader
+						iconName="flaticon-network"
+						link="/app/add_device"
+						index="core"
+					/>
+					<h5 className={[s.navTitle, s.groupTitle].join(' ')}>Developer</h5>
+					<LinksGroup
+						onActiveSidebarItemChange={(activeItem) =>
+							this.props.dispatch(changeActiveSidebarItem(activeItem))}
+						activeItem={this.props.activeItem}
+						header="Top Firmware"
+						isHeader
+						iconName="flaticon-layers"
+						link="/app/top_firmware"
+						index="ui"
+					/>
+					<LinksGroup
+						onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
+						activeItem={this.props.activeItem}
+						header="Add Firmware"
+						isHeader
+						iconName="flaticon-menu"
+						link="/app/add_firmware"
+						index="add_firmware" />
 					<LinksGroup
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
@@ -109,27 +139,28 @@ class Sidebar extends React.Component {
 						header="Earnings"
 						isHeader
 						iconName="flaticon-list"
-						link="/app/charts"
+						link="/app/earnings"
 						index="main"
 					/>
+					<h5 className={[s.navTitle, s.groupTitle].join(' ')}>Community</h5>
 					<LinksGroup
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
-						header="Available Firmware"
+						header="Top Bounties"
 						isHeader
 						iconName="flaticon-layers"
-						link="/app/tables"
+						link="/app/top_bounties"
 						index="ui"
 					/>
-          <LinksGroup
-            onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
-            activeItem={this.props.activeItem}
-            header="Developer"
-            isHeader
-            iconName="flaticon-menu"
-            link="/app/developer"
-            index="developer" />
+					<LinksGroup
+						onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
+						activeItem={this.props.activeItem}
+						header="Add a Bounty"
+						isHeader
+						iconName="flaticon-menu"
+						link="/app/add_bounty"
+						index="add_bounty" />
 				</ul>
 
 				{}
