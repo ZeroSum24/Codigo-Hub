@@ -4,7 +4,7 @@ import { Row, Col, Container, Card, CardTitle, CardText, Button } from 'reactstr
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ThreeBoxComments from '3box-comments-react';
-class TopBounties extends React.PureComponent {
+class AvailableBounties extends React.PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -21,81 +21,7 @@ class TopBounties extends React.PureComponent {
 		const codeString = `Description`;
 		return (
 			<div>
-				<Container fluid={true}>
-					<Row>
-						{' '}
-						<Col xs={12} sm={12} md={9}>
-							<h1 align="centre" className="page-title">
-								Bounty Name / Title &nbsp;
-							</h1>
-						</Col>
-						<Col xs={12} sm={12} md={3}>
-							<Button style={{ marginTop: '13px' }} align="centre" color="warning">
-								ETH Amount
-							</Button>
-						</Col>
-					</Row>
-					<Row>
-						<Col xs={12} sm={12} md={9}>
-							<SyntaxHighlighter language="javascript" style={atomDark} customStyle={{ height: '500px' }}>
-								{codeString}
-							</SyntaxHighlighter>{' '}
-							<br />
-							<br />
-							<br />
-							<Row>
-								<Col xs="2" sm="2" md="2" />{' '}
-								<Col xs="auto" sm="auto" md="auto">
-									<ThreeBoxComments
-										// required
-										spaceName="mySpaceName"
-										threadName="myThreadName"
-										adminEthAddr={this.state.adminEthAddr}
-										// Required props for auth A. & B.
-										box={this.state.box}
-										currentUserAddr={this.state.myAddress}
-									/>{' '}
-								</Col>
-								<Col xs="2" sm="2" md="2" />
-							</Row>
-						</Col>
-						<Col xs={12} sm={12} md={3}>
-							<Card style={{ marginTop: '3px' }} body outline color="primary">
-								<CardTitle>Bounty Details </CardTitle>
-								<CardText>Brand :</CardText>
-								<CardText>Model :</CardText>
-								<CardText>Firmware version :</CardText>
-							</Card>
-							<br />
-							<br />
-							<Row>
-								{' '}
-								<Col sm={4} md={2} />
-								<Col sm="auto">
-									{' '}
-									<Button style={{ width: '180px' }} color="info">
-										Bounty Setter{' '}
-									</Button>
-								</Col>
-								<Col sm={4} md={2} />
-							</Row>
-							<br />
-							<Row>
-								{' '}
-								<Col sm={4} md={2} />
-								<Col xs={12} sm="auto">
-									{' '}
-									<Button style={{ width: '180px' }} color="primary">
-										Accept Bounty{' '}
-									</Button>
-								</Col>
-								<Col sm={4} md={2} />
-							</Row>
-							<br />
-							<br />
-						</Col>
-					</Row>
-				</Container>
+				Available Bounties
 			</div>
 		);
 	}
@@ -103,4 +29,4 @@ class TopBounties extends React.PureComponent {
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps)(TopBounties);
+export default connect(mapStateToProps)(AvailableBounties);
