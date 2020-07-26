@@ -14,7 +14,7 @@ class AvailableBountiesWidget extends React.PureComponent {
     console.log(request);
     return (
       <Widget
-        title={<h5>Firmware Name: <small className="text-muted">{request.name}</small></h5>}
+        title={<h5>Bounty Title: <small className="text-muted">{request.name}</small></h5>}
         close collapse>
         <p></p>
         <div className="widget-padding-md w-100 h-100 text-left border rounded">
