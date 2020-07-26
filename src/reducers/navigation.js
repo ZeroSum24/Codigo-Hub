@@ -5,6 +5,7 @@ const initialState = {
   activeItem: window.location.pathname,
   sidebarPosition: 'left',
   sidebarVisibility: 'show',
+  targetProfileAddress: ''
 };
 
 export default function runtime(state = initialState, action) {

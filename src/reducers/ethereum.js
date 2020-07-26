@@ -16,7 +16,6 @@ export default function ethereum(state = {
                 isFetching: true
             });
         case ETHEREUM_SUCCESS:
-            console.log("reducer ethereum success");
             return Object.assign({}, state, {
                 isFetching: false,
                 isEthereumEnabled: true,

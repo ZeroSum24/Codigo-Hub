@@ -29,7 +29,13 @@ import {
 
 import Notifications from '../Notifications';
 import { logoutUser } from '../../actions/user';
-import { openSidebar, closeSidebar, changeSidebarPosition, changeSidebarVisibility } from '../../actions/navigation';
+import {
+	openSidebar,
+	closeSidebar,
+	changeSidebarPosition,
+	changeSidebarVisibility,
+	setProfileTargetAddress
+} from '../../actions/navigation';
 import 'animate.css';
 import s from './Header.module.scss';
 import 'animate.css';
@@ -139,13 +145,13 @@ class Header extends React.Component {
 						style={{ marginRight: 'auto' }}
 					>
 						<DropdownToggle nav caret style={{ color: '#f4f4f5', padding: 0 }}>
-							<Link to="/app/profile">
-								<ProfileHover
-									address={this.props.ethereumAddress}
-									orientation="bottom"
-									noCoverImg
-									showName>
-								</ProfileHover>
+							<Link to={{pathname: "/app/profile?id=" + this.props.ethereumAddress}}>
+									<ProfileHover
+										address={this.props.ethereumAddress}
+										orientation="bottom"
+										noCoverImg
+										showName>
+									</ProfileHover>
 							</Link>
 						</DropdownToggle>
 					</Dropdown>
