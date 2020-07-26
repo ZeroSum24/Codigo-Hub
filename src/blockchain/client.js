@@ -15,9 +15,6 @@ function handleChainChanged(_chainId) {
 
 export function getWeb3() {
   // init web3 for read only access on load
-    if (ethereum == null) {
-      throw Error('Unable to detect ethereum wallet. Some functionality will be lost.');
-    }
     web3 = new Web3(ethereum);
     window.web3 = web3;
     return web3;

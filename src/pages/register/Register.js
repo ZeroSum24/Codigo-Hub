@@ -2,11 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Container, Alert, Button, FormGroup, InputGroup, InputGroupAddon, InputGroupText, Input, Label } from 'reactstrap';
+import {
+    Container,
+    Alert,
+    Button,
+    FormGroup,
+    FormControl,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText,
+    Input,
+    Label,
+    NavItem, Nav
+} from 'reactstrap';
+
 import Widget from '../../components/Widget';
-import { registerUser, registerError } from '../../actions/register';
-import microsoft from '../../images/microsoft.png';
+import { registerUser, registerError, linkUserToFirmware } from '../../actions/register';
 import Login from '../login';
+import s from "./Register.module.scss";
+import Loader from "../../components/Loader";
 
 class Register extends React.Component {
     static propTypes = {
@@ -17,21 +31,21 @@ class Register extends React.Component {
         super(props);
 
         this.state = {
-            email: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            linkDeveloperCheckBox: false,
+            developerAddress: '',
+            developerKey: ''
         };
 
         this.doRegister = this.doRegister.bind(this);
-        this.changeEmail = this.changeEmail.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.changeConfirmPassword = this.changeConfirmPassword.bind(this);
         this.checkPassword = this.checkPassword.bind(this);
         this.isPasswordValid = this.isPasswordValid.bind(this);
-    }
-
-    changeEmail(event) {
-        this.setState({email: event.target.value});
+        this.changeLinkDeveloperCheckBox = this.changeLinkDeveloperCheckBox.bind(this);
+        this.changeDeveloperAddress = this.changeDeveloperAddress.bind(this);
+        this.changeDeveloperKey = this.changeDeveloperKey.bind(this)
     }
 
     changePassword(event) {
@@ -40,6 +54,18 @@ class Register extends React.Component {
 
     changeConfirmPassword(event) {
         this.setState({confirmPassword: event.target.value});
+    }
+
+    changeLinkDeveloperCheckBox(event) {
+        this.setState({linkDeveloperCheckBox: !this.state.linkDeveloperCheckBox});
+
+    }
+    changeDeveloperAddress(event) {
+        this.setState({developerAddress: event.target.value});
+    }
+
+    changeDeveloperKey(event) {
+        this.setState({developerKey: event.target.value});
     }
 
     checkPassword() {
@@ -55,6 +81,14 @@ class Register extends React.Component {
         }
     }
 
+    checkDeveloperLink() {
+        if (this.state.developerAddress !== '') {
+            this.props.dispatch(registerError("The developer address field is empty."));
+        } else {
+            this.props.dispatch(registerError("The developer key field is empty."));
+        }
+    }
+
     isPasswordValid() {
        return this.state.password && this.state.password === this.state.confirmPassword;
     }
@@ -64,13 +98,20 @@ class Register extends React.Component {
         if (!this.isPasswordValid()) {
             this.checkPassword();
         } else {
-            this.props.dispatch(registerUser({
-                creds: {
-                    email: this.state.email,
-                    password: this.state.password
-                },
-                history: this.props.history
-            }));
+
+          // Triggers the link of the developer account providing the requisite information is available in the UI.
+          if (this.state.linkDeveloperCheckBox) {
+            if (this.state.developerAddress === '' || this.state.developerKey === '') {
+              this.checkDeveloperLink()
+            } else {
+              // Triggers a loading screen whilst the user registers their account
+              this.props.dispatch(linkUserToFirmware(this.state.developerAddress, this.state.developerKey,
+                {creds: {password: this.state.password}, history: this.props.history}));
+            }
+          } else {
+            this.props.dispatch(registerUser(
+              {creds: {password: this.state.password}, history: this.props.history}));
+          }
         }
     }
 
@@ -86,8 +127,9 @@ class Register extends React.Component {
 
         return (
             <div className="auth-page">
+              {this.props.linkingDeveloperAccount ? <Loader loadingText={"Linking Developer Account"}/>:
                 <Container>
-                    <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Login to your Web App</h3>}>
+                    <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Register with Código</h3>}>
                         <p className="widget-auth-info">
                             Please fill all fields below.
                         </p>
@@ -100,16 +142,17 @@ class Register extends React.Component {
                                 )
                             }
                             <FormGroup className="mt">
-                                <Label for="email">Email</Label>
+                                <Label for="text">Ethereum Address</Label>
                                 <InputGroup className="input-group-no-border">
                                     <InputGroupAddon addonType="prepend">
                                         <InputGroupText>
                                             <i className="la la-user text-white"/>
                                         </InputGroupText>
                                     </InputGroupAddon>
-                                    <Input id="email" className="input-transparent pl-3" value={this.state.email}
-                                           onChange={this.changeEmail} type="email"
-                                           required name="email" placeholder="Email"/>
+                                    <Input id="threeBoxAddress" className="input-transparent pl-3"
+                                                 value={this.props.ethereumAddress}
+                                                 type="text" required name="threeBoxAddress"
+                                                 placeholder="0x6DdD06..." readOnly/>
                                 </InputGroup>
                             </FormGroup>
                             <FormGroup>
@@ -135,9 +178,55 @@ class Register extends React.Component {
                                     </InputGroupAddon>
                                     <Input id="confirmPassword" className="input-transparent pl-3" value={this.state.confirmPassword}
                                            onChange={this.changeConfirmPassword} onBlur={this.checkPassword} type="password"
-                                           required name="confirmPassword" placeholder="Confirm"/>
+                                           required name="confirmPassword" placeholder="Confirm Password"/>
                                 </InputGroup>
                             </FormGroup>
+                            <hr className={`${s.divider} text-white`} />
+                            <FormGroup>
+                                <Label for="linkDeveloperCheckBox">Link Código Developer Account</Label>
+                                <InputGroup className="input-group-no-border">
+                                    <InputGroupAddon addonType="prepend">
+                                        <InputGroupText>
+                                            <i className="la la-link text-white"/>
+                                        </InputGroupText>
+                                    </InputGroupAddon>
+                                    <InputGroupText>
+                                        <Input addon type="checkbox" value={this.state.linkDeveloperCheckBox}
+                                               onChange={this.changeLinkDeveloperCheckBox}
+                                               aria-label="Checkbox for following text input" />
+                                    </InputGroupText>
+                                </InputGroup>
+                            </FormGroup>
+                            {this.state.linkDeveloperCheckBox ? (
+                              <div>
+                                <FormGroup>
+                                  <Label for="developerAddress">Developer Address</Label>
+                                  <InputGroup className="input-group-no-border">
+                                      <InputGroupAddon addonType="prepend">
+                                          <InputGroupText>
+                                              <i className="la la-link text-white"/>
+                                          </InputGroupText>
+                                      </InputGroupAddon>
+                                      <Input id="developerAddress" className="input-transparent pl-3" value={this.state.developerAddress}
+                                             onChange={this.changeDeveloperAddress} onBlur={this.changeDeveloperAddress}
+                                             type="text" required name="developerAddress" placeholder="0x8B2D35..."/>
+                                  </InputGroup>
+                                </FormGroup>
+                                <FormGroup>
+                                  <Label for="developerKey">Developer Private Key</Label>
+                                  <InputGroup className="input-group-no-border">
+                                      <InputGroupAddon addonType="prepend">
+                                          <InputGroupText>
+                                              <i className="la la-link text-white"/>
+                                          </InputGroupText>
+                                      </InputGroupAddon>
+                                      {/*TODO updae placeholder to hex*/}
+                                      <Input id="developerKey" className="input-transparent pl-3" value={this.state.developerKey}
+                                             onChange={this.changeDeveloperKey} onBlur={this.changeDeveloperKey}
+                                             type="text" required name="developerKey" placeholder="MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjT"/>
+                                  </InputGroup>
+                                </FormGroup>
+                              </div>): null}
                             <div className="bg-widget-transparent auth-widget-footer">
                                 <Button type="submit" color="danger" className="auth-btn"
                                         size="sm" style={{color: '#fff'}}>{this.props.isFetching ? 'Loading...' : 'Register'}</Button>
@@ -145,69 +234,12 @@ class Register extends React.Component {
                                     Already have the account? Login now!
                                 </p>
                                 <Link className="d-block text-center mb-4" to="login">Enter the account</Link>
-                                <div className="social-buttons">
-                                    <Button color="primary" className="social-button">
-                                        <i className="social-icon social-google"/>
-                                        <p className="social-text">GOOGLE</p>
-                                    </Button>
-                                    <Button color="success" className="social-button">
-                                        <i className="social-icon social-microsoft"
-                                           style={{backgroundImage: `url(${microsoft})`}}/>
-                                        <p className="social-text" style={{color: '#fff'}}>MICROSOFT</p>
-                                    </Button>
-                                </div>
                             </div>
                         </form>
                     </Widget>
-                    {/*<Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Create an account</h3>}>*/}
-                        {/*<p className="widget-auth-info">*/}
-                            {/*Please fill all fields below*/}
-                        {/*</p>*/}
-                        {/*<form className="mt" onSubmit={this.doRegister}>*/}
-                            {/*{*/}
-                                {/*this.props.errorMessage && (*/}
-                                    {/*<Alert className="alert-sm" color="danger">*/}
-                                        {/*{this.props.errorMessage}*/}
-                                    {/*</Alert>*/}
-                                {/*)*/}
-                            {/*}*/}
-                            {/*<div className="form-group">*/}
-                                {/*<input className="form-control no-border" value={this.state.email}*/}
-                                       {/*onChange={this.changeEmail} type="text" required name="email"*/}
-                                       {/*placeholder="Email"/>*/}
-                            {/*</div>*/}
-                            {/*<div className="form-group">*/}
-                                {/*<input className="form-control no-border" value={this.state.password}*/}
-                                       {/*onChange={this.changePassword} type="password" required name="password"*/}
-                                       {/*placeholder="Password"/>*/}
-                            {/*</div>*/}
-                            {/*<div className="form-group">*/}
-                                {/*<input className="form-control no-border" value={this.state.confirmPassword}*/}
-                                       {/*onChange={this.changeConfirmPassword} onBlur={this.checkPassword} type="password" required name="confirmPassword"*/}
-                                       {/*placeholder="Confirm"/>*/}
-                            {/*</div>*/}
-                            {/*<Button type="submit" color="inverse" className="auth-btn mb-3" size="sm">{this.props.isFetching ? 'Loading...' : 'Register'}</Button>*/}
-                            {/*<p className="widget-auth-info">or sign up with</p>*/}
-                            {/*<div className="social-buttons">*/}
-                                {/*<Button onClick={this.googleLogin} color="primary" className="social-button mb-2">*/}
-                                    {/*<i className="social-icon social-google"/>*/}
-                                    {/*<p className="social-text">GOOGLE</p>*/}
-                                {/*</Button>*/}
-                                {/*<Button onClick={this.microsoftLogin} color="success" className="social-button">*/}
-                                    {/*<i className="social-icon social-microsoft"*/}
-                                       {/*style={{backgroundImage: `url(${microsoft})`}}/>*/}
-                                    {/*<p className="social-text">MICROSOFT</p>*/}
-                                {/*</Button>*/}
-                            {/*</div>*/}
-                        {/*</form>*/}
-                        {/*<p className="widget-auth-info">*/}
-                            {/*Already have the account? Login now!*/}
-                        {/*</p>*/}
-                        {/*<Link className="d-block text-center" to="login">Enter the account</Link>*/}
-                    {/*</Widget>*/}
-                </Container>
+                </Container>}
                 <footer className="auth-footer">
-                    2020 &copy;Còdigo Admin Dashboard.
+                    2020 &copy; Código Admin Dashboard.
                 </footer>
             </div>
         );
@@ -218,6 +250,8 @@ function mapStateToProps(state) {
     return {
         isFetching: state.register.isFetching,
         errorMessage: state.register.errorMessage,
+        ethereumAddress: state.ethereum.ethereumAddress,
+        linkingDeveloperAccount: state.register.linkingDeveloperAccount
     };
 }
 

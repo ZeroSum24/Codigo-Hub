@@ -6,6 +6,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Hammer from 'rc-hammerjs';
 
 import Dashboard from '../../pages/dashboard';
+import Profile from '../../pages/profile';
 import TopFirmware from '../../pages/topFirmware';
 import DeviceOverview from '../../pages/deviceOverview';
 import Earnings from '../../pages/earnings';
@@ -87,6 +88,7 @@ class Layout extends React.Component {
 										<Route path="/app/device_overview" exact component={DeviceOverview} />
 										<Route path="/app/top_firmware" exact component={TopFirmware} />
 										<Route path="/app/add_firmware" exact component={AddFirmware} />
+										<Route path="/app/profile" exact component={Profile} />
 										<Route path="/app/earnings" exact component={Earnings} />
 										<Route path="/app/availableBounties" exact component={AvailableBounties} />
 										<Route path="/app/add_bounty" exact component={AddBounty} />
