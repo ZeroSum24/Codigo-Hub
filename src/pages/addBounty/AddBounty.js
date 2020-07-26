@@ -6,7 +6,7 @@ import { Container, Alert, FormGroup, InputGroup, Input, Label } from 'reactstra
 import 'react-toastify/dist/ReactToastify.css';
 
 import Widget from '../../components/Widget';
-import Bounty from '../../classes/Bounty'
+import Bounty from '../../model/Bounty'
 
 class AddBounty extends React.PureComponent  {
 

@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Widget from '../../../components/Widget';
 
 import { createUserDevice } from '../../../actions/profile';
-import Device from '../../../classes/Device';
+import Device from '../../../model/Device';
 import { connect } from 'react-redux';
 
 class AddDeviceDialog extends React.PureComponent  {
