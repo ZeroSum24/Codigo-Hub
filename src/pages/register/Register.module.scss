@@ -1,0 +1,10 @@
+@import '../../styles/app';
+
+.divider {
+  display: block;
+  border:none;
+  border-top:1px dotted #f00;
+  width: 65%;
+  margin: 10px auto;
+  background: $white;
+}

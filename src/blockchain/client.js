@@ -15,9 +15,6 @@ function handleChainChanged(_chainId) {
 
 export function getWeb3() {
   // init web3 for read only access on load
-    if (ethereum == null) {
-      throw Error('Unable to detect ethereum wallet. Some functionality will be lost.');
-    }
     web3 = new Web3(ethereum);
     window.web3 = web3;
     return web3;
@@ -75,4 +72,21 @@ export function connect() {
 
 export function isWalletConnected() {
   return ethereum.isConnected();
+}
+
+export async function sendEth(address) {
+  const transactionParameters = {
+    to: address,
+    from: ethereum.selectedAddress,
+    // 0.1 ETH
+    value: '0x16345785D8A0000',
+  };
+
+// txHash is a hex string
+// As with any RPC call, it may throw an error
+  const txHash = await ethereum.request({
+    method: 'eth_sendTransaction',
+    params: [transactionParameters],
+  });
+  return txHash;
 }

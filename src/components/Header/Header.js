@@ -2,36 +2,35 @@ import { connect } from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
+import ProfileHover from "profile-hover";
+import AutoCompleteText from './AutoCompleteText';
 import {
 	Navbar,
 	Nav,
 	NavItem,
 	NavLink,
-	InputGroupAddon,
-	InputGroupText,
 	InputGroup,
-	Input,
-	UncontrolledAlert,
 	Dropdown,
 	Collapse,
-	Button,
 	DropdownToggle,
 	DropdownMenu,
-	DropdownItem,
 	Badge,
-	ButtonGroup,
-	Form,
-	FormGroup
+	Form
 } from 'reactstrap';
+
 import Notifications from '../Notifications';
 import { logoutUser } from '../../actions/user';
-import { openSidebar, closeSidebar, changeSidebarPosition, changeSidebarVisibility } from '../../actions/navigation';
-
-import avatar from '../../images/people/a5.jpg';
-
+import {
+	openSidebar,
+	closeSidebar,
+	changeSidebarPosition,
+	changeSidebarVisibility,
+	setProfileTargetAddress
+} from '../../actions/navigation';
+import 'animate.css';
 import s from './Header.module.scss';
 import 'animate.css';
-import AutoCompleteText from './AutoCompleteText';
 
 class Header extends React.Component {
 	static propTypes = {
@@ -138,18 +137,15 @@ class Header extends React.Component {
 						style={{ marginRight: 'auto' }}
 					>
 						<DropdownToggle nav caret style={{ color: '#f4f4f5', padding: 0 }}>
-							<span className={`${s.avatar} rounded-circle thumb-sm float-left mr-2`}>
-								<img src={avatar} alt="..." />
-							</span>
-							<span className={`small ${s.accountCheck}`}>Philip Schofield</span>
-							<Badge className={s.badge} color="primary" />
+							<Link to={{pathname: "/app/profile?id=" + this.props.ethereumAddress}}>
+									<ProfileHover
+										address={this.props.ethereumAddress}
+										orientation="bottom"
+										noCoverImg
+										showName>
+									</ProfileHover>
+							</Link>
 						</DropdownToggle>
-						<DropdownMenu
-							right
-							className={`${s.notificationsWrapper} py-0 animate__animated animate__faster animate__fadeInUp`}
-						>
-							<Notifications />
-						</DropdownMenu>
 					</Dropdown>
 					<NavItem className="d-lg-none d-md-block d-sm-none">
 						<NavLink onClick={this.toggleSearchOpen} className={s.navItem} href="#">
@@ -162,6 +158,29 @@ class Header extends React.Component {
 					<NavItem className={`${s.divider} text-white`} />
 					<Dropdown nav isOpen={this.state.supportOpen} toggle={this.toggleSupportDropdown}>
 						<DropdownMenu right className={`${s.dropdownMenu} ${s.support}`} />
+					</Dropdown>
+					<Dropdown nav isOpen={this.state.settingsOpen} toggle={this.toggleSettingsDropdown}>
+						<DropdownToggle nav className={`${s.navItem} text-white`}>
+							<i className="glyphicon glyphicon-cog" />
+						</DropdownToggle>
+						<DropdownMenu className={`${s.dropdownMenu} ${s.settings}`}>
+							<h6>Sidebar on the</h6>
+							<ButtonGroup size="sm">
+								<Button color="primary" onClick={() => this.moveSidebar('left')} className={this.props.sidebarPosition === 'left' ? 'active' : ''}>Left</Button>
+								<Button color="primary" onClick={() => this.moveSidebar('right')} className={this.props.sidebarPosition === 'right' ? 'active' : ''}>Right</Button>
+							</ButtonGroup>
+							<h6 className="mt-2">Sidebar</h6>
+							<ButtonGroup size="sm">
+								<Button color="primary" onClick={() => this.toggleVisibilitySidebar('show')} className={this.props.sidebarVisibility === 'show' ? 'active' : ''}>Show</Button>
+								<Button color="primary" onClick={() => this.toggleVisibilitySidebar('hide')} className={this.props.sidebarVisibility === 'hide' ? 'active' : ''}>Hide</Button>
+							</ButtonGroup>
+						</DropdownMenu>
+					</Dropdown>
+					<Dropdown nav isOpen={this.state.supportOpen} toggle={this.toggleSupportDropdown}>
+						<DropdownToggle nav className={`${s.navItem} text-white`}>
+							<i className="glyphicon glyphicon-globe" />
+							<span className={s.count}>8</span>
+						</DropdownToggle>
 					</Dropdown>
 					<NavItem>
 						<NavLink onClick={this.doLogout} className={`${s.navItem} text-white`} href="#">
@@ -183,7 +202,8 @@ function mapStateToProps(store) {
 	return {
 		isSidebarOpened: store.navigation.sidebarOpened,
 		sidebarVisibility: store.navigation.sidebarVisibility,
-		sidebarPosition: store.navigation.sidebarPosition
+		sidebarPosition: store.navigation.sidebarPosition,
+		ethereumAddress: store.ethereum.ethereumAddress
 	};
 }
 

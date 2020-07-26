@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import avatar from '../../images/rsz_4rsz_codigo-01.png';
+import appLogo from '../../images/rsz_4rsz_codigo-01.png';
 import {
 	Container,
 	Alert,
@@ -30,18 +30,12 @@ class Login extends React.Component {
 		super(props);
 
 		this.state = {
-			email: 'admin@flatlogic.com',
 			password: 'password'
 		};
 
 		this.doLogin = this.doLogin.bind(this);
-		this.changeEmail = this.changeEmail.bind(this);
 		this.changePassword = this.changePassword.bind(this);
 		this.signUp = this.signUp.bind(this);
-	}
-
-	changeEmail(event) {
-		this.setState({ email: event.target.value });
 	}
 
 	changePassword(event) {
@@ -50,7 +44,7 @@ class Login extends React.Component {
 
 	doLogin(e) {
 		e.preventDefault();
-		this.props.dispatch(loginUser({ email: this.state.email, password: this.state.password }));
+		this.props.dispatch(loginUser({ password: this.state.password }));
 	}
 
 	signUp() {
@@ -70,13 +64,12 @@ class Login extends React.Component {
 				<Container>
 					<Widget
 						className="widget-auth mx-auto"
-						title={<h3 className="mt-0">Login to your Còdigo Panel</h3>}
+						title={<h3 className="mt-0">Login to your Código Panel</h3>}
 					>
 						<div className="d-block text-center mb-4">
-							<img src={avatar} alt="..." />
+							<img src={appLogo} alt="..." />
 						</div>
-
-						<p className="widget-auth-info">Use your email to sign in.</p>
+						<p className="widget-auth-info">Use your password to sign in.</p>
 						<form onSubmit={this.doLogin}>
 							{this.props.errorMessage && (
 								<Alert className="alert-sm widget-middle-overflow rounded-0" color="danger">
@@ -84,23 +77,17 @@ class Login extends React.Component {
 								</Alert>
 							)}
 							<FormGroup className="mt">
-								<Label for="email">Email</Label>
+								<Label for="text">Ethereum Address</Label>
 								<InputGroup className="input-group-no-border">
 									<InputGroupAddon addonType="prepend">
 										<InputGroupText>
 											<i className="la la-user text-white" />
 										</InputGroupText>
 									</InputGroupAddon>
-									<Input
-										id="email"
-										className="input-transparent pl-3"
-										value={this.state.email}
-										onChange={this.changeEmail}
-										type="email"
-										required
-										name="email"
-										placeholder="Email"
-									/>
+									<Input id="threeBoxAddress" className="input-transparent pl-3"
+												 value={this.props.ethereumAddress}
+												 type="text" required name="threeBoxAddress"
+												 placeholder="0x6DdD06..." readOnly/>
 								</InputGroup>
 							</FormGroup>
 							<FormGroup>
@@ -144,7 +131,7 @@ class Login extends React.Component {
 						</form>
 					</Widget>
 				</Container>
-				<footer className="auth-footer">2020 &copy; Còdigo Admin Panel.</footer>
+				<footer className="auth-footer">2020 &copy; Código Admin Panel.</footer>
 			</div>
 		);
 	}
@@ -154,7 +141,8 @@ function mapStateToProps(state) {
 	return {
 		isFetching: state.auth.isFetching,
 		isAuthenticated: state.auth.isAuthenticated,
-		errorMessage: state.auth.errorMessage
+		errorMessage: state.auth.errorMessage,
+		ethereumAddress: state.ethereum.ethereumAddress
 	};
 }
 
