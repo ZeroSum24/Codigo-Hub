@@ -13,7 +13,7 @@ import {
 	DropdownToggle,
 	DropdownMenu,
 	Badge,
-	Form
+	Form, InputGroupAddon, Input, FormGroup, InputGroupText
 } from 'reactstrap';
 import Notifications from '../Notifications';
 import { logoutUser } from '../../actions/user';
@@ -23,7 +23,7 @@ import avatar from '../../images/people/a5.jpg';
 
 import s from './Header.module.scss';
 import 'animate.css';
-import AutoCompleteText from './AutoCompleteText';
+import {startSearch} from "../../actions/search";
 
 class Header extends React.Component {
 	static propTypes = {
@@ -41,6 +41,8 @@ class Header extends React.Component {
 		this.toggleAccountDropdown = this.toggleAccountDropdown.bind(this);
 		this.toggleSidebar = this.toggleSidebar.bind(this);
 		this.toggleSearchOpen = this.toggleSearchOpen.bind(this);
+		this.changeSearchText = this.changeSearchText.bind(this);
+		this.handleSearch = this.handleSearch.bind(this);
 
 		this.state = {
 			visible: true,
@@ -49,7 +51,8 @@ class Header extends React.Component {
 			settingsOpen: false,
 			searchFocused: false,
 			searchOpen: false,
-			notificationsOpen: false
+			notificationsOpen: false,
+			searchText: ''
 		};
 	}
 
@@ -103,21 +106,42 @@ class Header extends React.Component {
 		this.props.dispatch(changeSidebarVisibility(visibility));
 	}
 
+	changeSearchText(event) {
+		this.setState({"searchText": event.target.value})
+	}
+
+	handleSearch(event) {
+		event.preventDefault();
+		this.props.dispatch(startSearch(this.state.searchText));
+		this.props.history.push('/app/search');
+		this.setState({"searchText": ''});
+	}
+
 	render() {
-		const Firmwares = [
-			{ title: 'Uno' },
-			{ title: 'Nordic' },
-			{ title: 'GL-04' },
-			{ title: 'SR-04' },
-			{ title: 'PI 3' }
-		];
 		return (
+
 			<Navbar className={`d-print-none ${s.root}`}>
+
 				<Collapse className={`${s.searchCollapse} ml-lg-0 mr-md-3`} isOpen={this.state.searchOpen}>
-					<InputGroup className={`${s.navbarForm} ${this.state.searchFocused ? s.navbarFormFocused : ''}`} />
+					<InputGroup className={`${s.navbarForm} ${this.state.searchFocused ? s.navbarFormFocused : ''}`}>
+						<InputGroupAddon addonType="prepend" className={s.inputAddon}><InputGroupText><i className="fa fa-search" /></InputGroupText></InputGroupAddon>
+						<Input
+							id="search-input-2" placeholder="Search..." className="input-transparent"
+							onFocus={() => this.setState({ searchFocused: true })}
+							onBlur={() => this.setState({ searchFocused: false })}
+						/>
+					</InputGroup>
 				</Collapse>
-				<Form className="d-md-down-none mr-3 ml-3" inline>
-					<AutoCompleteText firmwares={Firmwares} />
+				<Form className="d-md-down-none mr-3 ml-3" inline onSubmit={this.handleSearch}>
+					<FormGroup>
+						<InputGroup className="input-group-no-border">
+							<InputGroupAddon addonType="prepend">
+								<InputGroupText><i className="fa fa-search text-white" /></InputGroupText>
+							</InputGroupAddon>
+							<Input id="search-input" className="input-transparent" placeholder="Search"
+										 onChange={this.changeSearchText} value={this.state.searchText}/>
+						</InputGroup>
+					</FormGroup>
 				</Form>
 
 				<Nav className="ml-md-0 d-flex nav-responsive">
