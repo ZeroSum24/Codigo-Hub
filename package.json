@@ -77,7 +77,6 @@
     "cross-env": "^7.0.2",
     "echarts": "^4.8.0",
     "echarts-for-react": "^2.0.16",
-    "font-awesome": "4.7.0",
     "glyphicons-halflings": "^1.9.1",
     "highcharts": "^8.1.2",
     "highcharts-react-official": "^3.0.0",
