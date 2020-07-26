@@ -650,11 +650,70 @@ export const identityABI = [
     "outputs": [{"name": "", "type": "address"}]
   }
 ];
+export const usersAddress = "0x3A906f5CacE37531A6326a53267A81ac0Ebb8157"
+export const usersABI = [
+  {
+    "type": "function",
+    "name": "incrRep",
+    "constant": false,
+    "payable": false,
+    "stateMutablilty": "nonpayable",
+    "inputs": [{"name": "target", "type": "address"}],
+  },
+  {
+    "type": "function",
+    "name": "decrRep",
+    "constant": false,
+    "payable": false,
+    "stateMutablilty": "nonpayable",
+    "inputs": [{"name": "target", "type": "address"}],
+  },
+  {
+    "type": "function",
+    "name": "getRep",
+    "constant": false,
+    "payable": false,
+    "stateMutablilty": "view",
+    "inputs": [{"name": "user", "type": "address"}],
+    "outputs": [{"name": "", "type": "uint"}]
+  },
+  {
+    "type": "function",
+    "name": "userExists",
+    "constant": false,
+    "payable": false,
+    "stateMutablilty": "view",
+    "inputs": [{"name": "user", "type": "address"}],
+    "outputs": [{"name": "", "type": "bool"}]
+  },
+  {
+    "type": "function",
+    "name": "getAllUsers",
+    "constant": false,
+    "payable": false,
+    "stateMutablilty": "view",
+    "outputs": [{"name": "", "type": "address[]"}]
+  },
+  {
+    "type": "function",
+    "name": "register",
+    "constant": false,
+    "payable": false,
+    "stateMutablilty": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "deregister",
+    "constant": false,
+    "payable": false,
+    "stateMutablilty": "nonpayable"
+  }
+];
 
 let firmwareRepo = null;
 let wot = null;
 let identity = null;
-
+let users = null;
 
 /**
  * Hardcoded constants to define all possible developers and device types. Please add your account address and favorite
@@ -701,6 +760,17 @@ function getIdentity() {
     identity = new web3.eth.Contract(identityABI, identityAddress);
   }
   return identity;
+}
+
+/**
+ * Retrieve instance of the users contract
+ * @return {Contract} the users contract
+ */
+function getUsers() {
+  if (users == null) {
+    users = new web3.eth.Contract(usersABI, usersAddress);
+  }
+  return users;
 }
 
 /**
@@ -782,6 +852,89 @@ export function getDeveloperAddress(userAddress) {
  */
 export function getUserAddress(developerAddress) {
     return getIdentity().methods.get_3box_address(developerAddress).call();
+}
+
+/**
+ * Wait a random delay between 0 and 10 seconds then add to the target user's reputation
+ * @params {String} the address of the target user
+ * @return {Promise<String>} the transaction hash
+ */
+export function addRepToUser(userAddress) {
+  const delayMs = Math.floor(Math.random() * 10000);
+  return new Promise(
+    (resolve, _) => {
+      setTimeout(
+        async () => {
+          const hash = await sendTransaction(usersAddress,
+            getUsers().methods.incrRep(userAddress).encodeABI());
+          resolve(hash);
+        },
+        delayMs
+      );
+    });
+}
+
+/**
+ * Wait a random delay between 0 and 10 seconds then subtract from the target
+ * user's reputation
+ * @params {String} the address of the target user
+ * @return {Promise<String>} the transaction hash
+ */
+export function removeRepFromUser(userAddress) {
+  const delayMs = Math.floor(Math.random() * 10000);
+  return new Promise(
+    (resolve, _) => {
+      setTimeout(
+        async () => {
+          const hash = await sendTransaction(usersAddress,
+            getUsers().methods.decrRep(userAddress).encodeABI());
+          resolve(hash);
+        },
+        delayMs
+      );
+    });
+}
+
+/**
+ * Retrieve the reputation of a user
+ * @params {String} the address of the user
+ * @return {Number} the user's reputation
+ */
+export function getUserRep(userAddress) {
+  return getUsers().methods.getRep(userAddress).call();
+}
+
+/**
+ * Check whether a user exists
+ * @params {String} the address of the user
+ * @return {bool} True if the user exists, else false
+ */
+export function userExists(userAddress) {
+  return getUsers().methods.userExists(userAddress).call();
+}
+
+/**
+ * Get all existing users
+ * @return {String[]} The addresses of all users
+ */
+export function getAllUsers() {
+  return getUsers().methods.getAllUsers().call();
+}
+
+/**
+ * Register the current user
+ * @return {Promise<String>} The transaction hash
+ */
+export function registerCurrentUser() {
+  return sendTransaction(usersAddress, getUsers().methods.register().encodeABI());
+}
+
+/**
+ * Deregister the current user
+ * @return {Promise<String>} The transaction hash
+ */
+export function deregisterCurrentUser() {
+  return sendTransaction(usersAddress, getUsers().methods.deregister().encodeABI());
 }
 
 /**
