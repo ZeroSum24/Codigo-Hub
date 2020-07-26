@@ -10,5 +10,5 @@ export default combineReducers({
   auth,
   ethereum,
   navigation,
-  register,
+  register
 });
