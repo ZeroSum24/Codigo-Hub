@@ -49,7 +49,8 @@ function DeviceListView(props) {
         <DeviceWidget key={item.serialNumber} device={item}/>)
       );
     } else {
-      view = (<div align ="center">Sorry, there is no firmware currently available for this device.</div>);
+      view = (
+        <div align ="center">Why not add some devices so you can manage them</div>);
     }
   return view
 }
