@@ -9,10 +9,10 @@ class AvailableBountiesWidget extends React.PureComponent {
   }
 
   render() {
+    /*Need to adjust according to the details of add bounty*/
     const request = this.props.bounty;
     console.log(request);
     return (
-      {/*Need to adjust according to the details of add bounty*/}
       <Widget
         title={<h5>Firmware Name: <small className="text-muted">{request.name}</small></h5>}
         close collapse>
