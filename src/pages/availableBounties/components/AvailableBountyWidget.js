@@ -15,12 +15,14 @@ class AvailableBountiesWidget extends React.PureComponent {
         <div className="widget-padding-md w-100 h-100 text-left border rounded">
           <Row>
             <Col sm={6}>
-              <h6><span className="fw-semi-bold">Author: </span></h6>
+              <h6><span className="fw-semi-bold">Proposer: </span></h6>
               <h6><span className="fw-semi-bold">Version: </span></h6>
+              <h6><span className="fw-semi-bold">Eth Amount: </span></h6>
             </Col>
             <Col sm={6}>
               <h6>{request.author}</h6>
               <h6>{request.version}</h6>
+              <h6>{request.ethAmount}</h6>
             </Col>
           </Row>
         </div>
