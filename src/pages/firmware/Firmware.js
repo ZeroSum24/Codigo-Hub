@@ -97,7 +97,7 @@ void loop() {
 							<br />
 							<br />
 							<Row>
-								<Col xs="2" sm="2" />{' '}
+								<Col xs="2" sm="2" md="2" />{' '}
 								<Col xs="auto" sm="auto" md="auto">
 									<ThreeBoxComments
 										// required
@@ -109,7 +109,7 @@ void loop() {
 										currentUserAddr={this.state.myAddress}
 									/>{' '}
 								</Col>
-								<Col xs="2" sm="2" />
+								<Col xs="2" sm="2" md="2" />
 							</Row>
 						</Col>
 						<Col xs={12} sm={12} md={3}>
@@ -174,7 +174,6 @@ void loop() {
 							</Card>
 						</Col>
 					</Row>
-					<Row />
 				</Container>
 			</div>
 		);
