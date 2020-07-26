@@ -100,7 +100,6 @@ class Layout extends React.Component {
 			</div>
 		);
 	}
->>>>>>> master
 }
 
 function mapStateToProps(store) {
