@@ -1,31 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import EditProfile from '3box-profile-edit-react';
+import { Modal, ModalBody } from 'reactstrap';
 
-import s from '../Profile.module.scss';
-import {Grid} from "@material-ui/core";
 
-class UserDetails extends React.Component {
+class EditProfileDialog extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log("Profile ethereum address", this.props.ethereumAddress)
-
   }
 
   render() {
     return (
-      <div className={s.root}>
-        User Details PAge
-      </div>
+      <Modal isOpen={this.props.show} toggle={() => this.props.onClose()}>
+        <ModalBody>
+          <EditProfileComponent box={this.props.userBox}
+                                space={this.props.userSpace}
+                                myAddress={this.props.ethereumAddress}/>
+        </ModalBody>
+      </Modal>
     );
   }
 }
-
-//
-// <EditProfileComponent box={this.props.userBox}
-//                       space={this.props.userSpace}
-//                       myAddress={this.props.ethereumAddress}/>
 
 const EditProfileComponent = ({ customFields, box, space, myAddress, myProfile, redirectFn }) => (
   <EditProfile
@@ -47,4 +43,4 @@ const mapStateToProps = state => ({
   user3Space: state.ethereum.user3Space,
 });
 
-export default connect(mapStateToProps)(UserDetails);
+export default connect(mapStateToProps)(EditProfileDialog);

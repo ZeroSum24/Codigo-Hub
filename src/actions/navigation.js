@@ -5,6 +5,7 @@ export const CLOSE_SIDEBAR = 'CLOSE_SIDEBAR';
 export const CHANGE_ACTIVE_SIDEBAR_ITEM = 'CHANGE_ACTIVE_SIDEBAR_ITEM';
 export const CHANGE_SIDEBAR_POSITION = 'CHANGE_SIDEBAR_POSITION';
 export const CHANGE_SIDEBAR_VISIBILITY = 'CHANGE_SIDEBAR_VISIBILITY';
+export const SET_PROFILE_TARGET_ADDRESS = 'SET_PROFILE_TARGET_ADDRESS';
 
 export function openSidebar() {
   return {
@@ -37,4 +38,11 @@ export function changeSidebarVisibility(nextVisibility) {
     type: CHANGE_SIDEBAR_VISIBILITY,
     payload: nextVisibility,
   };
+}
+
+export function setProfileTargetAddress(targetAddress) {
+  return {
+    type: SET_PROFILE_TARGET_ADDRESS,
+    payload: targetAddress
+  }
 }

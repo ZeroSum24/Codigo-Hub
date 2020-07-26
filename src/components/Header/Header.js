@@ -29,7 +29,13 @@ import {
 
 import Notifications from '../Notifications';
 import { logoutUser } from '../../actions/user';
-import { openSidebar, closeSidebar, changeSidebarPosition, changeSidebarVisibility } from '../../actions/navigation';
+import {
+	openSidebar,
+	closeSidebar,
+	changeSidebarPosition,
+	changeSidebarVisibility,
+	setProfileTargetAddress
+} from '../../actions/navigation';
 import 'animate.css';
 import s from './Header.module.scss';
 import 'animate.css';
@@ -50,6 +56,7 @@ class Header extends React.Component {
 		this.toggleAccountDropdown = this.toggleAccountDropdown.bind(this);
 		this.toggleSidebar = this.toggleSidebar.bind(this);
 		this.toggleSearchOpen = this.toggleSearchOpen.bind(this);
+		this.updateProfileTargetAddress = this.updateProfileTargetAddress.bind(this);
 
 		this.state = {
 			visible: true,
@@ -112,6 +119,10 @@ class Header extends React.Component {
 		this.props.dispatch(changeSidebarVisibility(visibility));
 	}
 
+	updateProfileTargetAddress() {
+		this.props.dispatch(setProfileTargetAddress(this.props.ethereumAddress))
+	}
+
 	render() {
 		const Firmwares = [
 			{ title: 'Uno' },
@@ -139,13 +150,13 @@ class Header extends React.Component {
 						style={{ marginRight: 'auto' }}
 					>
 						<DropdownToggle nav caret style={{ color: '#f4f4f5', padding: 0 }}>
-							<Link to="/app/profile">
-								<ProfileHover
-									address={this.props.ethereumAddress}
-									orientation="bottom"
-									noCoverImg
-									showName>
-								</ProfileHover>
+							<Link to="/app/profile?id=foo" onClick={this.updateProfileTargetAddress}>
+									<ProfileHover
+										address={this.props.ethereumAddress}
+										orientation="bottom"
+										noCoverImg
+										showName>
+									</ProfileHover>
 							</Link>
 						</DropdownToggle>
 					</Dropdown>

@@ -1,10 +1,11 @@
-import { CHANGE_SIDEBAR_VISIBILITY, CHANGE_SIDEBAR_POSITION, OPEN_SIDEBAR, CLOSE_SIDEBAR, CHANGE_ACTIVE_SIDEBAR_ITEM } from '../actions/navigation';
+import { CHANGE_SIDEBAR_VISIBILITY, CHANGE_SIDEBAR_POSITION, OPEN_SIDEBAR, CLOSE_SIDEBAR, CHANGE_ACTIVE_SIDEBAR_ITEM, SET_PROFILE_TARGET_ADDRESS } from '../actions/navigation';
 
 const initialState = {
   sidebarOpened: false,
   activeItem: window.location.pathname,
   sidebarPosition: 'left',
   sidebarVisibility: 'show',
+  targetProfileAddress: ''
 };
 
 export default function runtime(state = initialState, action) {
@@ -30,6 +31,10 @@ export default function runtime(state = initialState, action) {
         ...state,
         activeItem: action.activeItem,
       };
+    case SET_PROFILE_TARGET_ADDRESS:
+      return Object.assign({}, state, {
+        targetProfileAddress: action.payload,
+      });
     default:
       return state;
   }
