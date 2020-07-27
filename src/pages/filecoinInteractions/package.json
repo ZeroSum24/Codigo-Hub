@@ -2,5 +2,5 @@
   "name": "AddFirmware",
   "version": "0.0.0",
   "private": true,
-  "main": "AddFirmware.js"
+  "main": "FilecoinInteractions.js"
 }

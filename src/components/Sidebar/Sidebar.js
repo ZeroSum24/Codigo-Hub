@@ -115,7 +115,7 @@ class Sidebar extends React.Component {
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
-						header="Add Firmware"
+						header="Deployed Firmware"
 						isHeader
 						iconName="fi flaticon-plus"
 						link="/app/add_firmware"

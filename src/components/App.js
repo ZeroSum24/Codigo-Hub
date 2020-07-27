@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect, Provider} from 'react-redux';
+import {connect} from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router';
 import { HashRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -17,15 +17,7 @@ import Loader from "./Loader";
 import { enableUserEthereum } from '../actions/user';
 
 import { logoutUser } from '../actions/user';
-import { getWeb3 } from '../blockchain/client';
 import AuthErrorView from "../pages/error/AuthErrorView";
-
-try {
-  // init blockchain read only access on load
-  getWeb3();
-} catch (e) {
-  alert(e);
-}
 
 const PrivateRoute = ({dispatch, component, ...rest }) => {
     if (!Login.isAuthenticated(JSON.parse(localStorage.getItem('authenticated')))) {

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import time
+import hashlib
 
 import paho.mqtt.client as mqtt
 
@@ -12,9 +13,15 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("codigo/#")
 
 
+def md5_firmware(firmware_binary):
+    hash_md5 = hashlib.md5()
+    hash_md5.update(firmware_binary)
+    return hash_md5.hexdigest()
+
+
 def upgrade_firmware(client, userdata, msg):
     firmware = msg.payload
-    print('firmware upgrade: ' + msg.topic + " " + str(msg.payload))
+    print('firmware upgrade: ' + msg.topic + ' md5: ' + md5_firmware(firmware))
     with open('/tmp/output.bin', 'wb') as f:
         f.write(firmware)
 

@@ -3,12 +3,14 @@ import * as Paho from 'paho-mqtt';
 // Create a client instance
 const broker = 'test.mosquitto.org';
 const port = '8081';
-const clientID = 'master32r4r'
+// random client name to avoid being kicked out if multiple users are using the Dapp
+const clientID = Math.random().toString(36).substring(7);
 export const client = new Paho.Client(broker, Number(port), clientID);
 // set callback handlers
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
-client.connect({ onSuccess: onConnect,
+client.connect({
+  onSuccess: onConnect,
   onFailure: onFailureConnect,
   reconnect: true,
   useSSL: true,
@@ -23,7 +25,7 @@ function onFailureConnect(e) {
 
 // called when the client connects
 function onConnect() {
-  console.log('connected');
+  console.log('MQTT client connected');
   client.subscribe("codigo/active", {qos: 2});
 }
 

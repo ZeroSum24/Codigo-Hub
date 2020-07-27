@@ -1,11 +1,12 @@
 import React from 'react';
-import { Alert, Button, FormGroup, Input, InputGroup, Label, Modal, ModalBody } from 'reactstrap';
+import { Alert, Button, FormGroup, Input, InputGroup, Label } from 'reactstrap';
 import 'react-toastify/dist/ReactToastify.css';
 import Widget from '../../../components/Widget';
 
 import { createUserDevice } from '../../../actions/profile';
 import Device from '../../../model/Device';
 import { connect } from 'react-redux';
+import Modal from '@material-ui/core/Modal';
 
 class AddDeviceDialog extends React.PureComponent  {
 
@@ -62,21 +63,10 @@ class AddDeviceDialog extends React.PureComponent  {
   }
 
   render() {
-
-    // {this.props.addDeviceSuccess ?
-    //   (<Toast>
-    //       <Toast.Header>
-    //         <img src="../../../images/rsz_4rsz_codigo-01.png" className="rounded mr-2" alt="" />
-    //         <strong className="mr-auto">Código Hub</strong>
-    //       </Toast.Header>
-    //       <Toast.Body>Device successfully added: {this.state.deviceName}</Toast.Body>
-    //    </Toast>): null
-    // }
-    if (!this.props.show) return null;
+    if (!this.props.isOpen) return null;
     return (
-      <Modal isOpen={this.props.show} toggle={() => this.props.onClose()}>
-        <ModalBody>
-          <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Add a Device</h3>}>
+      <Modal onClose={this.props.onClose} open={this.props.isOpen}>
+          <Widget  className="widget-auth mx-auto" style={{background: '#212529', marginTop: '30px'}} title={<h3 className="mt-0">Add a Device</h3>}>
               <p className="widget-auth-info">
                   Please fill all fields below.
               </p>
@@ -132,7 +122,6 @@ class AddDeviceDialog extends React.PureComponent  {
                   </div>
               </form>
           </Widget>
-        </ModalBody>
       </Modal>
      );
    }

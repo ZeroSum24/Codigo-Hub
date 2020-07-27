@@ -1,24 +1,10 @@
 import React from 'react';
-import {
-  Row,
-  Col,
-  Table,
-  Button,
-  Progress,
-  UncontrolledButtonDropdown,
-  DropdownMenu,
-  DropdownToggle,
-  DropdownItem,
-  Input,
-  Label,
-  Badge,
-} from 'reactstrap';
-import { Comment, Form } from 'semantic-ui-react'
+import { Button, Col, Row, } from 'reactstrap';
+import { Comment, Form } from 'semantic-ui-react';
 
 import Widget from '../../components/Widget';
-import s from './FirmwareView.module.scss';
 import { retrieveAllAvailableFirmware } from '../../blockchain/contracts';
-import { downloadFirmware } from '../../ipfs/client';
+import { downloadFirmwareBinary } from '../../filecoin/client';
 
 class FirmwareView extends React.Component {
 
@@ -106,7 +92,7 @@ class FirmwareView extends React.Component {
                       <h4><span className="fw-semi-bold">Description:</span> </h4>
                       <h3>&nbsp;</h3>
                       <Button type="submit" color="success" className="auth-btn" size="sm" style={{ color: '#fff' }}
-                              onClick={() => downloadFirmware(firmware.IPFS_link, 'firmware')}>
+                              onClick={() => downloadFirmwareBinary(firmware.IPFS_link, 'firmware')}>
                         {
                           'Download Firmware'
                         }
