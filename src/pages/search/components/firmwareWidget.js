@@ -4,10 +4,6 @@ import React from "react";
 
 class FirmwareWidget extends React.PureComponent {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const request = this.props.firmware;
     console.log(request);

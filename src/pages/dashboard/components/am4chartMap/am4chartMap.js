@@ -86,7 +86,7 @@ class Am4chartMap extends Component {
 								formatValue={(n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
 							/>
 						</span>
-						<i className="fa fa-map-marker" />
+            <span className="glyphicon glyphicon-map-marker" />
 					</p>
 				</div>
 				<div style={{ 'padding-top': '90px' }} className={s.map} id="map">
