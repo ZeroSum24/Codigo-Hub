@@ -659,6 +659,7 @@ export const usersABI = [
     "payable": false,
     "stateMutablilty": "nonpayable",
     "inputs": [{"name": "target", "type": "address"}],
+    "outputs": []
   },
   {
     "type": "function",
@@ -667,6 +668,7 @@ export const usersABI = [
     "payable": false,
     "stateMutablilty": "nonpayable",
     "inputs": [{"name": "target", "type": "address"}],
+    "outputs": []
   },
   {
     "type": "function",
@@ -692,6 +694,7 @@ export const usersABI = [
     "constant": false,
     "payable": false,
     "stateMutablilty": "view",
+    "inputs": [],
     "outputs": [{"name": "", "type": "address[]"}]
   },
   {
@@ -699,14 +702,18 @@ export const usersABI = [
     "name": "register",
     "constant": false,
     "payable": false,
-    "stateMutablilty": "nonpayable"
+    "stateMutablilty": "nonpayable",
+    "inputs": [],
+    "outputs": []
   },
   {
     "type": "function",
     "name": "deregister",
     "constant": false,
     "payable": false,
-    "stateMutablilty": "nonpayable"
+    "stateMutablilty": "nonpayable",
+    "inputs": [],
+    "outputs": []
   }
 ];
 
