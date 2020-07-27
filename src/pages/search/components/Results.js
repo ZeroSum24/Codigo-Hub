@@ -8,7 +8,8 @@ import { Row, Col, Container, Card, CardTitle, CardText, CardImg, CardBody, Butt
 const SearchCategory = {
   FIRMWARE: "FIRMWARE",
   BOUNTY: "BOUNTY",
-  USER: "USER"
+  USER: "USER",
+  DEVICE: "DEVICE"
 };
 
 
@@ -23,6 +24,7 @@ class Search extends React.PureComponent {
     this.changeToFirmwareCategory = this.changeToFirmwareCategory.bind(this);
     this.changeToUserResultsCategory = this.changeToUserResultsCategory.bind(this);
     this.changeToBountyResultsCategory = this.changeToBountyResultsCategory.bind(this);
+    this.changeToDeviceResultsCategory = this.changeToDeviceResultsCategory.bind(this);
   }
 
   renderResults(param) {
@@ -30,9 +32,11 @@ class Search extends React.PureComponent {
       case SearchCategory.FIRMWARE:
         return (<FirmwareListView firmwares={this.props.firmwareResults} />);
       case SearchCategory.USER:
-        return 'bar';
+        return 'user';
       case SearchCategory.BOUNTY:
-        return 'bar';
+        return 'bounty';
+      case SearchCategory.DEVICE:
+        return 'device';
       default:
         return 'foo';
     }
@@ -50,6 +54,9 @@ class Search extends React.PureComponent {
     this.setState({"selectedCategory": SearchCategory.BOUNTY})
   }
 
+  changeToDeviceResultsCategory() {
+    this.setState({"selectedCategory": SearchCategory.DEVICE})
+  }
 
   render() {
     return (
@@ -68,6 +75,10 @@ class Search extends React.PureComponent {
               <br />
               <Card body outline color="primary">
                 <CardTitle align="center" onClick={this.changeToBountyResultsCategory}>Requests ({this.props.bountyResults.length})</CardTitle>
+              </Card>
+              <br />
+              <Card body outline color="primary">
+                <CardTitle align="center" onClick={this.changeToDeviceResultsCategory}>Devices ({this.props.deviceResults.length})</CardTitle>
               </Card>
               <br />
             </Col>
@@ -94,6 +105,7 @@ const mapStateToProps = state => ({
   bountyResults: state.search.bountyResults,
   firmwareResults: state.search.firmwareResults,
   userResults: state.search.userResults,
+  deviceResults: state.search.deviceResults,
   searchText: state.search.searchText
 });
 

@@ -4,6 +4,7 @@ export default function search(state = {
   searchText: '',
   searchStatus: SearchStatus.LOADING,
   bountyResults: [],
+  deviceResults: [],
   firmwareResults: [],
   userResults: [],
   errorMessage: ''
@@ -18,6 +19,7 @@ export default function search(state = {
         bountyResults: action.payload.bountyResults,
         firmwareResults: action.payload.firmwareResults,
         userResults:  action.payload.userResults,
+        deviceResults: action.payload.deviceResults,
         searchStatus: SearchStatus.COMPLETED
       });
     case SEARCH_FAILURE:

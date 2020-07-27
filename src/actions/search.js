@@ -45,8 +45,12 @@ export function startSearch(searchText) {
       let userResults = []; // list of firmware objects
       // search bounties on the bounty blockchain for bounty inclusion
       let bountyResults = []; // list of firmware objects
+      // device bounties
+      let deviceResults = [];
 
-      dispatch(searchSuccess({firmwareResults: firmwareResults, userResults: userResults, bountyResults: bountyResults}));
+      dispatch(searchSuccess({firmwareResults: firmwareResults, userResults: userResults,
+        bountyResults: bountyResults, deviceResults: deviceResults})
+      );
 
     } catch (error) {
       // User denied account access...
