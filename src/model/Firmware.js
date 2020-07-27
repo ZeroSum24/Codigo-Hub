@@ -8,3 +8,11 @@ export default class Firmware {
     this.device_type = device_type;
   }
 }
+
+export class FirmwareWithThumbs extends Firmware {
+  constructor(hash, IPFS_link, description, block, developer, device_type, thumbs_up=0, thumbs_down=0) {
+    super(hash, IPFS_link, description, block, developer, device_type);
+    this.thumbs_up = thumbs_up;
+    this.thumbs_down = thumbs_down;
+  }
+}

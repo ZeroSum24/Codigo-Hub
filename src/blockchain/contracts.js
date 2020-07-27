@@ -1,5 +1,5 @@
 import { currentAccount, web3, ethereum } from './client';
-import Firmware from '../model/Firmware';
+import Firmware, { FirmwareWithThumbs } from '../model/Firmware';
 
 export const firmwareRepoAddress = '0x3691B2BE18f186b475e81342585790DcBaC43A0b';
 export const abiFR = [
@@ -731,8 +731,20 @@ export function retrieveAllAvailableFirmware() {
 
 export function retrieveFirmware(device_type, developer_address) {
   return getFirmwareRepo().methods.get_firmware(device_type, developer_address, true).call().then(result => {
-    return new Firmware(result[0], result[1], result[2], result[3], developer_address, device_type);
+    return new FirmwareWithThumbs(result[0], result[1], result[2], result[3], developer_address, device_type, result[4] || 0, result[5] || 0);
   }, () => null);
+}
+
+export function thumbsUpFirmware(developer, device_type) {
+  return thumbsFirmware(true, developer, device_type);
+}
+
+export function thumbsDownFirmware(developer, device_type) {
+  return thumbsFirmware(false, developer, device_type);
+}
+
+function thumbsFirmware(is_thumb_up, developer, device_type) {
+  return getFirmwareRepo().methods.thumbs_up_down(is_thumb_up, developer, device_type, true).send({from: ethereum.selectedAddress});
 }
 
 // doesn't work yet, overflows for some reason
