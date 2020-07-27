@@ -35,7 +35,26 @@
     orbit-db-io "^0.2.0"
     safe-buffer "^5.1.2"
 
-"3box@^1.17.1", "3box@^1.20.0":
+"3box-profile-edit-react@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/3box-profile-edit-react/-/3box-profile-edit-react-0.0.9.tgz#86f4af779c59f843742121251cd3c04e8ba3cb1b"
+  integrity sha512-YdsRw7vvn355RTax6SQBs1HSVi/neqQ2661Vx5q/yaeAYJusi6W0bUyogcwHZ5+LEq0NioT6ZLfVqOk4HgGeog==
+  dependencies:
+    "3box" "^1.17.1"
+    "3id-resolver" "0.0.6"
+    "@babel/runtime" "^7.6.0"
+    async "^3.1.0"
+    babel-core "^7.0.0-bridge.0"
+    emoji-js "^3.4.1"
+    emoji-mart "^2.11.1"
+    ethereum-blockies-base64 "^1.0.2"
+    multicodec "^0.5.6"
+    node-sass "^4.13.0"
+    react-addons-css-transition-group "^15.6.2"
+    react-inlinesvg "^1.2.0"
+    svg-inline-loader "^0.8.0"
+
+"3box@^1.17.1", "3box@^1.20.0", "3box@^1.20.3":
   version "1.20.3"
   resolved "https://registry.yarnpkg.com/3box/-/3box-1.20.3.tgz#9e29329ab2e25a718723570f585b40525c2239e5"
   integrity sha512-aa8cJT4F/x75JL0prcFtdbhtaLslwzb8riqFXDHVitKeVXCsES9KSwyXkP9oo5wi93ACryhmwN1gkLzZ8FuCNg==
@@ -103,6 +122,16 @@
     postmsg-rpc "^2.4.0"
     store "^2.0.12"
     url-parse "^1.4.7"
+
+"3id-resolver@0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/3id-resolver/-/3id-resolver-0.0.6.tgz#1a2862198622bc5115c455b02e9372b1556d937f"
+  integrity sha512-EflG8C1238boxJL3jQOUZ7280LoQx2O19iaBsLPFOGl7mQZcQP1HQyQMIOQxVwYRYiYE31D5kO4eSkSGbUa/ng==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    did-jwt "^0.1.3"
+    did-resolver "0.0.6"
+    ipfs-did-document "^1.2.3"
 
 "3id-resolver@^1.0.0":
   version "1.0.1"
@@ -2260,6 +2289,11 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
+"@metamask/detect-provider@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@metamask/detect-provider/-/detect-provider-1.1.0.tgz#3200883de5d739bd0f7edfd1c9bb2bd01011ea49"
+  integrity sha512-7klN00NjDWPNUG4m5chX7LwUgnQ/L1r1m2+5VNx4zJsbD7oXsqQtkFyGwXe3msYUIvuRFeyH2kK94zeNEidxpw==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -3469,6 +3503,11 @@ async@^2.0.1, async@^2.6.1, async@^2.6.2:
   dependencies:
     lodash "^4.17.14"
 
+async@^3.1.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/async/-/async-3.2.0.tgz#b3a2685c5ebb641d3de02d161002c60fc9f85720"
+  integrity sha512-TR2mEZFVOj2pLStYxLht7TyfuRzaydfpxr3k9RpHIzMgw7A64dzsdqCxH1WJyQdoe8T10nDXd9wnEigmiuHIZw==
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -4499,6 +4538,11 @@ chai@^4.2.0:
     get-func-name "^2.0.0"
     pathval "^1.1.0"
     type-detect "^4.0.5"
+
+chain-function@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/chain-function/-/chain-function-1.0.1.tgz#c63045e5b4b663fb86f1c6e186adaf1de402a1cc"
+  integrity sha512-SxltgMwL9uCko5/ZCLiyG2B7R9fY4pDZUw7hJ4MhirdjBLosoDqkWABi3XMucddHdLiFJMb7PD2MZifZriuMTg==
 
 chalk@2.4.1:
   version "2.4.1"
@@ -6110,7 +6154,7 @@ dom-converter@^0.2:
   dependencies:
     utila "~0.4"
 
-dom-helpers@^3.4.0:
+dom-helpers@^3.2.0, dom-helpers@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.4.0.tgz#e9b369700f959f62ecde5a6babde4bccd9169af8"
   integrity sha512-LnuPJ+dwqKDIyotW1VzmOZ5TONUN7CwkCR5hrgawTUbkBGYdeoNLZo6nNfGkCrjtE1nXXaj7iMMpDa8/d9WoIA==
@@ -6326,6 +6370,13 @@ emoji-js@^3.4.1:
   integrity sha512-5uaULzdR3g6ALBC8xUzyoxAx6izT1M4+DEsxHLRS2/gaOKC/p62831itMoMsYfUj1fKX3YG01u5YVz2v7qpsWg==
   dependencies:
     emoji-datasource "4.1.0"
+
+emoji-mart@^2.11.1:
+  version "2.11.2"
+  resolved "https://registry.yarnpkg.com/emoji-mart/-/emoji-mart-2.11.2.tgz#ed331867f7f55bb33c8421c9a493090fa4a378c7"
+  integrity sha512-IdHZR5hc3mipTY/r0ergtqBgQ96XxmRdQDSg7fsL+GiJQQ4akMws6+cjLSyIhGQxtvNuPVNaEQiAlU00NsyZUg==
+  dependencies:
+    prop-types "^15.6.0"
 
 emoji-regex@^7.0.1, emoji-regex@^7.0.2:
   version "7.0.3"
@@ -14698,7 +14749,7 @@ process@~0.5.1:
   resolved "https://registry.yarnpkg.com/process/-/process-0.5.2.tgz#1638d8a8e34c2f440a91db95ab9aeb677fc185cf"
   integrity sha1-FjjYqONML0QKkduVq5rrZ3/Bhc8=
 
-profile-hover@^1.1.1:
+profile-hover@^1.1.1, profile-hover@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/profile-hover/-/profile-hover-1.1.2.tgz#5fcb979d3afebd54de2d5e02c1be033f3b3e48ea"
   integrity sha512-egIB4OpxBMGjuuWOf+y9KfFxRawx+xnOP6ZabNHDSQokjAo0uUG9csaa0FsX2WjLqxyohwunF6WX8P8oKf/y+A==
@@ -14781,7 +14832,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.4"
 
-prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -15041,6 +15092,13 @@ rc@^1.2.7, rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-addons-css-transition-group@^15.6.2:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/react-addons-css-transition-group/-/react-addons-css-transition-group-15.6.2.tgz#9e4376bcf40b5217d14ec68553081cee4b08a6d6"
+  integrity sha1-nkN2vPQLUhfRTsaFUwgc7ksIptY=
+  dependencies:
+    react-transition-group "^1.2.0"
+
 react-animate-height@^2.0.21:
   version "2.0.22"
   resolved "https://registry.yarnpkg.com/react-animate-height/-/react-animate-height-2.0.22.tgz#7beb04e7df92207043f502ad3985f909018f8cfe"
@@ -15249,6 +15307,17 @@ react-toastify@^6.0.8:
     classnames "^2.2.6"
     prop-types "^15.7.2"
     react-transition-group "^4.4.1"
+
+react-transition-group@^1.2.0:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-1.2.1.tgz#e11f72b257f921b213229a774df46612346c7ca6"
+  integrity sha512-CWaL3laCmgAFdxdKbhhps+c0HRGF4c+hdM4H23+FI1QBNUyx/AMeIJGWorehPNSaKnQNOAxL7PQmqMu78CDj3Q==
+  dependencies:
+    chain-function "^1.0.0"
+    dom-helpers "^3.2.0"
+    loose-envify "^1.3.1"
+    prop-types "^15.5.6"
+    warning "^3.0.0"
 
 react-transition-group@^2.3.1:
   version "2.9.0"

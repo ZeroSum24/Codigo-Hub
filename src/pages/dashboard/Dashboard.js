@@ -1,5 +1,4 @@
 import React from 'react';
-import Demo from './demo';
 import { Row, Col } from 'reactstrap';
 
 import s from './Dashboard.module.scss';
@@ -19,6 +18,7 @@ class Dashboard extends React.Component {
 			</div>
 		);
 	}
+
 }
 
 export default Dashboard;
