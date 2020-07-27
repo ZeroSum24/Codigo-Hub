@@ -4,7 +4,6 @@ import { Alert, FormGroup, InputGroup, Input, Label, Spinner } from 'reactstrap'
 import 'react-toastify/dist/ReactToastify.css';
 import Widget from '../../../components/Widget';
 import Web3 from 'web3';
-import { initWallet } from '../../../blockchain/client';
 import { hardcoded_device_types } from '../../../blockchain/contracts';
 import { getPG, upload } from '../../../filecoin/client';
 import Modal from '@material-ui/core/Modal';
@@ -58,7 +57,6 @@ class AddFirmwareDialog extends React.Component {
     const buffer = new Uint8Array(await this.state.file.arrayBuffer());
     const hash = Web3.utils.sha3(Buffer.from(buffer).toString('hex'));
     this.setState({ buttonText: filecoinUploadText });
-    await initWallet();
     const { cid, jobId } = await upload(buffer);
     this.props.onClose(hash, this.state.description, this.state.deviceType, cid, jobId);
     this._reset();
