@@ -723,6 +723,7 @@ export function registerFirmware(firmware_hash, IPFS_link, description, device_t
  */
 export function retrieveAllAvailableFirmware() {
   const promises = [];
+  if (!hardcoded_developers.includes(currentAccount)) hardcoded_developers.push(currentAccount);
   hardcoded_device_types.forEach(dev_type => hardcoded_developers
     .forEach(dev_addr => promises.push(retrieveFirmware(dev_type, dev_addr))));
   return Promise.all(promises).then(responses => responses.filter(f => f != null));

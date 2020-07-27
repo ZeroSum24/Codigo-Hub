@@ -7,7 +7,6 @@ import Web3 from 'web3';
 import { initWallet } from '../../../blockchain/client';
 import { hardcoded_device_types } from '../../../blockchain/contracts';
 import { getPG, upload } from '../../../filecoin/client';
-import { ffsTypes } from '@textile/powergate-client';
 import Modal from '@material-ui/core/Modal';
 
 const idleButtonText = 'Add Firmware to Còdigo';
@@ -61,26 +60,8 @@ class AddFirmwareDialog extends React.Component {
     this.setState({ buttonText: filecoinUploadText });
     await initWallet();
     const { cid, jobId } = await upload(buffer);
-    PG.ffs.watchJobs((job) => {
-      console.log(job);
-      if (job.status === ffsTypes.JobStatus.JOB_STATUS_CANCELED) {
-        console.log("job canceled");
-        this.props.onClose();
-      } else if (job.status === ffsTypes.JobStatus.JOB_STATUS_EXECUTING) {
-        console.log("job executing");
-      } else if (job.status === ffsTypes.JobStatus.JOB_STATUS_QUEUED) {
-        console.log("job queued");
-      } else if (job.status === ffsTypes.JobStatus.JOB_STATUS_FAILED) {
-        console.log("job failed");
-        this.props.onClose();
-      } else if (job.status === ffsTypes.JobStatus.JOB_STATUS_SUCCESS) {
-        console.log("job success!");
-        this.props.onClose(hash, this.state.description, this.state.deviceType, cid, jobId);
-      } else {
-        console.log("unknown job status", job);
-        this.props.onClose();
-      }
-    }, jobId);
+    this.props.onClose(hash, this.state.description, this.state.deviceType, cid, jobId);
+    this._reset();
   }
 
   render() {
