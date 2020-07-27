@@ -168,8 +168,6 @@ class FirmwareView extends React.Component {
                 </div>
               </Widget>)}
           </Col>
-
-
 </Row>
 </div>
     );
