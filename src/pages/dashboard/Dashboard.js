@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col } from 'reactstrap';
 
 import s from './Dashboard.module.scss';
+import Displaypage from './displaypage.jpg';
 
 class Dashboard extends React.Component {
 	constructor(props) {
@@ -14,11 +15,10 @@ class Dashboard extends React.Component {
 				<h1 align="centre" className="page-title">
 					Welcome to the Código Admin Panel &nbsp;
 				</h1>
-
+				<img src={Displaypage} alt="display picture" />
 			</div>
 		);
 	}
-
 }
 
 export default Dashboard;
