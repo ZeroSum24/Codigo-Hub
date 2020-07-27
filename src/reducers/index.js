@@ -7,6 +7,7 @@ import register from './register';
 import devices from './devices';
 import search from './search';
 import model from './model';
+import views from './views'
 
 export default combineReducers({
   alerts,
@@ -16,5 +17,6 @@ export default combineReducers({
   register,
   devices,
   search,
-  model
+  model,
+  views
 });

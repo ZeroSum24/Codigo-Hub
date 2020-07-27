@@ -4,6 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Device from "../../model/Device";
 import Bounty from "../../model/Bounty";
+import {initBountyView} from "../../actions/view";
 
 class BountyWidget extends React.PureComponent {
 
@@ -11,13 +12,22 @@ class BountyWidget extends React.PureComponent {
     item: PropTypes.objectOf(Bounty).isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.openBountyView = this.openBountyView.bind(this);
+  }
+
+  openBountyView() {
+    this.props.dispatch(initBountyView({profileObject: this.props.item, history: this.props.history}));
+  }
+
   render() {
     /*Need to adjust according to the details of add bounty*/
     const bounty = this.props.item;
     return (
       <Widget
         title={<h5>Bounty Title: <small className="text-muted">{bounty.name}</small></h5>}
-        close collapse>
+        close collapse onClick={this.openBountyView}>
         <p></p>
         <div className="widget-padding-md w-100 h-100 text-left border rounded">
           <Row>

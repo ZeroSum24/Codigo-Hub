@@ -8,6 +8,8 @@ import BountyWidget from "../../../components/CustomWidgets/BountyWidget";
 import ProfileWidget from "../../../components/CustomWidgets/ProfileWidget";
 import DeviceWidget from "../../../components/CustomWidgets/DeviceWidget";
 
+import s from "../Search.module.scss";
+
 
 const SearchCategory = {
   FIRMWARE: "FIRMWARE",
@@ -74,19 +76,19 @@ class Search extends React.PureComponent {
             {' '}
             <Col xs={3} sm={3} md={3}>
               <Card body outline color="primary">
-                <CardTitle align="center" onClick={this.changeToFirmwareCategory}>Firmware ({this.props.firmwareResults.length})</CardTitle>
+                <CardTitle align="center" className={s.categoryBtn} onClick={this.changeToFirmwareCategory}>Firmware ({this.props.firmwareResults.length})</CardTitle>
+              </Card>
+              <br />
+              <Card body outline color="primary" className={s.categoryBtn}>
+                <CardTitle align="center" className={s.categoryBtn} onClick={this.changeToUserResultsCategory}>Users ({this.props.userResults.length})</CardTitle>
               </Card>
               <br />
               <Card body outline color="primary">
-                <CardTitle align="center" onClick={this.changeToUserResultsCategory}>Users ({this.props.userResults.length})</CardTitle>
+                <CardTitle align="center" className={s.categoryBtn} onClick={this.changeToBountyResultsCategory}>Requests ({this.props.bountyResults.length})</CardTitle>
               </Card>
               <br />
               <Card body outline color="primary">
-                <CardTitle align="center" onClick={this.changeToBountyResultsCategory}>Requests ({this.props.bountyResults.length})</CardTitle>
-              </Card>
-              <br />
-              <Card body outline color="primary">
-                <CardTitle align="center" onClick={this.changeToDeviceResultsCategory}>Devices ({this.props.deviceResults.length})</CardTitle>
+                <CardTitle align="center" className={s.categoryBtn} onClick={this.changeToDeviceResultsCategory}>Devices ({this.props.deviceResults.length})</CardTitle>
               </Card>
               <br />
             </Col>
