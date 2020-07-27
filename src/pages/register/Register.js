@@ -7,13 +7,11 @@ import {
     Alert,
     Button,
     FormGroup,
-    FormControl,
     InputGroup,
     InputGroupAddon,
     InputGroupText,
     Input,
     Label,
-    NavItem, Nav
 } from 'reactstrap';
 
 import Widget from '../../components/Widget';

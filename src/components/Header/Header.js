@@ -9,17 +9,20 @@ import {
 	Nav,
 	NavItem,
 	NavLink,
-	ButtonGroup, 
+	ButtonGroup,
 	Button,
 	InputGroup,
 	Dropdown,
 	Collapse,
 	DropdownToggle,
 	DropdownMenu,
-	Form, InputGroupAddon, Input, FormGroup, InputGroupText
+	Form,
+	InputGroupAddon,
+	Input,
+	FormGroup,
+	InputGroupText
 } from 'reactstrap';
 
-import Notifications from '../Notifications';
 import { logoutUser } from '../../actions/user';
 import {
 	openSidebar,

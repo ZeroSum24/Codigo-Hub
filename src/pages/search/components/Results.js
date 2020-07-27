@@ -2,14 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FirmwareWidget from '../../../components/CustomWidgets/FirmwareWidget';
 
-import { Row, Col, Container, Card, CardTitle, CardText, CardImg, CardBody, Button } from 'reactstrap';
 import ListView from "../../../components/ListView";
 import BountyWidget from "../../../components/CustomWidgets/BountyWidget";
 import ProfileWidget from "../../../components/CustomWidgets/ProfileWidget";
 import DeviceWidget from "../../../components/CustomWidgets/DeviceWidget";
 
 import s from "../Search.module.scss";
-
+import {
+  Row,
+  Col,
+  Container,
+  Card,
+  CardTitle, 
+} from 'reactstrap';
 
 const SearchCategory = {
   FIRMWARE: "FIRMWARE",
