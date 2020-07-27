@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Container } from 'reactstrap';
 import 'react-toastify/dist/ReactToastify.css';
-import { ffsOptions } from '@textile/powergate-client';
+import { ffsOptions, ffsTypes } from '@textile/powergate-client';
 
 import { getPG } from '../../filecoin/client';
 import CreateFilecoinAddressDialog from './components/createFilecoinAddressDialog';
@@ -25,10 +25,27 @@ class FilecoinInteractions extends React.Component {
     this._refresh();
   };
 
-  _closeUploadDialog = (hash, description, deviceType, cid) => {
+  _closeUploadDialog = async (hash, description, deviceType, cid, jobId) => {
     this.setState({ showUpload: false });
     this._refresh();
+    (await getPG()).ffs.watchJobs((job) => {
+      console.log(job);
+      if (job.status === ffsTypes.JobStatus.JOB_STATUS_CANCELED) {
+        alert('File storage deal job canceled');
+      } else if (job.status === ffsTypes.JobStatus.JOB_STATUS_EXECUTING) {
+        console.log("job executing");
+      } else if (job.status === ffsTypes.JobStatus.JOB_STATUS_QUEUED) {
+        console.log("job queued");
+      } else if (job.status === ffsTypes.JobStatus.JOB_STATUS_FAILED) {
+        alert('File storage deal job failed');
+      } else if (job.status === ffsTypes.JobStatus.JOB_STATUS_SUCCESS) {
+        console.log("job success!");
+      } else {
+        console.log("unknown job status", job);
+      }
+    }, jobId);
     if (cid != null) {
+      // here or after success?
       registerFirmware(hash, cid, description, deviceType)
         .then(tx_hash => alert('Yas transaction succeeded with hash: ' + tx_hash))
         .catch(e => alert('Failed '+ e))
