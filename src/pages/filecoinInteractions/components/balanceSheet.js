@@ -3,6 +3,10 @@ import { Table } from 'reactstrap';
 
 const columns = [
   {
+    key: 'index',
+    name: '#',
+  },
+  {
     key: 'address',
     name: 'Address',
   },
@@ -34,9 +38,10 @@ export default class BalanceSheet extends React.Component {
             </tr>
           </thead>
           <tbody>
-          {data.map(d =>
+          {data.map((d,i) =>
           <tr key={d.addr.addr}>
-            <th scope='row'>{d.addr.addr}</th>
+            <th scope='row'>{i}</th>
+            <th>{d.addr.addr}</th>
             <th>{d.addr.name}</th>
             <th>{d.addr.type}</th>
             <th>{d.balance}</th>

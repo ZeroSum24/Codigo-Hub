@@ -7,13 +7,11 @@ class TopFirmware extends React.PureComponent {
 		super(props);
 
 		this.state = {
-			users:[],
 			bounties: [
 				{id:'name', value: 'Name'},
 				{id:'author', value: 'author'},
 				{id:'version', value: 'version'}
-			],
-			requests: []
+			]
 		};
 	}
 
