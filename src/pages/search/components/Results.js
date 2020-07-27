@@ -2,7 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FirmwareWidget from '../../../components/CustomWidgets/FirmwareWidget';
 
-import { Row, Col, Container, Card, CardTitle, CardText, CardImg, CardBody, Button } from 'reactstrap';
+import {
+  Row,
+  Col,
+  Container,
+  Card,
+  CardTitle, 
+} from 'reactstrap';
 
 
 const SearchCategory = {
