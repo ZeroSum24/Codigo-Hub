@@ -135,7 +135,7 @@ class Header extends React.Component {
 
 				<Collapse className={`${s.searchCollapse} ml-lg-0 mr-md-3`} isOpen={this.state.searchOpen}>
 					<InputGroup className={`${s.navbarForm} ${this.state.searchFocused ? s.navbarFormFocused : ''}`}>
-						<InputGroupAddon addonType="prepend" className={s.inputAddon}><InputGroupText><i className="fa fa-search" /></InputGroupText></InputGroupAddon>
+						<InputGroupAddon addonType="prepend" className={s.inputAddon}><InputGroupText><i className="glyphicon glyphicon-search" /></InputGroupText></InputGroupAddon>
 						<Input
 							id="search-input-2" placeholder="Search..." className="input-transparent"
 							onFocus={() => this.setState({ searchFocused: true })}
@@ -147,7 +147,7 @@ class Header extends React.Component {
 					<FormGroup>
 						<InputGroup className="input-group-no-border">
 							<InputGroupAddon addonType="prepend">
-								<InputGroupText><i className="fa fa-search text-white" /></InputGroupText>
+								<InputGroupText><i className="glyphicon glyphicon-search text-white" /></InputGroupText>
 							</InputGroupAddon>
 							<Input id="search-input" className="input-transparent" placeholder="Search"
 										 onChange={this.changeSearchText} value={this.state.searchText}/>
