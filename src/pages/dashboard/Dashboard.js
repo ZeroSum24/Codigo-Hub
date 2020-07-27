@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col } from 'reactstrap';
 
 import s from './Dashboard.module.scss';
-import Displaypage from './displaypage.jpg';
+import Displaypage from './displaypage.png';
 
 class Dashboard extends React.Component {
 	constructor(props) {
