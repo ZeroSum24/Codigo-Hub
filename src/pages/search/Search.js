@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Results from "./components/Results";
+import SearchLoader from "../../components/SearchLoader";
 
 class Search extends React.PureComponent {
 
@@ -18,8 +19,8 @@ class Search extends React.PureComponent {
 				// TODO display some kind of error state
 				return 'bar';
 			default:
-				// TODO display a temporary results loader view
-				return 'foo';
+				// TODO update SearchLoader view to stylistically match search view
+				return <SearchLoader loadingText={"Searching"}/>;
 		}
 	}
 
