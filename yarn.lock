@@ -8985,13 +8985,6 @@ ipfs-log@^4.5.4, ipfs-log@^4.6.1, ipfs-log@~4.6.0:
     p-map "^1.1.1"
     p-whilst "^1.0.0"
 
-ipfs-mini@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/ipfs-mini/-/ipfs-mini-1.1.5.tgz#1ffd1f0b048814aabbdfa24c77cde255c5b11fc7"
-  integrity sha512-BzsoCa3V/gxN2eEHnyqggOdreAwnvbddj4jUvp6Q7jXuzXx9q5XakXe8mG8qV0bn4bMKdH/7BUDbiWBCEMuYBg==
-  dependencies:
-    xmlhttprequest "^1.8.0"
-
 ipfs-pubsub-1on1@~0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/ipfs-pubsub-1on1/-/ipfs-pubsub-1on1-0.0.6.tgz#f0187b25b112f9c47361c66b22c71b4d38a2ae1c"

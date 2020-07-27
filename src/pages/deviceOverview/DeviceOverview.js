@@ -33,7 +33,7 @@ class DeviceOverview extends React.Component {
         <span className="glyphicon glyphicon-refresh" style={{ fontSize: '24px', marginBottom: '10px' }} title="Refresh device status" onClick={this.refreshComponent} aria-hidden="true" />
         <DeviceListView deviceList={this.props.deviceList.map(d =>
           new DeviceWithStatus(d.name, d.brand, d.model, d.serialNumber, isDeviceActive(d.name)))}/>
-        <AddDeviceDialog show={this.state.show} onClose={this.closeAddDialog} />
+        <AddDeviceDialog isOpen={this.state.show} onClose={this.closeAddDialog} />
       </div>
     );
   }

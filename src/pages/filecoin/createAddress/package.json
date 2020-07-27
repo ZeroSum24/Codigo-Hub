@@ -1,6 +1,0 @@
-{
-  "name": "CreateFilecoinAddress",
-  "version": "0.0.0",
-  "private": true,
-  "main": "createFilecoinAddressDialog.js"
-}
