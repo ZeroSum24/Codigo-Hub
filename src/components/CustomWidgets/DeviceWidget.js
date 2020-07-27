@@ -1,7 +1,7 @@
-import Widget from "../../../components/Widget";
+import Widget from "../Widget";
 import { Col, Row } from 'reactstrap';
 import React from 'react';
-import FirmwareUpgradeDialog from './firmwareUpgradeDialog';
+import FirmwareUpgradeDialog from '../../pages/deviceOverview/components/firmwareUpgradeDialog';
 
 class DeviceWidget extends React.PureComponent {
 

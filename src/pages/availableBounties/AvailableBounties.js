@@ -1,5 +1,5 @@
 import React from 'react';
-import AvailableBountiesWidget from './components/AvailableBountyWidget'
+import BountyWidget from '../../components/CustomWidgets/BountyWidget'
 import { Row, Col, Container } from 'reactstrap';
 
 class AvailableBounties extends React.PureComponent {
@@ -39,7 +39,7 @@ class AvailableBounties extends React.PureComponent {
 function BountiesListView(props) {
     let view;
     if (props.bounties.length > 0) {
-      		view = (props.bounties.map((item) => <AvailableBountiesWidget bounty={item}/>));
+      		view = (props.bounties.map((item) => <BountyWidget bounty={item}/>));
     } else {
       view = (<div align ="center">Sorry, no bounties are currently available. Please check back soon!</div>);
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import FirmwareWidget from './firmwareWidget';
+import FirmwareWidget from '../../../components/CustomWidgets/FirmwareWidget';
 
 import { Row, Col, Container, Card, CardTitle, CardText, CardImg, CardBody, Button } from 'reactstrap';
 
