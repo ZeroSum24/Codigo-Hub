@@ -1,97 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Demo from './demo';
-
-import {
-  Row,
-  Col,
-  Progress,
-  Table,
-  Label,
-  Input,
-} from 'reactstrap';
-
-import Widget from '../../components/Widget';
-
-import Calendar from './components/calendar/Calendar';
-import Map from './components/am4chartMap/am4chartMap';
-import Rickshaw from './components/rickshaw/Rickshaw';
-
-import AnimateNumber from 'react-animated-number';
+import { Row, Col } from 'reactstrap';
 
 import s from './Dashboard.module.scss';
 
-import peopleA1 from '../../images/people/a1.jpg';
-import peopleA2 from '../../images/people/a2.jpg';
-import peopleA5 from '../../images/people/a5.jpg';
-import peopleA4 from '../../images/people/a4.jpg';
-
 class Dashboard extends React.Component {
+	constructor(props) {
+		super(props);
+	}
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      graph: null,
-      checkedArr: [false, false, false],
-    };
-    this.checkTable = this.checkTable.bind(this);
-  }
+	render() {
+		return (
+			<div className={s.root}>
+				<h1 align="centre" className="page-title">
+					Welcome to the Código Admin Panel &nbsp;
+				</h1>
 
-  checkTable(id) {
-    let arr = [];
-    if (id === 0) {
-      const val = !this.state.checkedArr[0];
-      for (let i = 0; i < this.state.checkedArr.length; i += 1) {
-        arr[i] = val;
-      }
-    } else {
-      arr = this.state.checkedArr;
-      arr[id] = !arr[id];
-    }
-    if (arr[0]) {
-      let count = 1;
-      for (let i = 1; i < arr.length; i += 1) {
-        if (arr[i]) {
-          count += 1;
-        }
-      }
-      if (count !== arr.length) {
-        arr[0] = !arr[0];
-      }
-    }
-    this.setState({
-      checkedArr: arr,
-    });
-  }
+			</div>
+		);
+	}
 
-  render() {
-    return (
-      <div className={s.root}>
-        <h1 align="centre" className="page-title">Welcome to the Código Admin Panel &nbsp;
-          <small>
-            <small></small>
-          </small>
-        </h1>
-        <Row>
-          <Col lg={9}>
-            <Widget className="bg-transparent">
-              <Map />
-            </Widget>
-          </Col>
-          <Col lg={1} />
-        </Row>
-        <Row>
-        </Row>
-        <h2 className="page-title">Most popular user firmware requests &nbsp;
-          <small>
-            <small></small>
-          </small>
-        </h2>
-      <Demo />
-      </div>
-
-    );
-  }
 }
 
 export default Dashboard;

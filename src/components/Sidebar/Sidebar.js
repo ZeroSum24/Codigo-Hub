@@ -2,13 +2,12 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Progress, Alert } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { dismissAlert } from '../../actions/alerts';
 import s from './Sidebar.module.scss';
 import LinksGroup from './LinksGroup';
 
-import avatar from '../../images/rsz_4rsz_codigo-01.png';
+import logo from '../../images/rsz_4rsz_codigo-01.png';
 import { changeActiveSidebarItem } from '../../actions/navigation';
 import { logoutUser } from '../../actions/user';
 
@@ -30,7 +29,6 @@ class Sidebar extends React.Component {
 
 	constructor(props) {
 		super(props);
-
 		this.doLogout = this.doLogout.bind(this);
 	}
 
@@ -73,10 +71,9 @@ class Sidebar extends React.Component {
 				className={cx(s.root)}
 				ref={(nav) => {
 					this.element = nav;
-				}}
-			>
+				}}>
 				<header className={s.logo}>
-				<img src={avatar} alt="..." />
+					<img src={logo} alt="..." />
 					<a href="/">
 						Código <span className="fw-bold">User Panel</span>
 					</a>
@@ -88,19 +85,41 @@ class Sidebar extends React.Component {
 						activeItem={this.props.activeItem}
 						header="Home"
 						isHeader
-						iconName="flaticon-home"
+						iconName="fi flaticon-home"
 						link="/app/main"
 						index="main"
+					/>
+					<h5 className={[ s.navTitle, s.groupTitle ].join(' ')}>Devices</h5>
+					<LinksGroup
+						onActiveSidebarItemChange={(activeItem) =>
+							this.props.dispatch(changeActiveSidebarItem(activeItem))}
+						activeItem={this.props.activeItem}
+						header="Overview"
+						isHeader
+						iconName="fi flaticon-network"
+						link="/app/device_overview"
+						index="core"
+					/>
+					<h5 className={[ s.navTitle, s.groupTitle ].join(' ')}>Developer</h5>
+					<LinksGroup
+						onActiveSidebarItemChange={(activeItem) =>
+							this.props.dispatch(changeActiveSidebarItem(activeItem))}
+						activeItem={this.props.activeItem}
+						header="Top Firmware"
+						isHeader
+						iconName="fi flaticon-star"
+						link="/app/top_firmware"
+						index="ui"
 					/>
 					<LinksGroup
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
-						header="Device Overview"
+						header="Deployed Firmware"
 						isHeader
-						iconName="flaticon-network"
-						link="/app/deviceOverview"
-						index="core"
+						iconName="fi flaticon-plus"
+						link="/app/add_firmware"
+						index="add_firmware"
 					/>
 					<LinksGroup
 						onActiveSidebarItemChange={(activeItem) =>
@@ -108,31 +127,32 @@ class Sidebar extends React.Component {
 						activeItem={this.props.activeItem}
 						header="Earnings"
 						isHeader
-						iconName="flaticon-list"
-						link="/app/charts"
+						iconName="glyphicon glyphicon-usd"
+						link="/app/earnings"
 						index="main"
+					/>
+					<h5 className={[ s.navTitle, s.groupTitle ].join(' ')}>Community</h5>
+					<LinksGroup
+						onActiveSidebarItemChange={(activeItem) =>
+							this.props.dispatch(changeActiveSidebarItem(activeItem))}
+						activeItem={this.props.activeItem}
+						header="Available Bounties"
+						isHeader
+						iconName="fi flaticon-layers"
+						link="/app/availableBounties"
+						index="ui"
 					/>
 					<LinksGroup
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
-						header="Available Firmware"
+						header="Add a Bounty"
 						isHeader
-						iconName="flaticon-layers"
-						link="/app/tables"
-						index="ui"
+						iconName="fi flaticon-plus"
+						link="/app/add_bounty"
+						index="add_bounty"
 					/>
-          <LinksGroup
-            onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
-            activeItem={this.props.activeItem}
-            header="Developer"
-            isHeader
-            iconName="flaticon-menu"
-            link="/app/developer"
-            index="developer" />
 				</ul>
-
-				{}
 			</nav>
 		);
 	}

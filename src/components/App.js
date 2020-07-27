@@ -20,8 +20,12 @@ import { logoutUser } from '../actions/user';
 import { getWeb3 } from '../blockchain/client';
 import AuthErrorView from "../pages/error/AuthErrorView";
 
-// init blockchain read only access on load
-getWeb3();
+try {
+  // init blockchain read only access on load
+  getWeb3();
+} catch (e) {
+  alert(e);
+}
 
 const PrivateRoute = ({dispatch, component, ...rest }) => {
     if (!Login.isAuthenticated(JSON.parse(localStorage.getItem('authenticated')))) {
