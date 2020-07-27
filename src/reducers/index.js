@@ -4,8 +4,9 @@ import alerts from './alerts';
 import ethereum from "./ethereum";
 import navigation from './navigation';
 import register from './register';
-import devices from './devices'
-import search from './search'
+import devices from './devices';
+import search from './search';
+import model from './model';
 
 export default combineReducers({
   alerts,
@@ -14,5 +15,6 @@ export default combineReducers({
   navigation,
   register,
   devices,
-  search
+  search,
+  model
 });

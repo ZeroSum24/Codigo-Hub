@@ -2,8 +2,15 @@ import Widget from "../Widget";
 import { Col, Row } from 'reactstrap';
 import React from 'react';
 import FirmwareUpgradeDialog from '../../pages/deviceOverview/components/firmwareUpgradeDialog';
+import PropTypes from "prop-types";
+import Firmware from "../../model/Firmware";
+import Device from "../../model/Device";
 
 class DeviceWidget extends React.PureComponent {
+
+  static propTypes = {
+    item: PropTypes.objectOf(Device).isRequired
+  };
 
   constructor(props) {
     super(props);
@@ -12,13 +19,14 @@ class DeviceWidget extends React.PureComponent {
 
   showFirmwareDialog = () => {
     this.setState({showDialog: true});
-  }
+  };
 
   hideFirmwareDialog = () => {
     this.setState({showDialog: false});
-  }
+  };
+
   render() {
-    const device = this.props.device;
+    const device = this.props.item;
     return (
       <>
         {this.state.showDialog && <FirmwareUpgradeDialog device={device} onClose={this.hideFirmwareDialog} show={this.state.showDialog} /> }
