@@ -3,6 +3,11 @@ import Firmware from "../model/Firmware";
 export const SEARCH_START = 'SEARCH_START';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
 export const SEARCH_FAILURE = 'SEARCH_FAILURE';
+export const SearchStatus ={
+  COMPLETED: 'COMPLETED',
+  ERROR: 'ERROR',
+  LOADING: 'LOADING'
+};
 
 export function searchPending(payload) {
   return {
@@ -41,9 +46,11 @@ export function startSearch(searchText) {
       // search bounties on the bounty blockchain for bounty inclusion
       let bountyResults = []; // list of firmware objects
 
-      dispatch(searchSuccess({firmwareResults: '', userResults: '', bountyResults: ''}))
-    } catch {
-      // TODO update this try catch statement
+      dispatch(searchSuccess({firmwareResults: '', userResults: '', bountyResults: ''}));
+
+    } catch (error) {
+      // User denied account access...
+      console.log('search error caught', error);
       dispatch(searchFailure('Something was wrong. Try again'));
     }
   }

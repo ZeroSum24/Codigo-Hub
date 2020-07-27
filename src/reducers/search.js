@@ -1,8 +1,8 @@
-import { SEARCH_START, SEARCH_SUCCESS, SEARCH_FAILURE } from '../actions/search';
+import { SEARCH_START, SEARCH_SUCCESS, SEARCH_FAILURE, SearchStatus } from '../actions/search';
 
 export default function search(state = {
   searchText: '',
-  searchCompleted: false,
+  searchStatus: SearchStatus.LOADING,
   bountyResults: [],
   firmwareResults: [],
   userResults: [],
@@ -18,11 +18,12 @@ export default function search(state = {
         bountyResults: action.payload.bountyResults,
         firmwareResults: action.payload.firmwareResults,
         userResults:  action.payload.userResults,
-        searchCompleted: true
+        searchStatus: SearchStatus.COMPLETED
       });
     case SEARCH_FAILURE:
       return Object.assign({}, state, {
-        errorMessage: action.payload
+        errorMessage: action.payload,
+        searchStatus: SearchStatus.ERROR
       });
     default:
       return state;
