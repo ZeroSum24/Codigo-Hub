@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DeviceWidget from './components/DeviceWidget'
+import DeviceWidget from '../../components/CustomWidgets/DeviceWidget'
 import AddDeviceDialog from './components/AddDevice';
 import { connect } from 'react-redux';
 import { DeviceWithStatus } from '../../model/Device';
