@@ -21,7 +21,7 @@ class DeviceWidget extends React.PureComponent {
     const device = this.props.device;
     return (
       <>
-        <FirmwareUpgradeDialog device={device} onClose={this.hideFirmwareDialog} show={this.state.showDialog} />
+        {this.state.showDialog && <FirmwareUpgradeDialog device={device} onClose={this.hideFirmwareDialog} show={this.state.showDialog} /> }
         <Widget
           title={<h5>Device Name: <small className="text-muted">{device.name}</small></h5>}
           close collapse >
@@ -41,8 +41,10 @@ class DeviceWidget extends React.PureComponent {
                 <h6>{device.serialNumber}</h6>
                 {device.isActive ?
                   <span>
-                    <h6>Active</h6>
-                    <button onClick={this.showFirmwareDialog}>Deploy Firmware</button>
+                    <h6 style={{display: 'inline', paddingRight: '10px'}}>Active</h6>
+                    <i className={'glyphicon glyphicon-upload'}
+                       style={{fontSize: '15px'}}
+                       title={'Deploy Firmware'} onClick={this.showFirmwareDialog}/>
                   </span>
                   :
                   <h6>Inactive</h6>
