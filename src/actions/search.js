@@ -46,7 +46,7 @@ export function startSearch(searchText) {
       // search bounties on the bounty blockchain for bounty inclusion
       let bountyResults = []; // list of firmware objects
 
-      dispatch(searchSuccess({firmwareResults: '', userResults: '', bountyResults: ''}));
+      dispatch(searchSuccess({firmwareResults: firmwareResults, userResults: userResults, bountyResults: bountyResults}));
 
     } catch (error) {
       // User denied account access...
