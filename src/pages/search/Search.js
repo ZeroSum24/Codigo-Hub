@@ -10,6 +10,7 @@ class Search extends React.PureComponent {
 	}
 
 	renderResultStatus(props) {
+		console.log("search results status", props);
 		switch(props) {
 			case props.searchCompleted:
 				return (<Results />);

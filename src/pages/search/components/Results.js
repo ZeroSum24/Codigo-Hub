@@ -19,6 +19,10 @@ class Search extends React.PureComponent {
     this.state = {
       "selectedCategory": SearchCategory.FIRMWARE
     };
+
+    this.changeToFirmwareCategory = this.changeToFirmwareCategory.bind(this);
+    this.changeToUserResultsCategory = this.changeToUserResultsCategory.bind(this);
+    this.changeToBountyResultsCategory = this.changeToBountyResultsCategory.bind(this);
   }
 
   renderResults(param) {
@@ -34,6 +38,19 @@ class Search extends React.PureComponent {
     }
   }
 
+  changeToFirmwareCategory() {
+    this.setState({"selectedCategory": SearchCategory.FIRMWARE})
+  }
+
+  changeToUserResultsCategory() {
+    this.setState({"selectedCategory": SearchCategory.USER})
+  }
+
+  changeToBountyResultsCategory() {
+    this.setState({"selectedCategory": SearchCategory.BOUNTY})
+  }
+
+
   render() {
     return (
       <div>
@@ -42,15 +59,15 @@ class Search extends React.PureComponent {
             {' '}
             <Col xs={12} sm={12} md={2}>
               <Card body outline color="primary">
-                <CardTitle align="center">Firmware ({this.props.firmwareResults.length})</CardTitle>
+                <CardTitle align="center" onClick={this.changeToFirmwareCategory}>Firmware ({this.props.firmwareResults.length})</CardTitle>
               </Card>
               <br />
               <Card body outline color="primary">
-                <CardTitle align="center">Users ({this.props.userResults.length})</CardTitle>
+                <CardTitle align="center" onClick={this.changeToUserResultsCategory}>Users ({this.props.userResults.length})</CardTitle>
               </Card>
               <br />
               <Card body outline color="primary">
-                <CardTitle align="center">Requests ({this.props.bountyResults.length})</CardTitle>
+                <CardTitle align="center" onClick={this.changeToBountyResultsCategory}>Requests ({this.props.bountyResults.length})</CardTitle>
               </Card>
               <br />
             </Col>
