@@ -29,7 +29,7 @@ class  UserInfo extends React.Component {
     return (
       <div className={s.root}>
         <Grid container={true}>
-          <Grid item xs={11}>
+          <Grid item xs={16}>
             {
               <Container>
                 <Widget className="widget-auth mx-auto">
@@ -41,7 +41,7 @@ class  UserInfo extends React.Component {
                         imageHeight="150"
                         roundedSize="13"/>
                       <div align="center">
-                        <h1 className="page-title"><span className="fw-semi-bold">First Name</span></h1>
+                        <h1 className="page-title"><span className="fw-semi-bold">User Name</span></h1>
                       </div>
                       <div className="bg-widget-transparent auth-widget-footer">
                         <p className="widget-auth-info mt-4">
@@ -52,7 +52,7 @@ class  UserInfo extends React.Component {
                           <h5><span className="fw-semi-bold">User Address: </span></h5>
                         </Col>
                         <Col sm={6}>
-                          <h5>Address</h5>
+                          <h5>1231231223</h5>
                         </Col>
                       </Row>
                       <div align="center">
