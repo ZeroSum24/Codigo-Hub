@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import s from './Loader.module.scss';
 import { Grid } from '@material-ui/core';
+import Welcome from 'react-welcome-page';
+import CodigoImage from './images/codigo.png';
 
 class Loader extends React.Component {
-
 	constructor(props) {
 		super(props);
 	}
@@ -20,19 +21,23 @@ class Loader extends React.Component {
 
 	render() {
 		return (
-			<Grid
-				style={{
-					margin: '0',
-					position: 'absolute',
-					top: '45%'
-				}}
-				container
-			>
-				<div className={cx(s.root, this.props.className)}>
-					<i className="la la-spinner la-spin" style={{ fontSize: this.props.size }} />
-					<a style={{ fontSize: '36px' }}>{this.props.loadingText} </a>
-				</div>
-			</Grid>
+			<React.Fragment>
+				<Welcome
+					loopDuration={2100}
+					data={[
+						{
+							imageAnimation: 'flipInX',
+							backgroundColor: 'rgb(73, 49, 91)',
+							textColor: '#EE79EA',
+							text: this.props.loadingText,
+							textAnimation: 'fadeInUp',
+							image: CodigoImage
+						}
+					]}
+				>
+					{' '}
+				</Welcome>
+			</React.Fragment>
 		);
 	}
 }
