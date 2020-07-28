@@ -1,4 +1,4 @@
-import Firmware from "../model/Firmware";
+import { retrieveAllAvailableFirmware } from '../blockchain/contracts';
 
 export const SEARCH_START = 'SEARCH_START';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
@@ -30,6 +30,14 @@ function searchFailure(payload) {
   };
 }
 
+function containsIgnoreCase(string, term) {
+  return string.toLowerCase().indexOf(term.toLowerCase()) !== -1;
+}
+
+function isFirmwareRelevant(term, firmware) {
+  return containsIgnoreCase(firmware.description, term) ||
+  containsIgnoreCase(firmware.device_type, term)
+}
 
 export function startSearch(searchText) {
   return async (dispatch) => {
@@ -40,7 +48,7 @@ export function startSearch(searchText) {
 
       // TODO async and ideally 'simultaneously' call the following functions, replace as needed
       // search firmware on Codigo blockchain for token inclusion
-      let firmwareResults = []; // list of firmware objects
+      let firmwareResults = (await retrieveAllAvailableFirmware()).filter(f => isFirmwareRelevant(searchText, f)); // list of firmware objects
       // search users on user reputation blockchian for user inclusion
       let userResults = []; // list of firmware objects
       // search bounties on the bounty blockchain for bounty inclusion
