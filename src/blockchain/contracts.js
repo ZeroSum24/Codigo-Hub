@@ -650,7 +650,7 @@ export const identityABI = [
     "outputs": [{"name": "", "type": "address"}]
   }
 ];
-export const usersAddress = "0x3A906f5CacE37531A6326a53267A81ac0Ebb8157"
+export const usersAddress = "0x6227c20850c1f431cABEC5ec3CBD746186101882"
 export const usersABI = [
   {
     "type": "function",
