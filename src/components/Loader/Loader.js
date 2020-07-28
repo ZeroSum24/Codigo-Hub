@@ -2,8 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import s from './Loader.module.scss';
-import { Grid } from '@material-ui/core';
-import Welcome from 'react-welcome-page';
+import {Grid} from '@material-ui/core';
+import {
+	Row,
+	Col,
+	Container
+}
+from 'reactstrap';
+
 import CodigoImage from './images/codigo.png';
 
 class Loader extends React.Component {
@@ -21,23 +27,26 @@ class Loader extends React.Component {
 
 	render() {
 		return (
-			<React.Fragment>
-				<Welcome
-					loopDuration={2100}
-					data={[
-						{
-							imageAnimation: 'flipInX',
-							backgroundColor: 'rgb(73, 49, 91)',
-							textColor: '#EE79EA',
-							text: this.props.loadingText,
-							textAnimation: 'fadeInUp',
-							image: CodigoImage
-						}
-					]}
-				>
-					{' '}
-				</Welcome>
-			</React.Fragment>
+			<Grid
+				style={{
+					margin: '0',
+					position: 'absolute',
+					top: '40%'}}
+				container>
+			<Container fluid={true}>
+			<Row>
+				<div className={cx(s.root, this.props.className)}>
+				  <img src={CodigoImage} alt="..." />
+				</div>
+			</Row>
+			<Row>
+			<div className={cx(s.root, this.props.className)}>
+				<i className="la la-spinner la-spin" style={{ fontSize: this.props.size }} />
+				<a style={{ fontSize: '36px' }}>{this.props.loadingText} </a>
+			</div>
+			</Row>
+			</Container>
+			</Grid>
 		);
 	}
 }
