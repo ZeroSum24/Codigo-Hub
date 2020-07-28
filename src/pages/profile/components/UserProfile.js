@@ -4,7 +4,7 @@ import {Grid} from "@material-ui/core";
 import EditIcon from '@material-ui/icons/EditRounded';
 import s from '../Profile.module.scss';
 import EditProfileDialog from "./EditProfileDialog";
-import {Button, Container, FormGroup, Label,Col, Row} from 'reactstrap';
+import {Button,Container,Col,Row} from 'reactstrap';
 import logo from '../../../images/1.png';
 import Widget from '../../../components/Widget';
 import ExampleComponent from "react-rounded-image";
@@ -25,16 +25,14 @@ class UserProfile extends React.Component {
   };
 
   render() {
-
     const isCurrentUser = (this.props.profile.address === this.props.currentUserAddr);
-
     return (
       <div className={s.root}>
         <Grid container={true}>
           <Grid item xs={11}>
             {
               <Container>
-                <Widget className="widget-auth mx-auto" title={<h3 className="mt-0"></h3>}>
+                <Widget className="widget-auth mx-auto">
                   <div align="center">
                       <ExampleComponent
                         image={logo}
