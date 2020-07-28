@@ -800,6 +800,8 @@ export function registerFirmware(firmware_hash, IPFS_link, description, device_t
  */
 export function retrieveAllAvailableFirmware() {
   const promises = [];
+  console.log("Current Account");
+  console.log(null);
   if (!hardcoded_developers.includes(currentAccount)) hardcoded_developers.push(currentAccount);
   hardcoded_device_types.forEach(dev_type => hardcoded_developers
     .forEach(dev_addr => promises.push(retrieveFirmware(dev_type, dev_addr))));
@@ -807,6 +809,7 @@ export function retrieveAllAvailableFirmware() {
 }
 
 export function retrieveFirmware(device_type, developer_address) {
+  if (developer_address == null) return null;
   return getFirmwareRepo().methods.get_firmware(device_type, developer_address, true).call().then(result => {
     return new FirmwareWithThumbs(result[0], result[1], result[2], result[3], developer_address, device_type, result[4] || 0, result[5] || 0);
   }, () => null);

@@ -51,6 +51,7 @@ export function startSearch(searchText) {
       let firmwareResults = (await retrieveAllAvailableFirmware()).filter(f => isFirmwareRelevant(searchText, f)); // list of firmware objects
       // search users on user reputation blockchian for user inclusion
       let userResults = (await getAllUsers()).filter(u => containsIgnoreCase(searchText, u));
+      console.log(userResults);
       // search bounties on the bounty blockchain for bounty inclusion
       let bountyResults = []; // list of firmware objects
       // device bounties
