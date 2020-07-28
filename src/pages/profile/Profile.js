@@ -4,10 +4,12 @@ import { parse }  from 'qs';
 
 import s from './Profile.module.scss';
 import {Grid} from "@material-ui/core";
-import UserProfile from "./components/UserProfile";
+import UserInfo from "./components/UserInfo";
 import FirmwareHistory from "./components/FirmwareHistory";
+import UserStats from "./components/UserStats";
 import {retrieveProfileDetails} from "../../blockchain/userProfile";
 import {retrieveFirmwareHistory} from "../../blockchain/firmwareHistory";
+//TODO: Get user stats info
 import {Button} from "reactstrap";
 
 
@@ -17,20 +19,26 @@ class Profile extends React.Component {
     super(props);
 
     this.getProfileID = this.getProfileID.bind(this);
-    this.changeToUserView = this.changeToUserView.bind(this);
+    this.changeToUserInfoView = this.changeToUserInfoView.bind(this);
+    this.changeToUserStatView = this.changeToUserStatView.bind(this);
     this.changeToFirmwareView = this.changeToFirmwareView.bind(this);
 
     let targetAddress = this.getProfileID();
     this.state = {
-      "viewState": viewStates.USER_DETAILS,
+      "viewState": viewStates.USER_INFO,
       "targetAddress": targetAddress,
       "profileDetails": retrieveProfileDetails(targetAddress, this.props.currentUserAddr),
-      "firmwareHistory": retrieveFirmwareHistory(targetAddress)
+      "firmwareHistory": retrieveFirmwareHistory(targetAddress),
+      //TODO: Need to get user stats
     };
   }
 
-  changeToUserView() {
-    this.setState({"viewState": viewStates.USER_DETAILS})
+  changeToUserInfoView() {
+    this.setState({"viewState": viewStates.USER_INFO})
+  }
+
+  changeToUserStatView() {
+    this.setState({"viewState": viewStates.USER_STATS})
   }
 
   changeToFirmwareView() {
@@ -43,8 +51,9 @@ class Profile extends React.Component {
 
   render() {
 
-    const userButton = this.state.viewState === viewStates.USER_DETAILS ? s.highlightButton : s.normalButton;
-    const firmwareButton = this.state.viewState === viewStates.FIRMWARE_HISTORY ? s.highlightButton : s.normalButton;
+    const userInfoButton  = this.state.viewState === viewStates.USER_INFO        ? s.highlightButton : s.normalButton;
+    const userStatsButton = this.state.viewState === viewStates.USER_STATS       ? s.highlightButton : s.normalButton;
+    const firmwareButton  = this.state.viewState === viewStates.FIRMWARE_HISTORY ? s.highlightButton : s.normalButton;
 
     return (
       <div className={s.root}>
@@ -52,14 +61,19 @@ class Profile extends React.Component {
         {/*TODO update the User Profile title above to give the users name (ideally) or address*/}
         <Grid container={true} style={{justifyContent: 'center', paddingBottom: '20px'}}>
           <Grid item xs={2}>
-            <Button className={userButton} color="link" onClick={this.changeToUserView}>User Profile</Button>
+            <Button className={userInfoButton}  color="link"  onClick={this.changeToUserInfoView}>User Info</Button>
           </Grid>
           <Grid item xs={2}>
-            <Button className={firmwareButton} color="link" onClick={this.changeToFirmwareView}>Firmware History</Button>
+            <Button className={userStatsButton} color="link"  onClick={this.changeToUserStatView}>User Stats</Button>
+          </Grid>
+          <Grid item xs={2}>
+            <Button className={firmwareButton}  color="link"  onClick={this.changeToFirmwareView}>Firmware History</Button>
           </Grid>
         </Grid>
-        {this.state.viewState === viewStates.USER_DETAILS ? (<UserProfile profile={this.state.profileDetails} />):
-          (<FirmwareHistory firmwareHistory={this.state.firmwareHistory}/>)}
+
+        {this.state.viewState === viewStates.USER_INFO ? (<UserInfo profile={this.state.profileDetails} />):
+        (this.state.viewState === viewStates.USER_STATS ? (<UserInfo profile={this.state.profileDetails} />): //Need to change
+        <FirmwareHistory firmwareHistory={this.state.firmwareHistory}/>)}
       </div>
     );
   }
@@ -67,7 +81,8 @@ class Profile extends React.Component {
 
 
 const viewStates = {
-  USER_DETAILS: 'USER_PROFILE',
+  USER_INFO: 'USER_INFO',
+  USER_STATS: 'USER_STATS',
   FIRMWARE_HISTORY: 'FIRMWARE_HISTORY'
 };
 

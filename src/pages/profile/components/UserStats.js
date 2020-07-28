@@ -8,7 +8,7 @@ import {Button,Container,Col,Row} from 'reactstrap';
 import logo from '../../../images/1.png';
 import Widget from '../../../components/Widget';
 import ExampleComponent from "react-rounded-image";
-class UserProfile extends React.Component {
+class  UserStats extends React.Component {
 
   constructor(props) {
     super(props);
@@ -90,4 +90,4 @@ const mapStateToProps = state => ({
   currentUserAddr: state.ethereum.ethereumAddress
 });
 
-export default connect(mapStateToProps)(UserProfile);
+export default connect(mapStateToProps)(UserStats);
