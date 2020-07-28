@@ -16,8 +16,6 @@ import ViewBounties from '../../pages/viewBounties';
 import Firmware from '../../pages/firmware';
 import Search from '../../pages/search';
 import Bounty from '../../pages/bounty';
-import UserProfile from '../../pages/userProfile';
-
 
 import Header from '../Header';
 import Sidebar from '../Sidebar';
@@ -94,7 +92,6 @@ class Layout extends React.Component {
 										<Route path="/app/firmware" exact component={Firmware} />
 										<Route path="/app/search" exact component={Search} />
 										<Route path="/app/bounty" exact component={Bounty} />
-										<Route path="/app/userProfile" exact component={UserProfile} />
 
 									</Switch>
 								</CSSTransition>

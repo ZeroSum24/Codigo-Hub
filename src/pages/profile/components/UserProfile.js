@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Grid} from "@material-ui/core";
 import EditIcon from '@material-ui/icons/EditRounded';
-import {Button} from 'reactstrap';
-
 import s from '../Profile.module.scss';
 import EditProfileDialog from "./EditProfileDialog";
-
+import {Button, Container, FormGroup, Label,Col, Row} from 'reactstrap';
+import logo from '../../../images/1.png';
+import Widget from '../../../components/Widget';
+import ExampleComponent from "react-rounded-image";
 class UserProfile extends React.Component {
 
   constructor(props) {
@@ -31,7 +32,47 @@ class UserProfile extends React.Component {
       <div className={s.root}>
         <Grid container={true}>
           <Grid item xs={11}>
-            {/*TODO add in user profile display*/}
+            {
+              <Container>
+                <Widget className="widget-auth mx-auto" title={<h3 className="mt-0"></h3>}>
+                  <div align="center">
+                      <ExampleComponent
+                        image={logo}
+                        roundedColor=""
+                        imageWidth="150"
+                        imageHeight="150"
+                        roundedSize="13"/>
+                      <div align="center">
+                        <h1 className="page-title"><span className="fw-semi-bold">First Name</span></h1>
+                      </div>
+                      <div className="bg-widget-transparent auth-widget-footer">
+                        <p className="widget-auth-info mt-4">
+                        </p>
+                      </div>
+                      <Row>
+                        <Col sm={6}>
+                          <h5><span className="fw-semi-bold">User Address: </span></h5>
+                        </Col>
+                        <Col sm={6}>
+                          <h5>Address</h5>
+                        </Col>
+                      </Row>
+                      <div align="center">
+                        <div>     </div>
+                        <h4><span className="fw-semi-bold">
+                          Lorel Epsisum
+                          User Description
+                          Lorel Epsidm
+                          sOMETHING eLSE
+                          LOrel epsim
+                          You get the picture
+                        </span>
+                        </h4>
+                      </div>
+                    </div>
+                </Widget>
+              </Container>
+            }
           </Grid>
           <Grid item xs={1}>
             {isCurrentUser ? (
