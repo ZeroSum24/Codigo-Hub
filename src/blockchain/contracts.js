@@ -935,7 +935,7 @@ export function userExists(userAddress) {
 
 /**
  * Get all existing users
- * @return {String[]} The addresses of all users
+ * @return {Promise<String[]>} The addresses of all users
  */
 export function getAllUsers() {
   return getUsers().methods.getAllUsers().call();
