@@ -6,7 +6,7 @@ import {Grid} from "@material-ui/core";
 import {Button} from "reactstrap";
 import {Container, Alert, FormGroup, InputGroup, Input, Label} from 'reactstrap';
 import 'react-toastify/dist/ReactToastify.css';
-import logo from '../../images/rsz_4rsz_codigo-01.png';
+import logo from '../../images/1.png';
 import Widget from '../../components/Widget';
 import ExampleComponent from "react-rounded-image";
 import Bounty from '../../model/Bounty'
@@ -27,18 +27,10 @@ class UserProfile extends React.Component {
            />
 
           </div>
-          <form onSubmit={this.handleAddBounty}>{
-              this.props.errorMessage && (
-                <Alert className="alert-sm widget-middle-overflow rounded-0" color="danger">
-                  {this.props.errorMessage}
-                </Alert> )
-            }
-
             <div className="bg-widget-transparent auth-widget-footer">
               <p className="widget-auth-info mt-4">
               </p>
             </div>
-          </form>
         </Widget>
       </Container>
     );
