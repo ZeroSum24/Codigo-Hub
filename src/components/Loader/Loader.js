@@ -2,10 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import s from './Loader.module.scss';
-import { Grid } from '@material-ui/core';
+import {Grid} from '@material-ui/core';
+import {
+	Row,
+	Col,
+	Container
+}
+from 'reactstrap';
+
+import CodigoImage from './images/codigo.png';
 
 class Loader extends React.Component {
-
 	constructor(props) {
 		super(props);
 	}
@@ -24,14 +31,21 @@ class Loader extends React.Component {
 				style={{
 					margin: '0',
 					position: 'absolute',
-					top: '45%'
-				}}
-				container
-			>
+					top: '40%'}}
+				container>
+			<Container fluid={true}>
+			<Row>
 				<div className={cx(s.root, this.props.className)}>
-					<i className="la la-spinner la-spin" style={{ fontSize: this.props.size }} />
-					<a style={{ fontSize: '36px' }}>{this.props.loadingText} </a>
+				  <img src={CodigoImage} alt="..." />
 				</div>
+			</Row>
+			<Row>
+			<div className={cx(s.root, this.props.className)}>
+				<i className="la la-spinner la-spin" style={{ fontSize: this.props.size }} />
+				<a style={{ fontSize: '36px' }}>{this.props.loadingText} </a>
+			</div>
+			</Row>
+			</Container>
 			</Grid>
 		);
 	}

@@ -25,7 +25,7 @@ function onFailureConnect(e) {
 
 // called when the client connects
 function onConnect() {
-  console.log('connected');
+  console.log('MQTT client connected');
   client.subscribe("codigo/active", {qos: 2});
 }
 

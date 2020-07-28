@@ -50,7 +50,7 @@ export default class ListFilecoinUploads extends React.Component {
             <th><span className={'glyphicon glyphicon-download'}
                       onClick={() => downloadFirmwareBinary(d.rootCid, 'binary.bin')}/></th>
             <th><span className={'glyphicon glyphicon-remove'}
-                      onClick={() => removeFromFilecoin(d.rootCid)}/></th>
+                      onClick={() => removeFromFilecoin(d.rootCid).catch(alert)}/></th>
           </tr>)}
         </tbody>
       </Table>

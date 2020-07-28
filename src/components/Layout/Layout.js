@@ -7,18 +7,15 @@ import Hammer from 'rc-hammerjs';
 
 import Dashboard from '../../pages/dashboard';
 import Profile from '../../pages/profile';
-import TopFirmware from '../../pages/topFirmware';
+import ViewFirmware from '../../pages/viewFirmware';
 import DeviceOverview from '../../pages/deviceOverview';
 import Earnings from '../../pages/earnings';
 import FilecoinInteractions from '../../pages/filecoinInteractions/FilecoinInteractions';
 import AddBounty from '../../pages/addBounty';
-import AvailableBounties from '../../pages/availableBounties';
+import ViewBounties from '../../pages/viewBounties';
 import Firmware from '../../pages/firmware';
 import Search from '../../pages/search';
-import Results from '../../pages/results';
 import Bounty from '../../pages/bounty';
-
-
 
 import Header from '../Header';
 import Sidebar from '../Sidebar';
@@ -86,15 +83,14 @@ class Layout extends React.Component {
 										/>
 										<Route path="/app/main/dashboard" exact component={Dashboard} />
 										<Route path="/app/device_overview" exact component={DeviceOverview} />
-										<Route path="/app/top_firmware" exact component={TopFirmware} />
-										<Route path="/app/add_firmware" exact component={FilecoinInteractions} />
+										<Route path="/app/view_firmware" exact component={ViewFirmware} />
+										<Route path="/app/manage_firmware" exact component={FilecoinInteractions} />
 										<Route path="/app/profile" exact component={Profile} />
 										<Route path="/app/earnings" exact component={Earnings} />
-										<Route path="/app/availableBounties" exact component={AvailableBounties} />
+										<Route path="/app/view_bounties" exact component={ViewBounties} />
 										<Route path="/app/add_bounty" exact component={AddBounty} />
 										<Route path="/app/firmware" exact component={Firmware} />
 										<Route path="/app/search" exact component={Search} />
-										<Route path="/app/results" exact component={Results} />
 										<Route path="/app/bounty" exact component={Bounty} />
 									</Switch>
 								</CSSTransition>
