@@ -5,10 +5,6 @@ import FilterList from "./components/FilterList";
 
 class ListView extends React.Component {
 
-	constructor(props) {
-		super(props);
-	}
-
 	static propTypes = {
 		items: PropTypes.array.isRequired,
 		emptyText: PropTypes.string.isRequired,

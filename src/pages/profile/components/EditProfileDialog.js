@@ -6,17 +6,14 @@ import { Modal, ModalBody } from 'reactstrap';
 
 class EditProfileDialog extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Modal isOpen={this.props.show} toggle={() => this.props.onClose()}>
         <ModalBody>
           <EditProfileComponent box={this.props.userBox}
                                 space={this.props.userSpace}
-                                myAddress={this.props.ethereumAddress}/>
+                                myAddress={this.props.ethereumAddress}
+          />
         </ModalBody>
       </Modal>
     );

@@ -5,7 +5,6 @@ import s from './Loader.module.scss';
 import {Grid} from '@material-ui/core';
 import {
 	Row,
-	Col,
 	Container
 }
 from 'reactstrap';
@@ -13,9 +12,6 @@ from 'reactstrap';
 import CodigoImage from './images/codigo.png';
 
 class Loader extends React.Component {
-	constructor(props) {
-		super(props);
-	}
 
 	static propTypes = {
 		size: PropTypes.number.isRequired

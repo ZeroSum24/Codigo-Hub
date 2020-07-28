@@ -7,9 +7,6 @@ import { DeviceWithStatus } from '../../model/Device';
 import { isDeviceActive } from '../../mqtt/client';
 import ListView from "../../components/ListView";
 import {Grid} from "@material-ui/core";
-import {Button} from "reactstrap";
-import s from "../profile/Profile.module.scss";
-import EditIcon from "@material-ui/icons/EditRounded";
 
 class DeviceOverview extends React.Component {
 

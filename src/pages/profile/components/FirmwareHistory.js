@@ -5,12 +5,7 @@ import ListView from "../../../components/ListView";
 import FirmwareWidget from "../../../components/CustomWidgets/FirmwareWidget";
 
 class FirmwareHistory extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-  }
-
+  
   render() {
     return (
       <div className={s.root}>

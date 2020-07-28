@@ -5,11 +5,7 @@ import ListView from "../../components/ListView";
 import {connect} from "react-redux";
 
 class ViewBounties extends React.PureComponent {
-
-	constructor(props) {
-		super(props);
-	}
-
+	
 	render() {
 		return (
 			<div>

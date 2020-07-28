@@ -6,10 +6,6 @@ import { Grid } from '@material-ui/core';
 
 class SearchLoader extends React.Component {
 
-	constructor(props) {
-		super(props);
-	}
-
 	static propTypes = {
 		size: PropTypes.number.isRequired
 	};
