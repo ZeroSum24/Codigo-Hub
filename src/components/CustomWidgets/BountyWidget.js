@@ -2,7 +2,6 @@ import Widget from "../Widget";
 import {Col, Row} from "reactstrap";
 import React from "react";
 import PropTypes from "prop-types";
-import Device from "../../model/Device";
 import Bounty from "../../model/Bounty";
 import {initBountyView} from "../../actions/view";
 
