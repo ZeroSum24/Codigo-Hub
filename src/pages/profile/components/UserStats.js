@@ -41,7 +41,7 @@ class  UserStats extends React.Component {
                         imageHeight="150"
                         roundedSize="13"/>
                       <div align="center">
-                        <h1 className="page-title"><span className="fw-semi-bold">First Name</span></h1>
+                        <h1 className="page-title"><span className="fw-semi-bold">User Stats</span></h1>
                       </div>
                       <div className="bg-widget-transparent auth-widget-footer">
                         <p className="widget-auth-info mt-4">
