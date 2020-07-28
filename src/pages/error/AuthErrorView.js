@@ -42,7 +42,7 @@ class AuthErrorView extends React.PureComponent {
           }}
           container
         >
-          <img src={CodigoLogo} align="center" />
+          <img src={CodigoLogo} align="center" alt="Codigo"/>
           <h4 className="page-title" align="center">{this.props.title}</h4>
           <Row align="center">
             <Col>

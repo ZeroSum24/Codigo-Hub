@@ -176,7 +176,7 @@ class AddBounty extends React.PureComponent {
             </FormGroup>
 
             <div className="bg-widget-transparent auth-widget-footer">
-              <Button type="submit" 
+              <Button type="submit"
                       color="warning"
                       className="auth-btn"
                       size="sm" style={{color: '#fff'}}>{this.props.isFetching ? 'Loading...' : 'Add Bounty'}
@@ -189,6 +189,7 @@ class AddBounty extends React.PureComponent {
       </Container>
     );
   }
+
 }
 
 const mapStateToProps = state => ({

@@ -92,6 +92,7 @@ class Layout extends React.Component {
 										<Route path="/app/firmware" exact component={Firmware} />
 										<Route path="/app/search" exact component={Search} />
 										<Route path="/app/bounty" exact component={Bounty} />
+
 									</Switch>
 								</CSSTransition>
 							</TransitionGroup>
