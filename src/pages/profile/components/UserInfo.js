@@ -50,9 +50,11 @@ class  UserInfo extends React.Component {
                       <Row>
                         <Col sm={6}>
                           <h5><span className="fw-semi-bold">User Address: </span></h5>
+                          <h5><span className="fw-semi-bold">Website:</span></h5>
                         </Col>
                         <Col sm={6}>
                           <h5>1231231223</h5>
+                          <div onclick="location.href='portable-display-stands.html';" id="smallbox">www.example.com</div>
                         </Col>
                       </Row>
                       <div align="center">
