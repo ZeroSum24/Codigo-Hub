@@ -4,6 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Profile from "../../model/Profile";
 import {initProfileView} from "../../actions/view";
+import {connect} from "react-redux";
 
 class ProfileWidget extends React.PureComponent {
 
@@ -17,7 +18,7 @@ class ProfileWidget extends React.PureComponent {
   }
 
   openProfileView() {
-    this.props.dispatch(initProfileView({profileObject: this.props.item, history: this.props.history}));
+    this.props.dispatch(initProfileView({profile: this.props.item, history: this.props.history}));
   }
 
   render() {
@@ -43,4 +44,4 @@ class ProfileWidget extends React.PureComponent {
   }
 }
 
-export default ProfileWidget;
+export default connect(ProfileWidget);

@@ -1,5 +1,8 @@
 // Login Management
 
+import Profile from "../model/Profile";
+import {setUserProfile} from "./profile";
+
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
@@ -111,6 +114,8 @@ export function enableUserEthereum() {
                 userBox: box,
                 userSpace: spaces[0]
             }));
+
+            dispatch(setUserProfile({userAddress: ethereumAddress}));
 
             console.log('eth auth success', ethereumAddress, box, spaces)
 

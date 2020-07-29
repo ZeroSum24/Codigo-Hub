@@ -34,7 +34,7 @@ import 'animate.css';
 import s from './Header.module.scss';
 import 'animate.css';
 import {startSearch} from "../../actions/search";
-
+import {initProfileView} from "../../actions/view";
 
 class Header extends React.Component {
 	static propTypes = {
@@ -54,6 +54,7 @@ class Header extends React.Component {
 		this.toggleSearchOpen = this.toggleSearchOpen.bind(this);
 		this.changeSearchText = this.changeSearchText.bind(this);
 		this.handleSearch = this.handleSearch.bind(this);
+		this.loadProfileDetails = this.loadProfileDetails.bind(this);
 
 		this.state = {
 			visible: true,
@@ -128,6 +129,11 @@ class Header extends React.Component {
 		this.setState({"searchText": ''});
 	}
 
+	loadProfileDetails() {
+		console.log("load profile details", this.props);
+		this.props.dispatch(initProfileView({profile: this.props.userProfile, history: this.props.history}))
+	}
+
 	render() {
 		return (
 
@@ -165,7 +171,7 @@ class Header extends React.Component {
 						style={{ marginRight: 'auto' }}
 					>
 						<DropdownToggle nav caret style={{ color: '#f4f4f5', padding: 0 }}>
-							<Link to={{pathname: "/app/profile?id=" + this.props.ethereumAddress}}>
+							<Link to="/app/profile" onClick={this.loadProfileDetails}>
 									<ProfileHover
 										address={this.props.ethereumAddress}
 										orientation="bottom"
@@ -231,7 +237,8 @@ function mapStateToProps(store) {
 		isSidebarOpened: store.navigation.sidebarOpened,
 		sidebarVisibility: store.navigation.sidebarVisibility,
 		sidebarPosition: store.navigation.sidebarPosition,
-		ethereumAddress: store.ethereum.ethereumAddress
+		ethereumAddress: store.ethereum.ethereumAddress,
+		userProfile: store.profile.userProfile
 	};
 }
 

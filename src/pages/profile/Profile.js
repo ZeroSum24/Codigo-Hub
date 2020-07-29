@@ -6,10 +6,7 @@ import s from './Profile.module.scss';
 import {Grid} from "@material-ui/core";
 import UserInfo from "./components/UserInfo";
 import FirmwareHistory from "./components/FirmwareHistory";
-import UserStats from "./components/UserStats";
-import {retrieveProfileDetails} from "../../blockchain/userProfile";
-import {retrieveFirmwareHistory} from "../../blockchain/firmwareHistory";
-import {retrieveStatsDetails} from "../../blockchain/userStats";
+
 
 import {Button} from "reactstrap";
 
@@ -19,62 +16,42 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
 
-    this.getProfileID = this.getProfileID.bind(this);
-    this.changeToUserInfoView = this.changeToUserInfoView.bind(this);
-    this.changeToUserStatView = this.changeToUserStatView.bind(this);
-    this.changeToFirmwareView = this.changeToFirmwareView.bind(this);
-
-    let targetAddress = this.getProfileID();
     this.state = {
-      "viewState": viewStates.USER_INFO,
-      "targetAddress": targetAddress,
-      "profileDetails": retrieveProfileDetails(targetAddress, this.props.currentUserAddr),
-      "firmwareHistory": retrieveFirmwareHistory(targetAddress),
-      "profileStats": retrieveStatsDetails(targetAddress, this.props.currentUserAddr)
+      "viewState": viewStates.USER_INFO
     };
+
+    this.changeToUserInfoView = this.changeToUserInfoView.bind(this);
+    this.changeToFirmwareView = this.changeToFirmwareView.bind(this);
   }
 
   changeToUserInfoView() {
     this.setState({"viewState": viewStates.USER_INFO})
   }
 
-  changeToUserStatView() {
-    this.setState({"viewState": viewStates.USER_STATS})
-  }
-
   changeToFirmwareView() {
     this.setState({"viewState": viewStates.FIRMWARE_HISTORY})
   }
 
-  getProfileID() {
-    return parse(this.props.location.search, {ignoreQueryPrefix: true}).id
-  }
 
   render() {
 
     const userInfoButton  = this.state.viewState === viewStates.USER_INFO        ? s.highlightButton : s.normalButton;
-    const userStatsButton = this.state.viewState === viewStates.USER_STATS       ? s.highlightButton : s.normalButton;
     const firmwareButton  = this.state.viewState === viewStates.FIRMWARE_HISTORY ? s.highlightButton : s.normalButton;
 
     return (
       <div className={s.root}>
-        <h1 className="page-title">Profile: <small>{this.state.targetAddress}</small></h1>
+        <h1 className="page-title">Profile: <small>{this.props.profile.address}</small></h1>
         {/*TODO update the User Profile title above to give the users name (ideally) or address*/}
         <Grid container={true} style={{justifyContent: 'center', paddingBottom: '20px'}}>
           <Grid item xs={2}>
-            <Button className={userInfoButton}  color="link"  onClick={this.changeToUserInfoView}>User Info</Button>
-          </Grid>
-          <Grid item xs={2}>
-            <Button className={userStatsButton} color="link"  onClick={this.changeToUserStatView}>User Stats</Button>
+            <Button className={userInfoButton}  color="link"  onClick={this.changeToUserInfoView}>User Profile</Button>
           </Grid>
           <Grid item xs={2}>
             <Button className={firmwareButton}  color="link"  onClick={this.changeToFirmwareView}>Firmware History</Button>
           </Grid>
         </Grid>
-
-        {this.state.viewState === viewStates.USER_INFO  ? (<UserInfo  profile={this.state.profileDetails} />):
-        (this.state.viewState === viewStates.USER_STATS ? (<UserStats profile={this.state.profileStats} />): //Need to change
-        <FirmwareHistory firmwareHistory={this.state.firmwareHistory}/>)}
+        {this.state.viewState === viewStates.USER_INFO  ? (<UserInfo  profile={this.props.profile} />):
+          (<FirmwareHistory firmwareHistory={this.props.firmwareHistory}/>)}
       </div>
     );
   }
@@ -89,6 +66,8 @@ const viewStates = {
 
 const mapStateToProps = state => ({
   currentUserAddr: state.ethereum.ethereumAddress,
+  profile: state.views.profileWithStats,
+  firmwareHistory: state.views.profileFirmwareHistory
 });
 
 export default connect(mapStateToProps)(Profile);

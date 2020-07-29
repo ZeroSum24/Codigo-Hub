@@ -50,7 +50,7 @@ class  UserInfo extends React.Component {
                         </Col>
                         <Col sm={6}>
                           <h5>1231231223</h5>
-                          <div onclick="location.href='portable-display-stands.html';" id="smallbox">www.example.com</div>
+                          <div onClick="location.href='portable-display-stands.html';" id="smallbox">www.example.com</div>
                         </Col>
                       </Row>
                       <div align="center">

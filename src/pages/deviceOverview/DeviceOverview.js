@@ -49,8 +49,8 @@ class DeviceOverview extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  deviceList: state.devices.deviceList,
-  showAddDevice: state.devices.showAddDevice
+  deviceList: state.profile.deviceList,
+  showAddDevice: state.profile.showAddDevice
 });
 
 export default connect(mapStateToProps)(DeviceOverview);

@@ -7,11 +7,12 @@ class EditProfileDialog extends React.Component {
 
   render() {
     return (
-      <Modal isOpen={this.props.show} toggle={() => this.props.onClose()}>
-        <EditProfileComponent box={this.props.userBox}
-                              space={this.props.userSpace}
-                              myAddress={this.props.ethereumAddress}
-        />
+      <Modal onClose={this.props.onClose} open={this.props.show} isOpen={this.props.show}>
+        <div>
+          <EditProfileComponent box={this.props.userBox}
+                                space={this.props.userSpace}
+                                myAddress={this.props.ethereumAddress}/>
+        </div>
       </Modal>
     );
   }
