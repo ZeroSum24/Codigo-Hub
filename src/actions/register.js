@@ -1,6 +1,6 @@
 import {toast} from 'react-toastify';
 import { web3 } from '../blockchain/client';
-import { getChallenge, sendResponse } from '../blockchain/contracts';
+import { getChallenge, sendResponse, registerCurrentUser } from '../blockchain/contracts';
 
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -37,13 +37,18 @@ function firmwareLinkPending() {
 }
 
 export function registerUser(payload) {
-    return (dispatch) => {
+    return async (dispatch) => {
+      try {
         if (payload.creds.password.length > 0) {
-            toast.success("You've been registered successfully");
-            payload.history.push('/login');
+          await registerCurrentUser();
+          toast.success("You've been registered successfully");
+          payload.history.push('/login');
         } else {
-            dispatch(registerError('Something was wrong. Try again'));
+          dispatch(registerError('Something was wrong. Try again'));
         }
+      } catch (error) {
+        dispatch(registerError(error));
+      }
     }
 }
 
