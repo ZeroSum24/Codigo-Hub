@@ -43,10 +43,6 @@ class  UserInfo extends React.Component {
                       <div align="center">
                         <h1 className="page-title"><span className="fw-semi-bold">User Name</span></h1>
                       </div>
-                      <div className="bg-widget-transparent auth-widget-footer">
-                        <p className="widget-auth-info mt-4">
-                        </p>
-                      </div>
                       <Row>
                         <Col sm={6}>
                           <h5><span className="fw-semi-bold">User Address: </span></h5>
@@ -58,16 +54,12 @@ class  UserInfo extends React.Component {
                         </Col>
                       </Row>
                       <div align="center">
-                        <div>     </div>
-                        <h4><span className="fw-semi-bold">
-                          Lorel Epsisum
-                          User Description
-                          Lorel Epsidm
-                          sOMETHING eLSE
-                          LOrel epsim
-                          You get the picture
+                       <br></br>
+                       <br></br>
+                        <h5><span className="fw-semi-bold">
+    I write code and break stuff. Mostly build innovative solutions that advance human civilization.
                         </span>
-                        </h4>
+                        </h5>
                       </div>
                     </div>
                 </Widget>
