@@ -50,8 +50,8 @@ class  UserInfo extends React.Component {
                         <h5><span className="fw-semi-bold">Website:</span></h5>
                       </Col>
                       <Col sm={6}>
-                        <h5>{this.props.profile.address}</h5>
-                        <div onClick="location.href='portable-display-stands.html';" id="smallbox">{this.props.profile.website}</div>
+                        <h5 style={{textOverflow: "ellipsis"}}>{this.props.profile.address}</h5>
+                        <a >{this.props.profile.website}</a>
                       </Col>
                     </Row>
                     <div align="center">
@@ -65,12 +65,6 @@ class  UserInfo extends React.Component {
                   </div>
               </Widget>
             </Container>
-          </Grid>
-          <Grid item xs={1}>
-            {isCurrentUser ? (
-              <Button className={s.EditButton} color="link" onClick={this.showEditProfileDialog}>
-                <EditIcon/>
-              </Button>): null}
           </Grid>
         </Grid>
         </Col>

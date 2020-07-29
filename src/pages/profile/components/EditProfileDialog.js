@@ -8,7 +8,7 @@ class EditProfileDialog extends React.Component {
   render() {
     return (
       <Modal onClose={this.props.onClose} open={this.props.show} isOpen={this.props.show}>
-        <div>
+        <div style={{alignItems: 'center', alignSelf: 'center'}}>
           <EditProfileComponent box={this.props.userBox}
                                 space={this.props.userSpace}
                                 myAddress={this.props.ethereumAddress}/>

@@ -87,9 +87,16 @@ export function setUserProfile(payload) {
   return async (dispatch) => {
 
     console.log("set user profile", payload.userAddress);
+    let box = payload.userBox;
+
+    const name = await box.private.get('name');
+    const description = await box.private.get('description');
+    const image = await box.private.get('image');
+    const website = ""; //TODO this is null atm
 
     // need to check it is possible to delete that device
-    const userProfile = new Profile(payload.userAddress, "", "", "", "");
+    const userProfile = new Profile(payload.userAddress, name, description, image, website);
+    console.log("user profile set", userProfile);
 
     dispatch(setProfile(userProfile));
   }

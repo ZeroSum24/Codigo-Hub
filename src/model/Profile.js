@@ -1,9 +1,9 @@
 
 export default class Profile {
-  constructor(address, name, brand, image, website) {
+  constructor(address, name, description, image, website) {
     this.address = address;
     this.name = name;
-    this.description = brand;
+    this.description = description;
     this.image = image;
     this.website = website;
   }

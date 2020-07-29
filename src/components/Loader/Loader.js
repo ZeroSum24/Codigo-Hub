@@ -27,7 +27,7 @@ class Loader extends React.Component {
 				style={{
 					margin: '0',
 					position: 'absolute',
-					top: '40%'}}
+					top: '32%'}}
 				container>
 			<Container fluid={true}>
 			<Row>
