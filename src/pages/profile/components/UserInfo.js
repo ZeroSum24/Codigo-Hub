@@ -28,8 +28,10 @@ class  UserInfo extends React.Component {
     const isCurrentUser = (this.props.profile.address === this.props.currentUserAddr);
     return (
       <div className={s.root}>
-        <Grid container={true}>
-          <Grid item xs={16}>
+      <Row>
+        <Col sm={6}>
+        <Grid align="center"  container={true}>
+          <Grid align="center" item xs={16}>
             {
               <Container>
                 <Widget className="widget-auth mx-auto">
@@ -74,7 +76,59 @@ class  UserInfo extends React.Component {
           </Grid>
         </Grid>
         <EditProfileDialog show={this.state.showEditDialog}  onClose={this.closeEditProfileDialog} />
+        </Col>
+        <Col align="center" sm={6}>
+        <Grid align="center" container={true}>
+          <Grid item xs={11}>
+            {
+              <Container>
+                <Widget className="widget-auth mx-auto">
+                  <div align="center">
+                      <ExampleComponent
+                        image={logo}
+                        roundedColor=""
+                        imageWidth="150"
+                        imageHeight="150"
+                        roundedSize="13"/>
+                      <div align="center">
+                        <h1 className="page-title"><span className="fw-semi-bold">FirstNames Stats</span></h1>
+                      </div>
+
+                      <Row>
+                        <Col sm={6}>
+                          <h6><span className="fw-semi-bold">Community Score    </span></h6>
+                          <h6><span className="fw-semi-bold">Comments           </span></h6>
+                          <h6><span className="fw-semi-bold">Deployed firmware  </span></h6>
+                          <h6><span className="fw-semi-bold">Downloaded firmware</span></h6>
+                        </Col>
+                        <Col sm={6}>
+                          <h6>1234</h6>
+                          <h6>1234</h6>
+                          <h6>1234</h6>
+                          <h6>1234</h6>
+                        </Col>
+                      </Row>
+                    </div>
+                </Widget>
+              </Container>
+            }
+          </Grid>
+          <Grid item xs={1}>
+            {isCurrentUser ? (
+              <Button className={s.EditButton} color="link" onClick={this.showEditProfileDialog}>
+                <EditIcon/>
+              </Button>): null}
+          </Grid>
+        </Grid>
+        <EditProfileDialog show={this.state.showEditDialog}  onClose={this.closeEditProfileDialog} />
+        </Col>
+      </Row>
+
+
+
+
       </div>
+
     );
   }
 }
