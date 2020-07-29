@@ -32,16 +32,16 @@ class DeviceOverview extends React.Component {
       <div>
         <Grid container>
           <Grid item xs={11}>
-            <h1 className="page-title" style={{display: 'inline', paddingRight: '10px' }}><span className="fw-semi-bold">Devices</span></h1>
+            <h1 className="page-title"><span className="fw-semi-bold">Devices</span></h1>
           </Grid>
           <Grid item xs={1}>
-            <span className="glyphicon glyphicon-plus" style={{fontSize: '24px', marginBottom: '10px', paddingRight: '10px'}} title="Add new device" aria-hidden="true" onClick={this.showAddDialog} />
-            <span className="glyphicon glyphicon-refresh" style={{ fontSize: '24px', marginBottom: '10px' }} title="Refresh device status" onClick={this.refreshComponent} aria-hidden="true" />
+            <span className="glyphicon glyphicon-plus" style={{fontSize: '24px', paddingRight: '10px'}} title="Add new device" aria-hidden="true" onClick={this.showAddDialog} />
+            <span className="glyphicon glyphicon-refresh" style={{ fontSize: '24px'}} title="Refresh device status" onClick={this.refreshComponent} aria-hidden="true" />
           </Grid>
         </Grid>
-        <ListView customWidget={DeviceWidget} emptyText={"Why not add some devices so you can manage them?"}
-                  items={this.props.deviceList.map(d =>
-                    new DeviceWithStatus(d.name, d.brand, d.model, d.serialNumber, isDeviceActive(d.name)))}/>
+        <ListView customWidget={DeviceWidget} emptyText={"Why not add some devices so you can manage them?"}>
+          {this.props.deviceList.map(d => <DeviceWidget key={d.serialNumber} item={new DeviceWithStatus(d.name, d.brand, d.model, d.serialNumber, isDeviceActive(d.name))} />)}
+        </ListView>
         <AddDeviceDialog isOpen={this.state.show} onClose={this.closeAddDialog} />
       </div>
     );

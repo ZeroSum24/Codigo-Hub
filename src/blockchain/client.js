@@ -1,7 +1,6 @@
 import Web3 from 'web3';
 
 export const ethereum = window.ethereum;
-export let currentAccount = ethereum.selectedAddress;
 export let web3 = new Web3(ethereum);
 
 export function isWalletConnected() {

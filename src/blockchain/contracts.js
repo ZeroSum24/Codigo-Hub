@@ -1,4 +1,4 @@
-import { currentAccount, web3, ethereum } from './client';
+import { web3, ethereum } from './client';
 import Firmware, { FirmwareWithThumbs } from '../model/Firmware';
 
 export const firmwareRepoAddress = '0x3691B2BE18f186b475e81342585790DcBaC43A0b';
@@ -712,7 +712,7 @@ function getIdentity() {
  * @return {Promise<string>} `tx_hash` hash of transaction
  */
 export function registerFirmware(firmware_hash, IPFS_link, description, device_type) {
-  if (currentAccount == null) throw Error('Initialize account first');
+  if (ethereum.selectedAddress == null) throw Error('Initialize account first');
   return sendTransaction(firmwareRepoAddress,
     getFirmwareRepo().methods.add_firmware(firmware_hash, IPFS_link, description, device_type, true).encodeABI())
 }
@@ -723,7 +723,7 @@ export function registerFirmware(firmware_hash, IPFS_link, description, device_t
  */
 export function retrieveAllAvailableFirmware() {
   const promises = [];
-  if (!hardcoded_developers.includes(currentAccount)) hardcoded_developers.push(currentAccount);
+  if (!hardcoded_developers.includes(ethereum.selectedAddress)) hardcoded_developers.push(ethereum.selectedAddress);
   hardcoded_device_types.forEach(dev_type => hardcoded_developers
     .forEach(dev_addr => promises.push(retrieveFirmware(dev_type, dev_addr))));
   return Promise.all(promises).then(responses => responses.filter(f => f != null));

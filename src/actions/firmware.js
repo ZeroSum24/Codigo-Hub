@@ -1,11 +1,9 @@
-export const DEVICES_SET = 'DEVICES_SET';
+import { MODEL_SET_FIRMWARE } from './model';
 
 
-function setDevices(payload) {
-  // TODO update orbit DB datastore
-
+function setFw(payload) {
   return {
-    type: DEVICES_SET,
+    type: MODEL_SET_FIRMWARE,
     payload
   };
 }
@@ -14,58 +12,58 @@ function setDevices(payload) {
  * Sets the users devices without preforming any operation on it. Called at login once retrieving
  * the users profile details.
  * //TODO implement retrieval of data at login
- * @param devices
+ * @param fw
  * @returns {function(...[*]=)}
  */
-export function setUserDevices(devices) {
+export function setFirmware(fw) {
   return (dispatch) => {
-    dispatch(setDevices(devices));
+    dispatch(setFw(fw));
   }
 }
 
 /**
  * Add to the device list.
  * TODO implement UI binding and functionality
- * @param devices the list of the users devices
- * @param device the device to be added to the list of devices
+ * @param firmwares the list of the users devices
+ * @param fw the device to be added to the list of devices
  * @returns {function(...[*]=)}
  */
-export function createUserDevice(devices, device) {
+export function createFirmware(firmwares, fw) {
   return (dispatch) => {
 
-    devices.push(device);
-    dispatch(setDevices(devices));
+    firmwares.push(fw);
+    dispatch(setFw(firmwares));
   }
 }
 
 /**
  * Replaces an item in the device list.
  * TODO implement UI binding and functionality
- * @param device
+ * @param fw
  * @returns {function(...[*]=)}
  */
-export function updateUserDevice(devices) {
+export function updateFirmware(fw) {
   return (dispatch) => {
 
     // TODO update orbit DB datastore
 
     // need to check the device is unique based on naming convention first
 
-    dispatch(setDevices(devices));
+    dispatch(setFw(fw));
   }
 }
 
 /**
- * Remove a device from the list based on index.
+ * Remove a firmware from the list based on index.
  * TODO implement UI binding and functionality
- * @param device
+ * @param fw
  * @returns {function(...[*]=)}
  */
-export function deleteUserDevice(devices) {
+export function deleteFirmware(fw) {
   return (dispatch) => {
 
     // need to check it is possible to delete that device
 
-    dispatch(setDevices(devices));
+    dispatch(setFw(fw));
   }
 }

@@ -28,6 +28,7 @@ class FilecoinInteractions extends React.Component {
   _closeUploadDialog = async (hash, description, deviceType, cid, jobId) => {
     this.setState({ showUpload: false });
     this._refresh();
+    if (cid == null || jobId == null) return;
     (await getPG()).ffs.watchJobs((job) => {
       console.log(job);
       if (job.status === ffsTypes.JobStatus.JOB_STATUS_CANCELED) {
@@ -44,12 +45,10 @@ class FilecoinInteractions extends React.Component {
         console.log("unknown job status", job);
       }
     }, jobId);
-    if (cid != null) {
-      // here or after success?
-      registerFirmware(hash, cid, description, deviceType)
-        .then(tx_hash => alert('Yas transaction succeeded with hash: ' + tx_hash))
-        .catch(e => alert('Failed '+ e))
-    }
+    // here or after success?
+    return registerFirmware(hash, cid, description, deviceType)
+      .then(tx_hash => alert('Yas transaction succeeded with hash: ' + tx_hash))
+      .catch(e => alert('Failed '+ e))
   }
 
   _refresh = async () => {

@@ -9,8 +9,9 @@ class FirmwareHistory extends React.Component {
   render() {
     return (
       <div className={s.root}>
-        <ListView items={this.props.firmwareHistory} customWidget={FirmwareWidget}
-                  emptyText={"Sorry, there have been no firmware contributions made by this user."}/>
+        <ListView emptyText={"Sorry, there have been no firmware contributions made by this user."}>
+          {this.props.firmwareHistory.map(i => <FirmwareWidget item={i} />)}
+        </ListView>
       </div>
     );
   }
