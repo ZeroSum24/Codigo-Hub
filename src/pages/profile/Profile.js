@@ -19,7 +19,6 @@ class Profile extends React.Component {
 
     this.getProfileID = this.getProfileID.bind(this);
     this.changeToUserInfoView = this.changeToUserInfoView.bind(this);
-    this.changeToUserStatView = this.changeToUserStatView.bind(this);
     this.changeToFirmwareView = this.changeToFirmwareView.bind(this);
 
     let targetAddress = this.getProfileID();
@@ -28,7 +27,6 @@ class Profile extends React.Component {
       "targetAddress": targetAddress,
       "profileDetails": retrieveProfileDetails(targetAddress, this.props.currentUserAddr),
       "firmwareHistory": retrieveFirmwareHistory(targetAddress),
-      "profileStats": retrieveStatsDetails(targetAddress, this.props.currentUserAddr)
     };
   }
 
