@@ -30,8 +30,8 @@ class  UserInfo extends React.Component {
       <div className={s.root}>
       <Row>
         <Col sm={6}>
-        <Grid container={true}>
-          <Grid item xs={16}>
+        <Grid align="center"  container={true}>
+          <Grid align="center" item xs={16}>
             {
               <Container>
                 <Widget className="widget-auth mx-auto">
@@ -77,8 +77,8 @@ class  UserInfo extends React.Component {
         </Grid>
         <EditProfileDialog show={this.state.showEditDialog}  onClose={this.closeEditProfileDialog} />
         </Col>
-        <Col sm={6}>
-        <Grid container={true}>
+        <Col align="center" sm={6}>
+        <Grid align="center" container={true}>
           <Grid item xs={11}>
             {
               <Container>
