@@ -9,7 +9,8 @@ import FirmwareHistory from "./components/FirmwareHistory";
 import UserStats from "./components/UserStats";
 import {retrieveProfileDetails} from "../../blockchain/userProfile";
 import {retrieveFirmwareHistory} from "../../blockchain/firmwareHistory";
-//TODO: Get user stats info
+import {retrieveStatsDetails} from "../../blockchain/userStats";
+
 import {Button} from "reactstrap";
 
 
@@ -29,7 +30,7 @@ class Profile extends React.Component {
       "targetAddress": targetAddress,
       "profileDetails": retrieveProfileDetails(targetAddress, this.props.currentUserAddr),
       "firmwareHistory": retrieveFirmwareHistory(targetAddress),
-      //TODO: Need to get user stats
+      "profileStats": retrieveStatsDetails(targetAddress, this.props.currentUserAddr)
     };
   }
 
@@ -71,8 +72,8 @@ class Profile extends React.Component {
           </Grid>
         </Grid>
 
-        {this.state.viewState === viewStates.USER_INFO ? (<UserInfo profile={this.state.profileDetails} />):
-        (this.state.viewState === viewStates.USER_STATS ? (<UserInfo profile={this.state.profileDetails} />): //Need to change
+        {this.state.viewState === viewStates.USER_INFO  ? (<UserInfo  profile={this.state.profileDetails} />):
+        (this.state.viewState === viewStates.USER_STATS ? (<UserStats profile={this.state.profileStats} />): //Need to change
         <FirmwareHistory firmwareHistory={this.state.firmwareHistory}/>)}
       </div>
     );
