@@ -29,7 +29,7 @@ class ViewFirmware extends React.PureComponent {
 					<Row>
 						<Col xs={12} sm={12} md={12}>
 							<ListView items={this.props.firmwareList} emptyText={"Sorry, no firmware is currently available."}>
-                {this.props.firmwareList.map(i => <FirmwareWidget key={i.block} item={i}/>)}
+                {this.props.firmwareList.map(i => <FirmwareWidget key={i.block} item={i} />)}
               </ListView>
 					  </Col>
 					</Row>

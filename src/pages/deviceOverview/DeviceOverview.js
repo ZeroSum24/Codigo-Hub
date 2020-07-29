@@ -3,7 +3,7 @@ import React from 'react';
 import DeviceWidget from '../../components/CustomWidgets/DeviceWidget'
 import AddDeviceDialog from './components/AddDevice';
 import { connect } from 'react-redux';
-import { DeviceWithStatus } from '../../model/Device';
+import DeviceWithStatus from '../../model/DeviceWithStatus';
 import { isDeviceActive } from '../../mqtt/client';
 import ListView from "../../components/ListView";
 import {Grid} from "@material-ui/core";

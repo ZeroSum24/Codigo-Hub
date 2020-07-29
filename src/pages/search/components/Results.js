@@ -42,7 +42,7 @@ class Search extends React.PureComponent {
     switch(param) {
       case SearchCategory.FIRMWARE:
         return (<ListView emptyText={"Sorry, no firmware has been found, why not propose a bounty?"}>
-          {this.props.firmwareResults.map(e => <FirmwareWidget item={e} />)}
+          {this.props.firmwareResults.map(e => <FirmwareWidget key={e.block} item={e} />)}
         </ListView>);
       case SearchCategory.USER:
         return (<ListView emptyText={"Sorry, no users have  been found, why not propose a bounty?"}>
@@ -50,11 +50,11 @@ class Search extends React.PureComponent {
         </ListView>);
       case SearchCategory.BOUNTY:
         return (<ListView emptyText={"Sorry, no bounties have been found, why not propose a bounty?"}>
-          {this.props.bountyResults.map(e => <BountyWidget item={e} />)}
+          {this.props.bountyResults.map(e => <BountyWidget key={e.description} item={e} />)}
         </ListView>);
       case SearchCategory.DEVICE:
         return (<ListView emptyText={"Sorry, no devices have been found, why not propose a bounty?"}>
-          {this.props.deviceResults.map(e => <DeviceWidget item={e} />)}
+          {this.props.deviceResults.map(e => <DeviceWidget key={e.serialNumber} item={e} />)}
         </ListView>);
       default:
         return 'foo';
