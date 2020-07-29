@@ -3,8 +3,6 @@ import React from 'react';
 import DeviceWidget from '../../components/CustomWidgets/DeviceWidget'
 import AddDeviceDialog from './components/AddDevice';
 import { connect } from 'react-redux';
-import DeviceWithStatus from '../../model/DeviceWithStatus';
-import { isDeviceActive } from '../../mqtt/client';
 import ListView from "../../components/ListView";
 import {Grid} from "@material-ui/core";
 
@@ -40,7 +38,7 @@ class DeviceOverview extends React.Component {
           </Grid>
         </Grid>
         <ListView customWidget={DeviceWidget} emptyText={"Why not add some devices so you can manage them?"}>
-          {this.props.deviceList.map(d => <DeviceWidget key={d.serialNumber} item={new DeviceWithStatus(d.name, d.brand, d.model, d.serialNumber, isDeviceActive(d.name))} />)}
+          {this.props.deviceList.map(d => <DeviceWidget key={d.serialNumber} item={d} />)}
         </ListView>
         <AddDeviceDialog isOpen={this.state.show} onClose={this.closeAddDialog} />
       </div>

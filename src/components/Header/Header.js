@@ -124,7 +124,7 @@ class Header extends React.Component {
 
 	handleSearch(event) {
 		event.preventDefault();
-		this.props.dispatch(startSearch(this.state.searchText));
+		this.props.dispatch(startSearch(this.state.searchText, this.props.deviceList));
 		this.props.history.push('/app/search');
 		this.setState({"searchText": ''});
 	}
@@ -238,7 +238,8 @@ function mapStateToProps(store) {
 		sidebarVisibility: store.navigation.sidebarVisibility,
 		sidebarPosition: store.navigation.sidebarPosition,
 		ethereumAddress: store.ethereum.ethereumAddress,
-		userProfile: store.profile.userProfile
+		userProfile: store.profile.userProfile,
+    deviceList: store.profile.deviceList
 	};
 }
 

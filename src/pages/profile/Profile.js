@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { parse }  from 'qs';
 
 import s from './Profile.module.scss';
 import {Grid} from "@material-ui/core";
@@ -42,7 +41,7 @@ class Profile extends React.Component {
       <div className={s.root}>
         <h1 className="page-title">Profile: <small>{this.props.profile.address}</small></h1>
         {/*TODO update the User Profile title above to give the users name (ideally) or address*/}
-        <Grid container={true} style={{justifyContent: 'center', paddingBottom: '20px'}}>
+        <Grid container={true} style={{justifyContent: 'center', paddingBottom: '40px'}}>
           <Grid item xs={2}>
             <Button className={userInfoButton}  color="link"  onClick={this.changeToUserInfoView}>User Profile</Button>
           </Grid>
@@ -60,7 +59,6 @@ class Profile extends React.Component {
 
 const viewStates = {
   USER_INFO: 'USER_INFO',
-  USER_STATS: 'USER_STATS',
   FIRMWARE_HISTORY: 'FIRMWARE_HISTORY'
 };
 
