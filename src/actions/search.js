@@ -39,7 +39,13 @@ function isFirmwareRelevant(term, firmware) {
   containsIgnoreCase(firmware.device_type, term)
 }
 
-export function startSearch(searchText) {
+function isDeviceRelevant(term, device) {
+  return containsIgnoreCase(device.name, term) ||
+  containsIgnoreCase(device.brand, term) ||
+  containsIgnoreCase(device.model, term);
+}
+
+export function startSearch(searchText, devices) {
   return async (dispatch) => {
 
     dispatch(searchPending(searchText));
@@ -54,7 +60,7 @@ export function startSearch(searchText) {
       // search bounties on the bounty blockchain for bounty inclusion
       let bountyResults = []; // list of firmware objects
       // device bounties
-      let deviceResults = [];
+      let deviceResults = devices.filter(d => isDeviceRelevant(searchText, d));
 
       dispatch(searchSuccess({firmwareResults: firmwareResults, userResults: userResults,
         bountyResults: bountyResults, deviceResults: deviceResults})

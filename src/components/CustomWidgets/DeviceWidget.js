@@ -3,8 +3,8 @@ import { Col, Row } from 'reactstrap';
 import React from 'react';
 import FirmwareUpgradeDialog from '../../pages/deviceOverview/components/firmwareUpgradeDialog';
 import PropTypes from "prop-types";
-import Firmware from "../../model/Firmware";
 import Device from "../../model/Device";
+import { isDeviceActive, subscribeToStatusChanges, unSubscribeFromStatusChanges } from '../../mqtt/client';
 
 class DeviceWidget extends React.PureComponent {
 
@@ -14,7 +14,8 @@ class DeviceWidget extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = {showDialog: false};
+    this.state = {showDialog: false, isActive: isDeviceActive(this.props.item.name)};
+    this.callback = () => this.setState({isActive: true});
   }
 
   showFirmwareDialog = () => {
@@ -24,6 +25,16 @@ class DeviceWidget extends React.PureComponent {
   hideFirmwareDialog = () => {
     this.setState({showDialog: false});
   };
+
+  // subscribe to status changes
+  componentDidMount = () => {
+    subscribeToStatusChanges(this.props.item.name, this.callback);
+  }
+
+  // unsubscribe from status changes
+  componentWillUnmount() {
+    unSubscribeFromStatusChanges(this.props.item.name, this.callback);
+  }
 
   render() {
     const device = this.props.item;
@@ -47,7 +58,7 @@ class DeviceWidget extends React.PureComponent {
                 <h6>{device.brand}</h6>
                 <h6>{device.model}</h6>
                 <h6>{device.serialNumber}</h6>
-                {device.isActive ?
+                {this.state.isActive ?
                   <span>
                     <h6 style={{display: 'inline', paddingRight: '10px'}}>Active</h6>
                     <i className={'glyphicon glyphicon-upload'}
