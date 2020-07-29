@@ -16,7 +16,9 @@ client.connect({
   useSSL: true,
 });
 
-// map deviceName -> timestamp of last ping received
+const timestampKeyName = 'timestamp';
+const subscribersKeyName = 'subscribers';
+// map deviceName -> {timestamp: timestamp, subscribers: [callbacks]} of last ping received
 const activeDevicesMap = {};
 
 function onFailureConnect(e) {
@@ -44,15 +46,18 @@ function onConnectionLost(responseObject) {
 
 function onMessageArrived(message) {
   const topic = message.destinationName;
-  const payload = message.payloadString;
+  const deviceName = message.payloadString;
   if (topic === 'codigo/active') {
-    console.log("Device "+payload+ ' is active!');
-    activeDevicesMap[payload] = Date.now();
+    console.log("Device "+deviceName+ ' is active!');
+    if (activeDevicesMap[deviceName] == null) activeDevicesMap[deviceName] = {subscribers: []};
+    activeDevicesMap[deviceName][timestampKeyName] = Date.now();
+    for (const callback of activeDevicesMap[deviceName][subscribersKeyName]) callback(deviceName);
   }
 }
 // if we heard of it in the last minute, it's online
 export function isDeviceActive(deviceName) {
-  const timestamp = activeDevicesMap[deviceName];
+  console.log('query '+ deviceName);
+  const timestamp = (activeDevicesMap[deviceName] || {})[timestampKeyName];
   if (timestamp == null) return false;
   return ((Date.now() - timestamp) /1000) < 60;
 }
@@ -67,4 +72,19 @@ export function isDeviceActive(deviceName) {
  */
 export function requestFirmwareUpgrade(deviceName, firmware) {
   publish(firmware, 'codigo/firmware/'+deviceName)
+}
+
+
+export function subscribeToStatusChanges(deviceName, callback) {
+  if (activeDevicesMap[deviceName] == null) activeDevicesMap[deviceName] = { subscribers: []}
+  activeDevicesMap[deviceName][subscribersKeyName].push(callback);
+
+}
+
+export function unSubscribeFromStatusChanges(deviceName, callback) {
+  if (
+    activeDevicesMap[deviceName] != null &&
+    activeDevicesMap[deviceName][subscribersKeyName] != null) {
+      activeDevicesMap[deviceName][subscribersKeyName] = activeDevicesMap[deviceName][subscribersKeyName].filter(e => e!==callback);
+  }
 }
