@@ -3,30 +3,21 @@ import { Container, Form, FormGroup, Input, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 import s from './ErrorPage.module.scss';
+import error from '../../images/error.png';
 
 class ErrorPage extends React.Component {
 	render() {
 		return (
 			<div className={s.errorPage}>
+				<div>Error</div>
 				<Container>
 					<div className={`${s.errorContainer} mx-auto`}>
-						<h1 className={s.errorCode}>404</h1>
-						<p className={s.errorInfo}>Opps, it seems that this page does not exist here.</p>
-						<p className={[ s.errorHelp, 'mb-3' ].join(' ')}>
-							If you are sure it should, please search for it:
-						</p>
-						<Form method="get">
-							<FormGroup>
-								<Input className="input-no-border" type="text" placeholder="Search Pages" />
-							</FormGroup>
-							<Link to="app/extra/search">
-								<Button className={s.errorBtn} type="submit" color="inverse">
-									Search <i className="fa fa-search text-secondary ml-xs" />
-								</Button>
-							</Link>
-						</Form>
+						<p className={s.errorInfo}>Opps, it seems that we couldn't find what you're looking for</p>
 					</div>
-					<footer className={s.pageFooter}>2020 &copy; Código Network</footer>
+					<div align="center">
+						<img src={error} alt="..." />
+					</div>
+					<footer className={s.pageFooter}>2020 &copy; Código Hub</footer>
 				</Container>
 			</div>
 		);
