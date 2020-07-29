@@ -1,4 +1,4 @@
-import { retrieveAllAvailableFirmware } from '../blockchain/contracts';
+import { retrieveAllAvailableFirmware, getAllUsers } from '../blockchain/contracts';
 
 export const SEARCH_START = 'SEARCH_START';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
@@ -50,7 +50,7 @@ export function startSearch(searchText) {
       // search firmware on Codigo blockchain for token inclusion
       let firmwareResults = (await retrieveAllAvailableFirmware()).filter(f => isFirmwareRelevant(searchText, f)); // list of firmware objects
       // search users on user reputation blockchian for user inclusion
-      let userResults = []; // list of firmware objects
+      let userResults = (await getAllUsers()).filter(u => containsIgnoreCase(searchText, u));
       // search bounties on the bounty blockchain for bounty inclusion
       let bountyResults = []; // list of firmware objects
       // device bounties

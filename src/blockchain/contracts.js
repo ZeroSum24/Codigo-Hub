@@ -650,11 +650,77 @@ export const identityABI = [
     "outputs": [{"name": "", "type": "address"}]
   }
 ];
+export const usersAddress = "0x6227c20850c1f431cABEC5ec3CBD746186101882"
+export const usersABI = [
+  {
+    "type": "function",
+    "name": "incrRep",
+    "constant": false,
+    "payable": false,
+    "stateMutablilty": "nonpayable",
+    "inputs": [{"name": "target", "type": "address"}],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "decrRep",
+    "constant": false,
+    "payable": false,
+    "stateMutablilty": "nonpayable",
+    "inputs": [{"name": "target", "type": "address"}],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "getRep",
+    "constant": false,
+    "payable": false,
+    "stateMutablilty": "view",
+    "inputs": [{"name": "user", "type": "address"}],
+    "outputs": [{"name": "", "type": "uint"}]
+  },
+  {
+    "type": "function",
+    "name": "userExists",
+    "constant": false,
+    "payable": false,
+    "stateMutablilty": "view",
+    "inputs": [{"name": "user", "type": "address"}],
+    "outputs": [{"name": "", "type": "bool"}]
+  },
+  {
+    "type": "function",
+    "name": "getAllUsers",
+    "constant": false,
+    "payable": false,
+    "stateMutablilty": "view",
+    "inputs": [],
+    "outputs": [{"name": "", "type": "address[]"}]
+  },
+  {
+    "type": "function",
+    "name": "register",
+    "constant": false,
+    "payable": false,
+    "stateMutablilty": "nonpayable",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "type": "function",
+    "name": "deregister",
+    "constant": false,
+    "payable": false,
+    "stateMutablilty": "nonpayable",
+    "inputs": [],
+    "outputs": []
+  }
+];
 
 let firmwareRepo = null;
 let wot = null;
 let identity = null;
-
+let users = null;
 
 /**
  * Hardcoded constants to define all possible developers and device types. Please add your account address and favorite
@@ -704,6 +770,17 @@ function getIdentity() {
 }
 
 /**
+ * Retrieve instance of the users contract
+ * @return {Contract} the users contract
+ */
+function getUsers() {
+  if (users == null) {
+    users = new web3.eth.Contract(usersABI, usersAddress);
+  }
+  return users;
+}
+
+/**
  * register IPFS uploaded firmware to firmware repo smart contract
  * @param {String} `firmware_hash` SHA3 hash of firmware binary file
  * @param {String} `IPFS_link`
@@ -723,7 +800,8 @@ export function registerFirmware(firmware_hash, IPFS_link, description, device_t
  */
 export function retrieveAllAvailableFirmware() {
   const promises = [];
-  if (!hardcoded_developers.includes(ethereum.selectedAddress)) hardcoded_developers.push(ethereum.selectedAddress);
+  const currentAccount = ethereum.selectedAddress;
+  if (!hardcoded_developers.includes(currentAccount)) hardcoded_developers.push(currentAccount);
   hardcoded_device_types.forEach(dev_type => hardcoded_developers
     .forEach(dev_addr => promises.push(retrieveFirmware(dev_type, dev_addr))));
   return Promise.all(promises).then(responses => responses.filter(f => f != null));
@@ -795,6 +873,89 @@ export function getDeveloperAddress(userAddress) {
  */
 export function getUserAddress(developerAddress) {
     return getIdentity().methods.get_3box_address(developerAddress).call();
+}
+
+/**
+ * Wait a random delay between 0 and 10 seconds then add to the target user's reputation
+ * @params {String} the address of the target user
+ * @return {Promise<String>} the transaction hash
+ */
+export function addRepToUser(userAddress) {
+  const delayMs = Math.floor(Math.random() * 10000);
+  return new Promise(
+    (resolve, _) => {
+      setTimeout(
+        async () => {
+          const hash = await sendTransaction(usersAddress,
+            getUsers().methods.incrRep(userAddress).encodeABI());
+          resolve(hash);
+        },
+        delayMs
+      );
+    });
+}
+
+/**
+ * Wait a random delay between 0 and 10 seconds then subtract from the target
+ * user's reputation
+ * @params {String} the address of the target user
+ * @return {Promise<String>} the transaction hash
+ */
+export function removeRepFromUser(userAddress) {
+  const delayMs = Math.floor(Math.random() * 10000);
+  return new Promise(
+    (resolve, _) => {
+      setTimeout(
+        async () => {
+          const hash = await sendTransaction(usersAddress,
+            getUsers().methods.decrRep(userAddress).encodeABI());
+          resolve(hash);
+        },
+        delayMs
+      );
+    });
+}
+
+/**
+ * Retrieve the reputation of a user
+ * @params {String} the address of the user
+ * @return {Number} the user's reputation
+ */
+export function getUserRep(userAddress) {
+  return getUsers().methods.getRep(userAddress).call();
+}
+
+/**
+ * Check whether a user exists
+ * @params {String} the address of the user
+ * @return {bool} True if the user exists, else false
+ */
+export function userExists(userAddress) {
+  return getUsers().methods.userExists(userAddress).call();
+}
+
+/**
+ * Get all existing users
+ * @return {Promise<String[]>} The addresses of all users
+ */
+export function getAllUsers() {
+  return getUsers().methods.getAllUsers().call();
+}
+
+/**
+ * Register the current user
+ * @return {Promise<String>} The transaction hash
+ */
+export function registerCurrentUser() {
+  return sendTransaction(usersAddress, getUsers().methods.register().encodeABI());
+}
+
+/**
+ * Deregister the current user
+ * @return {Promise<String>} The transaction hash
+ */
+export function deregisterCurrentUser() {
+  return sendTransaction(usersAddress, getUsers().methods.deregister().encodeABI());
 }
 
 /**
