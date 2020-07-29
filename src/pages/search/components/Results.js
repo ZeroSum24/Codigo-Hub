@@ -41,17 +41,21 @@ class Search extends React.PureComponent {
   renderResults(param) {
     switch(param) {
       case SearchCategory.FIRMWARE:
-        return (<ListView items={this.props.firmwareResults} customWidget={FirmwareWidget}
-                          emptyText={"Sorry, no firmware has been found, why not propose a bounty?"}/>);
+        return (<ListView emptyText={"Sorry, no firmware has been found, why not propose a bounty?"}>
+          {this.props.firmwareResults.map(e => <FirmwareWidget key={e.block} item={e} />)}
+        </ListView>);
       case SearchCategory.USER:
-        return (<ListView items={this.props.userResults} customWidget={ProfileWidget}
-                          emptyText={"Sorry, no users have  been found, why not propose a bounty?"}/>);
+        return (<ListView emptyText={"Sorry, no users have  been found, why not propose a bounty?"}>
+          {this.props.userResults.map(e => <ProfileWidget item={e} />)}
+        </ListView>);
       case SearchCategory.BOUNTY:
-        return (<ListView items={this.props.bountyResults} customWidget={BountyWidget}
-                          emptyText={"Sorry, no bounties have been found, why not propose a bounty?"}/>);
+        return (<ListView emptyText={"Sorry, no bounties have been found, why not propose a bounty?"}>
+          {this.props.bountyResults.map(e => <BountyWidget key={e.description} item={e} />)}
+        </ListView>);
       case SearchCategory.DEVICE:
-        return (<ListView items={this.props.deviceResults} customWidget={DeviceWidget}
-                          emptyText={"Sorry, no devices have been found, why not propose a bounty?"}/>);
+        return (<ListView emptyText={"Sorry, no devices have been found, why not propose a bounty?"}>
+          {this.props.deviceResults.map(e => <DeviceWidget key={e.serialNumber} item={e} />)}
+        </ListView>);
       default:
         return 'foo';
     }
