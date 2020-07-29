@@ -36,13 +36,13 @@ class  UserInfo extends React.Component {
               <Widget className="widget-auth mx-auto">
                 <div align="center">
                     <ExampleComponent
-                      image={logo}
+                      image={this.props.profile.image}
                       roundedColor=""
                       imageWidth="150"
                       imageHeight="150"
                       roundedSize="13"/>
                     <div align="center">
-                      <h1 className="page-title"><span className="fw-semi-bold">User Name</span></h1>
+                      <h1 className="page-title"><span className="fw-semi-bold">{this.props.profile.name}</span></h1>
                     </div>
                     <Row>
                       <Col sm={6}>
@@ -50,15 +50,15 @@ class  UserInfo extends React.Component {
                         <h5><span className="fw-semi-bold">Website:</span></h5>
                       </Col>
                       <Col sm={6}>
-                        <h5>1231231223</h5>
-                        <div onClick="location.href='portable-display-stands.html';" id="smallbox">www.example.com</div>
+                        <h5>{this.props.profile.address}</h5>
+                        <div onClick="location.href='portable-display-stands.html';" id="smallbox">{this.props.profile.website}</div>
                       </Col>
                     </Row>
                     <div align="center">
                      <br></br>
                      <br></br>
                       <h5><span className="fw-semi-bold">
-  I write code and break stuff. Mostly build innovative solutions that advance human civilization.
+                        {this.props.profile.communityScore}
                       </span>
                       </h5>
                     </div>
@@ -90,20 +90,18 @@ class  UserInfo extends React.Component {
                           <h5><span className="fw-semi-bold">Community Score    </span></h5>
                         </Col>
                         <Col sm={6}>
-                          <h5>1234</h5>
+                          <h5>{this.props.profile.communityScore}</h5>
                         </Col>
                       </Row>
                       <hr className={`${s.divider} text-white`} />
                       <Row>
                         <Col sm={6}>
-                          <h6><span className="fw-semi-bold">Comments           </span></h6>
                           <h6><span className="fw-semi-bold">Deployed firmware  </span></h6>
-                          <h6><span className="fw-semi-bold">Downloaded firmware</span></h6>
+                          <h6><span className="fw-semi-bold">Amount of Comment Upvotes</span></h6>
                         </Col>
                         <Col sm={6}>
-                          <h6>1234</h6>
-                          <h6>1234</h6>
-                          <h6>1234</h6>
+                          <h6>{this.props.profile.amountOfFirmwareContributions}</h6>
+                          <h6>{this.props.profile.amountOfCommentUpvotes}</h6>
                         </Col>
                       </Row>
                     </div>

@@ -89,7 +89,7 @@ export function setUserProfile(payload) {
     console.log("set user profile", payload.userAddress);
 
     // need to check it is possible to delete that device
-    const userProfile = new Profile(payload.userAddress, "", "", "");
+    const userProfile = new Profile(payload.userAddress, "", "", "", "");
 
     dispatch(setProfile(userProfile));
   }
