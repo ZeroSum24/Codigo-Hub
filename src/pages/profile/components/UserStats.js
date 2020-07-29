@@ -41,32 +41,23 @@ class  UserStats extends React.Component {
                         imageHeight="150"
                         roundedSize="13"/>
                       <div align="center">
-                        <h1 className="page-title"><span className="fw-semi-bold">User Stats</span></h1>
+                        <h1 className="page-title"><span className="fw-semi-bold">FirstNames Stats</span></h1>
                       </div>
-                      <div className="bg-widget-transparent auth-widget-footer">
-                        <p className="widget-auth-info mt-4">
-                        </p>
-                      </div>
+
                       <Row>
                         <Col sm={6}>
-                          <h5><span className="fw-semi-bold">User Address: </span></h5>
+                          <h6><span className="fw-semi-bold">Community Score    </span></h6>
+                          <h6><span className="fw-semi-bold">Comments           </span></h6>
+                          <h6><span className="fw-semi-bold">Deployed firmware  </span></h6>
+                          <h6><span className="fw-semi-bold">Downloaded firmware</span></h6>
                         </Col>
                         <Col sm={6}>
-                          <h5>Address</h5>
+                          <h6>1234</h6>
+                          <h6>1234</h6>
+                          <h6>1234</h6>
+                          <h6>1234</h6>
                         </Col>
                       </Row>
-                      <div align="center">
-                        <div>     </div>
-                        <h4><span className="fw-semi-bold">
-                          Lorel Epsisum
-                          User Description
-                          Lorel Epsidm
-                          sOMETHING eLSE
-                          LOrel epsim
-                          You get the picture
-                        </span>
-                        </h4>
-                      </div>
                     </div>
                 </Widget>
               </Container>
