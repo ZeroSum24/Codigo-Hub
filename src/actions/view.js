@@ -9,7 +9,7 @@ export const VIEW_BOUNTY_SET = "VIEW_BOUNTY_SET";
 
 function setFirmware(payload) {
   return {
-    VIEW_FIRMWARE_SET,
+    type: VIEW_FIRMWARE_SET,
     payload,
   }
 }
@@ -23,8 +23,8 @@ function setProfile(payload) {
 
 function setBounty(payload) {
   return {
-    VIEW_BOUNTY_SET,
-    payload,
+    type: VIEW_BOUNTY_SET,
+    payload
   }
 }
 
@@ -33,6 +33,11 @@ export function initFirmwareView(payload) {
   return (dispatch) => {
 
     // TODO pull all the info from the backend necessary for the firmware page
+
+    let firmwareView = {
+      firmwareStats: '', // return updated firmware objects
+      firmwareSource: '' // full from IPFS using the link
+    };
 
     // change the app location and set the firmware page
     dispatch(setFirmware({firmwareView: payload.firmwareObj}));
@@ -69,7 +74,7 @@ export function initBountyView(payload) {
     // TODO pull all the info from the backend necessary for the bounty page
 
     // change the app location and set the firmware page
-    dispatch(setBounty({bountyView: payload.bountyObj}));
+    dispatch(setBounty({bountyView: payload.bountyObject}));
     payload.history.push('/app/bounty');
   }
 }
