@@ -1,11 +1,23 @@
-export const DEVICES_SET = 'DEVICES_SET';
+import Profile from "../model/Profile";
 
+export const USER_DEVICES_SET = 'DEVICES_SET';
+export const USER_PROFILE_SET = 'USER_PROFILE_SET';
 
 function setDevices(payload) {
   // TODO update orbit DB datastore
 
   return {
-    type: DEVICES_SET,
+    type: USER_DEVICES_SET,
+    payload
+  };
+}
+
+
+function setProfile(payload) {
+  // TODO update orbit DB datastore
+
+  return {
+    type: USER_PROFILE_SET,
     payload
   };
 }
@@ -67,5 +79,25 @@ export function deleteUserDevice(devices) {
     // need to check it is possible to delete that device
 
     dispatch(setDevices(devices));
+  }
+}
+
+
+export function setUserProfile(payload) {
+  return async (dispatch) => {
+
+    console.log("set user profile", payload.userAddress);
+    let box = payload.userBox;
+
+    const name = await box.private.get('name');
+    const description = await box.private.get('description');
+    const image = await box.private.get('image');
+    const website = ""; //TODO this is null atm
+
+    // need to check it is possible to delete that device
+    const userProfile = new Profile(payload.userAddress, name, description, image, website);
+    console.log("user profile set", userProfile);
+
+    dispatch(setProfile(userProfile));
   }
 }
