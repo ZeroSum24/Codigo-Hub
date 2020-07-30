@@ -1,7 +1,12 @@
 import { web3, ethereum } from './client';
 import Firmware, { FirmwareWithThumbs } from '../model/Firmware';
+import BN from 'bn.js';
+import Bounty from '../model/Bounty';
 
 export const firmwareRepoAddress = '0x3691B2BE18f186b475e81342585790DcBaC43A0b';
+export const usersAddress = "0x6227c20850c1f431cABEC5ec3CBD746186101882"
+export const identityAddress = "0xF665D2AA03aeA414522f684f14543b15DDbbE9F0";
+export const bountiesAddress = "0x8C58B5bf0145370916574E82DDecC4b2793EE888";
 export const abiFR = [
   {
     'constant': true,
@@ -298,303 +303,6 @@ export const abiFR = [
     'type': 'constructor'
   }
 ];
-export const abiWOT = [
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "device_type",
-        "type": "string"
-      },
-      {
-        "name": "i",
-        "type": "uint256"
-      }
-    ],
-    "name": "get_developer",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "get_t",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "get_trust_version",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "device_type",
-        "type": "string"
-      },
-      {
-        "name": "stable",
-        "type": "bool"
-      }
-    ],
-    "name": "get_most_trusted_firmware",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      },
-      {
-        "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "address"
-      },
-      {
-        "name": "",
-        "type": "int256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "nonce",
-        "type": "uint256"
-      }
-    ],
-    "name": "proofOfWork",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "v",
-        "type": "uint256"
-      }
-    ],
-    "name": "set_version",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "get_d",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "firmware_hash_",
-        "type": "bytes32"
-      },
-      {
-        "name": "IPFS_link_",
-        "type": "string"
-      },
-      {
-        "name": "description_",
-        "type": "string"
-      },
-      {
-        "name": "device_type_",
-        "type": "string"
-      },
-      {
-        "name": "stable",
-        "type": "bool"
-      }
-    ],
-    "name": "add_firmware",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "get_version",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "trust_address",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "description_",
-        "type": "string"
-      },
-      {
-        "name": "device_type",
-        "type": "string"
-      },
-      {
-        "name": "stable",
-        "type": "bool"
-      }
-    ],
-    "name": "edit_description",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "device_type",
-        "type": "string"
-      },
-      {
-        "name": "mf_address",
-        "type": "address"
-      },
-      {
-        "name": "stable",
-        "type": "bool"
-      }
-    ],
-    "name": "get_firmware",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      },
-      {
-        "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "v",
-        "type": "uint256"
-      }
-    ],
-    "name": "set_trust_version",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "get_c",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes32"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  }
-];
-export const identityAddress = "0xF665D2AA03aeA414522f684f14543b15DDbbE9F0";
 export const identityABI = [
   {
     "type": "event",
@@ -650,7 +358,6 @@ export const identityABI = [
     "outputs": [{"name": "", "type": "address"}]
   }
 ];
-export const usersAddress = "0x6227c20850c1f431cABEC5ec3CBD746186101882"
 export const usersABI = [
   {
     "type": "function",
@@ -716,11 +423,102 @@ export const usersABI = [
     "outputs": []
   }
 ];
+export const bountiesABI = [
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "name": "device_type",
+        "type": "string"
+      }
+    ],
+    "name": "add_bounty",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "block_num",
+        "type": "uint256"
+      }
+    ],
+    "name": "collectBounty",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "index",
+        "type": "uint256"
+      }
+    ],
+    "name": "get_bounty",
+    "outputs": [
+      {
+        "name": "",
+        "type": "string"
+      },
+      {
+        "name": "",
+        "type": "string"
+      },
+      {
+        "name": "",
+        "type": "string"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "get_number_bounties",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+];
 
 let firmwareRepo = null;
-let wot = null;
 let identity = null;
 let users = null;
+let bountiesRepo = null;
 
 /**
  * Hardcoded constants to define all possible developers and device types. Please add your account address and favorite
@@ -741,24 +539,6 @@ export function getFirmwareRepo() {
 }
 
 /**
- * Retrieve instance of web of trust contract
- * @return {Promise<Contract>} `wot` web of trust deployed contract
- */
-export async function getWOT() {
-  if (wot == null) {
-    getWOTAddress().then(address => {
-      wot = new web3.eth.Contract(abiWOT, address);
-      return wot;
-    })
-  }
-  return Promise.resolve(wot);
-}
-
-function getWOTAddress() {
-  return getFirmwareRepo().methods.trust_address().call();
-}
-
-/**
  * Retrieve instance of the identity contract
  * @return {Contract} the identity contract
  */
@@ -776,6 +556,17 @@ function getIdentity() {
 function getUsers() {
   if (users == null) {
     users = new web3.eth.Contract(usersABI, usersAddress);
+  }
+  return users;
+}
+
+/**
+ * Retrieve instance of the bounties contract
+ * @return {Contract} the users contract
+ */
+function getBounties() {
+  if (bountiesRepo == null) {
+    users = new web3.eth.Contract(bountiesABI, bountiesAddress);
   }
   return users;
 }
@@ -959,16 +750,57 @@ export function deregisterCurrentUser() {
 }
 
 /**
+ * Retrieve all bounties, active or collected
+ * @return {Promise<Bounty[]>}
+ */
+export async function retrieveAllBounties() {
+  const numberOfBounties = await getBounties().methods.get_number_bounties().call();
+  const bounties = [];
+  for (let i = 0; i < numberOfBounties; i++) {
+    const bounty = await getBounties().methods.get_bounty(i).call();
+    bounties.push(bounty);
+  }
+  return bounties.map(b => new Bounty(b[0], b[1], b[2], b[3], '0', b[4], b[5]));
+}
+
+/**
+ * Add a new bounty
+ * @param {Bounty} bounty
+ * @return {Promise<String>} The transaction hash
+ */
+export function addBounty(bounty) {
+  return sendTransaction(
+    bountiesAddress,
+    getBounties().methods.add_bounty(bounty.description, bounty.description, bounty.model).encodeABI(),
+    new BN(web3.utils.toWei(bounty.ethAmount, 'ether'), 10).toString(16)
+    );
+}
+
+/**
+ * Collect the stake of an existing bounty, if eligible
+ * @param {String} block_num the block number of the bounty on the blockchain
+ * @return {Promise<String>} The transaction hash
+ */
+export function collectBounty(block_num) {
+  return sendTransaction(
+    bountiesAddress,
+    getBounties().methods.collectBounty(block_num).encodeABI()
+  );
+}
+
+/**
  * data is only necessary for contract transactions, it can be computed with encodeABI from web3
  * @param {String} `to` address
  * @param {String} `data` abi encoded dats
+ * @param {String} `value` value to send to contract call
  * @return {Promise<string>} `tx_hash` hash of transaction
  */
-function sendTransaction(to, data) {
+function sendTransaction(to, data, value) {
   const transactionParameters = {
     to: to, // Required except during contract publications.
     from: ethereum.selectedAddress, // must match user's active address.
     data: data, // Optional, but used for defining smart contract creation and interaction.
+    value: value,
   };
 
 // txHash is a hex string

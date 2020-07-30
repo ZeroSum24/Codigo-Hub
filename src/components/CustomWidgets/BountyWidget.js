@@ -1,9 +1,9 @@
 import Widget from "../Widget";
-import {Col, Row} from "reactstrap";
+import {Col, Row, Button} from "reactstrap";
 import React from "react";
 import PropTypes from "prop-types";
 import Bounty from "../../model/Bounty";
-import {initBountyView} from "../../actions/view";
+import { collectBounty } from '../../blockchain/contracts';
 
 class BountyWidget extends React.PureComponent {
 
@@ -11,13 +11,14 @@ class BountyWidget extends React.PureComponent {
     item: PropTypes.objectOf(Bounty).isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.openBountyView = this.openBountyView.bind(this);
-  }
-
-  openBountyView() {
-    this.props.dispatch(initBountyView({profileObject: this.props.item, history: this.props.history}));
+  collect = () => {
+    const bounty = this.props.item;
+    let go = true;
+    if (bounty.bountySetter.toLowerCase() === window.ethereum.selectedAddress.toLowerCase()) {
+      go = window.confirm('You are the creator of this bounty. You can only cancel it if 3 months have passed since creation, ' +
+        'to give time for developers to create. The transaction will fail otherwise. Do you wish to continue?');
+    }
+    if (go) collectBounty(bounty.block_num);
   }
 
   render() {
@@ -25,20 +26,29 @@ class BountyWidget extends React.PureComponent {
     const bounty = this.props.item;
     return (
       <Widget
-        title={<h5>Bounty Title: <small className="text-muted">{bounty.name}</small></h5>}
-        close collapse onClick={this.openBountyView}>
+        title={<h5>Bounty Title: <small className="text-muted">{bounty.title}</small></h5>}
+        close collapse>
         <p></p>
         <div className="widget-padding-md w-100 h-100 text-left border rounded">
           <Row>
             <Col sm={6}>
               <h6><span className="fw-semi-bold">Proposer: </span></h6>
-              <h6><span className="fw-semi-bold">Version: </span></h6>
-              <h6><span className="fw-semi-bold">Eth Amount: </span></h6>
+              <h6><span className="fw-semi-bold">Description: </span></h6>
+              <h6><span className="fw-semi-bold">Firmware version: </span></h6>
+              <h6><span className="fw-semi-bold">Device Type: </span></h6>
+              <h6><span className="fw-semi-bold">Stake: </span></h6>
+              <h6><span className="fw-semi-bold">Active: </span></h6>
             </Col>
             <Col sm={6}>
-              <h6>{bounty.author}</h6>
-              <h6>{bounty.version}</h6>
-              <h6>{bounty.ethAmount}</h6>
+              <h6>{bounty.bountySetter}</h6>
+              <h6>{bounty.description}</h6>
+              <h6>v1.1.0</h6>
+              <h6>{bounty.model}</h6>
+              <h6>{bounty.ethAmount} Wei</h6>
+              <h6>{bounty.ethAmount === 0 ? 'False' : 'True'}</h6>
+            </Col>
+            <Col sm={6}>
+              <Button onClick={this.collect}>Collect</Button>
             </Col>
           </Row>
         </div>

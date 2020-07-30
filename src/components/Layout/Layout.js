@@ -11,7 +11,6 @@ import ViewFirmware from '../../pages/viewFirmware';
 import DeviceOverview from '../../pages/deviceOverview';
 import Earnings from '../../pages/earnings';
 import FilecoinInteractions from '../../pages/filecoinInteractions/FilecoinInteractions';
-import AddBounty from '../../pages/addBounty';
 import ViewBounties from '../../pages/viewBounties';
 import Firmware from '../../pages/firmware';
 import Search from '../../pages/search';
@@ -88,7 +87,6 @@ class Layout extends React.Component {
 										<Route path="/app/profile" exact component={Profile} />
 										<Route path="/app/earnings" exact component={Earnings} />
 										<Route path="/app/view_bounties" exact component={ViewBounties} />
-										<Route path="/app/add_bounty" exact component={AddBounty} />
 										<Route path="/app/firmware" exact component={Firmware} />
 										<Route path="/app/search" exact component={Search} />
 										<Route path="/app/bounty" exact component={Bounty} />

@@ -142,16 +142,6 @@ class Sidebar extends React.Component {
 						link="/app/view_bounties"
 						index="ui"
 					/>
-					<LinksGroup
-						onActiveSidebarItemChange={(activeItem) =>
-							this.props.dispatch(changeActiveSidebarItem(activeItem))}
-						activeItem={this.props.activeItem}
-						header="Add a Bounty"
-						isHeader
-						iconName="fi flaticon-plus"
-						link="/app/add_bounty"
-						index="add_bounty"
-					/>
 				</ul>
 			</nav>
 		);
