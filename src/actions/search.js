@@ -1,4 +1,4 @@
-import { retrieveAllAvailableFirmware, getAllUsers } from '../blockchain/contracts';
+import { retrieveAllAvailableFirmware, getAllUsers, retrieveAllBounties } from '../blockchain/contracts';
 
 export const SEARCH_START = 'SEARCH_START';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
@@ -34,9 +34,31 @@ function containsIgnoreCase(string, term) {
   return string.toLowerCase().indexOf(term.toLowerCase()) !== -1;
 }
 
+/**
+ *
+ * @param term
+ * @param {Firmware} firmware
+ * @return {boolean}
+ */
 function isFirmwareRelevant(term, firmware) {
   return containsIgnoreCase(firmware.description, term) ||
-  containsIgnoreCase(firmware.device_type, term)
+    containsIgnoreCase(firmware.developer, term) ||
+    containsIgnoreCase(firmware.device_type, term)
+}
+
+/**
+ *
+ * @param term
+ * @param {Bounty} bounty
+ * @return {boolean}
+ */
+function isBountyRelevant(term, bounty) {
+  console.log(bounty);
+  return containsIgnoreCase(bounty.description, term) ||
+    containsIgnoreCase(bounty.model, term) ||
+    containsIgnoreCase(bounty.title, term) ||
+    containsIgnoreCase(bounty.bountySetter, term);
+
 }
 
 function isDeviceRelevant(term, device) {
@@ -58,7 +80,7 @@ export function startSearch(searchText, devices) {
       // search users on user reputation blockchian for user inclusion
       let userResults = (await getAllUsers()).filter(u => containsIgnoreCase(searchText, u));
       // search bounties on the bounty blockchain for bounty inclusion
-      let bountyResults = []; // list of firmware objects
+      let bountyResults = (await  retrieveAllBounties()).filter(b => isBountyRelevant(searchText, b));
       // device bounties
       let deviceResults = devices.filter(d => isDeviceRelevant(searchText, d));
 
