@@ -24,7 +24,7 @@ const SearchCategory = {
 };
 
 
-class Search extends React.PureComponent {
+class Results extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -42,15 +42,15 @@ class Search extends React.PureComponent {
     switch(param) {
       case SearchCategory.FIRMWARE:
         return (<ListView emptyText={"Sorry, no firmware has been found, why not propose a bounty?"}>
-          {this.props.firmwareResults.map(e => <FirmwareWidget key={e.block} item={e} />)}
+          {this.props.firmwareResults.map(e => <FirmwareWidget key={e.block} item={e} history={this.props.history}/>)}
         </ListView>);
       case SearchCategory.USER:
         return (<ListView emptyText={"Sorry, no users have  been found, why not propose a bounty?"}>
-          {this.props.userResults.map(e => <ProfileWidget item={e} />)}
+          {this.props.userResults.map(e => <ProfileWidget item={e} history={this.props.history}/>)}
         </ListView>);
       case SearchCategory.BOUNTY:
         return (<ListView emptyText={"Sorry, no bounties have been found, why not propose a bounty?"}>
-          {this.props.bountyResults.map(e => <BountyWidget key={e.description} item={e} />)}
+          {this.props.bountyResults.map(e => <BountyWidget key={e.description} item={e} history={this.props.history}/>)}
         </ListView>);
       case SearchCategory.DEVICE:
         return (<ListView emptyText={"Sorry, no devices have been found, why not propose a bounty?"}>
@@ -119,4 +119,4 @@ const mapStateToProps = state => ({
   searchText: state.search.searchText
 });
 
-export default connect(mapStateToProps)(Search);
+export default connect(mapStateToProps)(Results);

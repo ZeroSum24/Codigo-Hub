@@ -26,7 +26,7 @@ class Search extends React.PureComponent {
 	renderResultStatus(searchStatus) {
 		switch(searchStatus) {
 			case SearchStatus.COMPLETED:
-				return  (<Results />);
+				return  (<Results history={this.props.history}/>);
 			case SearchStatus.ERROR:
 				// TODO display some kind of error state
 				return ('bar');

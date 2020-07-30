@@ -1,7 +1,9 @@
 import Widget from "../Widget";
 import {Col, Row} from "reactstrap";
 import React from "react";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
+
 import Firmware from "../../model/Firmware";
 import {initFirmwareView} from "../../actions/view";
 import { downloadFirmwareBinary } from '../../filecoin/client';
@@ -68,4 +70,6 @@ class FirmwareWidget extends React.PureComponent {
   }
 }
 
-export default FirmwareWidget;
+const mapStateToProps = state => ({});
+
+export default connect(mapStateToProps)(FirmwareWidget);

@@ -4,6 +4,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Bounty from "../../model/Bounty";
 import { collectBounty } from '../../blockchain/contracts';
+import {connect} from "react-redux";
+import {initBountyView} from "../../actions/view";
 
 class BountyWidget extends React.PureComponent {
 
@@ -11,10 +13,20 @@ class BountyWidget extends React.PureComponent {
     item: PropTypes.objectOf(Bounty).isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.openBountyView = this.openBountyView.bind(this);
+  }
+
+  openBountyView() {
+    console.log("bounty view props", this.props);
+    this.props.dispatch(initBountyView({bountyObject: this.props.item, history: this.props.history}));
+  }
+
   collect = () => {
     const bounty = this.props.item;
     let go = true;
-    if (bounty.bountySetter.toLowerCase() === window.ethereum.selectedAddress.toLowerCase()) {
+    if (bounty.bountySetter.toLowerCase() === this.props.ethereumAddress) {
       go = window.confirm('You are the creator of this bounty. You can only cancel it if 3 months have passed since creation, ' +
         'to give time for developers to create. The transaction will fail otherwise. Do you wish to continue?');
     }
@@ -27,7 +39,7 @@ class BountyWidget extends React.PureComponent {
     return (
       <Widget
         title={<h5>Bounty Title: <small className="text-muted">{bounty.title}</small></h5>}
-        close collapse>
+        close collapse onClick={this.openBountyView}>
         <p></p>
         <div className="widget-padding-md w-100 h-100 text-left border rounded">
           <Row>
@@ -57,4 +69,8 @@ class BountyWidget extends React.PureComponent {
   }
 }
 
-export default BountyWidget;
+const mapStateToProps = state => ({
+  ethereumAddress: state.ethereum.ethereumAddress
+});
+
+export default connect(mapStateToProps)(BountyWidget);

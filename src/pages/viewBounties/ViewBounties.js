@@ -4,20 +4,21 @@ import { Col, Container, Row } from 'reactstrap';
 import ListView from '../../components/ListView';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
-import { addBounty, retrieveAllBounties } from '../../blockchain/contracts';
+import { addBounty } from '../../blockchain/contracts';
 import AddBounty from './addBounty/AddBounty';
-import { setBounties } from '../../actions/bounty';
+import { setBounties } from '../../actions/model';
 
 class ViewBounties extends React.PureComponent {
 
   constructor(props) {
     super(props);
     this.state = {isOpen: false};
+
+    this.refreshComponent = this.refreshComponent.bind(this);
   }
 
-  refreshComponent = async () => {
-    const bounties = await retrieveAllBounties();
-    this.props.dispatch(setBounties(bounties));
+  refreshComponent() {
+    this.props.dispatch(setBounties());
   }
 
   onAddBounty = async (bounty) => {
@@ -48,7 +49,7 @@ class ViewBounties extends React.PureComponent {
 					<Row>
 						<Col xs={12} sm={12} md={12}>
 							<ListView emptyText={"Sorry, no bounties are currently available. Please check back soon!"}>
-                {this.props.bountyList.map(e => <BountyWidget key={e.block_num} item={e} />)}
+                {this.props.bountyList.map(e => <BountyWidget key={e.block_num} item={e} history={this.props.history}/>)}
               </ListView>
 					  </Col>
 					</Row>
