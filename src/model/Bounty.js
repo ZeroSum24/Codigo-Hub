@@ -1,12 +1,13 @@
 
 class Bounty {
-  constructor(description, brand, model, ethAmount, bountySetterAddress, firmwareVersion) {
+  constructor(title, description, model, ethAmount, firmwareVersion, bountySetterAddress=0, block_num=0) {
+    this.title = title;
     this.description = description;
-    this.brand = brand;
     this.model = model;
     this.ethAmount = ethAmount;
-    this.bountySetter = bountySetterAddress;
     this.firmwareVersion = firmwareVersion;
+    this.bountySetter = bountySetterAddress;
+    this.block_num = block_num;
   }
 }
 
