@@ -4,7 +4,7 @@ import alerts from './alerts';
 import ethereum from "./ethereum";
 import navigation from './navigation';
 import register from './register';
-import devices from './devices';
+import profile from './profile';
 import search from './search';
 import model from './model';
 import views from './views'
@@ -15,7 +15,7 @@ export default combineReducers({
   ethereum,
   navigation,
   register,
-  devices,
+  profile,
   search,
   model,
   views

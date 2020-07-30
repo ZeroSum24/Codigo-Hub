@@ -1,11 +1,12 @@
+import {ProfileWithStats} from "../model/Profile";
 
-
-export function retrieveStatsDetails(targetAddress, currentUserAddr) {
-  // TODO return profile details -- consult the redux state if current user
-  return getProfileDetails(targetAddress)
-}
-
-
-function getProfileDetails(address) {
-  return {'address': address}
+/**
+ * Should add the latest user stats pulled from the User Reputation smart contract + The Graph
+ * @param profile
+ * @returns {ProfileWithStats}
+ */
+export function retrieveStatsDetails(profile) {
+  console.log("retrieve stats", profile);
+  return new ProfileWithStats(profile.address,profile.name, profile.description, profile.image,
+    "", "", "")
 }

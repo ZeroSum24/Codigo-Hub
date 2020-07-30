@@ -31,102 +31,87 @@ class  UserInfo extends React.Component {
       <Row>
         <Col sm={6}>
         <Grid align="center"  container={true}>
-          <Grid align="center" item xs={16}>
-            {
-              <Container>
-                <Widget className="widget-auth mx-auto">
-                  <div align="center">
-                      <ExampleComponent
-                        image={logo}
-                        roundedColor=""
-                        imageWidth="150"
-                        imageHeight="150"
-                        roundedSize="13"/>
-                      <div align="center">
-                        <h1 className="page-title"><span className="fw-semi-bold">User Name</span></h1>
-                      </div>
-                      <Row>
-                        <Col sm={6}>
-                          <h5><span className="fw-semi-bold">User Address: </span></h5>
-                          <h5><span className="fw-semi-bold">Website:</span></h5>
-                        </Col>
-                        <Col sm={6}>
-                          <h5>1231231223</h5>
-                          <div onclick="location.href='portable-display-stands.html';" id="smallbox">www.example.com</div>
-                        </Col>
-                      </Row>
-                      <div align="center">
-                       <br></br>
-                       <br></br>
-                        <h5><span className="fw-semi-bold">
-    I write code and break stuff. Mostly build innovative solutions that advance human civilization.
-                        </span>
-                        </h5>
-                      </div>
+          <Grid align="center" item xs={12}>
+            <Container>
+              <Widget className="widget-auth mx-auto">
+                <div align="center">
+                    <ExampleComponent
+                      image={this.props.profile.image}
+                      roundedColor=""
+                      imageWidth="150"
+                      imageHeight="150"
+                      roundedSize="13"/>
+                    <div align="center">
+                      <h1 className="page-title"><span className="fw-semi-bold">{this.props.profile.name}</span></h1>
                     </div>
-                </Widget>
-              </Container>
-            }
-          </Grid>
-          <Grid item xs={1}>
-            {isCurrentUser ? (
-              <Button className={s.EditButton} color="link" onClick={this.showEditProfileDialog}>
-                <EditIcon/>
-              </Button>): null}
+                    <Row>
+                      <Col sm={6}>
+                        <h5><span className="fw-semi-bold">User Address: </span></h5>
+                        <h5><span className="fw-semi-bold">Website:</span></h5>
+                      </Col>
+                      <Col sm={6}>
+                        <h5 style={{textOverflow: "ellipsis"}}>{this.props.profile.address}</h5>
+                        <a >{this.props.profile.website}</a>
+                      </Col>
+                    </Row>
+                    <div align="center">
+                     <br></br>
+                     <br></br>
+                      <h5><span className="fw-semi-bold">
+                        {this.props.profile.communityScore}
+                      </span>
+                      </h5>
+                    </div>
+                  </div>
+              </Widget>
+            </Container>
           </Grid>
         </Grid>
-        <EditProfileDialog show={this.state.showEditDialog}  onClose={this.closeEditProfileDialog} />
         </Col>
-        <Col align="center" sm={6}>
-        <Grid align="center" container={true}>
-          <Grid item xs={11}>
-            {
-              <Container>
-                <Widget className="widget-auth mx-auto">
-                  <div align="center">
-                      <ExampleComponent
-                        image={logo}
-                        roundedColor=""
-                        imageWidth="150"
-                        imageHeight="150"
-                        roundedSize="13"/>
-                      <div align="center">
-                        <h1 className="page-title"><span className="fw-semi-bold">FirstNames Stats</span></h1>
-                      </div>
 
+        <Col align="center" sm={6}>
+          <Grid align="center" container={true}>
+            <Grid item xs={11}>
+                <Container>
+                  <Widget className="widget-auth mx-auto">
+                    <div align="center">
+                      <div align="center">
+                        <h3 className="page-title">Reputation</h3>
+                      </div>
+                      <hr className={`${s.divider} text-white`} />
                       <Row>
                         <Col sm={6}>
-                          <h6><span className="fw-semi-bold">Community Score    </span></h6>
-                          <h6><span className="fw-semi-bold">Comments           </span></h6>
-                          <h6><span className="fw-semi-bold">Deployed firmware  </span></h6>
-                          <h6><span className="fw-semi-bold">Downloaded firmware</span></h6>
+                          <h5><span className="fw-semi-bold">Community Score    </span></h5>
                         </Col>
                         <Col sm={6}>
-                          <h6>1234</h6>
-                          <h6>1234</h6>
-                          <h6>1234</h6>
-                          <h6>1234</h6>
+                          <h5>{this.props.profile.communityScore}</h5>
+                        </Col>
+                      </Row>
+                      <hr className={`${s.divider} text-white`} />
+                      <Row>
+                        <Col sm={6}>
+                          <h6><span className="fw-semi-bold">Deployed firmware  </span></h6>
+                          <h6><span className="fw-semi-bold">Amount of Comment Upvotes</span></h6>
+                        </Col>
+                        <Col sm={6}>
+                          <h6>{this.props.profile.amountOfFirmwareContributions}</h6>
+                          <h6>{this.props.profile.amountOfCommentUpvotes}</h6>
                         </Col>
                       </Row>
                     </div>
-                </Widget>
-              </Container>
-            }
+                  </Widget>
+                </Container>
+            </Grid>
+            <Grid item xs={1}>
+              {isCurrentUser ? (
+                <Button className={s.EditButton} color="link" onClick={this.showEditProfileDialog}>
+                  <EditIcon/>
+                </Button>): null}
+            </Grid>
           </Grid>
-          <Grid item xs={1}>
-            {isCurrentUser ? (
-              <Button className={s.EditButton} color="link" onClick={this.showEditProfileDialog}>
-                <EditIcon/>
-              </Button>): null}
-          </Grid>
-        </Grid>
-        <EditProfileDialog show={this.state.showEditDialog}  onClose={this.closeEditProfileDialog} />
+          <EditProfileDialog show={this.state.showEditDialog}  onClose={this.closeEditProfileDialog} />
         </Col>
       </Row>
-
-
-
-
       </div>
 
     );

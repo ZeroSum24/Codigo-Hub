@@ -1,20 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import EditProfile from '3box-profile-edit-react';
-import { Modal, ModalBody } from 'reactstrap';
-
+import Modal from '@material-ui/core/Modal';
 
 class EditProfileDialog extends React.Component {
 
   render() {
     return (
-      <Modal isOpen={this.props.show} toggle={() => this.props.onClose()}>
-        <ModalBody>
+      <Modal onClose={this.props.onClose} open={this.props.show} isOpen={this.props.show}>
+        <div style={{alignItems: 'center', alignSelf: 'center'}}>
           <EditProfileComponent box={this.props.userBox}
                                 space={this.props.userSpace}
-                                myAddress={this.props.ethereumAddress}
-          />
-        </ModalBody>
+                                myAddress={this.props.ethereumAddress}/>
+        </div>
       </Modal>
     );
   }

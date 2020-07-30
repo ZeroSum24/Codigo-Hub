@@ -2,8 +2,9 @@ import { VIEW_FIRMWARE_SET, VIEW_PROFILE_SET, VIEW_BOUNTY_SET } from '../actions
 
 export default function views(state = {
   firmwareView: {},
-  profileView: {},
-  bountyView: {}
+  bountyView: {},
+  profileWithStats: {},
+  profileFirmwareHistory: []
 }, action) {
   switch (action.type) {
     case VIEW_FIRMWARE_SET:
@@ -12,7 +13,8 @@ export default function views(state = {
       });
     case VIEW_PROFILE_SET:
       return Object.assign({}, state, {
-        profileView: action.payload,
+        profileWithStats: action.payload.profileWithStats,
+        profileFirmwareHistory: action.payload.profileFirmwareHistory
       });
     case VIEW_BOUNTY_SET:
       return Object.assign({}, state, {

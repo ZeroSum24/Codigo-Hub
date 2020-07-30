@@ -1,13 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { parse }  from 'qs';
 
 import s from './Profile.module.scss';
 import {Grid} from "@material-ui/core";
 import UserInfo from "./components/UserInfo";
 import FirmwareHistory from "./components/FirmwareHistory";
-import {retrieveProfileDetails} from "../../blockchain/userProfile";
-import {retrieveFirmwareHistory} from "../../blockchain/firmwareHistory";
+
 
 import {Button} from "reactstrap";
 
@@ -17,17 +15,12 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
 
-    this.getProfileID = this.getProfileID.bind(this);
+    this.state = {
+      "viewState": viewStates.USER_INFO
+    };
+
     this.changeToUserInfoView = this.changeToUserInfoView.bind(this);
     this.changeToFirmwareView = this.changeToFirmwareView.bind(this);
-
-    let targetAddress = this.getProfileID();
-    this.state = {
-      "viewState": viewStates.USER_INFO,
-      "targetAddress": targetAddress,
-      "profileDetails": retrieveProfileDetails(targetAddress, this.props.currentUserAddr),
-      "firmwareHistory": retrieveFirmwareHistory(targetAddress),
-    };
   }
 
   changeToUserInfoView() {
@@ -38,9 +31,6 @@ class Profile extends React.Component {
     this.setState({"viewState": viewStates.FIRMWARE_HISTORY})
   }
 
-  getProfileID() {
-    return parse(this.props.location.search, {ignoreQueryPrefix: true}).id
-  }
 
   render() {
 
@@ -49,20 +39,18 @@ class Profile extends React.Component {
 
     return (
       <div className={s.root}>
-        <h1 className="page-title">Profile: <small>{this.state.targetAddress}</small></h1>
+        <h1 className="page-title">Profile: <small>{this.props.profile.address}</small></h1>
         {/*TODO update the User Profile title above to give the users name (ideally) or address*/}
-        <Grid container={true} style={{justifyContent: 'center', paddingBottom: '20px'}}>
+        <Grid container={true} style={{justifyContent: 'center', paddingBottom: '40px'}}>
           <Grid item xs={2}>
-            <Button className={userInfoButton}  color="link"  onClick={this.changeToUserInfoView}>User Info</Button>
+            <Button className={userInfoButton}  color="link"  onClick={this.changeToUserInfoView}>User Profile</Button>
           </Grid>
-
           <Grid item xs={2}>
             <Button className={firmwareButton}  color="link"  onClick={this.changeToFirmwareView}>Firmware History</Button>
           </Grid>
         </Grid>
-
-        {this.state.viewState === viewStates.USER_INFO  ? (<UserInfo  profile={this.state.profileDetails} />):
-        (<FirmwareHistory firmwareHistory={this.state.firmwareHistory}/>)})
+        {this.state.viewState === viewStates.USER_INFO  ? (<UserInfo  profile={this.props.profile} />):
+          (<FirmwareHistory firmwareHistory={this.props.firmwareHistory}/>)}
       </div>
     );
   }
@@ -76,6 +64,8 @@ const viewStates = {
 
 const mapStateToProps = state => ({
   currentUserAddr: state.ethereum.ethereumAddress,
+  profile: state.views.profileWithStats,
+  firmwareHistory: state.views.profileFirmwareHistory
 });
 
 export default connect(mapStateToProps)(Profile);

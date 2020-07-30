@@ -1,4 +1,7 @@
 // Login Management
+import Box from "3box";
+
+import {setUserProfile} from "./profile";
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -98,12 +101,12 @@ export function enableUserEthereum() {
             console.log("ethereum address retrieved", ethereumAddress);
 
             // Authenticate and the users 3box and app space
-            // const box = await Box.create(window.ethereum);
-            // const spaces = ['código-user-space'];
-            // await box.auth(spaces, {address: ethereumAddress});
-            // await box.syncDone;
-            const box = null;
-            const spaces = [null];
+            const box = await Box.create(window.ethereum);
+            const spaces = ['código-user-space'];
+            await box.auth(spaces, {address: ethereumAddress});
+            await box.syncDone;
+            // const box = null;
+            // const spaces = [null];
 
             // Accounts now exposed
             dispatch(ethereumAuthSuccess({
@@ -111,6 +114,8 @@ export function enableUserEthereum() {
                 userBox: box,
                 userSpace: spaces[0]
             }));
+
+            dispatch(setUserProfile({userAddress: ethereumAddress, userBox: box}));
 
             console.log('eth auth success', ethereumAddress, box, spaces)
 

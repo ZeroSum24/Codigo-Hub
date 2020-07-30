@@ -128,8 +128,8 @@ class AddDeviceDialog extends React.PureComponent  {
 }
 
 const mapStateToProps = state => ({
-    addDeviceSuccess: state.devices.addDeviceSuccess,
-    deviceList: state.devices.deviceList
+    addDeviceSuccess: state.profile.addDeviceSuccess,
+    deviceList: state.profile.deviceList
 });
 
 export default connect(mapStateToProps)(AddDeviceDialog);

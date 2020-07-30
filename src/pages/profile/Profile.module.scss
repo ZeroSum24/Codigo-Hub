@@ -54,3 +54,14 @@
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
+
+@import '../../styles/app';
+
+.divider {
+  display: block;
+  border:none;
+  border-top:1px dotted #f00;
+  width: 99%;
+  margin: 10px auto;
+  background: $white;
+}
