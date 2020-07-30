@@ -47,11 +47,11 @@ export function initFirmwareView(payload) {
  */
 export function initProfileView(payload) {
 
-  return (dispatch) => {
+  return async (dispatch) => {
 
     console.log("initial initProfileView", payload);
 
-    let profileWithStats = retrieveStatsDetails(payload.profile);
+    let profileWithStats = await retrieveStatsDetails(payload.profile);
     let profileFirmwareHistory = retrieveFirmwareHistory(payload.profile.address);
 
     console.log("init profile view", profileWithStats, profileFirmwareHistory, typeof profileWithStats, typeof profileFirmwareHistory)
