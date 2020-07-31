@@ -15,7 +15,7 @@ class ListView extends React.Component {
 
   render() {
     return (
-      <Grid container style={{ marginTop: '50px' }}>
+      <Grid container>
         <Grid container>
           <Grid xs={10}>
           </Grid>
