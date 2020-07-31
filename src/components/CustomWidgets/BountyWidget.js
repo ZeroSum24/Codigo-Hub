@@ -43,7 +43,7 @@ class BountyWidget extends React.PureComponent {
             <Col sm={6}>
               <h6>{bounty.bountySetter}</h6>
               <h6>{bounty.description}</h6>
-              <h6>v1.1.0</h6>
+              <h6>{bounty.firmwareVersion}</h6>
               <h6>{bounty.model}</h6>
               <h6>{bounty.ethAmount} Wei</h6>
               <h6>{bounty.ethAmount === 0 ? 'False' : 'True'}</h6>

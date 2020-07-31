@@ -1,5 +1,7 @@
 export default class Firmware {
   constructor(hash, IPFS_link, description, block, developer, device_type) {
+    this.name = 'Firmware for ' + device_type;
+    this.version = 'v0.0.1';
     this.hash = hash;
     this.IPFS_link = IPFS_link;
     this.description = description;

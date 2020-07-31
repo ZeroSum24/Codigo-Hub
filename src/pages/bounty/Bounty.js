@@ -42,7 +42,7 @@ class Bounty extends React.PureComponent {
 						</Col>
 						<Col xs={12} sm={12} md={3}>
 							<Button style={{ marginTop: '13px' }} align="centre" color="warning">
-                {bounty.ethAmount || 'Eth Amount'}
+                Eth Amount
 							</Button>
 						</Col>
 					</Row>
@@ -72,10 +72,13 @@ class Bounty extends React.PureComponent {
 						</Col>
 						<Col xs={12} sm={12} md={3}>
 							<Card style={{ marginTop: '3px' }} body outline color="primary">
-								<CardTitle>Bounty Details :</CardTitle>
+								<CardTitle>Details</CardTitle>
 								<CardText>Model : {bounty.model || ''}</CardText>
-								<CardText>Firmware version : {bounty.firmwareVersion || ''}</CardText>
-							</Card>
+                <CardText>Firmware version : {bounty.firmwareVersion || ''}</CardText>
+                <CardText>Creator : {bounty.bountySetter || ''}</CardText>
+                <CardText>Eth amount : {bounty.ethAmount || ''} Wei</CardText>
+                <CardText>Collected : {bounty.ethAmount === 0 ? 'Yes' : 'No'}</CardText>
+              </Card>
 							<br />
 							<br />
 							<Row>
@@ -84,7 +87,7 @@ class Bounty extends React.PureComponent {
 								<Col sm="auto">
 									{' '}
 									<Button style={{ width: '180px' }} color="info">
-                    {bounty.bountySetter || 'Bounty Setter'}
+                    Bounty Setter
 									</Button>
 								</Col>
 								<Col sm={4} md={2} />
@@ -96,7 +99,7 @@ class Bounty extends React.PureComponent {
 								<Col xs={12} sm="auto">
 									{' '}
 									<Button style={{ width: '180px' }} color="primary" onClick={this.collect}>
-										Accept Bounty{' '}
+										Collect Bounty{' '}
 									</Button>
 								</Col>
 								<Col sm={4} md={2} />

@@ -26,7 +26,7 @@ class FirmwareWidget extends React.PureComponent {
     const firmware = this.props.item;
     return (
       <Widget
-        title={<h5>Firmware Name: <small className="text-muted">WHAT_IS_THIS?</small></h5>}
+        title={<h5>Firmware Name: <small className="text-muted">{firmware.name}</small></h5>}
         close collapse onClick={this.openFirmwareView}>
         <div className="widget-padding-md w-100 h-100 text-left border rounded">
           <Row>
@@ -38,7 +38,7 @@ class FirmwareWidget extends React.PureComponent {
             </Col>
             <Col sm={6}>
               <h6>{firmware.developer}</h6>
-              <h6>NOT_YET_IMPL</h6>
+              <h6>{firmware.version}</h6>
               <h6>{firmware.description}</h6>
               <h6>{firmware.device_type}</h6>
             </Col>

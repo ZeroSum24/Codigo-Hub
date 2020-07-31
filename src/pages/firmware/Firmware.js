@@ -82,7 +82,7 @@ void loop() {
     const firmware = this.props.item || {};
     return (
       <div>
-        <h1 className="page-title">Firmware name</h1>
+        <h1 className="page-title">{firmware.name || 'Firmware name'}</h1>
         <Container fluid={true}>
           <Row>
             <Col xs={12} sm={12} md={9}>
@@ -115,7 +115,7 @@ void loop() {
             </Col>
             <Col xs={12} sm={12} md={3}>
               <Card body outline color="primary">
-                <CardTitle>Details Box</CardTitle>
+                <CardTitle>Details</CardTitle>
                 <CardText>
                   {firmware.description || 'No description available'}
                 </CardText>
