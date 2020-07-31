@@ -7,22 +7,25 @@ import { IconButton } from '@material-ui/core';
 import ThreeBoxComments from '3box-comments-react';
 
 import { Row, Col, Container, Card, CardTitle, CardText, CardBody, Button } from 'reactstrap';
+import { downloadFirmwareBinary } from '../../filecoin/client';
+import { sendEth } from '../../blockchain/client';
+import { connect } from 'react-redux';
 
 class Firmware extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			code: '',
-			checkedArr: [ false, false, false ],
-			score: '123',
-			adminEthAddr: '0xf7367F3abDB31428Ed56032AbC14B245fCC95BA2',
-			box: '123',
-			myAddress: '0xf7367F3abDB31428Ed56032AbC14B245fCC95BA2'
-		};
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      code: '',
+      checkedArr: [false, false, false],
+      score: '123',
+      adminEthAddr: '0xf7367F3abDB31428Ed56032AbC14B245fCC95BA2',
+      box: '123',
+      myAddress: '0xf7367F3abDB31428Ed56032AbC14B245fCC95BA2'
+    };
+  }
 
-	render() {
-		const codeString = `
+  render() {
+    const codeString = `
 /*
   Analog input, analog output, serial output
 
@@ -76,108 +79,113 @@ void loop() {
   delay(2);
 }
 `;
-
-		return (
-			<div>
-				<h1 align="centre" className="page-title">
-					Firmware name &nbsp;
-				</h1>
-				<Container fluid={true}>
-					<Row>
-						<Col xs={12} sm={12} md={9}>
-							<SyntaxHighlighter
-								language="javascript"
-								showLineNumbers
-								style={atomDark}
-								customStyle={{ height: '500px' }}
-							>
-								{codeString}
-							</SyntaxHighlighter>{' '}
-							<br />
-							<br />
-							<br />
-							<Row>
-								<Col xs="2" sm="2" md="2" />{' '}
-								<Col xs="auto" sm="auto" md="auto">
-									<ThreeBoxComments
-										// required
-										spaceName="mySpaceName"
-										threadName="myThreadName"
-										adminEthAddr={this.state.adminEthAddr}
-										// Required props for auth A. & B.
-										box={this.state.box}
-										currentUserAddr={this.state.myAddress}
-									/>{' '}
-								</Col>
-								<Col xs="2" sm="2" md="2" />
-							</Row>
-						</Col>
-						<Col xs={12} sm={12} md={3}>
-							<Card body outline color="primary">
-								<CardTitle>Details Box</CardTitle>
-								<CardText>
-									With supporting text below as a natural lead-in to additional content.
-								</CardText>
-							</Card>
-							<br />
-							<br />
-							<Row>
-								{' '}
-								<Col sm={4} md={2} />
-								<Col sm="auto">
-									{' '}
-									<Button style={{ width: '180px' }} color="info">
-										Download{' '}
-									</Button>
-								</Col>
-								<Col sm={4} md={2} />
-							</Row>
-							<br />
-							<Row>
-								{' '}
-								<Col sm={4} md={2} />
-								<Col sm="auto">
-									{' '}
-									<Button style={{ width: '180px' }} color="primary">
-										Deploy to Device{' '}
-									</Button>
-								</Col>
-								<Col sm={4} md={2} />
-							</Row>
-							<br />
-							<Row>
-								{' '}
-								<Col sm={4} md={2} />
-								<Col sm="auto" md="auto">
-									{' '}
-									<Button style={{ width: '180px' }} color="success">
-										Donate to DEV{' '}
-									</Button>
-								</Col>
-								<Col sm={4} md={2} />
-							</Row>
-							<br />
-							<br />
-							<Card>
-								<CardBody>
-									<CardTitle>
-										{' '}
-										<IconButton color="inherit">
-											<ThumbUpIcon />{' '}
-										</IconButton>
-										<IconButton color="inherit">
-											<ThumbDownIcon />
-										</IconButton>
-									</CardTitle>
-									<CardText>Community Score ammount of {this.state.score} </CardText>
-								</CardBody>
-							</Card>
-						</Col>
-					</Row>
-				</Container>
-			</div>
-		);
-	}
+    const firmware = this.props.item || {};
+    return (
+      <div>
+        <h1 className="page-title">{firmware.name || 'Firmware name'}</h1>
+        <Container fluid={true}>
+          <Row>
+            <Col xs={12} sm={12} md={9}>
+              <SyntaxHighlighter
+                language="javascript"
+                showLineNumbers
+                style={atomDark}
+                customStyle={{ height: '500px' }}
+              >
+                {codeString}
+              </SyntaxHighlighter>{' '}
+              <br/>
+              <br/>
+              <br/>
+              <Row>
+                <Col xs="2" sm="2" md="2"/>{' '}
+                <Col xs="auto" sm="auto" md="auto">
+                  <ThreeBoxComments
+                    // required
+                    spaceName="mySpaceName"
+                    threadName="myThreadName"
+                    adminEthAddr={this.state.adminEthAddr}
+                    // Required props for auth A. & B.
+                    box={this.state.box}
+                    currentUserAddr={this.props.ethereumAddress}
+                  />{' '}
+                </Col>
+                <Col xs="2" sm="2" md="2"/>
+              </Row>
+            </Col>
+            <Col xs={12} sm={12} md={3}>
+              <Card body outline color="primary">
+                <CardTitle>Details</CardTitle>
+                <CardText>
+                  {firmware.description || 'No description available'}
+                </CardText>
+              </Card>
+              <br/>
+              <br/>
+              <Row>
+                {' '}
+                <Col sm={4} md={2}/>
+                <Col sm="auto">
+                  {' '}
+                  <Button style={{ width: '180px' }}
+                          color="info"
+                          onClick={() => downloadFirmwareBinary(firmware.IPFS_link, 'firmware.bin', 'application/octet-stream')}>
+                    Download
+                  </Button>
+                </Col>
+                <Col sm={4} md={2}/>
+              </Row>
+              <br/>
+              <Row>
+                {' '}
+                <Col sm={4} md={2}/>
+                <Col sm="auto">
+                  {' '}
+                  <Button style={{ width: '180px' }} color="primary">
+                    Deploy to Device{' '}
+                  </Button>
+                </Col>
+                <Col sm={4} md={2}/>
+              </Row>
+              <br/>
+              <Row>
+                {' '}
+                <Col sm={4} md={2}/>
+                <Col sm="auto" md="auto">
+                  {' '}
+                  <Button style={{ width: '180px' }} color="success" onClick={() => sendEth(firmware.developer)}>
+                    Donate to DEV{' '}
+                  </Button>
+                </Col>
+                <Col sm={4} md={2}/>
+              </Row>
+              <br/>
+              <br/>
+              <Card>
+                <CardBody>
+                  <CardTitle>
+                    {' '}
+                    <IconButton color="inherit">
+                      <ThumbUpIcon/>{' '}
+                    </IconButton>
+                    <IconButton color="inherit">
+                      <ThumbDownIcon/>
+                    </IconButton>
+                  </CardTitle>
+                  <CardText>Community Score amount of {this.state.score} </CardText>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    );
+  }
 }
 
-export default Firmware;
+const mapStateToProps = state => ({
+  item: state.views.firmwareView.firmwareView,
+  ethereumAddress: state.ethereum.ethereumAddress
+});
+
+export default connect(mapStateToProps)(Firmware);

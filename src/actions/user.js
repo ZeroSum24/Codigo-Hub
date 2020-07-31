@@ -2,6 +2,7 @@
 import Box from "3box";
 
 import {setUserProfile} from "./profile";
+import { setBounties, setFirmware } from './model';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -99,6 +100,11 @@ export function enableUserEthereum() {
             // Request account access if needed
             const ethereumAddress = (await window.ethereum.request({ method: 'eth_requestAccounts' }))[0];
             console.log("ethereum address retrieved", ethereumAddress);
+            // initialize blockchain data
+            //init available firmware
+            dispatch(setFirmware());
+            //init available bounties
+            dispatch(setBounties());
 
             // Authenticate and the users 3box and app space
             const box = await Box.create(window.ethereum);
