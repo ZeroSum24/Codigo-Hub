@@ -562,13 +562,13 @@ function getUsers() {
 
 /**
  * Retrieve instance of the bounties contract
- * @return {Contract} the users contract
+ * @return {Contract} the bounties contract
  */
 function getBounties() {
   if (bountiesRepo == null) {
-    users = new web3.eth.Contract(bountiesABI, bountiesAddress);
+    bountiesRepo = new web3.eth.Contract(bountiesABI, bountiesAddress);
   }
-  return users;
+  return bountiesRepo;
 }
 
 /**
@@ -625,7 +625,7 @@ export function retrieveMostTrustedFirmwareForDevice(device_type) {
 
 /**
  * challenge method on identity contract
- * @param {String} The address to associate with the current address
+ * @param {String} addressToClaim address to associate with the current address
  * @returns {Promise<String>} The challenge, should be signed by web3.eth.accounts.sign then passed to sendResponse
  */
 export function getChallenge(addressToClaim) {
@@ -638,7 +638,7 @@ export function getChallenge(addressToClaim) {
 
 /**
  * response_decomposed method on identity contract
- * @param {String} The response value
+ * @param {String} response response value
  * @return {Promise<String>} hash of transaction
  */
 export function sendResponse(response) {
@@ -648,7 +648,7 @@ export function sendResponse(response) {
 
 /**
  * Map the user (3box) address to the developer (codigo) address
- * @param {String} the user address
+ * @param {String} userAddress user address
  * @return {Promise<String>} the developer address (if there is no mapping it
  * returns an all zero address, e.g "0x000...")
  */
@@ -658,7 +658,7 @@ export function getDeveloperAddress(userAddress) {
 
 /**
  * Map the developer (codigo) address to the user (3box) address
- * @param {String} the developer address
+ * @param {String} developerAddress developer address
  * @return {Promise<String>} the user address (if there is no mapping it returns
  * an all zero address, e.g "0x0000...")
  */

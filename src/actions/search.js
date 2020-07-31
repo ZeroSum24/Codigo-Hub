@@ -53,7 +53,6 @@ function isFirmwareRelevant(term, firmware) {
  * @return {boolean}
  */
 function isBountyRelevant(term, bounty) {
-  console.log(bounty);
   return containsIgnoreCase(bounty.description, term) ||
     containsIgnoreCase(bounty.model, term) ||
     containsIgnoreCase(bounty.title, term) ||
