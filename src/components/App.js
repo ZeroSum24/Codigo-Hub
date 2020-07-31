@@ -60,7 +60,7 @@ class App extends React.PureComponent {
     } else if (this.props.isFetching && !this.props.isEthereumEnabled) {
       // begin enable ethereum process (default application state at beginning of user flow)
       // console.log('loading fetching')
-      appView = (<Loader loadingText={"Loading Código"}/>);
+      appView = (<Loader loadingText={"Loading Código Hub"}/>);
     } else {
       //  An error has occurred logging users in with ethereum
       appView = (<AuthErrorView onClick={this.handleEthereumEnable} title={"Ethereum Account Access Denied"}/>);

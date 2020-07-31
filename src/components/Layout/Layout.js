@@ -98,7 +98,7 @@ class Layout extends React.Component {
 									</Switch>
 								</CSSTransition>
 							</TransitionGroup>
-							<footer className={s.contentFooter}>Código Admin Panel</footer>
+							<footer className={s.contentFooter}>Código Hub</footer>
 						</main>
 					</Hammer>
 				</div>
