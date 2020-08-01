@@ -1,10 +1,19 @@
 #!/usr/bin/env python3
 import time
 import hashlib
+from termcolor import colored
 
+from alive_progress import alive_bar
 import paho.mqtt.client as mqtt
 
 client_name = "uno"
+
+
+def animate(length):
+    with alive_bar(length) as bar:
+        for item in range(0, length):
+            time.sleep(.002)
+            bar()
 
 
 def on_connect(client, userdata, flags, rc):
@@ -20,10 +29,20 @@ def md5_firmware(firmware_binary):
 
 
 def upgrade_firmware(client, userdata, msg):
+    filename = '/tmp/output.bin'
     firmware = msg.payload
-    print('firmware upgrade: ' + msg.topic + ' md5: ' + md5_firmware(firmware))
-    with open('/tmp/output.bin', 'wb') as f:
+    print('Downloading firmware')
+    with open(filename, 'wb') as f:
         f.write(firmware)
+    animate(len(firmware))
+    print('Downloaded at {}, md5 hash: {}'.format(filename, md5_firmware(firmware)))
+    print('Press any key to abort firmware upgrade...')
+    time.sleep(2)
+    print('Extracting binary file...')
+    animate(400)
+    print('Flashing firmware. ' + colored('Do not power off while flashing', 'red'))
+    animate(300)
+    print('Press any key to restart device.')
 
 
 def on_message(client, userdata, msg):
