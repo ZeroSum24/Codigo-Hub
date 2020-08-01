@@ -9,7 +9,6 @@ class ErrorPage extends React.Component {
 	render() {
 		return (
 			<div className={s.errorPage}>
-				<div>Error</div>
 				<Container>
 					<div className={`${s.errorContainer} mx-auto`}>
 						<p className={s.errorInfo}>Opps, it seems that we couldn't find what you're looking for</p>
