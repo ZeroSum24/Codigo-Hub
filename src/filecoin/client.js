@@ -41,11 +41,10 @@ export function getFirmwareAsByteBuffer(cid) {
   return PG.ffs.get(cid);
 }
 
-export async function downloadFirmwareBinary(hash, filename, mimeType) {
-  return getFirmwareAsByteBuffer(hash).then(uintarray => {
-    const blob = new Blob([uintarray], {
-      type: mimeType
-    })
+export async function downloadFirmwareBinary(cid, filename, mimeType) {
+  return getFirmwareAsByteBuffer(cid).then(uintarray => {
+    const blob = new Blob([uintarray], { type: mimeType });
+    console.log(blob);
     const url = window.URL.createObjectURL(blob)
     const downloadLink = document.createElement('a');
     downloadLink.href = url;

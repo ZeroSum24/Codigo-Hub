@@ -5,6 +5,7 @@ import FirmwareUpgradeDialog from '../../pages/deviceOverview/components/firmwar
 import PropTypes from "prop-types";
 import Device from "../../model/Device";
 import { isDeviceActive, subscribeToStatusChanges, unSubscribeFromStatusChanges } from '../../mqtt/client';
+import logo from '../../images/rsz_4rsz_codigo-01.png';
 
 class DeviceWidget extends React.PureComponent {
 
@@ -44,19 +45,29 @@ class DeviceWidget extends React.PureComponent {
         <Widget
           title={<h5>Device Name: <small className="text-muted">{device.name}</small></h5>}
           close collapse >
-          <p></p>
           <div className="widget-padding-md w-100 h-100 text-left border rounded">
-            {/*TODO there is a bug with all the text being displayed as a single line, please display as a table*/}
+          <div align="center">
+            <img src={logo} alt="..." />
+          </div>
+
+          <Row>
+            <Col sm={6}>
+              <h3>
+                <span className="fw-semi-bold">{device.brand}</span>
+              </h3>
+            </Col>
+            <Col sm={6}>
+              <h3>
+                <span className="fw-semi-bold">{device.model}</span>
+              </h3>
+            </Col>
+          </Row>
             <Row>
               <Col sm={6}>
-                <h6><span className="fw-semi-bold">Brand: </span></h6>
-                <h6><span className="fw-semi-bold">Model: </span></h6>
-                <h6><span className="fw-semi-bold">Serial Number: </span></h6>
+                <h6><span className="fw-semi-bold">Serial: </span></h6>
                 <h6><span className="fw-semi-bold">Status: </span></h6>
               </Col>
               <Col sm={6}>
-                <h6>{device.brand}</h6>
-                <h6>{device.model}</h6>
                 <h6>{device.serialNumber}</h6>
                 {this.state.isActive ?
                   <span>
@@ -64,9 +75,7 @@ class DeviceWidget extends React.PureComponent {
                     <i className={'glyphicon glyphicon-upload'}
                        style={{fontSize: '15px'}}
                        title={'Deploy Firmware'} onClick={this.showFirmwareDialog}/>
-                  </span>
-                  :
-                  <h6>Inactive</h6>
+                  </span>:<h6>Inactive</h6>
                 }
               </Col>
             </Row>

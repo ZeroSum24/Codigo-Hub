@@ -1,9 +1,8 @@
 import Widget from "../Widget";
-import {Col, Row, Button} from "reactstrap";
+import {Col, Row} from "reactstrap";
 import React from "react";
 import PropTypes from "prop-types";
 import Bounty from "../../model/Bounty";
-import { collectBounty } from '../../blockchain/contracts';
 import {connect} from "react-redux";
 import {initBountyView} from "../../actions/view";
 
@@ -21,16 +20,6 @@ class BountyWidget extends React.PureComponent {
   openBountyView() {
     console.log("bounty view props", this.props);
     this.props.dispatch(initBountyView({bountyObject: this.props.item, history: this.props.history}));
-  }
-
-  collect = () => {
-    const bounty = this.props.item;
-    let go = true;
-    if (bounty.bountySetter.toLowerCase() === this.props.ethereumAddress) {
-      go = window.confirm('You are the creator of this bounty. You can only cancel it if 3 months have passed since creation, ' +
-        'to give time for developers to create. The transaction will fail otherwise. Do you wish to continue?');
-    }
-    if (go) collectBounty(bounty.block_num);
   }
 
   render() {
@@ -54,13 +43,10 @@ class BountyWidget extends React.PureComponent {
             <Col sm={6}>
               <h6>{bounty.bountySetter}</h6>
               <h6>{bounty.description}</h6>
-              <h6>v1.1.0</h6>
+              <h6>{bounty.firmwareVersion}</h6>
               <h6>{bounty.model}</h6>
               <h6>{bounty.ethAmount} Wei</h6>
               <h6>{bounty.ethAmount === 0 ? 'False' : 'True'}</h6>
-            </Col>
-            <Col sm={6}>
-              <Button onClick={this.collect}>Collect</Button>
             </Col>
           </Row>
         </div>

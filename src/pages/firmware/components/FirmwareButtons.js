@@ -8,6 +8,8 @@ import ThreeBoxComments from '3box-comments-react';
 
 import { Row, Col, Container, Card, CardTitle, CardText, CardBody, Button } from 'reactstrap';
 import {connect} from "react-redux";
+import {downloadFirmwareBinary} from "../../../filecoin/client";
+import {sendEth} from "../../../blockchain/client";
 
 class FirmwareButtons extends React.Component {
 	constructor(props) {
@@ -24,7 +26,10 @@ class FirmwareButtons extends React.Component {
 					<Col sm={4} md={2} />
 					<Col sm="auto">
 						{' '}
-						<Button style={{ width: '200px' }} color="info">
+						<Button style={{ width: '200px' }} color="info"
+										onClick={() => downloadFirmwareBinary(this.props.firmware.IPFS_link,
+											'firmware.bin',
+											'application/octet-stream')}>
 							Download{' '}
 						</Button>
 					</Col>
@@ -48,7 +53,7 @@ class FirmwareButtons extends React.Component {
 					<Col sm={4} md={2} />
 					<Col sm="auto" md="auto">
 						{' '}
-						<Button style={{ width: '200px' }} color="success">
+						<Button style={{ width: '200px' }} color="success" onClick={() => sendEth(this.props.firmware.developer)}>
 							Donate to Developer{' '}
 						</Button>
 					</Col>

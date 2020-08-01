@@ -1,21 +1,21 @@
 import React from 'react';
+import {connect} from "react-redux";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ThreeBoxComments from '3box-comments-react';
-
 import { Row, Col, Container, Card, CardTitle, CardText, CardBody, Button } from 'reactstrap';
-import {connect} from "react-redux";
+
 import DetailsBox from "./components/DetailsBox";
 import FirmwareButtons from "./components/FirmwareButtons";
 import ReputationBox from "./components/ReputationBox";
+
 
 class Firmware extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			adminEthAddr: '0xf7367F3abDB31428Ed56032AbC14B245fCC95BA2',
-			box: '123',
-			myAddress: '0xf7367F3abDB31428Ed56032AbC14B245fCC95BA2'
+			box: '123'
 		};
 	}
 
@@ -53,7 +53,7 @@ class Firmware extends React.Component {
 										adminEthAddr={this.state.adminEthAddr}
 										// Required props for auth A. & B.
 										box={this.state.box}
-										currentUserAddr={this.state.myAddress}
+										currentUserAddr={this.props.ethereumAddress}
 									/>{' '}
 								</Col>
 								<Col xs="2" sm="2" md="2" />
@@ -63,7 +63,7 @@ class Firmware extends React.Component {
 							<DetailsBox details={this.props.firmware}/>
 							<br />
 							<br />
-							<FirmwareButtons details={this.props.firmware}/>
+							<FirmwareButtons firmware={this.props.firmware}/>
 							<br />
 							<br />
 							<ReputationBox details={this.props.firmware}/>
@@ -77,10 +77,10 @@ class Firmware extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-	firmware: state.views.firmwareStats,
-	source: state.views.firmwareSource,
-	developer: state.views.firmwareDeveloper
+  firmware: state.views.firmwareStats,
+  source: state.views.firmwareSource,
+  developer: state.views.firmwareDeveloper,
+  ethereumAddress: state.ethereum.ethereumAddress
 });
 
 export default connect(mapStateToProps)(Firmware);
-

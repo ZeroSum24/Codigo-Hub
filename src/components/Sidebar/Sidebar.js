@@ -75,7 +75,7 @@ class Sidebar extends React.Component {
 				<header className={s.logo}>
 					<img src={logo} alt="..." />
 					<a href="/">
-						Código <span className="fw-bold">User Panel</span>
+						Código <span className="fw-bold">Hub</span>
 					</a>
 				</header>
 				<ul className={s.nav}>
