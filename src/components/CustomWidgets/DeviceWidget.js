@@ -47,7 +47,7 @@ class DeviceWidget extends React.PureComponent {
           close collapse >
           <div className="widget-padding-md w-100 h-100 text-left border rounded">
           <div align="center">
-            <img src={logo} alt="..." />
+            <img src={logo} alt="...." />
           </div>
 
           <Row>

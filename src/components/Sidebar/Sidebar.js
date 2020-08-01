@@ -101,16 +101,7 @@ class Sidebar extends React.Component {
 						index="core"
 					/>
 					<h5 className={[ s.navTitle, s.groupTitle ].join(' ')}>Developer</h5>
-					<LinksGroup
-						onActiveSidebarItemChange={(activeItem) =>
-							this.props.dispatch(changeActiveSidebarItem(activeItem))}
-						activeItem={this.props.activeItem}
-						header="View Firmware"
-						isHeader
-						iconName="fi flaticon-star"
-						link="/app/view_firmware"
-						index="ui"
-					/>
+
 					<LinksGroup
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
@@ -136,12 +127,24 @@ class Sidebar extends React.Component {
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
-						header="View Bounties"
+						header="Firmware"
+						isHeader
+						iconName="fi flaticon-star"
+						link="/app/view_firmware"
+						index="ui"
+					/>
+
+					<LinksGroup
+						onActiveSidebarItemChange={(activeItem) =>
+							this.props.dispatch(changeActiveSidebarItem(activeItem))}
+						activeItem={this.props.activeItem}
+						header="Bounties"
 						isHeader
 						iconName="fi flaticon-layers"
 						link="/app/view_bounties"
 						index="ui"
 					/>
+
 				</ul>
 			</nav>
 		);
