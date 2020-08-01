@@ -7,6 +7,10 @@ import { IconButton } from '@material-ui/core';
 import ThreeBoxComments from '3box-comments-react';
 
 import { Row, Col, Container, Card, CardTitle, CardText, CardBody, Button } from 'reactstrap';
+import {connect} from "react-redux";
+import DetailsBox from "./components/DetailsBox";
+import FirmwareButtons from "./components/FirmwareButtons";
+import ReputationBox from "./components/ReputationBox";
 
 class Firmware extends React.Component {
 	constructor(props) {
@@ -79,19 +83,22 @@ void loop() {
 
 		return (
 			<div>
-				<h1 align="centre" className="page-title">
-					Firmware name &nbsp;
-				</h1>
+				<div align="centre" className="page-title">
+					<h1 >
+						Firmware: {this.props.firmware.hash}
+					</h1>
+					<h4>Contributed by {this.props.developer.name} ({this.props.developer.communityScore})</h4>
+				</div>
 				<Container fluid={true}>
 					<Row>
-						<Col xs={12} sm={12} md={9}>
+						<Col xs={12} sm={12} md={8}>
 							<SyntaxHighlighter
 								language="javascript"
 								showLineNumbers
 								style={atomDark}
 								customStyle={{ height: '500px' }}
 							>
-								{codeString}
+								{this.props.source}
 							</SyntaxHighlighter>{' '}
 							<br />
 							<br />
@@ -112,66 +119,14 @@ void loop() {
 								<Col xs="2" sm="2" md="2" />
 							</Row>
 						</Col>
-						<Col xs={12} sm={12} md={3}>
-							<Card body outline color="primary">
-								<CardTitle>Details Box</CardTitle>
-								<CardText>
-									With supporting text below as a natural lead-in to additional content.
-								</CardText>
-							</Card>
+						<Col xs={12} sm={12} md={4}>
+							<DetailsBox details={this.props.firmware}/>
 							<br />
 							<br />
-							<Row>
-								{' '}
-								<Col sm={4} md={2} />
-								<Col sm="auto">
-									{' '}
-									<Button style={{ width: '180px' }} color="info">
-										Download{' '}
-									</Button>
-								</Col>
-								<Col sm={4} md={2} />
-							</Row>
-							<br />
-							<Row>
-								{' '}
-								<Col sm={4} md={2} />
-								<Col sm="auto">
-									{' '}
-									<Button style={{ width: '180px' }} color="primary">
-										Deploy to Device{' '}
-									</Button>
-								</Col>
-								<Col sm={4} md={2} />
-							</Row>
-							<br />
-							<Row>
-								{' '}
-								<Col sm={4} md={2} />
-								<Col sm="auto" md="auto">
-									{' '}
-									<Button style={{ width: '180px' }} color="success">
-										Donate to DEV{' '}
-									</Button>
-								</Col>
-								<Col sm={4} md={2} />
-							</Row>
+							<FirmwareButtons details={this.props.firmware}/>
 							<br />
 							<br />
-							<Card>
-								<CardBody>
-									<CardTitle>
-										{' '}
-										<IconButton color="inherit">
-											<ThumbUpIcon />{' '}
-										</IconButton>
-										<IconButton color="inherit">
-											<ThumbDownIcon />
-										</IconButton>
-									</CardTitle>
-									<CardText>Community Score ammount of {this.state.score} </CardText>
-								</CardBody>
-							</Card>
+							<ReputationBox details={this.props.firmware}/>
 						</Col>
 					</Row>
 				</Container>
@@ -180,4 +135,12 @@ void loop() {
 	}
 }
 
-export default Firmware;
+
+const mapStateToProps = (state) => ({
+	firmware: state.views.firmwareStats,
+	source: state.views.firmwareSource,
+	developer: state.views.firmwareDeveloper
+});
+
+export default connect(mapStateToProps)(Firmware);
+
