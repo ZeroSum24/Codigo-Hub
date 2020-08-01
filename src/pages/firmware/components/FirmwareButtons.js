@@ -1,20 +1,10 @@
 import React from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-import ThumbDownIcon from '@material-ui/icons/ThumbDown';
-import { IconButton } from '@material-ui/core';
-import ThreeBoxComments from '3box-comments-react';
 
-import { Row, Col, Container, Card, CardTitle, CardText, CardBody, Button } from 'reactstrap';
-import {connect} from "react-redux";
-import {downloadFirmwareBinary} from "../../../filecoin/client";
-import {sendEth} from "../../../blockchain/client";
+import { Button, Col, Row } from 'reactstrap';
+import { downloadFirmwareBinary } from '../../../filecoin/client';
+import { sendEth } from '../../../blockchain/client';
 
 class FirmwareButtons extends React.Component {
-	constructor(props) {
-		super(props);
-	}
 
 	render() {
 
@@ -41,7 +31,7 @@ class FirmwareButtons extends React.Component {
 					<Col sm={4} md={2} />
 					<Col sm="auto">
 						{' '}
-						<Button style={{ width: '200px' }} color="primary">
+						<Button style={{ width: '200px' }} color="primary" onClick={this.props.onDeploy}>
 							Deploy to Device{' '}
 						</Button>
 					</Col>
