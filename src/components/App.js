@@ -18,6 +18,8 @@ import { enableUserEthereum } from '../actions/user';
 
 import { logoutUser } from '../actions/user';
 import AuthErrorView from "../pages/error/AuthErrorView";
+import { initUserDevices } from '../actions/profile';
+import { setBounties, setFirmware } from '../actions/model';
 
 const PrivateRoute = ({dispatch, component, ...rest }) => {
     if (!Login.isAuthenticated(JSON.parse(localStorage.getItem('authenticated')))) {
@@ -35,18 +37,20 @@ const CloseButton = ({closeToast}) => <i onClick={closeToast} className="la la-c
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.handleEthereumEnable = this.handleEthereumEnable.bind(this);
   }
 
-  handleEthereumEnable() {
+  handleEthereumEnable = async () => {
     // console.log('enabling ethereum');
     this.props.dispatch(enableUserEthereum());
+    //init available devices
+    this.props.dispatch(initUserDevices());
   }
 
   componentDidMount() {
     if (this.props.isFetching && !this.props.isEthereumEnabled) {
       // this represents the loading state
       this.handleEthereumEnable();
+
     }
   }
 
@@ -60,7 +64,7 @@ class App extends React.PureComponent {
     } else if (this.props.isFetching && !this.props.isEthereumEnabled) {
       // begin enable ethereum process (default application state at beginning of user flow)
       // console.log('loading fetching')
-      appView = (<Loader loadingText={"Loading Código"}/>);
+      appView = (<Loader loadingText={"Loading Código Hub"}/>);
     } else {
       //  An error has occurred logging users in with ethereum
       appView = (<AuthErrorView onClick={this.handleEthereumEnable} title={"Ethereum Account Access Denied"}/>);

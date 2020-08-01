@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import ErrorPage from "../error/"
 import Results from "./components/Results";
 import SearchLoader from "../../components/SearchLoader";
 import {SearchStatus} from "../../actions/search";
@@ -26,10 +27,10 @@ class Search extends React.PureComponent {
 	renderResultStatus(searchStatus) {
 		switch(searchStatus) {
 			case SearchStatus.COMPLETED:
-				return  (<Results />);
+				return  (<Results history={this.props.history}/>);
 			case SearchStatus.ERROR:
 				// TODO display some kind of error state
-				return ('bar');
+				return (<ErrorPage/>);
 			default:
 				// TODO update SearchLoader view to stylistically match search view
 				return (<SearchLoader loadingText={"Searching"}/>);

@@ -45,7 +45,7 @@ class Dashboard extends React.Component {
 		return (
 			<div className={s.root}>
 				<h1 align="centre" className="page-title">
-					Welcome to the Código Admin Panel &nbsp;
+					Welcome to the Código Hub &nbsp;
 					<small>
 						<small />
 					</small>

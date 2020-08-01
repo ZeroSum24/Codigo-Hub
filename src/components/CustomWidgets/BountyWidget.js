@@ -3,6 +3,7 @@ import {Col, Row} from "reactstrap";
 import React from "react";
 import PropTypes from "prop-types";
 import Bounty from "../../model/Bounty";
+import {connect} from "react-redux";
 import {initBountyView} from "../../actions/view";
 
 class BountyWidget extends React.PureComponent {
@@ -17,7 +18,8 @@ class BountyWidget extends React.PureComponent {
   }
 
   openBountyView() {
-    this.props.dispatch(initBountyView({profileObject: this.props.item, history: this.props.history}));
+    console.log("bounty view props", this.props);
+    this.props.dispatch(initBountyView({bountyObject: this.props.item, history: this.props.history}));
   }
 
   render() {
@@ -25,20 +27,26 @@ class BountyWidget extends React.PureComponent {
     const bounty = this.props.item;
     return (
       <Widget
-        title={<h5>Bounty Title: <small className="text-muted">{bounty.name}</small></h5>}
+        title={<h5>Bounty Title: <small className="text-muted">{bounty.title}</small></h5>}
         close collapse onClick={this.openBountyView}>
         <p></p>
         <div className="widget-padding-md w-100 h-100 text-left border rounded">
           <Row>
             <Col sm={6}>
               <h6><span className="fw-semi-bold">Proposer: </span></h6>
-              <h6><span className="fw-semi-bold">Version: </span></h6>
-              <h6><span className="fw-semi-bold">Eth Amount: </span></h6>
+              <h6><span className="fw-semi-bold">Description: </span></h6>
+              <h6><span className="fw-semi-bold">Firmware version: </span></h6>
+              <h6><span className="fw-semi-bold">Device Type: </span></h6>
+              <h6><span className="fw-semi-bold">Stake: </span></h6>
+              <h6><span className="fw-semi-bold">Active: </span></h6>
             </Col>
             <Col sm={6}>
-              <h6>{bounty.author}</h6>
-              <h6>{bounty.version}</h6>
-              <h6>{bounty.ethAmount}</h6>
+              <h6>{bounty.bountySetter}</h6>
+              <h6>{bounty.description}</h6>
+              <h6>{bounty.firmwareVersion}</h6>
+              <h6>{bounty.model}</h6>
+              <h6>{bounty.ethAmount} Wei</h6>
+              <h6>{bounty.ethAmount === 0 ? 'False' : 'True'}</h6>
             </Col>
           </Row>
         </div>
@@ -47,4 +55,8 @@ class BountyWidget extends React.PureComponent {
   }
 }
 
-export default BountyWidget;
+const mapStateToProps = state => ({
+  ethereumAddress: state.ethereum.ethereumAddress
+});
+
+export default connect(mapStateToProps)(BountyWidget);

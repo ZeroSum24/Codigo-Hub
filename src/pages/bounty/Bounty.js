@@ -4,6 +4,7 @@ import { Row, Col, Container, Card, CardTitle, CardText, Button } from 'reactstr
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ThreeBoxComments from '3box-comments-react';
+import { collectBounty } from '../../blockchain/contracts';
 class Bounty extends React.PureComponent {
 	constructor(props) {
 		super(props);
@@ -17,28 +18,38 @@ class Bounty extends React.PureComponent {
 		};
 	}
 
+  collect = () => {
+    const bounty = this.props.item;
+    let go = true;
+    if (bounty.bountySetter.toLowerCase() === this.props.ethereumAddress) {
+      go = window.confirm('You are the creator of this bounty. You can only cancel it if 3 months have passed since creation, ' +
+        'to give time for developers to create. The transaction will fail otherwise. Do you wish to continue?');
+    }
+    if (go) collectBounty(bounty.block_num);
+  }
+
 	render() {
-		const codeString = `Description`;
+    const bounty = this.props.item || {};
 		return (
 			<div>
 				<Container fluid={true}>
 					<Row>
 						{' '}
 						<Col xs={12} sm={12} md={9}>
-							<h1 align="centre" className="page-title">
-								Bounty Name / Title &nbsp;
+							<h1 className="page-title">
+                {bounty.title || 'Title'}
 							</h1>
 						</Col>
 						<Col xs={12} sm={12} md={3}>
 							<Button style={{ marginTop: '13px' }} align="centre" color="warning">
-								ETH Amount
+                Eth Amount
 							</Button>
 						</Col>
 					</Row>
 					<Row>
 						<Col xs={12} sm={12} md={9}>
 							<SyntaxHighlighter language="javascript" style={atomDark} customStyle={{ height: '500px' }}>
-								{codeString}
+								{bounty.description || 'Description'}
 							</SyntaxHighlighter>{' '}
 							<br />
 							<br />
@@ -53,7 +64,7 @@ class Bounty extends React.PureComponent {
 										adminEthAddr={this.state.adminEthAddr}
 										// Required props for auth A. & B.
 										box={this.state.box}
-										currentUserAddr={this.state.myAddress}
+										currentUserAddr={this.props.ethereumAddress}
 									/>{' '}
 								</Col>
 								<Col xs="2" sm="2" md="2" />
@@ -61,11 +72,13 @@ class Bounty extends React.PureComponent {
 						</Col>
 						<Col xs={12} sm={12} md={3}>
 							<Card style={{ marginTop: '3px' }} body outline color="primary">
-								<CardTitle>Bounty Details </CardTitle>
-								<CardText>Brand :</CardText>
-								<CardText>Model :</CardText>
-								<CardText>Firmware version :</CardText>
-							</Card>
+								<CardTitle>Details</CardTitle>
+								<CardText>Model : {bounty.model || ''}</CardText>
+                <CardText>Firmware version : {bounty.firmwareVersion || ''}</CardText>
+                <CardText>Creator : {bounty.bountySetter || ''}</CardText>
+                <CardText>Eth amount : {bounty.ethAmount || ''} Wei</CardText>
+                <CardText>Collected : {bounty.ethAmount === 0 ? 'Yes' : 'No'}</CardText>
+              </Card>
 							<br />
 							<br />
 							<Row>
@@ -74,7 +87,7 @@ class Bounty extends React.PureComponent {
 								<Col sm="auto">
 									{' '}
 									<Button style={{ width: '180px' }} color="info">
-										Bounty Setter{' '}
+                    Bounty Setter
 									</Button>
 								</Col>
 								<Col sm={4} md={2} />
@@ -85,8 +98,8 @@ class Bounty extends React.PureComponent {
 								<Col sm={4} md={2} />
 								<Col xs={12} sm="auto">
 									{' '}
-									<Button style={{ width: '180px' }} color="primary">
-										Accept Bounty{' '}
+									<Button style={{ width: '180px' }} color="primary" onClick={this.collect}>
+										Collect Bounty{' '}
 									</Button>
 								</Col>
 								<Col sm={4} md={2} />
@@ -101,6 +114,9 @@ class Bounty extends React.PureComponent {
 	}
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = state => ({
+  item: state.views.bountyView.bountyView,
+  ethereumAddress: state.ethereum.ethereumAddress,
+});
 
 export default connect(mapStateToProps)(Bounty);

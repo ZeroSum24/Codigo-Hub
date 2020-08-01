@@ -75,7 +75,7 @@ class Sidebar extends React.Component {
 				<header className={s.logo}>
 					<img src={logo} alt="..." />
 					<a href="/">
-						Código <span className="fw-bold">User Panel</span>
+						Código <span className="fw-bold">Hub</span>
 					</a>
 				</header>
 				<ul className={s.nav}>
@@ -101,16 +101,7 @@ class Sidebar extends React.Component {
 						index="core"
 					/>
 					<h5 className={[ s.navTitle, s.groupTitle ].join(' ')}>Developer</h5>
-					<LinksGroup
-						onActiveSidebarItemChange={(activeItem) =>
-							this.props.dispatch(changeActiveSidebarItem(activeItem))}
-						activeItem={this.props.activeItem}
-						header="View Firmware"
-						isHeader
-						iconName="fi flaticon-star"
-						link="/app/view_firmware"
-						index="ui"
-					/>
+
 					<LinksGroup
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
@@ -136,22 +127,24 @@ class Sidebar extends React.Component {
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
-						header="View Bounties"
+						header="Available Firmware"
+						isHeader
+						iconName="fi flaticon-star"
+						link="/app/view_firmware"
+						index="ui"
+					/>
+
+					<LinksGroup
+						onActiveSidebarItemChange={(activeItem) =>
+							this.props.dispatch(changeActiveSidebarItem(activeItem))}
+						activeItem={this.props.activeItem}
+						header="Available Bounties"
 						isHeader
 						iconName="fi flaticon-layers"
 						link="/app/view_bounties"
 						index="ui"
 					/>
-					<LinksGroup
-						onActiveSidebarItemChange={(activeItem) =>
-							this.props.dispatch(changeActiveSidebarItem(activeItem))}
-						activeItem={this.props.activeItem}
-						header="Add a Bounty"
-						isHeader
-						iconName="fi flaticon-plus"
-						link="/app/add_bounty"
-						index="add_bounty"
-					/>
+
 				</ul>
 			</nav>
 		);

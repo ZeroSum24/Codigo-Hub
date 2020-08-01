@@ -1,7 +1,9 @@
 import { VIEW_FIRMWARE_SET, VIEW_PROFILE_SET, VIEW_BOUNTY_SET } from '../actions/view';
 
 export default function views(state = {
-  firmwareView: {},
+  firmwareStats: {},
+  firmwareSource: '',
+  firmwareDeveloper: {},
   bountyView: {},
   profileWithStats: {},
   profileFirmwareHistory: []
@@ -9,7 +11,9 @@ export default function views(state = {
   switch (action.type) {
     case VIEW_FIRMWARE_SET:
       return Object.assign({}, state, {
-        firmwareView: action.payload,
+        firmwareStats: action.payload.firmwareStats,
+        firmwareSource: action.payload.firmwareSource,
+        firmwareDeveloper: action.payload.firmwareDeveloper
       });
     case VIEW_PROFILE_SET:
       return Object.assign({}, state, {
