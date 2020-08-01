@@ -108,7 +108,8 @@ class Register extends React.Component {
             }
           } else {
             this.props.dispatch(registerUser(
-              {creds: {password: this.state.password}, history: this.props.history}));
+              {creds: {password: this.state.password}, history: this.props.history},
+              this.props.user3Space));
           }
         }
     }
@@ -249,7 +250,8 @@ function mapStateToProps(state) {
         isFetching: state.register.isFetching,
         errorMessage: state.register.errorMessage,
         ethereumAddress: state.ethereum.ethereumAddress,
-        linkingDeveloperAccount: state.register.linkingDeveloperAccount
+        linkingDeveloperAccount: state.register.linkingDeveloperAccount,
+        user3Space: state.ethereum.user3Space
     };
 }
 

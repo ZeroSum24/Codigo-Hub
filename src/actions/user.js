@@ -43,13 +43,14 @@ export function logoutUser() {
     };
 }
 
-export function loginUser(creds) {
-    // TODO this is where we implement an actual login implementation
-    return (dispatch) => {
+export function loginUser(creds, user3Space) {
+    return async (dispatch) => {
 
         dispatch(receiveLogin());
 
-        if (creds.password.length > 0) {
+        // TODO this needs to be made more secure in production
+        let password = await user3Space.private.get('password');
+        if (creds.password === password) {
             localStorage.setItem('authenticated', true)
         } else {
             dispatch(loginError('Something was wrong. Try again'));
