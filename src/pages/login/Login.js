@@ -64,7 +64,7 @@ class Login extends React.Component {
 				<Container>
 					<Widget
 						className="widget-auth mx-auto"
-						title={<h3 className="mt-0">Login to your Código Panel</h3>}
+						title={<h3 className="mt-0">Login to your Código Hub</h3>}
 					>
 						<div className="d-block text-center mb-4">
 							<img src={appLogo} alt="..." />
@@ -131,7 +131,7 @@ class Login extends React.Component {
 						</form>
 					</Widget>
 				</Container>
-				<footer className="auth-footer">2020 &copy; Código Admin Panel.</footer>
+				<footer className="auth-footer">2020 &copy; Código Hub.</footer>
 			</div>
 		);
 	}

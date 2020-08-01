@@ -127,7 +127,7 @@ class Register extends React.Component {
             <div className="auth-page">
               {this.props.linkingDeveloperAccount ? <Loader loadingText={"Linking Developer Account"}/>:
                 <Container>
-                    <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Register with Código</h3>}>
+                    <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Register with Código Hub</h3>}>
                         <p className="widget-auth-info">
                             Please fill all fields below.
                         </p>
@@ -237,7 +237,7 @@ class Register extends React.Component {
                     </Widget>
                 </Container>}
                 <footer className="auth-footer">
-                    2020 &copy; Código Admin Dashboard.
+                    2020 &copy; Código Hub.
                 </footer>
             </div>
         );
