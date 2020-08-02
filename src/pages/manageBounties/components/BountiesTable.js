@@ -13,8 +13,7 @@ import {
 import Widget from '../../../components/Widget';
 import s from '../ManageBounties.module.scss';
 import PropTypes from "prop-types";
-import CloseRounded from "@material-ui/icons/CloseRounded"
-import {Grid} from "@material-ui/core";
+
 
 class BountiesTable extends React.Component {
 
