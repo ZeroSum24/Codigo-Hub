@@ -128,16 +128,12 @@ export function initBountyView(payload) {
 
     // TODO pull all the info from the backend necessary for the bounty page
 
-    console.log("initial initProfileView", payload);
-
-    let profileWithStats = retrieveStatsDetails(payload.profile);
-    let profileFirmwareHistory = retrieveFirmwareHistory(payload.profile.address);
-
-    console.log("init profile view", profileWithStats, profileFirmwareHistory, typeof profileWithStats, typeof profileFirmwareHistory)
-
+    //TODO return this object using the address of bounty.bountySetter
+    let bountyProposer = new ProfileWithStats(payload.bountyObject.bountySetter, "", "","", "",
+      "", "");
 
     // change the app location and set the firmware page
-    dispatch(setBounty({bountyView: payload.bountyObject}));
+    dispatch(setBounty({bountyDetails: payload.bountyObject, bountyProposer: bountyProposer}));
     payload.history.push('/app/bounty');
   }
 }

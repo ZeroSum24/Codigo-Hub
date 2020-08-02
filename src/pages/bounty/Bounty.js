@@ -29,7 +29,7 @@ class Bounty extends React.PureComponent {
   }
 
 	render() {
-    const bounty = this.props.item || {};
+    const bounty = this.props.bounty || {};
 		return (
 			<div>
 				<Container fluid={true}>
@@ -59,11 +59,11 @@ class Bounty extends React.PureComponent {
 								<Col xs="auto" sm="auto" md="auto">
 									<ThreeBoxComments
 										// required
-										spaceName="mySpaceName"
-										threadName="myThreadName"
-										adminEthAddr={this.state.adminEthAddr}
+										spaceName={this.props.userSpace}
+										threadName={this.props.bounty.title} //TODO this should be updated to a hash
+										adminEthAddr={this.props.proposer.address}
 										// Required props for auth A. & B.
-										box={this.state.box}
+										box={this.props.userBox}
 										currentUserAddr={this.props.ethereumAddress}
 									/>{' '}
 								</Col>
@@ -115,8 +115,11 @@ class Bounty extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-  item: state.views.bountyView.bountyView,
-  ethereumAddress: state.ethereum.ethereumAddress,
+	bounty: state.views.bountyDetails,
+	proposer: state.views.bountyProposer,
+	ethereumAddress: state.ethereum.ethereumAddress,
+	userBox: state.ethereum.userBox,
+	userSpace: state.ethereum.userSpace
 });
 
 export default connect(mapStateToProps)(Bounty);
