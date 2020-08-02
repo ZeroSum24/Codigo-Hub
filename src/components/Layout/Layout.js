@@ -16,6 +16,7 @@ import Firmware from '../../pages/firmware';
 import Search from '../../pages/search';
 import Bounty from '../../pages/bounty';
 import ErrorPage from '../../pages/error';
+import ManageBounties from "../../pages/manageBounties";
 
 
 import Header from '../Header';
@@ -23,6 +24,7 @@ import Sidebar from '../Sidebar';
 import BreadcrumbHistory from '../BreadcrumbHistory';
 import { openSidebar, closeSidebar } from '../../actions/navigation';
 import s from './Layout.module.scss';
+import LinksGroup from "../Sidebar/LinksGroup";
 
 class Layout extends React.Component {
 	static propTypes = {
@@ -93,7 +95,7 @@ class Layout extends React.Component {
 										<Route path="/app/search" exact component={Search} />
 										<Route path="/app/bounty" exact component={Bounty} />
 										<Route path="/app/error" exact component={ErrorPage} />
-
+										<Route path="/app/manage_bounties" exact component={ManageBounties} />
 
 									</Switch>
 								</CSSTransition>
