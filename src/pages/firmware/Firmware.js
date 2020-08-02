@@ -30,7 +30,7 @@ class Firmware extends React.Component {
   };
 
 	render() {
-
+    console.log(this.props);
 		return (
 			<div>
         {this.state.showDeployDialog &&
@@ -42,7 +42,7 @@ class Firmware extends React.Component {
         }
         <div className="page-title">
 					<h1 >
-						Firmware: {this.props.firmware.hash}
+						{this.props.firmware.name}
 					</h1>
 					<h4>Contributed by {this.props.developer.name} ({this.props.developer.communityScore})</h4>
 				</div>
@@ -83,7 +83,7 @@ class Firmware extends React.Component {
 							<FirmwareButtons firmware={this.props.firmware} onDeploy={this.showDeployDialog}/>
 							<br />
 							<br />
-							<ReputationBox details={this.props.firmware}/>
+							<ReputationBox details={this.props.firmware} mineLike={this.props.mineLike}/>
 						</Col>
 					</Row>
 				</Container>
@@ -97,6 +97,7 @@ const mapStateToProps = (state) => ({
   firmware: state.views.firmwareStats,
   source: state.views.firmwareSource,
   developer: state.views.firmwareDeveloper,
+  mineLike: state.views.mineLike,
   ethereumAddress: state.ethereum.ethereumAddress,
   deviceList: state.profile.deviceList,
 });
