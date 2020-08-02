@@ -5,7 +5,11 @@ export default class Profile {
     this.name = name;
     this.description = description;
     this.image = image;
-    this.website = website;
+
+    this.website = "N/A";
+    if (website !== undefined && website !== "") {
+      this.website = website
+    }
   }
 }
 

@@ -65,11 +65,11 @@ class Firmware extends React.Component {
 								<Col xs="auto" sm="auto" md="auto">
 									<ThreeBoxComments
 										// required
-										spaceName="mySpaceName"
-										threadName="myThreadName"
-										adminEthAddr={this.state.adminEthAddr}
+										spaceName={this.props.userSpace}
+										threadName={this.props.firmware.hash}
+										adminEthAddr={this.props.developer.address}
 										// Required props for auth A. & B.
-										box={this.state.box}
+										box={this.props.userBox}
 										currentUserAddr={this.props.ethereumAddress}
 									/>{' '}
 								</Col>
@@ -99,6 +99,8 @@ const mapStateToProps = (state) => ({
   developer: state.views.firmwareDeveloper,
   mineLike: state.views.mineLike,
   ethereumAddress: state.ethereum.ethereumAddress,
+	userBox: state.ethereum.userBox,
+	userSpace: state.ethereum.userSpace,
   deviceList: state.profile.deviceList,
 });
 

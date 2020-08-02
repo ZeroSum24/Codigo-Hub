@@ -20,8 +20,8 @@ export default function ethereum(state = {
                 isFetching: false,
                 isEthereumEnabled: true,
                 ethereumAddress: action.payload.ethereumAddress,
-                userBox: action.payload.user3Box,
-                userSpace: action.payload.user3Spaces,
+                userBox: action.payload.userBox,
+                userSpace: action.payload.userSpace,
                 errorMessage: ''
             });
         case ETHEREUM_FAILURE:

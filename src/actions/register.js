@@ -36,15 +36,17 @@ function firmwareLinkPending() {
     };
 }
 
-export function registerUser(payload) {
+export function registerUser(payload, user3Space) {
     return async (dispatch) => {
       try {
-        if (payload.creds.password.length > 0) {
+
+        if (payload.creds.password.length > 8) {
           await registerCurrentUser();
           toast.success("You've been registered successfully");
           payload.history.push('/login');
+          await user3Space.private.set('password', payload.creds.password);
         } else {
-          dispatch(registerError('Something was wrong. Try again'));
+          dispatch(registerError('Password must contain 8 characters. Try again'));
         }
       } catch (error) {
         dispatch(registerError(error));

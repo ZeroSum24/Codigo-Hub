@@ -44,7 +44,7 @@ class Login extends React.Component {
 
 	doLogin(e) {
 		e.preventDefault();
-		this.props.dispatch(loginUser({ password: this.state.password }));
+		this.props.dispatch(loginUser({ password: this.state.password }, this.props.user3Space));
 	}
 
 	signUp() {
@@ -142,7 +142,8 @@ function mapStateToProps(state) {
 		isFetching: state.auth.isFetching,
 		isAuthenticated: state.auth.isAuthenticated,
 		errorMessage: state.auth.errorMessage,
-		ethereumAddress: state.ethereum.ethereumAddress
+		ethereumAddress: state.ethereum.ethereumAddress,
+		user3Space: state.ethereum.user3Space
 	};
 }
 
