@@ -3,6 +3,7 @@ import Box from "3box";
 
 export const USER_DEVICES_SET = 'DEVICES_SET';
 export const USER_PROFILE_SET = 'USER_PROFILE_SET';
+export const USER_PASSWORD_SET = 'USER_PASSWORD_SET';
 const deviceLocalStorageKey = 'devices';
 
 function setDevices(payload) {
@@ -17,10 +18,15 @@ function setDevices(payload) {
 
 
 function setProfile(payload) {
-  // TODO update orbit DB datastore
-
   return {
     type: USER_PROFILE_SET,
+    payload
+  };
+}
+
+export function setProfilePassword(payload) {
+  return {
+    type: USER_PASSWORD_SET,
     payload
   };
 }
@@ -108,6 +114,6 @@ export function setUserProfile(payload) {
     const userProfile = new Profile(payload.userAddress, publicProfile.name,
       publicProfile.description, publicProfile.image, publicProfile.website);
 
-    dispatch(setProfile(userProfile));
+    dispatch(setProfile({userProfile: userProfile}));
   }
 }
