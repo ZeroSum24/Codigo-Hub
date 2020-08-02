@@ -1,7 +1,7 @@
 import { createPow } from '@textile/powergate-client';
 
 const tokenKey = 'token'
-const host = "http://pow.slate.textile.io:6002";
+const host = "http://pow.hackfs.textile.io:6002";
 // const host = "http://localhost:6002";
 const PG = createPow( { host } );
 let initialized = false;
