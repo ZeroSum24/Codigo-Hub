@@ -21,6 +21,8 @@ class Profile extends React.Component {
 
     this.changeToUserInfoView = this.changeToUserInfoView.bind(this);
     this.changeToFirmwareView = this.changeToFirmwareView.bind(this);
+
+    console.log("users main", this.props)
   }
 
   changeToUserInfoView() {

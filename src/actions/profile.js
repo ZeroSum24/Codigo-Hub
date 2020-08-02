@@ -1,8 +1,10 @@
 import Profile from "../model/Profile";
+import Box from "3box";
 
 export const USER_DEVICES_SET = 'DEVICES_SET';
 export const USER_PROFILE_SET = 'USER_PROFILE_SET';
-const deviceLocalStorageKey = 'devices'
+const deviceLocalStorageKey = 'devices';
+
 function setDevices(payload) {
   // TODO update orbit DB datastore
   localStorage[deviceLocalStorageKey] = JSON.stringify(payload);
@@ -101,16 +103,16 @@ export function deleteUserDevice(device) {
 export function setUserProfile(payload) {
   return async (dispatch) => {
 
-    console.log("set user profile", payload.userAddress);
-    let box = payload.userBox;
+    console.log("set user profile", payload);
+    // let box = payload.userBox;
 
-    const name = await box.private.get('name');
-    const description = await box.private.get('description');
-    const image = await box.private.get('image');
-    const website = ""; //TODO this is null atm
+    const publicProfile = await Box.getProfile(payload.userAddress);
+    console.log("set user profile", publicProfile);
+
 
     // need to check it is possible to delete that device
-    const userProfile = new Profile(payload.userAddress, name, description, image, website);
+    const userProfile = new Profile(payload.userAddress, publicProfile.name,
+      publicProfile.description, publicProfile.image, publicProfile.website);
     console.log("user profile set", userProfile);
 
     dispatch(setProfile(userProfile));

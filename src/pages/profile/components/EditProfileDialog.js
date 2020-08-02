@@ -5,14 +5,17 @@ import Modal from '@material-ui/core/Modal';
 
 class EditProfileDialog extends React.Component {
 
+  constructor(props) {
+    super(props);
+    console.log("edit profile props", this.props)
+  }
+
   render() {
     return (
       <Modal onClose={this.props.onClose} open={this.props.show} isOpen={this.props.show}>
-        <div style={{alignItems: 'center', alignSelf: 'center'}}>
           <EditProfileComponent box={this.props.userBox}
-                                space={this.props.userSpace}
+                                space={this.props.userBox}
                                 myAddress={this.props.ethereumAddress}/>
-        </div>
       </Modal>
     );
   }
@@ -34,8 +37,8 @@ const EditProfileComponent = ({ customFields, box, space, myAddress, myProfile, 
 
 const mapStateToProps = state => ({
   ethereumAddress: state.ethereum.ethereumAddress,
-  user3Box: state.ethereum.user3Box,
-  user3Space: state.ethereum.user3Space,
+  userBox: state.ethereum.userBox,
+  userSpace: state.ethereum.userSpace,
 });
 
 export default connect(mapStateToProps)(EditProfileDialog);

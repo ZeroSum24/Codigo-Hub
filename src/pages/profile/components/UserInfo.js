@@ -2,17 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Grid} from "@material-ui/core";
 import EditIcon from '@material-ui/icons/EditRounded';
+import {Button,Container,Col,Row} from 'reactstrap';
+
 import s from '../Profile.module.scss';
 import EditProfileDialog from "./EditProfileDialog";
-import {Button,Container,Col,Row} from 'reactstrap';
 import logo from '../../../images/1.png';
 import Widget from '../../../components/Widget';
 import ExampleComponent from "react-rounded-image";
+import {isValidImage} from "../../../utils/funcs";
+
+
 class  UserInfo extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log("User Profile addresses", this.props.profile);
+    console.log("User Profile Info main", this.props.profile, "logo details", logo, typeof logo);
     this.state = {showEditDialog: false};
   }
 
@@ -26,6 +30,11 @@ class  UserInfo extends React.Component {
 
   render() {
     const isCurrentUser = (this.props.profile.address === this.props.currentUserAddr);
+    const src = isValidImage(this.props.profile.image)
+      ? `https://ipfs.infura.io/ipfs/${this.props.profile.image[0].contentUrl['/']}`
+      : logo;
+    console.log("image src", src, isValidImage(this.props.profile.image));
+
     return (
       <div className={s.root}>
       <Row>
@@ -36,7 +45,7 @@ class  UserInfo extends React.Component {
               <Widget className="widget-auth mx-auto">
                 <div align="center">
                     <ExampleComponent
-                      image={this.props.profile.image}
+                      image={src}
                       roundedColor=""
                       imageWidth="150"
                       imageHeight="150"
@@ -50,15 +59,17 @@ class  UserInfo extends React.Component {
                         <h5><span className="fw-semi-bold">Website:</span></h5>
                       </Col>
                       <Col sm={6}>
-                        <h5 style={{textOverflow: "ellipsis"}}>{this.props.profile.address}</h5>
-                        <a >{this.props.profile.website}</a>
+                        <h5 style={{textOverflow: "ellipsis", whiteSpace: 'nowrap',
+                          overflow: 'hidden'}}>{this.props.profile.address}</h5>
+                        <a style={{textOverflow: "ellipsis", whiteSpace: 'nowrap',
+                          overflow: 'hidden'}}>{this.props.profile.website}</a>
                       </Col>
                     </Row>
                     <div align="center">
                      <br></br>
                      <br></br>
                       <h5><span className="fw-semi-bold">
-                        {this.props.profile.communityScore}
+                        {this.props.profile.description}
                       </span>
                       </h5>
                     </div>
@@ -69,10 +80,10 @@ class  UserInfo extends React.Component {
         </Grid>
         </Col>
 
-        <Col align="center" sm={6}>
-          <Grid align="center" container={true}>
+        <Col align="left" sm={6}>
+          <Grid align="left" container={true}>
             <Grid item xs={11}>
-                <Container>
+                <Container >
                   <Widget className="widget-auth mx-auto">
                     <div align="center">
                       <div align="center">
