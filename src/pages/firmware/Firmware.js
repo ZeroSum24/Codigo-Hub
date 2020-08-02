@@ -9,23 +9,41 @@ import DetailsBox from "./components/DetailsBox";
 import FirmwareButtons from "./components/FirmwareButtons";
 import ReputationBox from "./components/ReputationBox";
 import {userVotingCallback} from "../../blockchain/userStats";
+import FirmwareUpgradeDialog from './components/firmwareUpgradeDialog';
+
 
 class Firmware extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			adminEthAddr: '0xf7367F3abDB31428Ed56032AbC14B245fCC95BA2',
-			box: '123'
+			box: '123',
+      showDeployDialog: false
 		};
 	}
 
-	render() {
+  showDeployDialog = () => {
+    this.setState({showDeployDialog: true});
+  };
 
+  hideDeployDialog = () => {
+    this.setState({showDeployDialog: false});
+  };
+
+	render() {
+    console.log(this.props);
 		return (
 			<div>
-				<div align="centre" className="page-title">
+        {this.state.showDeployDialog &&
+        <FirmwareUpgradeDialog
+          onClose={this.hideDeployDialog}
+          show={this.state.showDeployDialog}
+          firmware={this.props.firmware}
+          deviceList={this.props.deviceList} />
+        }
+        <div className="page-title">
 					<h1 >
-						Firmware: {this.props.firmware.hash}
+						{this.props.firmware.name}
 					</h1>
 					<h4>Contributed by {this.props.developer.name} ({this.props.developer.communityScore})</h4>
 				</div>
@@ -64,10 +82,10 @@ class Firmware extends React.Component {
 							<DetailsBox details={this.props.firmware}/>
 							<br />
 							<br />
-							<FirmwareButtons firmware={this.props.firmware}/>
+							<FirmwareButtons firmware={this.props.firmware} onDeploy={this.showDeployDialog}/>
 							<br />
 							<br />
-							<ReputationBox details={this.props.firmware}/>
+							<ReputationBox details={this.props.firmware} mineLike={this.props.mineLike}/>
 						</Col>
 					</Row>
 				</Container>
@@ -81,10 +99,11 @@ const mapStateToProps = (state) => ({
   firmware: state.views.firmwareStats,
   source: state.views.firmwareSource,
   developer: state.views.firmwareDeveloper,
+  mineLike: state.views.mineLike,
   ethereumAddress: state.ethereum.ethereumAddress,
 	userBox: state.ethereum.userBox,
 	userSpace: state.ethereum.userSpace,
-	commentThread: state.views.commentThread
+  deviceList: state.profile.deviceList,
 });
 
 export default connect(mapStateToProps)(Firmware);

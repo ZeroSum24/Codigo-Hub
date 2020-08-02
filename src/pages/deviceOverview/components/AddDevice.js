@@ -13,59 +13,49 @@ class AddDeviceDialog extends React.PureComponent  {
   constructor(props) {
     super(props);
     this.state = {
-      options: {
-        position: "top-right",
-        autoClose: 5000,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: true
-      },
       deviceName: '',
       deviceBrand: '',
       deviceModel: '',
       serialNumber: '',
+      longitude: undefined,
+      latitude: undefined,
     };
-
-    this.handleAddDevice = this.handleAddDevice.bind(this);
-    this.changeDeviceName = this.changeDeviceName.bind(this)
-    this.changeDeviceBrand = this.changeDeviceBrand.bind(this)
-    this.changeDeviceModel = this.changeDeviceModel.bind(this)
-    this.changeSerialNumber = this.changeSerialNumber.bind(this)
   }
 
-  handleAddDevice(e) {
+  handleAddDevice = (e) => {
     e.preventDefault();
-    let newDevice = new Device(this.state.deviceName, this.state.deviceBrand, this.state.deviceModel, this.state.serialNumber);
+    let newDevice = new Device(
+      this.state.deviceName,
+      this.state.deviceBrand,
+      this.state.deviceModel,
+      this.state.serialNumber,
+      this.props.latitude,
+      this.props.longitude
+    );
     this.props.dispatch(createUserDevice(this.props.deviceList, newDevice));
+    this.reset();
+  }
+
+  reset = () => {
     this.setState({
       deviceName: '',
       deviceBrand: '',
       deviceModel: '',
       serialNumber: '',
+      longitude: undefined,
+      latitude: undefined,
     })
     this.props.onClose();
   }
 
-  changeDeviceName(e) {
-    this.setState({deviceName: e.target.value})
-  }
-
-  changeDeviceBrand(e) {
-    this.setState({deviceBrand: e.target.value})
-  }
-
-  changeDeviceModel(e) {
-    this.setState({deviceModel: e.target.value})
-  }
-
-  changeSerialNumber(e) {
-    this.setState({serialNumber: e.target.value})
+  change = (e) => {
+    this.setState({[e.target.name]: e.target.value})
   }
 
   render() {
     if (!this.props.isOpen) return null;
     return (
-      <Modal onClose={this.props.onClose} open={this.props.isOpen}>
+      <Modal onClose={this.reset} open={this.props.isOpen}>
           <Widget  className="widget-auth mx-auto" style={{background: '#212529', marginTop: '30px'}} title={<h3 className="mt-0">Add a Device</h3>}>
               <p className="widget-auth-info">
                   Please fill all fields below.
@@ -82,8 +72,8 @@ class AddDeviceDialog extends React.PureComponent  {
                       <Label for="text">Name</Label>
                       <InputGroup className="input-group-no-border">
                           <Input id="deviceName" className="input-transparent pl-3" value={this.state.deviceName}
-                                 onChange={this.changeDeviceName} type="text"
-                                 required name="Device Name" placeholder="E.g. Garden Monitor"/>
+                                 onChange={this.change} type="text"
+                                 required name="deviceName" placeholder="E.g. Garden Monitor"/>
                       </InputGroup>
                   </FormGroup>
 
@@ -91,8 +81,8 @@ class AddDeviceDialog extends React.PureComponent  {
                       <Label for="text">Brand</Label>
                       <InputGroup className="input-group-no-border">
                           <Input id="deviceType" className="input-transparent pl-3" value={this.state.deviceBrand}
-                                 onChange={this.changeDeviceBrand} type="text"
-                                 required name="Device Name" placeholder="E.g. Arduino"/>
+                                 onChange={this.change} type="text"
+                                 required name="deviceBrand" placeholder="E.g. Arduino"/>
                       </InputGroup>
                   </FormGroup>
 
@@ -100,8 +90,8 @@ class AddDeviceDialog extends React.PureComponent  {
                   <Label for="text">Model</Label>
                   <InputGroup className="input-group-no-border">
                     <Input id="deviceModel" className="input-transparent pl-3" value={this.state.deviceModel}
-                           onChange={this.changeDeviceModel} type="text"
-                           required name="Device Name" placeholder="E.g. Uno"/>
+                           onChange={this.change} type="text"
+                           required name="deviceModel" placeholder="E.g. Uno"/>
                   </InputGroup>
                 </FormGroup>
 
@@ -109,10 +99,22 @@ class AddDeviceDialog extends React.PureComponent  {
                       <Label for="text">Serial Number</Label>
                       <InputGroup className="input-group-no-border">
                           <Input id="serialNumber" className="input-transparent pl-3" value={this.state.serialNumber}
-                                 onChange={this.changeSerialNumber} type="text"
-                                 required name="Device Serial Number" placeholder="E.g. Device Serial Number"/>
+                                 onChange={this.change} type="text"
+                                 required name="serialNumber" placeholder="E.g. Device Serial Number"/>
                       </InputGroup>
                   </FormGroup>
+
+                <FormGroup className="mt">
+                  <Label for="text">Location</Label>
+                  <InputGroup className="input-group-no-border">
+                    <Input id="longitude" className="input-transparent pl-3" value={this.state.longitude}
+                           onChange={this.change} type="text"
+                           name="longitude" placeholder="Longitude"/>
+                    <Input id="latitude" className="input-transparent pl-3" value={this.state.latitude}
+                           onChange={this.change} type="text"
+                           name="latitude" placeholder="Latitude"/>
+                  </InputGroup>
+                </FormGroup>
 
                   <div className="bg-widget-transparent auth-widget-footer">
                       <Button type="submit" color="warning" className="auth-btn"

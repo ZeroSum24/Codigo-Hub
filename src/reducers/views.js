@@ -3,6 +3,7 @@ import { VIEW_FIRMWARE_SET, VIEW_PROFILE_SET, VIEW_BOUNTY_SET } from '../actions
 export default function views(state = {
   firmwareStats: {},
   firmwareSource: '',
+  mineLike: 0,
   firmwareDeveloper: {},
   bountyDetails: {},
   bountyProposer: {},
@@ -14,7 +15,8 @@ export default function views(state = {
       return Object.assign({}, state, {
         firmwareStats: action.payload.firmwareStats,
         firmwareSource: action.payload.firmwareSource,
-        firmwareDeveloper: action.payload.firmwareDeveloper
+        firmwareDeveloper: action.payload.firmwareDeveloper,
+        mineLike: action.payload.mineLike,
       });
     case VIEW_PROFILE_SET:
       return Object.assign({}, state, {

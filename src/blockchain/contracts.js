@@ -7,6 +7,7 @@ export const firmwareRepoAddress = '0x3691B2BE18f186b475e81342585790DcBaC43A0b';
 export const usersAddress = "0x6227c20850c1f431cABEC5ec3CBD746186101882"
 export const identityAddress = "0xF665D2AA03aeA414522f684f14543b15DDbbE9F0";
 export const bountiesAddress = "0x8C58B5bf0145370916574E82DDecC4b2793EE888";
+export const likesAddress = "0x7B86bB454670Bb38dfbdeA0133530D2256816F85";
 export const abiFR = [
   {
     'constant': true,
@@ -514,11 +515,78 @@ export const bountiesABI = [
     "type": "function"
   }
 ];
+export const likesABI = [
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "block_num",
+        "type": "uint256"
+      }
+    ],
+    "name": "get_like_for_user",
+    "outputs": [
+      {
+        "name": "",
+        "type": "int256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "thumb",
+        "type": "int256"
+      },
+      {
+        "name": "block_num",
+        "type": "uint256"
+      }
+    ],
+    "name": "thumbs_up_down",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "block_num",
+        "type": "uint256"
+      }
+    ],
+    "name": "get_all_likes",
+    "outputs": [
+      {
+        "name": "",
+        "type": "int256"
+      },
+      {
+        "name": "",
+        "type": "int256"
+      },
+      {
+        "name": "",
+        "type": "int256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+];
 
 let firmwareRepo = null;
 let identity = null;
 let users = null;
 let bountiesRepo = null;
+let likesRepo = null;
 
 /**
  * Hardcoded constants to define all possible developers and device types. Please add your account address and favorite
@@ -526,6 +594,17 @@ let bountiesRepo = null;
  */
 export const hardcoded_developers = ['0x6d2f650eb7d7dce957c9fb19ca79adf535a93dde'];
 export const hardcoded_device_types = ['RPI4', 'Uno'];
+
+/**
+ * Retrieve instance of the likes contract
+ * @return {Contract} `likesRepo` returns the likes Repo deployed contract
+ */
+export function getLikesRepo() {
+  if (likesRepo == null) {
+    likesRepo = new web3.eth.Contract(likesABI, likesAddress);
+  }
+  return likesRepo;
+}
 
 /**
  * Retrieve instance of firmware repo contract
@@ -598,22 +677,44 @@ export function retrieveAllAvailableFirmware() {
   return Promise.all(promises).then(responses => responses.filter(f => f != null));
 }
 
-export function retrieveFirmware(device_type, developer_address) {
-  return getFirmwareRepo().methods.get_firmware(device_type, developer_address, true).call().then(result => {
-    return new FirmwareWithThumbs(result[0], result[1], result[2], result[3], developer_address, device_type, result[4] || 0, result[5] || 0);
-  }, () => null);
+export function retrieveFirmware(device_type, user_address) {
+  return getDeveloperAddress(user_address).then(developer_address => {
+    return getFirmwareRepo().methods.get_firmware(device_type, developer_address, true).call().then(result => {
+      return new FirmwareWithThumbs(result[0], result[1], result[2], result[3], developer_address, device_type, result[4] || 0, result[5] || 0);
+    }, () => null);
+  });
 }
 
-export function thumbsUpFirmware(developer, device_type) {
-  return thumbsFirmware(true, developer, device_type);
+/**
+ * Gets firmware number of likes, dislikes and the user's choice (i.e. if the user is already (dis-)liking it)
+ * @param block_num
+ * returns {Promise<{likes: >=0, dislikes: >=0, mine: -1-dislike/0-neutral/1-like}>}
+ */
+export async function getFirmwareLikes(block_num) {
+  const r = await getLikesRepo().methods.get_all_likes(block_num).call({from: ethereum.selectedAddress});
+  return {likes: r[0], dislikes: r[1], mine: r[2]};
 }
 
-export function thumbsDownFirmware(developer, device_type) {
-  return thumbsFirmware(false, developer, device_type);
+export function thumbsUpFirmware(block_num) {
+  return thumbsFirmware(1, block_num);
 }
 
-function thumbsFirmware(is_thumb_up, developer, device_type) {
-  return getFirmwareRepo().methods.thumbs_up_down(is_thumb_up, developer, device_type, true).send({from: ethereum.selectedAddress});
+export function thumbsDownFirmware(block_num) {
+  return thumbsFirmware(-1, block_num);
+}
+
+export function thumbsNeutralFirmware(block_num) {
+  return thumbsFirmware(0, block_num);
+}
+
+/**
+ *
+ * @param thumb 1 - like, 0 - neutral, -1 - dislike
+ * @param block_num firmware block num
+ * @return {*}
+ */
+function thumbsFirmware(thumb, block_num) {
+  return getLikesRepo().methods.thumbs_up_down(thumb, block_num).send({from: ethereum.selectedAddress});
 }
 
 // doesn't work yet, overflows for some reason
@@ -650,10 +751,15 @@ export function sendResponse(response) {
  * Map the user (3box) address to the developer (codigo) address
  * @param {String} userAddress user address
  * @return {Promise<String>} the developer address (if there is no mapping it
- * returns an all zero address, e.g "0x000...")
+ * returns the input address)
  */
 export function getDeveloperAddress(userAddress) {
-    return getIdentity().methods.get_codigo_address(userAddress).call();
+  return getIdentity().methods.get_codigo_address(userAddress).call().then(address => {
+    if (address == "0x0000000000000000000000000000000000000000") {
+      return userAddress;
+    }
+    return address;
+  });
 }
 
 /**
