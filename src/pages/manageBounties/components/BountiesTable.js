@@ -35,7 +35,7 @@ class BountiesTable extends React.Component {
             <th className="hidden-sm-down">#</th>
             <th>Title</th>
             <th>Model</th>
-            <th>Firmware Version</th>
+            <th>Version</th>
             <th>Description</th>
             <th className="hidden-sm-down">ETH Amount</th>
             <th className="hidden-sm-down">Claimed</th>
@@ -48,7 +48,7 @@ class BountiesTable extends React.Component {
               <tr key={id}>
                 <td>{id}</td>
                 <td>
-                  {row.title}
+                  <span className="fw-semi-bold">{row.title}</span>
                 </td>
                 <td>
                   {row.model}
