@@ -62,7 +62,7 @@ class Bounty extends React.PureComponent {
 								<Col xs="auto" sm="auto" md="auto">
 									<ThreeBoxComments
 										// required
-										spaceName={this.props.userSpace}
+										spaceName={this.props.userSpaceName}
 										threadName={this.props.bounty.title} //TODO this should be updated to a hash
 										adminEthAddr={this.props.proposer.address}
 										// Required props for auth A. & B.
@@ -123,7 +123,7 @@ const mapStateToProps = state => ({
 	proposer: state.views.bountyProposer,
 	ethereumAddress: state.ethereum.ethereumAddress,
 	userBox: state.ethereum.userBox,
-	userSpace: state.ethereum.userSpace
+	userSpaceName: state.ethereum.userSpaceName
 });
 
 export default connect(mapStateToProps)(Bounty);

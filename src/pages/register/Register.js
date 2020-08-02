@@ -15,7 +15,7 @@ import {
 } from 'reactstrap';
 
 import Widget from '../../components/Widget';
-import { registerUser, registerError, linkUserToFirmware } from '../../actions/register';
+import {registerUser, registerError, linkUserToFirmware, registerPending} from '../../actions/register';
 import Login from '../login';
 import s from "./Register.module.scss";
 import Loader from "../../components/Loader";
@@ -96,20 +96,21 @@ class Register extends React.Component {
         if (!this.isPasswordValid()) {
             this.checkPassword();
         } else {
+          this.props.dispatch(registerPending());
 
-          // Triggers the link of the developer account providing the requisite information is available in the UI.
+            // Triggers the link of the developer account providing the requisite information is available in the UI.
           if (this.state.linkDeveloperCheckBox) {
             if (this.state.developerAddress === '' || this.state.developerKey === '') {
               this.checkDeveloperLink()
             } else {
               // Triggers a loading screen whilst the user registers their account
               this.props.dispatch(linkUserToFirmware(this.state.developerAddress, this.state.developerKey,
-                {creds: {password: this.state.password}, history: this.props.history}));
+                {creds: {password: this.state.password}, history: this.props.history},
+                this.props.userSpace));
             }
-          } else {
-            this.props.dispatch(registerUser(
+          } else {this.props.dispatch(registerUser(
               {creds: {password: this.state.password}, history: this.props.history},
-              this.props.user3Space));
+              this.props.userSpace));
           }
         }
     }
@@ -123,10 +124,11 @@ class Register extends React.Component {
                 <Redirect to={from}/>
             );
         }
+        let loadingText = this.props.linkingDeveloperAccount ? "Linking Developer Account": "Registering Account";
 
         return (
             <div className="auth-page">
-              {this.props.linkingDeveloperAccount ? <Loader loadingText={"Linking Developer Account"}/>:
+              {this.props.registerPending ? <Loader loadingText={loadingText}/>:
                 <Container>
                     <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Register with Código Hub</h3>}>
                         <p className="widget-auth-info">
@@ -251,7 +253,8 @@ function mapStateToProps(state) {
         errorMessage: state.register.errorMessage,
         ethereumAddress: state.ethereum.ethereumAddress,
         linkingDeveloperAccount: state.register.linkingDeveloperAccount,
-        user3Space: state.ethereum.user3Space
+        userSpace: state.ethereum.userSpace,
+        registerPending: state.register.registerPending
     };
 }
 

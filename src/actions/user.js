@@ -1,7 +1,7 @@
 // Login Management
 import Box from "3box";
 
-import {setUserProfile} from "./profile";
+import {setProfilePassword, setUserProfile} from "./profile";
 import { setBounties, setFirmware } from './model';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -43,14 +43,12 @@ export function logoutUser() {
     };
 }
 
-export function loginUser(creds, user3Space) {
+export function loginUser(creds, knownPassword) {
     return async (dispatch) => {
 
         dispatch(receiveLogin());
 
-        // TODO this needs to be made more secure in production
-        let password = await user3Space.private.get('password');
-        if (creds.password === password) {
+        if (creds.password === knownPassword) {
             localStorage.setItem('authenticated', true)
         } else {
             dispatch(loginError('Something was wrong. Try again'));
@@ -112,17 +110,23 @@ export function enableUserEthereum() {
             const spaces = ['código-user-space'];
             await box.auth(spaces, {address: ethereumAddress});
             await box.syncDone;
-            // const box = null;
-            // const spaces = [null];
+
+            // open user space
+            let space = await box.openSpace(spaces[0]);
+            await space.syncDone;
+
+            // get user password from space and kick off user profile set
+            let userPassword = await space.private.get('password');
+            dispatch(setProfilePassword({userPassword: userPassword}));
+            dispatch(setUserProfile({userAddress: ethereumAddress}));
 
             // Accounts now exposed
             dispatch(ethereumAuthSuccess({
                 ethereumAddress: ethereumAddress,
                 userBox: box,
-                userSpace: spaces[0]
+                userSpaceName: spaces[0],
+                userSpace: space
             }));
-
-            dispatch(setUserProfile({userAddress: ethereumAddress, userBox: box}));
 
             console.log('eth auth success', ethereumAddress, box, spaces)
 

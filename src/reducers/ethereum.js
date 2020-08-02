@@ -8,6 +8,7 @@ export default function ethereum(state = {
     ethereumAddress: '',
     userBox: null,
     userSpace: null,
+    userSpaceName: '',
     errorMessage: ''
 }, action) {
     switch (action.type) {
@@ -22,7 +23,7 @@ export default function ethereum(state = {
                 ethereumAddress: action.payload.ethereumAddress,
                 userBox: action.payload.userBox,
                 userSpace: action.payload.userSpace,
-                errorMessage: ''
+                userSpaceName: action.payload.userSpaceName,
             });
         case ETHEREUM_FAILURE:
             return Object.assign({}, state, {
@@ -31,6 +32,7 @@ export default function ethereum(state = {
                 ethereumAddress: '',
                 userBox: null,
                 userSpace: null,
+                userSpaceName: '',
                 errorMessage: action.payload
             });
         default:
