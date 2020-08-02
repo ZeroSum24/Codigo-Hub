@@ -25,7 +25,7 @@ class BountiesTable extends React.Component {
   render() {
     return (
       <Widget
-        title={<h5>Your <span className="fw-semi-bold">Bounties</span></h5>} settings close
+        title={<h5>Your <span className="fw-semi-bold">Bounties</span></h5>} close
         bodyClass={s.mainTableWidget}
       >
         <Table striped>
@@ -38,14 +38,13 @@ class BountiesTable extends React.Component {
             <th>Description</th>
             <th className="hidden-sm-down">ETH Amount</th>
             <th className="hidden-sm-down">Claimed</th>
-            <th className="hidden-sm-down" align={"center"}>Remove</th>
           </tr>
           </thead>
           <tbody>
           {
             this.props.bountyList.map((row, id) =>
               <tr key={id}>
-                <td>{id}</td>
+                <td>{id+1}</td>
                 <td>
                   <span className="fw-semi-bold">{row.title}</span>
                 </td>
@@ -75,22 +74,6 @@ class BountiesTable extends React.Component {
           }
           </tbody>
         </Table>
-        {/*// TODO remove this or think about use for it*/}
-        <div className="clearfix">
-          <div className="float-right">
-            <Button color="default" className="mr-xs" size="sm">Send to...</Button>
-            <UncontrolledButtonDropdown>
-              <DropdownToggle color="inverse" className="mr-xs" size="sm" caret>Clear</DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem>Clear</DropdownItem>
-                <DropdownItem>Move ...</DropdownItem>
-                <DropdownItem>Something else here</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Separated link</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledButtonDropdown>
-          </div>
-        </div>
       </Widget>
     );
   }
