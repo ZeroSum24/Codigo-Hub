@@ -2,12 +2,13 @@ import React from 'react';
 import {connect} from "react-redux";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import ThreeBoxComments from '3box-comments-react';
 import { Row, Col, Container } from 'reactstrap';
 
+import ThreeBoxComments from '../../external/3box-comments-react';
 import DetailsBox from "./components/DetailsBox";
 import FirmwareButtons from "./components/FirmwareButtons";
 import ReputationBox from "./components/ReputationBox";
+import {userVotingCallback} from "../../blockchain/userStats";
 import FirmwareUpgradeDialog from './components/firmwareUpgradeDialog';
 
 
@@ -71,6 +72,7 @@ class Firmware extends React.Component {
 										// Required props for auth A. & B.
 										box={this.props.userBox}
 										currentUserAddr={this.props.ethereumAddress}
+										votingCallback={userVotingCallback}
 									/>{' '}
 								</Col>
 								<Col xs="2" sm="2" md="2" />
