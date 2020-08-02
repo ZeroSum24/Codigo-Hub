@@ -12,7 +12,6 @@ import { isDeviceActive } from '../../../../mqtt/client';
 class Am4chartMap extends Component {
 	componentDidMount() {
 	  const devices = this.props.deviceList;
-	  console.log(devices);
 	  const mapData = devices.map(d => {
 	    return  {
         latitude: d.latitude,

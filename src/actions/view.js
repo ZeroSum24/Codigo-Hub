@@ -3,6 +3,7 @@ import {retrieveStatsDetails} from "../blockchain/userStats";
 import {SEARCH_SUCCESS} from "./search";
 import {FirmwareWithThumbs} from "../model/Firmware";
 import Profile, {ProfileWithStats} from "../model/Profile";
+import { getFirmwareLikes } from '../blockchain/contracts';
 
 export const VIEW_FIRMWARE_SET = "VIEW_FIRMWARE_SET";
 export const VIEW_PROFILE_SET = "VIEW_PROFILE_SET";
@@ -87,19 +88,22 @@ void loop() {
 
 export function initFirmwareView(payload) {
 
-  return (dispatch) => {
+  return async (dispatch) => {
 
     // TODO pull all the info from the backend necessary for the firmware page
 
     // TODO pull source from IPFS using the link
-    let firmwareStats = new FirmwareWithThumbs(payload.firmwareObj.name); // return updated firmware objects //TODO replace this with stats object
+    const fw = payload.firmwareObj;
+    const {likes, dislikes, mine} = await getFirmwareLikes(fw.block);
+    let firmwareStats = new FirmwareWithThumbs(fw.hash, fw.IPFS_link, fw.description, fw.block,
+      fw.developer, fw.device_type, likes, dislikes);
     let firmwareSource = exampleTempFirmwareSource;
     let firmwareDeveloper = new ProfileWithStats("", "", "","", "",
       "", "");
 
 
     // change the app location and set the firmware page
-    dispatch(setFirmware({firmwareStats: firmwareStats, firmwareSource: firmwareSource, firmwareDeveloper: firmwareDeveloper}));
+    dispatch(setFirmware({firmwareStats: firmwareStats, firmwareSource: firmwareSource, firmwareDeveloper: firmwareDeveloper, mineLike: mine}));
     payload.history.push('/app/firmware');
   }
 }
