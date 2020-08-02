@@ -10,3 +10,13 @@ export function retrieveStatsDetails(profile) {
   return new ProfileWithStats(profile.address,profile.name, profile.description, profile.image,
     "", "", "")
 }
+
+export function userVotingCallback(votingPower, profileAddr) {
+
+  console.log("Voting occurred", votingPower, profileAddr);
+  if (votingPower === 1) {
+    // positive vote
+  } else if (votingPower === -1) {
+    // negative vote
+  }
+}

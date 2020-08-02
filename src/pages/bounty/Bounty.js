@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 import { Row, Col, Container, Card, CardTitle, CardText, Button } from 'reactstrap';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import ThreeBoxComments from '3box-comments-react';
+
+import ThreeBoxComments from '../../external/3box-comments-react';
 import { collectBounty } from '../../blockchain/contracts';
+import {userVotingCallback} from "../../blockchain/userStats";
+
 class Bounty extends React.PureComponent {
 	constructor(props) {
 		super(props);
@@ -65,6 +68,7 @@ class Bounty extends React.PureComponent {
 										// Required props for auth A. & B.
 										box={this.props.userBox}
 										currentUserAddr={this.props.ethereumAddress}
+										votingCallback={userVotingCallback}
 									/>{' '}
 								</Col>
 								<Col xs="2" sm="2" md="2" />
