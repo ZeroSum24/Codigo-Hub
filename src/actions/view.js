@@ -113,12 +113,8 @@ export function initProfileView(payload) {
 
   return (dispatch) => {
 
-    console.log("initial initProfileView", payload);
-
     let profileWithStats = retrieveStatsDetails(payload.profile);
     let profileFirmwareHistory = retrieveFirmwareHistory(payload.profile.address);
-
-    console.log("init profile view", profileWithStats, profileFirmwareHistory, typeof profileWithStats, typeof profileFirmwareHistory)
 
     // change the app location and set the firmware page
     dispatch(setProfile({profileWithStats: profileWithStats, profileFirmwareHistory: profileFirmwareHistory}));

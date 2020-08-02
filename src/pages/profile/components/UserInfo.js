@@ -16,7 +16,6 @@ class  UserInfo extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log("User Profile Info main", this.props.profile, "logo details", logo, typeof logo);
     this.state = {showEditDialog: false};
   }
 
@@ -33,7 +32,6 @@ class  UserInfo extends React.Component {
     const src = isValidImage(this.props.profile.image)
       ? `https://ipfs.infura.io/ipfs/${this.props.profile.image[0].contentUrl['/']}`
       : logo;
-    console.log("image src", src, isValidImage(this.props.profile.image));
 
     return (
       <div className={s.root}>

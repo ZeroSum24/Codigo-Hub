@@ -7,7 +7,6 @@ class EditProfileDialog extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log("edit profile props", this.props)
   }
 
   render() {
