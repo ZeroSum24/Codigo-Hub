@@ -40,7 +40,7 @@ export function registerUser(payload, user3Space) {
     return async (dispatch) => {
       try {
 
-        if (payload.creds.password.length > 8) {
+        if (payload.creds.password.length >= 8) {
           await registerCurrentUser();
           toast.success("You've been registered successfully");
           payload.history.push('/login');
