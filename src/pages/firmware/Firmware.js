@@ -3,11 +3,12 @@ import {connect} from "react-redux";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ThreeBoxComments from '3box-comments-react';
-import { Row, Col, Container, Card, CardTitle, CardText, CardBody, Button } from 'reactstrap';
+import { Row, Col, Container } from 'reactstrap';
 
 import DetailsBox from "./components/DetailsBox";
 import FirmwareButtons from "./components/FirmwareButtons";
 import ReputationBox from "./components/ReputationBox";
+import FirmwareUpgradeDialog from './components/firmwareUpgradeDialog';
 
 
 class Firmware extends React.Component {
@@ -15,15 +16,31 @@ class Firmware extends React.Component {
 		super(props);
 		this.state = {
 			adminEthAddr: '0xf7367F3abDB31428Ed56032AbC14B245fCC95BA2',
-			box: '123'
+			box: '123',
+      showDeployDialog: false
 		};
 	}
+
+  showDeployDialog = () => {
+    this.setState({showDeployDialog: true});
+  };
+
+  hideDeployDialog = () => {
+    this.setState({showDeployDialog: false});
+  };
 
 	render() {
 
 		return (
 			<div>
-				<div align="centre" className="page-title">
+        {this.state.showDeployDialog &&
+        <FirmwareUpgradeDialog
+          onClose={this.hideDeployDialog}
+          show={this.state.showDeployDialog}
+          firmware={this.props.firmware}
+          deviceList={this.props.deviceList} />
+        }
+        <div className="page-title">
 					<h1 >
 						Firmware: {this.props.firmware.hash}
 					</h1>
@@ -63,7 +80,7 @@ class Firmware extends React.Component {
 							<DetailsBox details={this.props.firmware}/>
 							<br />
 							<br />
-							<FirmwareButtons firmware={this.props.firmware}/>
+							<FirmwareButtons firmware={this.props.firmware} onDeploy={this.showDeployDialog}/>
 							<br />
 							<br />
 							<ReputationBox details={this.props.firmware}/>
@@ -82,7 +99,8 @@ const mapStateToProps = (state) => ({
   developer: state.views.firmwareDeveloper,
   ethereumAddress: state.ethereum.ethereumAddress,
 	userBox: state.ethereum.userBox,
-	userSpace: state.ethereum.userSpace
+	userSpace: state.ethereum.userSpace,
+  deviceList: state.profile.deviceList,
 });
 
 export default connect(mapStateToProps)(Firmware);

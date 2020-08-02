@@ -127,7 +127,7 @@ class Sidebar extends React.Component {
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
-						header="Firmware"
+						header="Available Firmware"
 						isHeader
 						iconName="fi flaticon-star"
 						link="/app/view_firmware"
@@ -138,7 +138,7 @@ class Sidebar extends React.Component {
 						onActiveSidebarItemChange={(activeItem) =>
 							this.props.dispatch(changeActiveSidebarItem(activeItem))}
 						activeItem={this.props.activeItem}
-						header="Bounties"
+						header="Available Bounties"
 						isHeader
 						iconName="fi flaticon-layers"
 						link="/app/view_bounties"

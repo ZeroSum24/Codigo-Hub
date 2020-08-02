@@ -111,9 +111,11 @@ export function initFirmwareView(payload) {
  */
 export function initProfileView(payload) {
 
-  return (dispatch) => {
+  return async (dispatch) => {
 
-    let profileWithStats = retrieveStatsDetails(payload.profile);
+    console.log("initial initProfileView", payload);
+
+    let profileWithStats = await retrieveStatsDetails(payload.profile);
     let profileFirmwareHistory = retrieveFirmwareHistory(payload.profile.address);
 
     // change the app location and set the firmware page

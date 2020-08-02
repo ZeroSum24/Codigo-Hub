@@ -2,14 +2,26 @@ import React, { Component } from 'react';
 
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4maps from '@amcharts/amcharts4/maps';
-import cities from './mock';
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow';
 
 import AnimateNumber from 'react-animated-number';
 import s from './am4chartMap.module.scss';
+import { connect } from 'react-redux';
+import { isDeviceActive } from '../../../../mqtt/client';
 
 class Am4chartMap extends Component {
 	componentDidMount() {
+	  const devices = this.props.deviceList;
+	  console.log(devices);
+	  const mapData = devices.map(d => {
+	    return  {
+        latitude: d.latitude,
+        longitude: d.longitude,
+        size: 6,
+        tooltip: `${d.name} - ${d.brand} ${d.model}`,
+        fill: isDeviceActive(d.name) ? am4core.color('#23e323') : am4core.color("#a32828")
+      }
+    })
 		let map = am4core.create('map', am4maps.MapChart);
 		map.geodata = am4geodata_worldLow;
 		map.percentHeight = 90;
@@ -49,14 +61,14 @@ class Am4chartMap extends Component {
 		let hs = polygonTemplate.states.create('hover');
 		hs.properties.fill = am4core.color('#354D84');
 		let citySeries = map.series.push(new am4maps.MapImageSeries());
-		citySeries.data = cities;
+		citySeries.data = mapData;
 		citySeries.dataFields.value = 'size';
 		let city = citySeries.mapImages.template;
 		city.nonScaling = true;
 		city.propertyFields.latitude = 'latitude';
 		city.propertyFields.longitude = 'longitude';
 		let circle = city.createChild(am4core.Circle);
-		circle.fill = am4core.color('#C7D0FF');
+		circle.propertyFields.fill = 'fill';
 		circle.strokeWidth = 0;
 		let circleHoverState = circle.states.create('hover');
 		circleHoverState.properties.strokeWidth = 1;
@@ -75,18 +87,18 @@ class Am4chartMap extends Component {
 		return (
 			<div className={s.mapChart}>
 				<div className={s.stats}>
-					<h6 className="mt-1">GEO-LOCATIONS</h6>
-					<p className="h3 m-0">
-						<span className="mr-xs fw-normal">
+					<h3 className="mt-1" style={{display: 'inline', paddingRight: '10px'}}>IoT Devices</h3>
+					<p style={{display: 'inline'}} className="h3 m-0">
+            <span className="glyphicon glyphicon-map-marker" />
+            <span className="mr-xs fw-normal">
 							<AnimateNumber
-								value={1656843}
+								value={this.props.deviceList.length}
 								initialValue={0}
 								duration={1000}
 								stepPrecision={0}
 								formatValue={(n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
 							/>
 						</span>
-            <span className="glyphicon glyphicon-map-marker" />
 					</p>
 				</div>
 				<div style={{ 'padding-top': '90px' }} className={s.map} id="map">
@@ -97,4 +109,8 @@ class Am4chartMap extends Component {
 	}
 }
 
-export default Am4chartMap;
+const mapStateToProps = state => ({
+  deviceList: state.profile.deviceList,
+});
+
+export default connect(mapStateToProps)(Am4chartMap);
