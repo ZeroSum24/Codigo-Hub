@@ -25,48 +25,32 @@ class FirmwareWidget extends React.PureComponent {
   render() {
     const firmware = this.props.item;
     return (
-      /*
-      <h6><span className="fw-semi-bold">Developer: </span></h6>
-
-
-      <h6>{firmware.developer}</h6>
-      <h6>{firmware.version}</h6>
-      <h6>{firmware.description}</h6>
-      <h6>{firmware.device_type}</h6>
-
-      */
 
       <Widget
         close collapse onClick={this.openFirmwareView}>
         <div className="widget-padding-md w-100 h-100 text-left border rounded">
         <Row>
           <Col>
-          <h3>{firmware.name}</h3>
-          </Col>
-          <Col>
-
+            <h1><span className="fw-semi-bold">{firmware.name}</span></h1>
+            <h6>Developer: {firmware.developer}</h6>
+            <br/><br/>
           </Col>
         </Row>
 
-          <Row>
-            <Col>
-              <Row>
-                <h4><span className="fw-semi-bold">{firmware.device_type}</span></h4>
-              </Row>
-            </Col>
+        <Row>
+          <Col>
+              <h2><span className="fw-semi-bold">{firmware.device_type}</span></h2>
+          </Col>
 
-            <Col>
-              <Row>
-                <h4><span className="fw-semi-bold">"  " + {firmware.version}</span></h4>
-              </Row>
-            </Col>
+          <Col>
+              <h3><span className="fw-semi-bold">{firmware.version}</span></h3>
+          </Col>
+        </Row>
 
+        <Row>
 
-          </Row>
+        </Row>
 
-          <Row>
-            <h4><span className="fw-semi-bold">{firmware.developer}</span></h4>
-          </Row>
         </div>
       </Widget>
     );
