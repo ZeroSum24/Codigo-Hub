@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 import { addBounty } from '../../blockchain/contracts';
-import AddBounty from './addBounty/AddBounty';
+import AddBounty from './components/AddBounty';
 import TableView from "../../components/TableView";
+import BountiesTable from "./components/BountiesTable";
 
 class ManageBounties extends React.PureComponent {
 
@@ -32,7 +33,7 @@ class ManageBounties extends React.PureComponent {
 	render() {
 		return (
 			<div>
-        <TableView tableView={ManageBountiesTable}
+        <TableView tableView={<BountiesTable bountyList={this.props.bountyList}/>}
                    addView={<AddBounty isOpen={this.state.isOpen}
                                        onClose={this.onAddBounty}/>}
                    addFunction={ this.openAddBounty.bind(this)}
@@ -45,10 +46,6 @@ class ManageBounties extends React.PureComponent {
 	}
 }
 
-function ManageBountiesTable() {
-  return (<div></div>);
-}
-
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({bountyList: state.model.bountyList});
 
 export default connect(mapStateToProps)(ManageBounties);

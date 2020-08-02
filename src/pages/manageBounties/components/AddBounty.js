@@ -65,7 +65,7 @@ export default class AddBounty extends React.PureComponent {
       <Modal onClose={this.handleAddBounty} open={this.props.isOpen}>
         <Widget className="widget-auth mx-auto"
                 style={{ background: '#212529', marginTop: '30px' }}
-                title={<h3 className="mt-0">Add a bounty</h3>}>
+                title={<h3 className="mt-0">Add a Bounty</h3>}>
           <p className="widget-auth-info">
             Please fill all fields below.
           </p>
@@ -163,7 +163,7 @@ export default class AddBounty extends React.PureComponent {
               <Button type="submit"
                       color="warning"
                       className="auth-btn"
-                      size="sm" style={{ color: '#fff' }}>Add Bounty
+                      size="sm" style={{ color: '#fff' }}>Add a Bounty
               </Button>
               <p className="widget-auth-info mt-4">
               </p>
