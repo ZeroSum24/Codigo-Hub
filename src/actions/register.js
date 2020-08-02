@@ -49,7 +49,7 @@ export function registerUser(payload, userSpace) {
 
       try {
 
-        if (payload.creds.password.length > 8) {
+        if (payload.creds.password.length >= 8) {
           await registerCurrentUser();
           toast.success("You've been registered successfully");
           dispatch(setPassword(userSpace, payload.creds.password));
