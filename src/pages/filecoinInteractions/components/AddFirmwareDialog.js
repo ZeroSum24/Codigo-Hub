@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Widget from '../../../components/Widget';
 import Web3 from 'web3';
 import { hardcoded_device_types } from '../../../blockchain/contracts';
-import { getPG, upload } from '../../../filecoin/client';
+import { upload } from '../../../filecoin/client';
 import Modal from '@material-ui/core/Modal';
 
 const idleButtonText = 'Add Firmware to Còdigo';
@@ -20,22 +20,24 @@ class AddFirmwareDialog extends React.Component {
       deviceType: '',
       hash: '',
       file: null,
+      source: null,
       filetype: '',
       buttonText: idleButtonText
     };
   }
 
+  changeSourceCodeFile = (event) => {
+    const file = event.target.files[0];
+    this.setState({ [event.target.name]: file });
+  }
+
   changeFile = (event) => {
     const file = event.target.files[0];
-    this.setState({ file: file, filetype: file == null ? '' : file.type });
+    this.setState({ [event.target.name]: file, filetype: file == null ? '' : file.type });
   }
 
-  changeDescription = (e) => {
-    this.setState({ description: e.target.value });
-  }
-
-  changeDeviceType = (e) => {
-    this.setState({ deviceType: e.target.value });
+  change = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   _reset = () => {
@@ -44,20 +46,35 @@ class AddFirmwareDialog extends React.Component {
       deviceType: '',
       hash: '',
       file: null,
+      source: null,
       filetype: '',
       buttonText: idleButtonText
     });
+  }
 
+  toBytesInt32 (num) {
+    const arr = new ArrayBuffer(4); // an Int32 takes 4 bytes
+    const view = new DataView(arr);
+    view.setUint32(0, num, false); // byteOffset = 0; litteEndian = false
+    return new Uint8Array(arr);
   }
 
   onSubmit = async (e) => {
     e.preventDefault();
-    const PG = await getPG();
     this.setState({ buttonText: readFileText });
     const buffer = new Uint8Array(await this.state.file.arrayBuffer());
-    const hash = Web3.utils.sha3(Buffer.from(buffer).toString('hex'));
+    const sourceCode = await this.state.source.arrayBuffer();
+
+    // join source code and binary, append length of source code
+    const joined = new Uint8Array(buffer.byteLength + sourceCode.byteLength + 4);
+    joined.set(this.toBytesInt32(sourceCode.byteLength), 0);
+    console.log(joined);
+    joined.set(new Uint8Array(sourceCode), 4);
+    joined.set(new Uint8Array(buffer), sourceCode.byteLength + 4);
+
+    const hash = Web3.utils.sha3(Buffer.from(joined).toString('hex'));
     this.setState({ buttonText: filecoinUploadText });
-    const { cid, jobId } = await upload(buffer);
+    const { cid, jobId } = await upload(joined);
     this.props.onClose(hash, this.state.description, this.state.deviceType, cid, jobId);
     this._reset();
   }
@@ -80,26 +97,26 @@ class AddFirmwareDialog extends React.Component {
                   id="description"
                   className="input-transparent pl-3"
                   value={this.state.description}
-                  onChange={this.changeDescription}
+                  onChange={this.change}
                   type="textarea"
                   required
-                  name="Description"
+                  name="description"
                   placeholder="E.g. fixed bug CVSxxx"
                 />
               </InputGroup>
             </FormGroup>
 
             <FormGroup className="mt">
-              <Label for="devtype">Device Type</Label>
+              <Label for="deviceType">Device Type</Label>
               <InputGroup className="input-group-no-border">
                 <Input
-                  id="devtype"
+                  id="deviceType"
                   className="input-transparent pl-3"
                   value={this.state.deviceType}
-                  onChange={this.changeDeviceType}
+                  onChange={this.change}
                   type="select"
                   required
-                  name="Device Type"
+                  name="deviceType"
                 >
                   {hardcoded_device_types.map((dt) => <option key={dt}>{dt}</option>)}
                 </Input>
@@ -120,7 +137,14 @@ class AddFirmwareDialog extends React.Component {
                 </div>
                 : null}
               <InputGroup>
-                <Input id="file" type="file" required onChange={this.changeFile} />
+                <Input name="file" type="file" required onChange={this.changeFile} />
+              </InputGroup>
+            </FormGroup>
+
+            <FormGroup className="mt">
+              <Label for="file">Source code</Label>
+              <InputGroup>
+                <Input name="source" type="file" required onChange={this.changeSourceCodeFile} />
               </InputGroup>
             </FormGroup>
 

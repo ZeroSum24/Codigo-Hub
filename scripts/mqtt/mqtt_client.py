@@ -2,6 +2,7 @@
 import time
 import hashlib
 from termcolor import colored
+import sys
 
 from alive_progress import alive_bar
 import paho.mqtt.client as mqtt
@@ -34,7 +35,7 @@ def upgrade_firmware(client, userdata, msg):
     print('Downloading firmware')
     with open(filename, 'wb') as f:
         f.write(firmware)
-    animate(len(firmware))
+    animate(700)
     print('Downloaded at {}, md5 hash: {}'.format(filename, md5_firmware(firmware)))
     print('Press any key to abort firmware upgrade...')
     time.sleep(2)
@@ -53,11 +54,12 @@ def send_keepalive(client):
     if not client.is_connected():
         print('Client is disconnected, cant send keepalive')
     else:
-        print('Sending keepalive')
         client.publish('codigo/active', payload=client_name, qos=2)
 
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        client_name = sys.argv[1]
     client = mqtt.Client(client_id=client_name, clean_session=True, userdata=None, protocol=mqtt.MQTTv311, transport="websockets", )
     client.on_connect = on_connect
     client.tls_set_context(context=None)
