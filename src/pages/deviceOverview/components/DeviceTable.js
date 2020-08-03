@@ -1,26 +1,35 @@
 import React from 'react';
 import {
   Table,
-  Progress,
-  Button,
-  UncontrolledButtonDropdown,
-  DropdownMenu,
-  DropdownToggle,
-  DropdownItem,
   Badge,
 } from 'reactstrap';
 
 import Widget from '../../../components/Widget';
 import s from '../DeviceOverview.module.scss';
 import PropTypes from "prop-types";
+import { isDeviceActive, subscribeToStatusChanges, unSubscribeFromStatusChanges } from '../../../mqtt/client';
 
-
-class BountiesTable extends React.Component {
+class DeviceTable extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {activeDevices: new Set(this.props.deviceList.filter(d => isDeviceActive(d.name)).map(d => d.name))};
+    this.callback = (deviceName) => {
+      if (!this.state.activeDevices.has(deviceName)) {
+        const newState = new Set(this.state.activeDevices);
+        newState.add(deviceName);
+        this.setState({activeDevices: newState});
+      }
+    }
   }
 
+  componentDidMount = () => {
+    this.props.deviceList.forEach(d => subscribeToStatusChanges(d.name, this.callback));
+  }
+
+  componentWillUnmount = () => {
+    this.props.deviceList.forEach(d => unSubscribeFromStatusChanges(d.name, this.callback));
+  }
 
   render() {
     return (
@@ -34,14 +43,14 @@ class BountiesTable extends React.Component {
             <th className="hidden-sm-down">#</th>
             <th>Brand</th>
             <th>Model</th>
-            <th>Serial</th>
+            <th>Serial #</th>
             <th className="hidden-sm-down">Status</th>
           </tr>
           </thead>
           <tbody>
           {
-            this.props.bountyList.map((row, id) =>
-              <tr key={id}>
+            this.props.deviceList.map((row, id) =>
+              <tr key={row.serialNumber}>
                 <td>{id+1}</td>
                 <td>
                   <span className="fw-semi-bold">{row.brand}</span>
@@ -53,13 +62,15 @@ class BountiesTable extends React.Component {
                   {row.serialNumber}
                 </td>
                 <td>
-                  {/*TODO changed the colour depending on the status which needs to be passed in*/}
-                  <Badge color="success" className="text-secondary" pill>Online</Badge>
+                  {this.state.activeDevices.has(row.name) ?
+                    <Badge color="success" className="text-secondary" pill>Online</Badge>
+                    :
+                    <Badge color="info" className="text-secondary" pill>Offline</Badge>
+                  }
                 </td>
                 <td align={"center"}>
-                  {/*TODO add */}
-                  <span className="glyphicon glyphicon-remove-circle" title={"Remove Device?"} aria-hidden="true"
-                        onClick={() => {}} />
+                  <span className="glyphicon glyphicon-remove-circle" title={"Remove Device"} aria-hidden="true"
+                        onClick={() => this.props.onDeleteDevice(row)} />
                 </td>
               </tr>,
             )
@@ -69,11 +80,11 @@ class BountiesTable extends React.Component {
       </Widget>
     );
   }
-
 }
 
-export default BountiesTable;
+export default DeviceTable;
 
-BountiesTable.propTypes = {
-  bountyList: PropTypes.array.isRequired
+DeviceTable.propTypes = {
+  deviceList: PropTypes.array.isRequired,
+  onDeleteDevice: PropTypes.func.isRequired,
 };
