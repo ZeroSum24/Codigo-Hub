@@ -5,6 +5,8 @@ import AddDeviceDialog from './components/AddDevice';
 import { connect } from 'react-redux';
 import ListView from "../../components/ListView";
 import {Grid} from "@material-ui/core";
+import DeviceTable from "./components/DeviceTable";
+
 
 class DeviceOverview extends React.Component {
 

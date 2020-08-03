@@ -11,7 +11,7 @@ import {
 } from 'reactstrap';
 
 import Widget from '../../../components/Widget';
-import s from '../ManageBounties.module.scss';
+import s from '../DeviceOverview.module.scss';
 import PropTypes from "prop-types";
 
 
