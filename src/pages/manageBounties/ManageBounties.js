@@ -31,16 +31,16 @@ class ManageBounties extends React.PureComponent {
   }
 	
 	render() {
+    const myAddress = window.ethereum.selectedAddress.toLowerCase();
 		return (
 			<div>
-        <TableView tableView={<BountiesTable bountyList={this.props.bountyList}/>}
-                   addView={<AddBounty isOpen={this.state.isOpen}
-                                       onClose={this.onAddBounty}/>}
-                   addFunction={ this.openAddBounty.bind(this)}
-                   addFunctionExplanation={"Add new Bounty"}
-                   title={"Manage Bounties"}
-                   usageExplanation={"Monitor the status of your bounties. " +
-                   "Add or remove bounties at your leisure."} />
+        <TableView
+          tableView={<BountiesTable bountyList={this.props.bountyList.filter(b => b.bountySetter.toLowerCase() === myAddress)}/>}
+          addView={<AddBounty isOpen={this.state.isOpen} onClose={this.onAddBounty}/>}
+          addFunction={ this.openAddBounty.bind(this)}
+          addFunctionExplanation={"Add new Bounty"}
+          title={"Manage Bounties"}
+          usageExplanation={"Monitor the status of your bounties. Add or remove bounties at your leisure."} />
       </div>
 		);
 	}
