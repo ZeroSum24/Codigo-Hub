@@ -1,10 +1,12 @@
 import React from 'react';
 
-import DeviceWidget from '../../components/CustomWidgets/DeviceWidget'
+import TableView from "../../components/TableView";
 import AddDeviceDialog from './components/AddDevice';
 import { connect } from 'react-redux';
 import ListView from "../../components/ListView";
 import {Grid} from "@material-ui/core";
+import DeviceTable from "./components/DeviceTable";
+
 
 class DeviceOverview extends React.Component {
 
@@ -21,6 +23,10 @@ class DeviceOverview extends React.Component {
     this.setState({show: false});
   };
 
+  openAddDevice() {
+    this.setState({show: true});
+  }
+
   refreshComponent = () => {
     this.setState(this.state);
   };
@@ -28,19 +34,15 @@ class DeviceOverview extends React.Component {
   render() {
     return (
       <div>
-        <Grid container>
-          <Grid item xs={11}>
-            <h1 className="page-title"><span className="fw-semi-bold">Devices</span></h1>
-          </Grid>
-          <Grid item xs={1}>
-            <span className="glyphicon glyphicon-plus" style={{fontSize: '24px', paddingRight: '10px'}} title="Add new device" aria-hidden="true" onClick={this.showAddDialog} />
-            <span className="glyphicon glyphicon-refresh" style={{ fontSize: '24px'}} title="Refresh device status" onClick={this.refreshComponent} aria-hidden="true" />
-          </Grid>
-        </Grid>
-        <ListView customWidget={DeviceWidget} emptyText={"Why not add some devices so you can manage them?"}>
-          {this.props.deviceList.map(d => <DeviceWidget key={d.serialNumber} item={d} />)}
-        </ListView>
-        <AddDeviceDialog isOpen={this.state.show} onClose={this.closeAddDialog} />
+        <TableView tableView={<DeviceTable       bountyList = {this.props.deviceList}/>}
+                   addView  ={<AddDeviceDialog   isOpen     = {this.state.show}
+                                                 onClose    = {this.closeAddDialog}
+                           />}
+                   addFunction            = {this.openAddDevice.bind(this)}
+                   addFunctionExplanation = {"Add new Device"}
+                   title                  ={"Manage Devices"}
+                   usageExplanation       ={"Monitor the status of your Devices. " +
+                   "Add or remove devices at your leisure."} />
       </div>
     );
   }

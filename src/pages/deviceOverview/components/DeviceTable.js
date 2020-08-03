@@ -11,7 +11,7 @@ import {
 } from 'reactstrap';
 
 import Widget from '../../../components/Widget';
-import s from '../ManageBounties.module.scss';
+import s from '../DeviceOverview.module.scss';
 import PropTypes from "prop-types";
 
 
@@ -25,19 +25,17 @@ class BountiesTable extends React.Component {
   render() {
     return (
       <Widget
-        title={<h5>Your <span className="fw-semi-bold">Bounties</span></h5>} close
+        title={<h5>Your <span className="fw-semi-bold">Devices</span></h5>} close
         bodyClass={s.mainTableWidget}
       >
         <Table striped>
           <thead>
           <tr className="fs-sm">
             <th className="hidden-sm-down">#</th>
-            <th>Title</th>
+            <th>Brand</th>
             <th>Model</th>
-            <th>Version</th>
-            <th>Description</th>
-            <th className="hidden-sm-down">ETH Amount</th>
-            <th className="hidden-sm-down">Claimed</th>
+            <th>Serial</th>
+            <th className="hidden-sm-down">Status</th>
           </tr>
           </thead>
           <tbody>
@@ -46,27 +44,21 @@ class BountiesTable extends React.Component {
               <tr key={id}>
                 <td>{id+1}</td>
                 <td>
-                  <span className="fw-semi-bold">{row.title}</span>
+                  <span className="fw-semi-bold">{row.brand}</span>
                 </td>
                 <td>
                   {row.model}
                 </td>
                 <td>
-                  {row.firmwareVersion}
-                </td>
-                <td>
-                  {row.description}
-                </td>
-                <td className="text-muted">
-                  {row.ethAmount}
+                  {row.serialNumber}
                 </td>
                 <td>
                   {/*TODO changed the colour depending on the status which needs to be passed in*/}
-                  <Badge color="success" className="text-secondary" pill>Claimed</Badge>
+                  <Badge color="success" className="text-secondary" pill>Online</Badge>
                 </td>
                 <td align={"center"}>
                   {/*TODO add */}
-                  <span className="glyphicon glyphicon-remove-circle" title={"Remove Bounty"} aria-hidden="true"
+                  <span className="glyphicon glyphicon-remove-circle" title={"Remove Device?"} aria-hidden="true"
                         onClick={() => {}} />
                 </td>
               </tr>,
