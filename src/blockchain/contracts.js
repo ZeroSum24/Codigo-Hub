@@ -1,4 +1,4 @@
-import { web3, ethereum } from './client';
+import { web3 } from './client';
 import Firmware, { FirmwareWithThumbs } from '../model/Firmware';
 import BN from 'bn.js';
 import Bounty from '../model/Bounty';
@@ -6,7 +6,7 @@ import Bounty from '../model/Bounty';
 export const firmwareRepoAddress = '0x3691B2BE18f186b475e81342585790DcBaC43A0b';
 export const usersAddress = "0x6227c20850c1f431cABEC5ec3CBD746186101882"
 export const identityAddress = "0xF665D2AA03aeA414522f684f14543b15DDbbE9F0";
-export const bountiesAddress = "0x8C58B5bf0145370916574E82DDecC4b2793EE888";
+export const bountiesAddress = "0xDF408fe9E0b0c7467cfb9568e93dBea3a91B97Fb";
 export const likesAddress = "0x7B86bB454670Bb38dfbdeA0133530D2256816F85";
 export const abiFR = [
   {
@@ -659,7 +659,7 @@ function getBounties() {
  * @return {Promise<string>} `tx_hash` hash of transaction
  */
 export function registerFirmware(firmware_hash, IPFS_link, description, device_type) {
-  if (ethereum.selectedAddress == null) throw Error('Initialize account first');
+  if (window.ethereum.selectedAddress == null) throw Error('Initialize account first');
   return sendTransaction(firmwareRepoAddress,
     getFirmwareRepo().methods.add_firmware(firmware_hash, IPFS_link, description, device_type, true).encodeABI())
 }
@@ -670,7 +670,7 @@ export function registerFirmware(firmware_hash, IPFS_link, description, device_t
  */
 export function retrieveAllAvailableFirmware() {
   const promises = [];
-  const currentAccount = ethereum.selectedAddress;
+  const currentAccount = window.ethereum.selectedAddress;
   if (!hardcoded_developers.includes(currentAccount)) hardcoded_developers.push(currentAccount);
   hardcoded_device_types.forEach(dev_type => hardcoded_developers
     .forEach(dev_addr => promises.push(retrieveFirmware(dev_type, dev_addr))));
@@ -691,7 +691,7 @@ export function retrieveFirmware(device_type, user_address) {
  * returns {Promise<{likes: >=0, dislikes: >=0, mine: -1-dislike/0-neutral/1-like}>}
  */
 export async function getFirmwareLikes(block_num) {
-  const r = await getLikesRepo().methods.get_all_likes(block_num).call({from: ethereum.selectedAddress});
+  const r = await getLikesRepo().methods.get_all_likes(block_num).call({from: window.ethereum.selectedAddress});
   return {likes: r[0], dislikes: r[1], mine: r[2]};
 }
 
@@ -714,7 +714,7 @@ export function thumbsNeutralFirmware(block_num) {
  * @return {*}
  */
 function thumbsFirmware(thumb, block_num) {
-  return getLikesRepo().methods.thumbs_up_down(thumb, block_num).send({from: ethereum.selectedAddress});
+  return getLikesRepo().methods.thumbs_up_down(thumb, block_num).send({from: window.ethereum.selectedAddress});
 }
 
 // doesn't work yet, overflows for some reason
@@ -731,7 +731,7 @@ export function retrieveMostTrustedFirmwareForDevice(device_type) {
  */
 export function getChallenge(addressToClaim) {
   return new Promise((resolve, _) => {
-    getIdentity().methods.challenge(addressToClaim).send({from: ethereum.selectedAddress}).on('receipt', r => {
+    getIdentity().methods.challenge(addressToClaim).send({from: window.ethereum.selectedAddress}).on('receipt', r => {
       resolve(r.events.Challenge.returnValues.challenge);
     });
   });
@@ -904,14 +904,14 @@ export function collectBounty(block_num) {
 function sendTransaction(to, data, value) {
   const transactionParameters = {
     to: to, // Required except during contract publications.
-    from: ethereum.selectedAddress, // must match user's active address.
+    from: window.ethereum.selectedAddress, // must match user's active address.
     data: data, // Optional, but used for defining smart contract creation and interaction.
     value: value,
   };
 
 // txHash is a hex string
 // As with any RPC call, it may throw an error
-  return ethereum.request({
+  return window.ethereum.request({
     method: 'eth_sendTransaction',
     params: [transactionParameters],
   });

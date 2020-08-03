@@ -1,26 +1,30 @@
 import React from 'react';
 import {
   Table,
-  Progress,
-  Button,
-  UncontrolledButtonDropdown,
-  DropdownMenu,
-  DropdownToggle,
-  DropdownItem,
   Badge,
 } from 'reactstrap';
 
 import Widget from '../../../components/Widget';
 import s from '../ManageBounties.module.scss';
 import PropTypes from "prop-types";
+import { collectBounty } from '../../../blockchain/contracts';
+import { web3 } from '../../../blockchain/client';
 
 
 class BountiesTable extends React.Component {
 
-  constructor(props) {
-    super(props);
+  collect = async (block_num) => {
+    // 3628800 blocks ~12 weeks~ need to be created before a bounty is cancelable
+    const timeToBountyCancelable = 3628800;
+    const timeSinceCreation = (await web3.eth.getBlockNumber()) - block_num;
+    const remainingBlocks = timeToBountyCancelable - timeSinceCreation;
+    if (remainingBlocks <= 0) {
+      collectBounty(block_num);
+    } else {
+      alert('You need to wait ' + remainingBlocks + ' more blocks before the bounty can be canceled. ' +
+        'Developers are working hard to implement your bounty.');
+    }
   }
-
 
   render() {
     return (
@@ -43,7 +47,7 @@ class BountiesTable extends React.Component {
           <tbody>
           {
             this.props.bountyList.map((row, id) =>
-              <tr key={id}>
+              <tr key={row.block_num}>
                 <td>{id+1}</td>
                 <td>
                   <span className="fw-semi-bold">{row.title}</span>
@@ -58,16 +62,18 @@ class BountiesTable extends React.Component {
                   {row.description}
                 </td>
                 <td className="text-muted">
-                  {row.ethAmount}
+                  {web3.utils.fromWei(row.ethAmount, 'ether')}
                 </td>
                 <td>
-                  {/*TODO changed the colour depending on the status which needs to be passed in*/}
-                  <Badge color="success" className="text-secondary" pill>Claimed</Badge>
+                  {row.ethAmout == 0 ?
+                    <Badge color="info" className="text-secondary" pill>Claimed</Badge>
+                  :
+                    <Badge color="success" className="text-secondary" pill>Active</Badge>
+                  }
                 </td>
                 <td align={"center"}>
-                  {/*TODO add */}
                   <span className="glyphicon glyphicon-remove-circle" title={"Remove Bounty"} aria-hidden="true"
-                        onClick={() => {}} />
+                        onClick={() => this.collect(row.block_num)} />
                 </td>
               </tr>,
             )
