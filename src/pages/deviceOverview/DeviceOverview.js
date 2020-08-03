@@ -1,6 +1,5 @@
 import React from 'react';
 
-import DeviceWidget from '../../components/CustomWidgets/DeviceWidget'
 import TableView from "../../components/TableView";
 import AddDeviceDialog from './components/AddDevice';
 import { connect } from 'react-redux';
