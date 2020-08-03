@@ -1,5 +1,5 @@
 import {ProfileWithStats} from "../model/Profile";
-import {getUserRep} from "./contracts";
+import { getUserRep, addRepToUser, removeRepFromUser } from "./contracts";
 
 /**
  * Should add the latest user stats pulled from the User Reputation smart contract + The Graph
@@ -17,8 +17,8 @@ export function userVotingCallback(votingPower, profileAddr) {
 
   console.log("Voting occurred", votingPower, profileAddr);
   if (votingPower === 1) {
-    // positive vote
+      addRepToUser(profileAddr);
   } else if (votingPower === -1) {
-    // negative vote
+      removeRepFromUser(profileAddr);
   }
 }
