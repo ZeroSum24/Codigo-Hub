@@ -3,9 +3,8 @@ import React from 'react';
 import TableView from "../../components/TableView";
 import AddDeviceDialog from './components/AddDevice';
 import { connect } from 'react-redux';
-import ListView from "../../components/ListView";
-import {Grid} from "@material-ui/core";
 import DeviceTable from "./components/DeviceTable";
+import { deleteDevice } from '../../actions/profile';
 
 
 class DeviceOverview extends React.Component {
@@ -15,10 +14,6 @@ class DeviceOverview extends React.Component {
     this.state = {show: false};
   }
 
-  showAddDialog = () => {
-    this.setState({show: true});
-  };
-
   closeAddDialog = () => {
     this.setState({show: false});
   };
@@ -27,14 +22,14 @@ class DeviceOverview extends React.Component {
     this.setState({show: true});
   }
 
-  refreshComponent = () => {
-    this.setState(this.state);
-  };
+  onDeleteDevice = (device) => {
+    this.props.dispatch(deleteDevice(device, this.props.deviceList));
+  }
 
   render() {
     return (
       <div>
-        <TableView tableView={<DeviceTable       bountyList = {this.props.deviceList}/>}
+        <TableView tableView={<DeviceTable       deviceList = {this.props.deviceList} onDeleteDevice={this.onDeleteDevice} />}
                    addView  ={<AddDeviceDialog   isOpen     = {this.state.show}
                                                  onClose    = {this.closeAddDialog}
                            />}

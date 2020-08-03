@@ -9,7 +9,6 @@ const deviceLocalStorageKey = 'devices';
 function setDevices(payload) {
   // TODO update orbit DB datastore
   localStorage[deviceLocalStorageKey] = JSON.stringify(payload);
-  console.log(payload);
   return {
     type: USER_DEVICES_SET,
     payload
@@ -94,14 +93,14 @@ export function updateUserDevice(device) {
 /**
  * Remove a device from the list based on index.
  * TODO implement UI binding and functionality
- * @param device
+ * @param {Device} device
+ * @param {Device[]} devices
  * @returns {function(...[*]=)}
  */
-export function deleteUserDevice(device) {
+export function deleteDevice(device, devices) {
   return (dispatch) => {
-
     // need to check it is possible to delete that device
-    dispatch(setDevices(device));
+    dispatch(setDevices(devices.filter(d => d!== device)));
   }
 }
 

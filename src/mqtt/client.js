@@ -56,7 +56,6 @@ function onMessageArrived(message) {
 }
 // if we heard of it in the last minute, it's online
 export function isDeviceActive(deviceName) {
-  console.log('query '+ deviceName);
   const timestamp = (activeDevicesMap[deviceName] || {})[timestampKeyName];
   if (timestamp == null) return false;
   return ((Date.now() - timestamp) /1000) < 60;
