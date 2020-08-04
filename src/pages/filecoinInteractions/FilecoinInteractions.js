@@ -105,10 +105,8 @@ class FilecoinInteractions extends React.Component {
           }
         </Col>
 
-
-
         <div>
-          <TableView tableView={<FirmwareTable     deviceList = {this.props.deviceList} onDeleteDevice={this.onDeleteDevice} />}
+          <TableView tableView={<FirmwareTable     deviceList = {this.props.recordsList} onDeleteDevice={this.onDeleteDevice} />}
                      addView  ={<AddFirmwareDialog isOpen     = {this.state.showUpload}
                                                    onClose    = {this._closeUploadDialog}
                              />}
@@ -122,10 +120,5 @@ class FilecoinInteractions extends React.Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  deviceList: state.profile.deviceList,
-  showAddDevice: state.profile.showAddDevice
-});
 
 export default FilecoinInteractions;

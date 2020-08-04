@@ -13,22 +13,22 @@ class FirmwareTable extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {activeDevices: new Set(this.props.deviceList.filter(d => isDeviceActive(d.name)).map(d => d.name))};
-    this.callback = (deviceName) => {
+    //this.state = {activeDevices: new Set(this.props.deviceList.filter(d => isDeviceActive(d.name)).map(d => d.name))};
+    /*this.callback = (deviceName) => {
       if (!this.state.activeDevices.has(deviceName)) {
         const newState = new Set(this.state.activeDevices);
         newState.add(deviceName);
         this.setState({activeDevices: newState});
       }
-    }
+    }*/
   }
 
   componentDidMount = () => {
-    this.props.deviceList.forEach(d => subscribeToStatusChanges(d.name, this.callback));
+    //this.props.deviceList.forEach(d => subscribeToStatusChanges(d.name, this.callback));
   }
 
   componentWillUnmount = () => {
-    this.props.deviceList.forEach(d => unSubscribeFromStatusChanges(d.name, this.callback));
+    //this.props.deviceList.forEach(d => unSubscribeFromStatusChanges(d.name, this.callback));
   }
 
   render() {
