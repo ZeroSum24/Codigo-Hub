@@ -686,6 +686,17 @@ export function retrieveFirmware(device_type, user_address) {
 }
 
 /**
+ *
+ * @param {string} myAddress address to filter on, or empty to pick from metamask
+ * @return {Bounty[]}
+ */
+export async function retrieveAllMyFirmware(myAddress) {
+  const address = myAddress || window.ethereum.selectedAddress;
+  const allfw = await retrieveAllAvailableFirmware();
+  return allfw.filter(f => address.toLowerCase() === f.developer.toLowerCase());
+}
+
+/**
  * Gets firmware number of likes, dislikes and the user's choice (i.e. if the user is already (dis-)liking it)
  * @param block_num
  * returns {Promise<{likes: >=0, dislikes: >=0, mine: -1-dislike/0-neutral/1-like}>}
@@ -715,13 +726,6 @@ export function thumbsNeutralFirmware(block_num) {
  */
 function thumbsFirmware(thumb, block_num) {
   return getLikesRepo().methods.thumbs_up_down(thumb, block_num).send({from: window.ethereum.selectedAddress});
-}
-
-// doesn't work yet, overflows for some reason
-export function retrieveMostTrustedFirmwareForDevice(device_type) {
-  return getFirmwareRepo().methods.get_most_trusted_firmware(device_type, true).call().then(result => {
-    return {fw: new Firmware(result[0], result[1], result[2], result[3]), dev: result[4], trusted: result[5]};
-  });
 }
 
 /**
@@ -868,6 +872,20 @@ export async function retrieveAllBounties() {
   }
   return bounties.map(b => new Bounty(b[0], b[1], b[2], b[3], '0', b[4], b[5]));
 }
+
+/**
+ *
+ * @param {String} myAddress address of wallet to filter on, or empty to pick it from metamask
+ * @return {Promise<Bounty[]>}
+ */
+export async function retrieveAllMyBounties(myAddress) {
+  const address = myAddress || window.ethereum.selectedAddress;
+  const allBounties = await retrieveAllBounties();
+  return allBounties.filter(b => address.toLowerCase() === b.bountySetter.toLowerCase());
+}
+
+window.r = retrieveAllMyFirmware;
+window.b = retrieveAllMyBounties;
 
 /**
  * Add a new bounty
