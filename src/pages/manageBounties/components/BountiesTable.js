@@ -68,7 +68,7 @@ class BountiesTable extends React.Component {
                   {row.ethAmout == 0 ?
                     <Badge color="info" className="text-secondary" pill>Claimed</Badge>
                   :
-                    <Badge color="success" className="text-secondary" pill>Active</Badge>
+                    <Badge color="success" className="text-secondary" pill>Open</Badge>
                   }
                 </td>
                 <td align={"center"}>
