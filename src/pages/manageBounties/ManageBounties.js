@@ -31,7 +31,7 @@ class ManageBounties extends React.PureComponent {
   }
 	
 	render() {
-    const myAddress = window.ethereum.selectedAddress.toLowerCase();
+    const myAddress = this.props.currentUserAddr;
 		return (
 			<div>
         <TableView
@@ -46,6 +46,9 @@ class ManageBounties extends React.PureComponent {
 	}
 }
 
-const mapStateToProps = state => ({bountyList: state.model.bountyList});
+const mapStateToProps = state => ({
+  bountyList: state.model.bountyList,
+  currentUserAddr: state.ethereum.ethereumAddress
+});
 
 export default connect(mapStateToProps)(ManageBounties);

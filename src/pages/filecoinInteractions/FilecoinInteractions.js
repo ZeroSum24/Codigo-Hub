@@ -9,6 +9,9 @@ import BalanceSheet from './components/balanceSheet';
 import AddFirmwareDialog from './components/AddFirmwareDialog';
 import { registerFirmware } from '../../blockchain/contracts';
 import ListFilecoinUploads from './components/ListFilecoinUploads';
+import TableView from "../../components/TableView";
+import FirmwareTable from "./components/FirmwareTable";
+import {connect} from "react-redux";
 
 class FilecoinInteractions extends React.Component {
   constructor(props) {
@@ -49,7 +52,7 @@ class FilecoinInteractions extends React.Component {
     return registerFirmware(hash, cid, description, deviceType)
       .then(tx_hash => alert('Yas transaction succeeded with hash: ' + tx_hash))
       .catch(e => alert('Failed '+ e))
-  }
+  };
 
   _refresh = async () => {
     const PG = await getPG();
@@ -70,26 +73,47 @@ class FilecoinInteractions extends React.Component {
     this.setState({ balancesList: info.balancesList, ...storageList });
   };
 
+  openAddFirmware() {
+    this.setState({ showUpload: true });
+  }
+
   render() {
+    const myAddress = this.props.currentUserAddr;
     return (
-      <Container>
-        <h1 className="page-title" style={{ display: 'inline', paddingRight: '10px' }}>Filecoin Storage Deals</h1>
-        <span className="glyphicon glyphicon-plus"
-              style={{ fontSize: '24px', marginBottom: '10px', paddingRight: '10px' }} title="Upload new firmware"
-              aria-hidden="true" onClick={() => this.setState({ showUpload: true })}/>
-        <span className="glyphicon glyphicon-refresh" style={{ fontSize: '24px', marginBottom: '10px' }}
-              title="Refresh storage deals" onClick={this._refresh} aria-hidden="true"/>
-        <Col>
-          <AddFirmwareDialog isOpen={this.state.showUpload} onClose={this._closeUploadDialog}/>
-          {this.state.recordsList.length > 0 ?
-            <ListFilecoinUploads recordsList={this.state.recordsList} balancesList={this.state.balancesList} />
-          :
-            "You have no firmware uploaded to Codigo :("
-          }
-        </Col>
-      </Container>
+      <div>
+        <TableView
+          tableView={<FirmwareTable recordsList={this.state.recordsList} balancesList={this.state.balancesList}/>}
+          addView={<AddFirmwareDialog isOpen={this.state.showUpload} onClose={this._closeUploadDialog}/>}
+          addFunction={ this.openAddFirmware.bind(this)}
+          addFunctionExplanation={"Upload new firmware"}
+          title={"Manage Firmware"}
+          usageExplanation={"Upload new Firmware and manage your Filecoin Storage Contracts."} />
+      </div>
     );
   }
 }
 
-export default FilecoinInteractions;
+
+// <Container>
+//   <h1 className="page-title" style={{ display: 'inline', paddingRight: '10px' }}>Filecoin Storage Deals</h1>
+//   <span className="glyphicon glyphicon-plus"
+//         style={{ fontSize: '24px', marginBottom: '10px', paddingRight: '10px' }} title="Upload new firmware"
+//         aria-hidden="true" onClick={() => />
+//     <span className="glyphicon glyphicon-refresh" style={{ fontSize: '24px', marginBottom: '10px' }}
+//     title="Refresh storage deals" onClick={this._refresh} aria-hidden="true"/>
+//     <Col>
+//   {this.state.recordsList.length > 0 ?
+//     <ListFilecoinUploads recordsList={this.state.recordsList} balancesList={this.state.balancesList} />
+//     :
+//     "You have no firmware uploaded to Codigo :("
+//   }
+//     </Col>
+//     </Container>
+
+
+const mapStateToProps = state => ({
+  firmwareList: state.model.firmwareList,
+  currentUserAddr: state.ethereum.ethereumAddress
+});
+
+export default connect(mapStateToProps)(FilecoinInteractions);
