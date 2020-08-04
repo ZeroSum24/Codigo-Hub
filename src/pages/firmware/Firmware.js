@@ -42,8 +42,7 @@ class Firmware extends React.Component {
           deviceList={this.props.deviceList} />
         }
         <div className="page-title">
-					<h1 >
-						{this.props.firmware.name}
+					<h1 >Firmware: <span>{this.props.firmware.name}</span>
 					</h1>
 					<h4>Contributed by {this.props.developer.name} ({this.props.developer.communityScore})</h4>
 				</div>
