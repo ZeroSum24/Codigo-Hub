@@ -92,17 +92,17 @@ class Earnings extends React.Component {
 										<tr>
 											<td />
 											<td>Earnings Last 7 days : </td>
-											<td className="text-align-right fw-semi-bold">$100.10</td>
+											<td className="text-align-right fw-semi-bold">£100.10</td>
 										</tr>
 										<tr>
 											<td />
 											<td>Earnings Last 30 days : </td>
-											<td className="text-align-right fw-semi-bold">$500.10</td>
+											<td className="text-align-right fw-semi-bold">£500.10</td>
 										</tr>
 										<tr>
 											<td />
 											<td>Earnings Last 90 days : </td>
-											<td className="text-align-right fw-semi-bold">$1000.10</td>
+											<td className="text-align-right fw-semi-bold">£1000.10</td>
 										</tr>
 									</tbody>
 								</Table>

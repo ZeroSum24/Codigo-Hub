@@ -73,16 +73,6 @@ class FilecoinInteractions extends React.Component {
   render() {
     return (
       <Container>
-        <h1 className="page-title" style={{ display: 'inline', paddingRight: '10px' }}>Filecoin Wallet</h1>
-        <span className="glyphicon glyphicon-plus"
-              style={{ fontSize: '24px', marginBottom: '10px', paddingRight: '10px' }} title="Add new address"
-              aria-hidden="true" onClick={() => this.setState({ showCreate: true })}/>
-        <span className="glyphicon glyphicon-refresh" style={{ fontSize: '24px', marginBottom: '10px' }}
-              title="Refresh wallet" onClick={this._refresh} aria-hidden="true"/>
-        <Col>
-          <CreateFilecoinAddressDialog isOpen={this.state.showCreate} onClose={() => this.setState({ showCreate: false })}/>
-          <BalanceSheet balancesList={this.state.balancesList}/>
-        </Col>
         <h1 className="page-title" style={{ display: 'inline', paddingRight: '10px' }}>Filecoin Storage Deals</h1>
         <span className="glyphicon glyphicon-plus"
               style={{ fontSize: '24px', marginBottom: '10px', paddingRight: '10px' }} title="Upload new firmware"
