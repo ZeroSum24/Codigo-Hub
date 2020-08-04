@@ -5,6 +5,8 @@ import { ffsOptions, ffsTypes } from '@textile/powergate-client';
 
 import { getPG } from '../../filecoin/client';
 import CreateFilecoinAddressDialog from './components/createFilecoinAddressDialog';
+import TableView from "../../components/TableView";
+import FirmwareTable from "./components/FirmwareTable";
 import BalanceSheet from './components/balanceSheet';
 import AddFirmwareDialog from './components/AddFirmwareDialog';
 import { registerFirmware } from '../../blockchain/contracts';
@@ -70,6 +72,11 @@ class FilecoinInteractions extends React.Component {
     this.setState({ balancesList: info.balancesList, ...storageList });
   };
 
+  openAddDevice() {
+    this.setState({show: true});
+  }
+
+
   render() {
     return (
       <Container>
@@ -97,9 +104,28 @@ class FilecoinInteractions extends React.Component {
             "You have no firmware uploaded to Codigo :("
           }
         </Col>
+
+
+
+        <div>
+          <TableView tableView={<FirmwareTable     deviceList = {this.props.deviceList} onDeleteDevice={this.onDeleteDevice} />}
+                     addView  ={<AddFirmwareDialog isOpen     = {this.state.showUpload}
+                                                   onClose    = {this._closeUploadDialog}
+                             />}
+                     addFunction            = {this.openAddDevice.bind(this)}
+                     addFunctionExplanation = {"Add Firmware"}
+                     title                  = {"Manage Firmware"}
+                     usageExplanation       = {"Monitor the status of your deployed firmware. " +
+                     "Add firmware at your leisure."} />
+        </div>
       </Container>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  deviceList: state.profile.deviceList,
+  showAddDevice: state.profile.showAddDevice
+});
 
 export default FilecoinInteractions;
