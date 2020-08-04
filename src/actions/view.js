@@ -1,8 +1,7 @@
-import {retrieveFirmwareHistory} from "../blockchain/firmwareHistory";
 import {retrieveStatsDetails} from "../blockchain/userStats";
 import {FirmwareWithThumbs} from "../model/Firmware";
 import {ProfileWithStats} from "../model/Profile";
-import { getFirmwareLikes } from '../blockchain/contracts';
+import { getFirmwareLikes, retrieveAllMyFirmware } from '../blockchain/contracts';
 import { downloadSourceCode } from '../filecoin/client';
 
 export const VIEW_FIRMWARE_SET = "VIEW_FIRMWARE_SET";
@@ -60,8 +59,9 @@ export function initProfileView(payload) {
 
     console.log("initial initProfileView", payload);
 
-    let profileWithStats = await retrieveStatsDetails(payload.profile);
-    let profileFirmwareHistory = retrieveFirmwareHistory(payload.profile.address);
+    let profileFirmwareHistory = await retrieveAllMyFirmware(payload.profile.address);
+
+    let profileWithStats = await retrieveStatsDetails(payload.profile, profileFirmwareHistory.length);
 
     // change the app location and set the firmware page
     dispatch(setProfile({profileWithStats: profileWithStats, profileFirmwareHistory: profileFirmwareHistory}));
