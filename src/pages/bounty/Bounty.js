@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {Row, Col, Container, Card, CardTitle, CardText, Button, Badge} from 'reactstrap';
+import {Row, Col, Container, Card, CardText, Button, Badge} from 'reactstrap';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import ThreeBoxComments from '../../external/3box-comments-react';
 import { collectBounty } from '../../blockchain/contracts';
 import {userVotingCallback} from "../../blockchain/userStats";
+import UserReferral from "../../components/UserReferral/UserReferral";
 
 
 class Bounty extends React.PureComponent {
@@ -43,7 +44,7 @@ class Bounty extends React.PureComponent {
 					<Col xs={12} sm={12} md={9}>
 						<div className="page-title">
 							<h1>Bounty: <span>{bounty.title || 'Title'}</span></h1>
-							<h4>Proposed by {proposer.name} ({proposer.communityScore})</h4>
+							<UserReferral titleStart={"Proposed"} user={proposer} history={this.props.history}/>
 						</div>
 					</Col>
 				</Row>

@@ -51,7 +51,7 @@ class Profile extends React.Component {
           </Grid>
         </Grid>
         {this.state.viewState === viewStates.USER_INFO  ? (<UserInfo  profile={this.props.profile} />):
-          (<FirmwareHistory firmwareHistory={this.props.firmwareHistory}/>)}
+          (<FirmwareHistory firmwareHistory={this.props.profile.firmwareHistory}/>)}
       </div>
     );
   }
@@ -65,8 +65,7 @@ const viewStates = {
 
 const mapStateToProps = state => ({
   currentUserAddr: state.ethereum.ethereumAddress,
-  profile: state.views.profileWithStats,
-  firmwareHistory: state.views.profileFirmwareHistory
+  profile: state.views.profileWithStats
 });
 
 export default connect(mapStateToProps)(Profile);

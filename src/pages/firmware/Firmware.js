@@ -10,6 +10,7 @@ import FirmwareButtons from "./components/FirmwareButtons";
 import ReputationBox from "./components/ReputationBox";
 import {userVotingCallback} from "../../blockchain/userStats";
 import FirmwareUpgradeDialog from './components/firmwareUpgradeDialog';
+import UserReferral from "../../components/UserReferral/UserReferral";
 
 
 class Firmware extends React.Component {
@@ -20,6 +21,8 @@ class Firmware extends React.Component {
 			box: '123',
       showDeployDialog: false
 		};
+
+		console.log("developer details ", this.props.developer)
 	}
 
   showDeployDialog = () => {
@@ -44,7 +47,7 @@ class Firmware extends React.Component {
         <div className="page-title">
 					<h1 >Firmware: <span>{this.props.firmware.name}</span>
 					</h1>
-					<h4>Contributed by {this.props.developer.name} ({this.props.developer.communityScore})</h4>
+					<UserReferral titleStart={"Contributed"} user={this.props.developer} history={this.props.history}/>
 				</div>
 				<Container fluid={true}>
 					<Row>
