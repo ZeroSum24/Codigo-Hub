@@ -34,11 +34,11 @@ class ReputationBox extends React.Component {
 							<Col sm={4}><h5 style={{marginTop:'10px'}}>Reputation</h5></Col>
 							<Col sm={8}>
 								{/*// TODO align this to the right*/}
-								<div style={{marginLeft: '140px'}}>
-									<IconButton color={this.props.mineLike && this.props.mineLike == 1 ? 'primary' : "inherit"}>
+								<div style={{marginLeft: '120px'}}>
+									<IconButton color={this.props.mineLike && this.props.mineLike === 1 ? 'primary' : "inherit"}>
 										<ThumbUpIcon onClick={() => this.thumbs(firmware.block, 1)} /> {firmware.thumbs_up}
 									</IconButton>
-									<IconButton color={this.props.mineLike && this.props.mineLike == -1 ? 'primary' : "inherit"}>
+									<IconButton color={this.props.mineLike && this.props.mineLike === -1 ? 'primary' : "inherit"}>
 										<ThumbDownIcon onClick={() => this.thumbs(firmware.block, -1)} /> {firmware.thumbs_down}
 									</IconButton>
 								</div>

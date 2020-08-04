@@ -28,13 +28,13 @@ class DetailsBox extends React.Component {
 						<Row style={{marginLeft: '1px'}}>
 							<Col sm={6}>
 								<h6><span >Device Type: </span></h6>
-								<h6><span >IPFS Link: </span></h6>
 								<h6><span >Block: </span></h6>
+								<h6><span >IPFS Link: </span></h6>
 							</Col>
 							<Col sm={6}>
 								<h6>{this.props.details.device_type}</h6>
-								<h6>{this.props.details.IPFS_link}</h6>
 								<h6>{this.props.details.block}</h6>
+								<h6>{this.props.details.IPFS_link}</h6>
 							</Col>
 						</Row>
 					</CardText>
