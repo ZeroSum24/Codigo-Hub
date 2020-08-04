@@ -2,9 +2,14 @@ import React from 'react';
 
 import ListView from "../../../components/ListView";
 import FirmwareWidget from "../../../components/CustomWidgets/FirmwareWidget";
+import PropTypes from "prop-types";
 
 class FirmwareHistory extends React.Component {
-  
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <div >
@@ -17,3 +22,7 @@ class FirmwareHistory extends React.Component {
 }
 
 export default FirmwareHistory;
+
+FirmwareHistory.propTypes = {
+  firmwareHistory: PropTypes.array.isRequired
+};
