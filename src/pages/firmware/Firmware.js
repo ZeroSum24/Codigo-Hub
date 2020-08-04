@@ -10,7 +10,7 @@ import FirmwareButtons from "./components/FirmwareButtons";
 import ReputationBox from "./components/ReputationBox";
 import {userVotingCallback} from "../../blockchain/userStats";
 import FirmwareUpgradeDialog from './components/firmwareUpgradeDialog';
-import UserReferral from "../../components/UserReferral/UserReferral";
+import UserReferral from "../../components/UserReferral";
 
 
 class Firmware extends React.Component {

@@ -7,7 +7,7 @@ import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ThreeBoxComments from '../../external/3box-comments-react';
 import { collectBounty } from '../../blockchain/contracts';
 import {userVotingCallback} from "../../blockchain/userStats";
-import UserReferral from "../../components/UserReferral/UserReferral";
+import UserReferral from "../../components/UserReferral";
 
 
 class Bounty extends React.PureComponent {

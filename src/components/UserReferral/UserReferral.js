@@ -21,7 +21,7 @@ class UserReferral extends React.Component {
     return (
       <div>
         <h4>{this.props.titleStart} by &nbsp;
-          <a href="#" onClick={this.handleClick}>
+          <a href="javascript:void(0);" onClick={this.handleClick}>
             <span>{this.props.user.name} </span>
             - ({this.props.user.communityScore})
           </a>
