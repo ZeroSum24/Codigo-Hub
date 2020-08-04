@@ -2,7 +2,7 @@ import { requestFirmwareUpgrade } from '../../../mqtt/client';
 import { Button, FormGroup, Input, InputGroup, Label } from 'reactstrap';
 import React, { useState } from 'react';
 import Widget from '../../../components/Widget';
-import { getFirmwareAsByteBuffer } from '../../../filecoin/client';
+import { downloadFirmware } from '../../../filecoin/client';
 import Modal from '@material-ui/core/Modal';
 
 /**
@@ -19,7 +19,7 @@ export default function FirmwareUpgradeDialog({deviceList, firmware, onClose, sh
   //TODO: filter available firmware according to device / mode type
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const firmwareBuffer = await getFirmwareAsByteBuffer(firmware.IPFS_link);
+    const firmwareBuffer = await downloadFirmware(firmware.IPFS_link);
     requestFirmwareUpgrade(selectedDevice.name, firmwareBuffer.buffer);
     onClose();
   }

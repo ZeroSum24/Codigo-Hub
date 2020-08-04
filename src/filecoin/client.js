@@ -37,15 +37,45 @@ export async function upload(fileAsUint8Array) {
   return {cid: cid, jobId: jobId};
 }
 
-export function getFirmwareAsByteBuffer(cid) {
+function getFirmwareAsByteBuffer(cid) {
   return PG.ffs.get(cid);
 }
 
+/**
+ * @param {Uint8Array} uintarray fetched from filecoin
+ * @return {*}
+ */
+function extractSourceCode(uintarray) {
+  const view = new DataView(uintarray.buffer);
+  const binaryStartByte = view.getInt32(0, false) + 4;
+  return uintarray.slice(4, binaryStartByte);
+}
+
+/**
+ * @param {Uint8Array} uintarray fetched from filecoin
+ * @return {*}
+ */
+function extractBinary(uintarray) {
+  const view = new DataView(uintarray.buffer);
+  const binaryStartByte = view.getInt32(0, false) + 4;
+  return uintarray.slice(binaryStartByte);
+}
+
+export async function downloadSourceCode(cid) {
+  const uintarray = await getFirmwareAsByteBuffer(cid);
+  const blob = new Blob([extractSourceCode(uintarray)], { type: 'text/plain' });
+  return blob.text();
+}
+
+export async function downloadFirmware(cid) {
+  const uintarray = await getFirmwareAsByteBuffer(cid);
+  return extractBinary(uintarray);
+}
+
 export async function downloadFirmwareBinary(cid, filename, mimeType) {
-  return getFirmwareAsByteBuffer(cid).then(uintarray => {
+  return downloadFirmware(cid).then(uintarray => {
     const blob = new Blob([uintarray], { type: mimeType });
-    console.log(blob);
-    const url = window.URL.createObjectURL(blob)
+    const url = window.URL.createObjectURL(blob);
     const downloadLink = document.createElement('a');
     downloadLink.href = url;
     downloadLink.download = filename;
