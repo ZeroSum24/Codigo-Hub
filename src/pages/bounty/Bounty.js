@@ -43,11 +43,6 @@ class Bounty extends React.PureComponent {
                 {bounty.title || 'Title'}
 							</h1>
 						</Col>
-						<Col xs={12} sm={12} md={3}>
-							<Button style={{ marginTop: '13px' }} align="centre" color="warning">
-                Eth Amount
-							</Button>
-						</Col>
 					</Row>
 					<Row>
 						<Col xs={12} sm={12} md={9}>
@@ -80,22 +75,10 @@ class Bounty extends React.PureComponent {
 								<CardText>Model : {bounty.model || ''}</CardText>
                 <CardText>Firmware version : {bounty.firmwareVersion || ''}</CardText>
                 <CardText>Creator : {bounty.bountySetter || ''}</CardText>
-                <CardText>Eth amount : {bounty.ethAmount || ''} Wei</CardText>
+                <CardText>Eth amount : {bounty.ethAmount /1e18 || ''} ETH</CardText>
                 <CardText>Collected : {bounty.ethAmount === 0 ? 'Yes' : 'No'}</CardText>
               </Card>
 							<br />
-							<br />
-							<Row>
-								{' '}
-								<Col sm={4} md={2} />
-								<Col sm="auto">
-									{' '}
-									<Button style={{ width: '180px' }} color="info">
-                    Bounty Setter
-									</Button>
-								</Col>
-								<Col sm={4} md={2} />
-							</Row>
 							<br />
 							<Row>
 								{' '}
