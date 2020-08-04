@@ -105,7 +105,7 @@ class Bounty extends React.PureComponent {
 													<Badge color="success" className="text-secondary" pill>Open</Badge>
 												}
 											</h6>
-											<h6>{bounty.ethAmount || ''} Wei</h6>
+											<h6>{bounty.ethAmount/1e18 || ''} ETH</h6>
 										</Col>
 									</Row>
 								</CardText>
