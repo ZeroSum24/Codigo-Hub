@@ -1,6 +1,5 @@
 import React from 'react';
 
-import s from '../Profile.module.scss';
 import ListView from "../../../components/ListView";
 import FirmwareWidget from "../../../components/CustomWidgets/FirmwareWidget";
 
