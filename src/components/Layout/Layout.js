@@ -5,7 +5,7 @@ import { Switch, Route, withRouter, Redirect } from 'react-router';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Hammer from 'rc-hammerjs';
 
-import Dashboard from '../../pages/dashboard';
+import DashboardOld from '../../pages/dashboard';
 import Profile from '../../pages/profile';
 import ViewFirmware from '../../pages/viewFirmware';
 import DeviceOverview from '../../pages/deviceOverview';
@@ -84,7 +84,7 @@ class Layout extends React.Component {
 											exact
 											render={() => <Redirect to="/app/main/dashboard" />}
 										/>
-										<Route path="/app/main/dashboard" exact component={Dashboard} />
+										<Route path="/app/main/dashboard" exact component={DashboardOld} />
 										<Route path="/app/device_overview" exact component={DeviceOverview} />
 										<Route path="/app/view_firmware" exact component={ViewFirmware} />
 										<Route path="/app/manage_firmware" exact component={FilecoinInteractions} />
@@ -100,7 +100,7 @@ class Layout extends React.Component {
 									</Switch>
 								</CSSTransition>
 							</TransitionGroup>
-							<footer className={s.contentFooter}>Código Hub</footer>
+							<footer className={s.contentFooter}>Código Hub - Made for IoT + ETH with {"<3"} </footer>
 						</main>
 					</Hammer>
 				</div>
