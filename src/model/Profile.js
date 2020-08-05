@@ -14,10 +14,10 @@ export default class Profile {
 }
 
 export class ProfileWithStats extends Profile {
-  constructor(address, name, brand, image, communityScore, amountOfCommentUpvotes, amountOfFirmwareContributions) {
+  constructor(address, name, brand, image, communityScore, amountOfCommentUpvotes, firmwareHistory) {
     super(address, name, brand, image);
     this.communityScore = communityScore;
     this.amountOfCommentUpvotes = amountOfCommentUpvotes;
-    this.amountOfFirmwareContributions = amountOfFirmwareContributions;
+    this.firmwareHistory = firmwareHistory;
   }
 }

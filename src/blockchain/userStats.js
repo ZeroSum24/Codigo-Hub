@@ -4,14 +4,14 @@ import { getUserRep, addRepToUser, removeRepFromUser } from "./contracts";
 /**
  * Should add the latest user stats pulled from the User Reputation smart contract + The Graph
  * @param profile
- * @param numFirmwareContributions
+ * @param firmwareHistory
  * @returns {Promise<ProfileWithStats>}
  */
-export async function retrieveStatsDetails(profile, numFirmwareContributions) {
+export async function retrieveStatsDetails(profile, firmwareHistory) {
   console.log("retrieve stats", profile);
   const userRep = await getUserRep(profile.address);
   return new ProfileWithStats(profile.address,profile.name, profile.description, profile.image,
-                              userRep, "", numFirmwareContributions);
+                              userRep, "", firmwareHistory);
 }
 
 export function userVotingCallback(votingPower, profileAddr) {
