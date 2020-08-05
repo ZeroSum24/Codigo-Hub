@@ -14,9 +14,9 @@ class Am4chartMap extends Component {
 	  const devices = this.props.deviceList;
 	  const mapData = devices.map(d => {
 	    return  {
-        latitude: d.latitude,
-        longitude: d.longitude,
-        size: 6,
+        latitude: Number(d.latitude),
+        longitude: Number(d.longitude),
+        size: 3,
         tooltip: `${d.name} - ${d.brand} ${d.model}`,
         fill: isDeviceActive(d.name) ? am4core.color('#23e323') : am4core.color("#a32828")
       }
@@ -28,7 +28,8 @@ class Am4chartMap extends Component {
 		map.projection = new am4maps.projections.NaturalEarth1();
 		let polygonSeries = map.series.push(new am4maps.MapPolygonSeries());
 		polygonSeries.useGeodata = true;
-		map.homeZoomLevel = 1.2;
+		map.homeZoomLevel = 10;
+		map.homeGeoPoint = {longitude: -3, latitude: 55};
 		map.zoomControl = new am4maps.ZoomControl();
 		map.zoomControl.layout = 'horizontal';
 		map.zoomControl.align = 'left';

@@ -13,14 +13,7 @@ class DeviceTable extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {activeDevices: new Set(this.props.deviceList.filter(d => isDeviceActive(d.name)).map(d => d.name))};
-    this.callback = (deviceName) => {
-      if (!this.state.activeDevices.has(deviceName)) {
-        const newState = new Set(this.state.activeDevices);
-        newState.add(deviceName);
-        this.setState({activeDevices: newState});
-      }
-    }
+    this.callback = () => {this.setState(this.state)};
   }
 
   componentDidMount = () => {
@@ -62,7 +55,7 @@ class DeviceTable extends React.Component {
                   {row.serialNumber}
                 </td>
                 <td>
-                  {this.state.activeDevices.has(row.name) ?
+                  {isDeviceActive(row.name) ?
                     <Badge color="success" className="text-secondary" pill>Online</Badge>
                     :
                     <Badge color="info" className="text-secondary" pill>Offline</Badge>

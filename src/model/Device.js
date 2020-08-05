@@ -1,5 +1,5 @@
 class Device {
-  constructor(name, brand, model, serialNumber, latitude= 55.945135, longitude= -3.190010) {
+  constructor(name, brand, model, serialNumber, latitude, longitude) {
     this.name = name;
     this.brand = brand;
     this.model = model;

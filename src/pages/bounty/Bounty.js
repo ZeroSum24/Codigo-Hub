@@ -24,7 +24,7 @@ class Bounty extends React.PureComponent {
 	}
 
   collect = () => {
-    const bounty = this.props.item;
+    const bounty = this.props.bounty;
     let go = true;
     if (bounty.bountySetter.toLowerCase() === this.props.ethereumAddress) {
       go = window.confirm('You are the creator of this bounty. You can only cancel it if 3 months have passed since creation, ' +
