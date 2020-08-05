@@ -884,9 +884,6 @@ export async function retrieveAllMyBounties(myAddress) {
   return allBounties.filter(b => address.toLowerCase() === b.bountySetter.toLowerCase());
 }
 
-window.r = retrieveAllMyFirmware;
-window.b = retrieveAllMyBounties;
-
 /**
  * Add a new bounty
  * @param {Bounty} bounty
