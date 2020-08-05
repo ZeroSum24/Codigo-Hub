@@ -103,7 +103,7 @@ class  UserInfo extends React.Component {
                           <h6><span className="fw-semi-bold">Amount of Comment Upvotes</span></h6>
                         </Col>
                         <Col sm={6}>
-                          <h6>{this.props.profile.firmwareHistory.length}</h6>
+                          <h6>{(this.props.profile.firmwareHistory || []).length}</h6>
                           <h6>{this.props.profile.amountOfCommentUpvotes}</h6>
                         </Col>
                       </Row>
