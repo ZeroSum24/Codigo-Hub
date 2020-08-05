@@ -71,7 +71,8 @@ class Sidebar extends React.Component {
 				className={cx(s.root)}
 				ref={(nav) => {
 					this.element = nav;
-				}}>
+				}}
+			>
 				<header className={s.logo}>
 					<img src={logo} alt="..." />
 					<a href="/">
@@ -108,7 +109,7 @@ class Sidebar extends React.Component {
 						activeItem={this.props.activeItem}
 						header="Manage Firmware"
 						isHeader
-						iconName="fi flaticon-plus"
+						iconName="fi flaticon-database-1"
 						link="/app/manage_firmware"
 						index="manage_firmware"
 					/>
@@ -140,7 +141,7 @@ class Sidebar extends React.Component {
 						activeItem={this.props.activeItem}
 						header="Available Bounties"
 						isHeader
-						iconName="fi flaticon-layers"
+						iconName="fi flaticon-info"
 						link="/app/view_bounties"
 						index="ui"
 					/>
@@ -155,7 +156,6 @@ class Sidebar extends React.Component {
 						link="/app/manage_bounties"
 						index="ui"
 					/>
-
 				</ul>
 			</nav>
 		);
