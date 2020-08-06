@@ -31,7 +31,7 @@ class ManageBounties extends React.PureComponent {
   }
 	
 	render() {
-    const myAddress = this.props.currentUserAddr;
+    const myAddress = this.props.currentUserAddr.toLowerCase();
 		return (
 			<div>
         <TableView

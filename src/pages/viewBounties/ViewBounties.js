@@ -5,19 +5,17 @@ import ListView from '../../components/ListView';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import { addBounty } from '../../blockchain/contracts';
-import AddBounty from './addBounty/AddBounty';
 import { setBounties } from '../../actions/model';
+import AddBounty from '../manageBounties/components/AddBounty';
 
 class ViewBounties extends React.PureComponent {
 
   constructor(props) {
     super(props);
     this.state = {isOpen: false};
-
-    this.refreshComponent = this.refreshComponent.bind(this);
   }
 
-  refreshComponent() {
+  refreshComponent = () => {
     this.props.dispatch(setBounties());
   }
 
