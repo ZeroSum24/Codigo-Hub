@@ -30,9 +30,9 @@ A full specification can be viewed online by clicking [here](https://github.com/
 Código Hub incorporates almost all of the functionality outlined in this diagram. The network layer is based on the [Código Network](https://project-archive.inf.ed.ac.uk/msc/20182632/msc_proj.pdf) research project. Credit also to [CHAINIAC](https://www.usenix.org/conference/usenixsecurity17/technical-sessions/presentation/nikitin) for the distributed software verification components which are integratable with this project. Cumulatively, this design represents the current and future potential state of the Código project.
 
 
-## [Demo Site & Video](https://youtu.be/wC4hBVBiIKI)
+## [Demo Site & Video](https://codigo-hub.com/)
 
-You can also demo the site by clicking [here](https://codigo-hub.com/), and view how it all works in the video [here](https://codigo-hub.com/).
+You can also demo the site by clicking [here](https://codigo-hub.com/), and view how it all works in the video [here](https://youtu.be/wC4hBVBiIKI).
 
 ## Technologies Used
 * [React](https://reactjs.org/)
