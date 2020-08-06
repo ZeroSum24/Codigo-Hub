@@ -28,7 +28,7 @@ For users we provide a graphical method for searching all firmware available on 
 
 
 ## [Demo Video](https://codigo-hub.com/)
-You can view our demo video by clicking [here](https://codigo-hub.com/)
+You can view our demo video by clicking [here](https://codigo-hub.com/).
 
 ## Technologies Used
 [React](https://reactjs.org/) <br />
