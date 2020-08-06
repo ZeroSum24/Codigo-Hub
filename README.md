@@ -35,7 +35,8 @@ Código Hub incorporates almost all of the functionality outlined in this diagra
 You can also demo the site by clicking [here](https://codigo-hub.com/), and view how it all works in the video [here](https://codigo-hub.com/).
 
 ## Technologies Used
-* [React](https://reactjs.org/)+[Redux](https://redux.js.org/introduction/getting-started) <br />
+* [React](https://reactjs.org/)
+* [Redux](https://redux.js.org/introduction/getting-started) <br />
 * [Fleek](https://fleek.co/) <br />
 * [Textile](https://textile.io/) <br />
 * [Filecoin](https://filecoin.io/) <br />
