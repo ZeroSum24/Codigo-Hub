@@ -29,14 +29,6 @@ For users we provide a graphical method for searching all firmware available on 
 
 ## [Demo Video](https://codigo-hub.com/)
 You can view our demo video by clicking [here](https://codigo-hub.com/)
-## Future Work 
-
-There are some improvements that could be made to app in the future:
-* Inspect developer history on the Código Network using The Graph
-* Use Unstoppable Domains to allow developers to add their crypto domain to their profile
-* Stricter validation using user reputation, firmware metrics and CHAINIAC
-moving instead to a system like fixed membership numbers
-
 
 ## Technologies Used
 [React](https://reactjs.org/) <br />
@@ -49,38 +41,21 @@ moving instead to a system like fixed membership numbers
 [IPFS](https://ipfs.io/) <br />
 [3Box](https://3box.io/) <br />
 
-
-
-## Software Developers
+## Developers
 
 * **[Stephen Waddell](https://github.com/ZeroSum24)** <br />
-* **[Michal Michaelides](https://github.com/michaelg9)** <br />
+* **[Michael Michaelides](https://github.com/michaelg9)** <br />
 * **[Alex Shand](https://github.com/Alex-Shand)** <br />
 * **[Mahbub Iftekhar](https://www.mahbubiftekhar.co.uk/)** <br />
 * **[Bernard Choo](https://github.com/Bernardchoo)** <br />
 
 
+## Future Work 
 
-## CODE LICESNSE - MIT
+There are some improvements that could be made to app in the future:
+* Inspect developer history on the Código Network using The Graph
+* Use Unstoppable Domains to allow developers to add their crypto domain to their profile
+* Stricter validation using user reputation, firmware metrics and CHAINIAC
+moving instead to a system like fixed membership numbers
 
-MIT Licence
 
-Copyright (c) 2020
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
