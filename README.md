@@ -35,16 +35,24 @@ Código Hub incorporates almost all of the functionality outlined in this diagra
 You can also demo the site by clicking [here](https://codigo-hub.com/), and view how it all works in the video [here](https://codigo-hub.com/).
 
 ## Technologies Used
-* [React](https://reactjs.org/) <br />
+* [React](https://reactjs.org/)+[Redux](https://redux.js.org/introduction/getting-started) <br />
 * [Fleek](https://fleek.co/) <br />
 * [Textile](https://textile.io/) <br />
 * [Filecoin](https://filecoin.io/) <br />
 * [Ethereum](https://ethereum.org/en/) <br />
 * [MetaMask](https://metamask.io/) <br />
-* [Redux](https://redux.js.org/introduction/getting-started) <br />
 * [IPFS](https://ipfs.io/) <br />
 * [3Box](https://3box.io/) <br />
 
+
+Ethereum 1.0
+Smart contracts for tracking users, bounties, available firmware
+Allow developers to be paid in Ether for their contributions through donations or bounties
+Filecoin to store firmware binaries and source code
+Fleek to deploy our Dapp <--MISSING
+Textile’s Powergate to interface with IPFS and Filecoin <--- MISSING
+3box to manage decentralized user profiles and comments on firmware  ← MISSING
+Websocket MQTT to communicate with constrained devices
 ## Developers
 
 * **[Stephen Waddell](https://github.com/ZeroSum24)** <br />
