@@ -35,15 +35,15 @@ You can view our demo video by clicking [here](https://codigo-hub.com/).
 You can also try the site by clicking [here](https://codigo-hub.com/)
 
 ## Technologies Used
-[React](https://reactjs.org/) <br />
-[Fleek](https://fleek.co/) <br />
-[Textile](https://codigo-hub.com/) <br />
-[Filecoin](https://filecoin.io/) <br />
-[Ethereum](https://ethereum.org/en/) <br />
-[MetaMask](https://metamask.io/) <br />
-[Redux](https://redux.js.org/introduction/getting-started) <br />
-[IPFS](https://ipfs.io/) <br />
-[3Box](https://3box.io/) <br />
+* **[React](https://reactjs.org/) <br />
+* **[Fleek](https://fleek.co/) <br />
+* **[Textile](https://codigo-hub.com/) <br />
+* **[Filecoin](https://filecoin.io/) <br />
+* **[Ethereum](https://ethereum.org/en/) <br />
+* **[MetaMask](https://metamask.io/) <br />
+* **[Redux](https://redux.js.org/introduction/getting-started) <br />
+* **[IPFS](https://ipfs.io/) <br />
+* **[3Box](https://3box.io/) <br />
 
 ## Developers
 
