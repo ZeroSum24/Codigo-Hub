@@ -52,9 +52,13 @@ export default class AddBounty extends React.PureComponent {
         this.state.firmwareVersion,
       );
     }
-    this.props.onClose(newBounty);
-    this.reset();
+    this.onClose(newBounty);
   };
+
+  onClose = (bounty) => {
+    this.props.onClose(bounty);
+    this.reset();
+  }
 
   change = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -62,7 +66,7 @@ export default class AddBounty extends React.PureComponent {
 
   render() {
     return (
-      <Modal onClose={this.handleAddBounty} open={this.props.isOpen}>
+      <Modal onClose={() => this.onClose()} open={this.props.isOpen}>
         <Widget className="widget-auth mx-auto"
                 style={{ background: '#212529', marginTop: '30px' }}
                 title={<h3 className="mt-0">Add a Bounty</h3>}>

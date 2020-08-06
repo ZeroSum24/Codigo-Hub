@@ -870,7 +870,7 @@ export async function retrieveAllBounties() {
     const bounty = await getBounties().methods.get_bounty(i).call();
     bounties.push(bounty);
   }
-  return bounties.map(b => new Bounty(b[0], b[1], b[2], b[3], '0', b[4], b[5]));
+  return bounties.map(b => new Bounty(b[0], b[1], b[2], b[3], 'v0.1.1', b[4], b[5]));
 }
 
 /**
@@ -892,7 +892,7 @@ export async function retrieveAllMyBounties(myAddress) {
 export function addBounty(bounty) {
   return sendTransaction(
     bountiesAddress,
-    getBounties().methods.add_bounty(bounty.description, bounty.description, bounty.model).encodeABI(),
+    getBounties().methods.add_bounty(bounty.title, bounty.description, bounty.model).encodeABI(),
     new BN(web3.utils.toWei(bounty.ethAmount, 'ether'), 10).toString(16)
     );
 }
