@@ -5,11 +5,11 @@ import * as am4maps from '@amcharts/amcharts4/maps';
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow';
 
 import AnimateNumber from 'react-animated-number';
-import s from './am4chartMap.module.scss';
+import s from './DeviceMap.module.scss';
 import { connect } from 'react-redux';
-import { isDeviceActive } from '../../../../mqtt/client';
+import { isDeviceActive } from '../../../../../mqtt/client';
 
-class Am4chartMap extends Component {
+class DeviceMap extends Component {
 	componentDidMount() {
 	  const devices = this.props.deviceList;
 	  const mapData = devices.map(d => {
@@ -87,21 +87,20 @@ class Am4chartMap extends Component {
 		return (
 			<div className={s.mapChart}>
 				<div className={s.stats}>
-					<h3 className="mt-1" style={{display: 'inline', paddingRight: '10px'}}>IoT Devices</h3>
-					<p style={{display: 'inline'}} className="h3 m-0">
-            <span className="glyphicon glyphicon-map-marker" />
+					<h6 className="mt-1" style={{fontSize: '12pt'}}>IoT Devices</h6>
+					<p className="h3 m-0">
             <span className="mr-xs fw-normal">
-							<AnimateNumber
+              <AnimateNumber
 								value={this.props.deviceList.length}
 								initialValue={0}
 								duration={1000}
 								stepPrecision={0}
-								formatValue={(n) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
-							/>
-						</span>
+								formatValue={n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}
+							/></span>
+						<i className="glyphicon glyphicon-map-marker" />
 					</p>
 				</div>
-				<div style={{ 'padding-top': '90px' }} className={s.map} id="map">
+				<div className={s.map} id="map">
 					<span>Alternative content for the map</span>
 				</div>
 			</div>
@@ -113,4 +112,4 @@ const mapStateToProps = state => ({
   deviceList: state.profile.deviceList,
 });
 
-export default connect(mapStateToProps)(Am4chartMap);
+export default connect(mapStateToProps)(DeviceMap);
