@@ -9,28 +9,49 @@
 </p>
 
 
-Código is a firmware distribution service with an IoT twist. Developed conceptually as research project at the University of Edinburgh. We're bringing the idea into the twenty-twenties by rebuilding the network framework as a Dapp. Built to act as a shop-window for users to manage their IoT devices, the platform works to incentivise developers to build, maintain and contribute firmware to be securely deployment across a host of devices in the IoT domain as a system with no single point of failure, helping to solve one of the biggest challenges facing the uptake of this domain - security.
+##Project Overview
 
-We're building a Dapp using React, tied in with 3box (for user management and data storage), deployed on Fleek and integrated with both Ethereum (for user incentivisation) and Filecoin (to manage distributed firmware storage).
+Código is a firmware distribution service built on top of the Ethereum blockchain and IPFS. Código natively allows developers to upload firmware for different devices and provides rudimentary search capabilities for users. Users can download firmware either by requesting a specific firmware image from a known developer or utilising a built-in web of trust model to automatically select a trusted developer.
+
+This project aims to produce a DApp front end driver for Código, called Código Hub, to make it easier for developers to manage the firmware they upload to the network and for users to discover new firmware for their devices.
+
+For developers we provide a convenient UI for viewing previously uploaded firmware, Filecoin integration for friction-less persistence on IPFS and a bounty system which rewards developers with ETH for filling unmet needs in the IoT domain.
+
+For users we provide a graphical method for searching all firmware available on the network, automatic firmware deployment via MQTT (for supported devices), a reputation system to help users make trust decisions about individual firmware or developers, and the bounty system which allows users to offer ETH in return for novel features.
+
+Código Hub is built using React.js, Redex, Redux Persist and 3box. Intergration with several custom Ethereum 1.0 smart contracts is provided by Metamask. Filecoin and IPFS integration is provided by the Textile Powergate Javascript library and a hosted Powergate instance provided by Textile. Websocket MQTT is used to communicate with and automatically deploy firmware to compatible devices.
+
 </div>
+
+##Future Work 
+
+There are some improvements that could be made to app in the future:
+* Inspect developer history on the Código Network using The Graph
+* Use Unstoppable Domains to allow developers to add their crypto domain to their profile
+* Stricter validation using user reputation, firmware metrics and CHAINIAC
+moving instead to a system like fixed membership numbers
 
 
 ## Technologies Used
-## Frontend:
-[Python 3.7](https://www.python.org/downloads/release/python-370/) <br />
-
-## Backend:
-[Flask](http://flask.pocoo.org/) <br />
+[React](https://codigo-hub.com/) <br />
+[Fleek](https://codigo-hub.com/) <br />
+[Textile](https://codigo-hub.com/) <br />
+[Filecoin](https://codigo-hub.com/) <br />
+[Ethereum](https://codigo-hub.com/) <br />
+[MetaMask](https://codigo-hub.com/) <br />
+[Redux](https://codigo-hub.com/) <br />
+[IPFS](https://codigo-hub.com/) <br />
+[3Box](https://codigo-hub.com/) <br />
 
 
 
 ## Software Developers
 
 * **[Stephen Waddell](https://github.com/ZeroSum24)** <br />
-* **[Michal Michaelides]([https://github.com/michaelg9)** <br />
+* **[Michal Michaelides](https://github.com/michaelg9)** <br />
 * **[Alex Shand](https://github.com/Alex-Shand)** <br />
 * **[Mahbub Iftekhar](https://www.mahbubiftekhar.co.uk/)** <br />
-* **[Bernard Choo]([https://github.com/Bernardchoo])** <br />
+* **[Bernard Choo](https://github.com/Bernardchoo)** <br />
 
 
 
