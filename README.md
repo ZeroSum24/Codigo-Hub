@@ -5,11 +5,11 @@
 <p style="text-align: center;">&nbsp;</p>
 <p align="center">
 
-<img alt="Código Hub" src="src/images/codigo_225.png">
+<img alt="Código Hub" src="src/images/codigo_225.png" width="200">
 </p>
 
 
-##Project Overview
+## Project Overview
 
 Código is a firmware distribution service built on top of the Ethereum blockchain and IPFS. Código natively allows developers to upload firmware for different devices and provides rudimentary search capabilities for users. Users can download firmware either by requesting a specific firmware image from a known developer or utilising a built-in web of trust model to automatically select a trusted developer.
 
@@ -20,10 +20,13 @@ For developers we provide a convenient UI for viewing previously uploaded firmwa
 For users we provide a graphical method for searching all firmware available on the network, automatic firmware deployment via MQTT (for supported devices), a reputation system to help users make trust decisions about individual firmware or developers, and the bounty system which allows users to offer ETH in return for novel features.
 
 Código Hub is built using React.js, Redex, Redux Persist and 3box. Intergration with several custom Ethereum 1.0 smart contracts is provided by Metamask. Filecoin and IPFS integration is provided by the Textile Powergate Javascript library and a hosted Powergate instance provided by Textile. Websocket MQTT is used to communicate with and automatically deploy firmware to compatible devices.
-
 </div>
 
-##Future Work 
+## System Design Diagram
+<img alt="System Diagram" src="src/images/overview.png">
+
+
+## Future Work 
 
 There are some improvements that could be made to app in the future:
 * Inspect developer history on the Código Network using The Graph
