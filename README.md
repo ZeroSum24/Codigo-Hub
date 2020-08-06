@@ -27,10 +27,10 @@ We're building a Dapp using React, tied in with 3box (for user management and da
 ## Software Developers
 
 * **[Stephen Waddell](https://github.com/ZeroSum24)** <br />
-* **[Michal Michaelides]([https://github.com/michaelg9](https://github.com/michaelg9))** <br />
+* **[Michal Michaelides]([https://github.com/michaelg9)** <br />
 * **[Alex Shand](https://github.com/Alex-Shand)** <br />
 * **[Mahbub Iftekhar](https://www.mahbubiftekhar.co.uk/)** <br />
-* **[Bernard Choo]([https://github.com/Bernardchoo](https://github.com/Bernardchoo))** <br />
+* **[Bernard Choo]([https://github.com/Bernardchoo])** <br />
 
 
 
