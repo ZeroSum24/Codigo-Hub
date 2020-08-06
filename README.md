@@ -1,6 +1,6 @@
 
   
-<h1  align="center" style="text-align: center;"><span  align="center" style="color: #ff0000;"><strong><span align="center" style="color: #FF0000;"> [Código Hub](https://codigo-hub.com/)
+<h1  align="center" style="text-align: center;"><span  align="center" style="color: #ff0000;"><strong><span align="center" style="color: #FF0000;"> Código Hub
 </span> </strong></span></h1>
 <p style="text-align: center;">&nbsp;</p>
 <p align="center">
@@ -13,8 +13,6 @@
 
 [Código](https://codigo-hub.com/) is a firmware distribution service built on top of the Ethereum blockchain and IPFS. Código natively allows developers to upload firmware for different devices and provides rudimentary search capabilities for users. Users can download firmware either by requesting a specific firmware image from a known developer or utilising a built-in web of trust model to automatically select a trusted developer.
 
-A full 
-
 This project aims to produce a DApp front end driver for Código, called Código Hub, to make it easier for developers to manage the firmware they upload to the network and for users to discover new firmware for their devices.
 
 For developers we provide a convenient UI for viewing previously uploaded firmware, Filecoin integration for friction-less persistence on IPFS and a bounty system which rewards developers with ETH for filling unmet needs in the IoT domain.
@@ -22,6 +20,8 @@ For developers we provide a convenient UI for viewing previously uploaded firmwa
 For users we provide a graphical method for searching all firmware available on the network, automatic firmware deployment via MQTT (for supported devices), a reputation system to help users make trust decisions about individual firmware or developers, and the bounty system which allows users to offer ETH in return for novel features.
 
 [Código Hub](https://codigo-hub.com/)  is built using React.js, Redex, Redux Persist and 3box. Intergration with several custom Ethereum 1.0 smart contracts is provided by Metamask. Filecoin and IPFS integration is provided by the Textile Powergate Javascript library and a hosted Powergate instance provided by Textile. Websocket MQTT is used to communicate with and automatically deploy firmware to compatible devices.
+
+A full specification can be viewed online by clicking [here](https://github.com/ZeroSum24/Codigo-Hub/blob/master/specs/C%C3%B3digo%20Hub%20-%20Project%20Spec.pdf) 
 </div>
 
 ## System Design Diagram
