@@ -25,7 +25,7 @@ class FirmwareWidget extends React.PureComponent {
   render() {
     const firmware = this.props.item;
     return (
-
+      <div style = {{width: '200%'}}>
       <Widget
         close collapse onClick={this.openFirmwareView}>
         <div className="widget-padding-md w-100 h-100 text-left border rounded">
@@ -36,12 +36,10 @@ class FirmwareWidget extends React.PureComponent {
             <br/><br/>
           </Col>
         </Row>
-
         <Row>
           <Col>
               <h2><span className="fw-semi-bold">{firmware.device_type}</span></h2>
           </Col>
-
           <Col>
               <h3><span className="fw-semi-bold">{firmware.version}</span></h3>
           </Col>
@@ -53,6 +51,7 @@ class FirmwareWidget extends React.PureComponent {
 
         </div>
       </Widget>
+      </div>
     );
   }
 }
