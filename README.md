@@ -37,7 +37,7 @@ You can also try the site by clicking [here](https://codigo-hub.com/)
 ## Technologies Used
 * [React](https://reactjs.org/) <br />
 * [Fleek](https://fleek.co/) <br />
-* [Textile](https://codigo-hub.com/) <br />
+* [Textile](https://textile.io/) <br />
 * [Filecoin](https://filecoin.io/) <br />
 * [Ethereum](https://ethereum.org/en/) <br />
 * [MetaMask](https://metamask.io/) <br />
