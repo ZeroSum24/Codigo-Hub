@@ -21,7 +21,7 @@ For users we provide a graphical method for searching all firmware available on 
 
 [Código Hub](https://codigo-hub.com/)  is built using React.js, Redex, Redux Persist and 3box. Intergration with several custom Ethereum 1.0 smart contracts is provided by Metamask. Filecoin and IPFS integration is provided by the Textile Powergate Javascript library and a hosted Powergate instance provided by Textile. Websocket MQTT is used to communicate with and automatically deploy firmware to compatible devices.
 
-A full specification can be viewed online by clicking [here](https://github.com/ZeroSum24/Codigo-Hub/blob/master/specs/C%C3%B3digo%20Hub%20-%20Project%20Spec.pdf) 
+A full specification can be viewed online by clicking [here](https://github.com/ZeroSum24/Codigo-Hub/blob/master/specs/C%C3%B3digo%20Hub%20-%20Project%20Spec.pdf). 
 </div>
 
 ## System Design Diagram
