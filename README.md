@@ -1,6 +1,6 @@
 
   
-<h1  align="center" style="text-align: center;"><span  align="center" style="color: #ff0000;"><strong><span align="center" style="color: #FF0000;"> Código Hub
+<h1  align="center" style="text-align: center;"><span  align="center" style="color: #ff0000;"><strong><span align="center" style="color: #FF0000;"> [Código Hub](https://codigo-hub.com/)
 </span> </strong></span></h1>
 <p style="text-align: center;">&nbsp;</p>
 <p align="center">
@@ -12,6 +12,8 @@
 ## Project Overview
 
 [Código](https://codigo-hub.com/) is a firmware distribution service built on top of the Ethereum blockchain and IPFS. Código natively allows developers to upload firmware for different devices and provides rudimentary search capabilities for users. Users can download firmware either by requesting a specific firmware image from a known developer or utilising a built-in web of trust model to automatically select a trusted developer.
+
+A full 
 
 This project aims to produce a DApp front end driver for Código, called Código Hub, to make it easier for developers to manage the firmware they upload to the network and for users to discover new firmware for their devices.
 
@@ -29,6 +31,8 @@ For users we provide a graphical method for searching all firmware available on 
 
 ## [Demo Video](https://codigo-hub.com/)
 You can view our demo video by clicking [here](https://codigo-hub.com/).
+
+You can also try the site by clicking [here](https://codigo-hub.com/)
 
 ## Technologies Used
 [React](https://reactjs.org/) <br />
