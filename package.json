@@ -106,6 +106,7 @@
     "reactstrap": "8.5.1",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "rickshaw": "1.7.1",
     "semantic-ui-react": "^0.88.2",
