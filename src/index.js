@@ -1,21 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
-import ReduxThunk from 'redux-thunk'
 import * as serviceWorker from './serviceWorker';
+import { PersistGate } from 'redux-persist/integration/react'
 
 // this function detects most providers injected at window.ethereum
 import detectEthereumProvider from '@metamask/detect-provider';
 
 import App from './components/App';
-import reducers from './reducers';
 import AuthErrorView from "./pages/error/AuthErrorView";
+import configureStore from "./utils/configureStore";
+import Loader from "./components/Loader";
 
-const store = createStore(
-  reducers,
-  applyMiddleware(ReduxThunk)
-);
 
 function EthereumApp(props) {
     let ethereumApp;
@@ -30,9 +26,12 @@ function EthereumApp(props) {
 }
 
 function startApp(provider) {
+    const redux = configureStore();
     ReactDOM.render(
-        <Provider store={store}>
-            <EthereumApp provider={provider} />
+        <Provider store={redux.store}>
+            <PersistGate loading={<Loader loadingText={"Loading Código Hub"} />} persistor={redux.persistor}>
+                <EthereumApp provider={provider} />
+            </PersistGate>
         </Provider>,
         document.getElementById('root')
     );
