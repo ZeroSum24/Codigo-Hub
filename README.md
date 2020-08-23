@@ -50,9 +50,9 @@ Ethereum 1.0
 Smart contracts for tracking users, bounties, available firmware
 Allow developers to be paid in Ether for their contributions through donations or bounties
 Filecoin to store firmware binaries and source code
-Fleek to deploy our Dapp <--MISSING
-Textile’s Powergate to interface with IPFS and Filecoin <--- MISSING
-3box to manage decentralized user profiles and comments on firmware  ← MISSING
+Fleek to deploy our Dapp
+Textile’s Powergate to interface with IPFS and Filecoin 
+3box to manage decentralized user profiles and comments on firmware 
 Websocket MQTT to communicate with constrained devices
 ## Developers
 
