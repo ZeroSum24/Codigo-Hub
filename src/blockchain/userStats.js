@@ -11,7 +11,7 @@ export async function retrieveStatsDetails(profile, firmwareHistory) {
   console.log("retrieve stats", profile);
   const userRep = await getUserRep(profile.address);
   return new ProfileWithStats(profile.address,profile.name, profile.description, profile.image,
-                              userRep, "", firmwareHistory);
+                              userRep, 0, firmwareHistory);
 }
 
 export function userVotingCallback(votingPower, profileAddr) {

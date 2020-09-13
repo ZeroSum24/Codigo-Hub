@@ -15,7 +15,6 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log("herhehehe", this.props.profile)
     this.state = {
       "viewState": viewStates.USER_INFO
     };
