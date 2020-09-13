@@ -32,7 +32,7 @@ class DeviceRow extends React.Component {
               <p>Map Status: <strong>Live</strong></p>
               <p>
                 <span className="circle bg-default text-white"><i className="glyphicon glyphicon-map-marker" style={{marginBottom:"5px"}}/></span> &nbsp;
-                1 Country, 1 City
+                0 Country, 0 City
               </p>
               <h5 className="name fw-semi-bold" style={{marginTop: '18px'}}>Device Status</h5>
               <div style={{paddingBottom: '13px', marginTop: '-4px' }}>
@@ -42,8 +42,8 @@ class DeviceRow extends React.Component {
               <h6 className="fw-semi-bold mt">Map Distribution</h6>
               <p>Tracking: <strong>Active</strong></p>
               <p>
-                <span className="circle bg-default text-white"><i className="glyphicon glyphicon-cog" style={{marginBottom:"4px"}}/></span>
-                &nbsp; 1 device added, 3 devices total
+                <span className="circle bg-default text-white"><i className="glyphicon glyphicon-cog" style={{marginBottom:"0px"}}/></span>
+                &nbsp; 0 device added, 0 devices total
               </p>
               <div className="input-group mt">
                 <input type="text" className="form-control bg-custom-dark border-0" placeholder="Search Map" />
