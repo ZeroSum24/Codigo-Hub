@@ -224,7 +224,7 @@ class Register extends React.Component {
                                       {/*TODO updae placeholder to hex*/}
                                       <Input id="developerKey" className="input-transparent pl-3" value={this.state.developerKey}
                                              onChange={this.changeDeveloperKey} onBlur={this.changeDeveloperKey}
-                                             type="text" required name="developerKey" placeholder="MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjT"/>
+                                             type="text" required name="developerKey" placeholder="0x4E7A62D53B7..."/>
                                   </InputGroup>
                                 </FormGroup>
                               </div>): null}
