@@ -35,7 +35,8 @@ class ProfileWidget extends React.PureComponent {
               <h6><span className="fw-semi-bold">Address: </span></h6>
             </Col>
             <Col sm={6}>
-              <h6>{profile.address}</h6>
+              <h6 style={{textOverflow: "ellipsis", whiteSpace: 'nowrap',
+                          overflow: 'hidden'}}>{profile.address}</h6>
             </Col>
           </Row>
         </div>
@@ -44,4 +45,6 @@ class ProfileWidget extends React.PureComponent {
   }
 }
 
-export default connect(ProfileWidget);
+const mapStateToProps = state => ({});
+
+export default connect(mapStateToProps)(ProfileWidget);

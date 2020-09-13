@@ -1,4 +1,5 @@
 import { retrieveAllAvailableFirmware, getAllUsers, retrieveAllBounties } from '../blockchain/contracts';
+import { getProfileWithStats } from './view.js';
 
 export const SEARCH_START = 'SEARCH_START';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
@@ -31,6 +32,9 @@ function searchFailure(payload) {
 }
 
 function containsIgnoreCase(string, term) {
+  if (string == null || term == null) {
+    return false;
+  }
   return string.toLowerCase().indexOf(term.toLowerCase()) !== -1;
 }
 
@@ -66,6 +70,11 @@ function isDeviceRelevant(term, device) {
   containsIgnoreCase(device.model, term);
 }
 
+function isUserRelevant(term, user) {
+  return containsIgnoreCase(user.address, term) ||
+         containsIgnoreCase(user.name, term);
+}
+
 export function startSearch(searchText, devices) {
   return async (dispatch) => {
 
@@ -77,7 +86,9 @@ export function startSearch(searchText, devices) {
       // search firmware on Codigo blockchain for token inclusion
       let firmwareResults = (await retrieveAllAvailableFirmware()).filter(f => isFirmwareRelevant(searchText, f)); // list of firmware objects
       // search users on user reputation blockchian for user inclusion
-      let userResults = (await getAllUsers()).filter(u => containsIgnoreCase(searchText, u));
+      let userAddresses = await getAllUsers();
+      let userProfiles = await Promise.all(userAddresses.map(x => getProfileWithStats(x)));
+      let userResults = userProfiles.filter(u => isUserRelevant(searchText, u));
       // search bounties on the bounty blockchain for bounty inclusion
       let bountyResults = (await  retrieveAllBounties()).filter(b => isBountyRelevant(searchText, b));
       // device bounties
