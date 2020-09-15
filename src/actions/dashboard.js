@@ -11,7 +11,13 @@ function updateDashboardData(payload) {
 	};
 }
 
+// TODO must consider where to store, and how to calculate, last months values as compared to this ones for various fields
 
+/**
+ * High-level function for triggering the Dashboard data retrival.
+ * @param currentUserAddress
+ * @returns {function(*): Promise<void>}
+ */
 export function retrieveDashboardData(currentUserAddress) {
 	return async (dispatch) => {
 
