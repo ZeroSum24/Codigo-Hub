@@ -19,8 +19,8 @@ class Dashboard extends React.Component {
             <small>Hub Overview</small>
           </small>
         </h1>
-        <DeviceRow />
-        <TableRow />
+        <DeviceRow/>
+        <TableRow/>
       </div>
     );
   }

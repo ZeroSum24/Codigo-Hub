@@ -77,7 +77,7 @@ class Earnings extends React.Component {
 							close
 						>
 							<div className="widget-body">
-								<h3><span className="fw-semi-bold">5.466880 ETH</span> Earned</h3>
+								<h3><span className="fw-semi-bold">0.000000 ETH</span> Earned</h3>
 							</div>
 							<div style={{ paddingBottom: '40px' }} className={`widget-table-overflow ${s.table}`}>
 								<Table striped size="sm">
@@ -90,19 +90,19 @@ class Earnings extends React.Component {
 									</thead>
 									<tbody>
 										<tr>
-											<td />
+											<td/>
 											<td>Earnings Last 7 days : </td>
-											<td className="text-align-right fw-semi-bold">0.394504 ETH</td>
+											<td className="text-align-right fw-semi-bold">0.000000 ETH</td>
 										</tr>
 										<tr>
-											<td />
+											<td/>
 											<td>Earnings Last 30 days : </td>
-											<td className="text-align-right fw-semi-bold">2.020639 ETH</td>
+											<td className="text-align-right fw-semi-bold">0.000000 ETH</td>
 										</tr>
 										<tr>
-											<td />
+											<td/>
 											<td>Earnings Last 90 days : </td>
-											<td className="text-align-right fw-semi-bold">3.466880 ETH</td>
+											<td className="text-align-right fw-semi-bold">0.000000 ETH</td>
 										</tr>
 									</tbody>
 								</Table>
