@@ -31,7 +31,7 @@ function searchFailure(payload) {
   };
 }
 
-function containsIgnoreCase(string, term) {
+export function containsIgnoreCase(string, term) {
   if (string == null || term == null) {
     return false;
   }

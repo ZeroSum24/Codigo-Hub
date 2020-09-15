@@ -3,6 +3,7 @@ import React from 'react';
 import s from './Dashboard.module.scss';
 import DeviceRow from "./components/DeviceRow";
 import TableRow from "./components/TableRow";
+import {connect} from "react-redux";
 
 
 class Dashboard extends React.Component {
@@ -12,6 +13,14 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    const {
+      devicesStats,
+      communityStats,
+      firmwareStats,
+      bountiesStats,
+    } = this.props;
+
+    console.log('Dashboard', this.props)
     return (
       <div className={s.root}>
         <h1 className="page-title">Dashboard &nbsp;
@@ -19,11 +28,18 @@ class Dashboard extends React.Component {
             <small>Hub Overview</small>
           </small>
         </h1>
-        <DeviceRow/>
-        <TableRow/>
+        <DeviceRow devicesStats={devicesStats}/>
+        <TableRow communityStats={communityStats} firmwareStats={firmwareStats} bountiesStats={bountiesStats}/>
       </div>
     );
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  communityStats: state.dashboard.community,
+  bountiesStats: state.dashboard.bounties,
+  firmwareStats: state.dashboard.firmware,
+  devicesStats: state.dashboard.devices
+});
+
+export default connect(mapStateToProps)(Dashboard);
