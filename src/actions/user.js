@@ -4,6 +4,7 @@ import Box from "3box";
 import {setProfilePassword, setUserProfile} from "./profile";
 import { setBounties, setFirmware } from './model';
 import { getPG } from '../filecoin/client';
+import {retrieveDashboardData} from "./dashboard";
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -120,6 +121,7 @@ export function enableUserEthereum() {
             let userPassword = await space.private.get('password');
             dispatch(setProfilePassword({userPassword: userPassword}));
             dispatch(setUserProfile({userAddress: ethereumAddress}));
+            dispatch(retrieveDashboardData(ethereumAddress))
 
             // Accounts now exposed
             dispatch(ethereumAuthSuccess({

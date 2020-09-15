@@ -62,6 +62,23 @@ export function initUserDevices() {
 }
 
 /**
+ * Reads available user devices from the browser cache
+ */
+export function getUserDevices() {
+  return async (dispatch) => {
+    let devices = [];
+    if (localStorage[deviceLocalStorageKey]) {
+      try{
+        devices = JSON.parse(localStorage['devices']);
+      } catch (e) {
+        devices = [];
+      }
+    }
+    return devices;
+  }
+}
+
+/**
  * Add to the device list.
  * TODO implement UI binding and functionality
  * @param devices the list of the users devices

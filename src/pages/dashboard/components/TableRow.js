@@ -12,6 +12,13 @@ class TableRow extends React.Component {
   }
 
   render() {
+
+    const {
+      communityStats,
+      firmwareStats,
+      bountiesStats,
+    } = this.props;
+
     return (
       <Row>
         <Col lg={4} xs={12}>
@@ -26,15 +33,15 @@ class TableRow extends React.Component {
             <div className="stats-row">
               <div className="stat-item">
                 <h6 className="name">Amount of Users</h6>
-                <p className="value">0</p>
+                <p className="value">{communityStats.userAmount}</p>
               </div>
               <div className="stat-item">
                 <h6 className="name">Total Bounties</h6>
-                <p className="value">0</p>
+                <p className="value">{communityStats.totalBounties}</p>
               </div>
               <div className="stat-item">
                 <h6 className="name">Total Firmware</h6>
-                <p className="value">0</p>
+                <p className="value">{communityStats.totalFirmware}</p>
               </div>
             </div>
             <Progress color="bg-primary" value="0" className="bg-custom-dark progress-xs" />
@@ -58,15 +65,15 @@ class TableRow extends React.Component {
             <div className="stats-row">
               <div className="stat-item">
                 <h6 className="name">Amount Submitted</h6>
-                <p className="value">0</p>
+                <p className="value">{bountiesStats.amountSubmitted}</p>
               </div>
               <div className="stat-item">
                 <h6 className="name">Overall Claimed</h6>
-                <p className="value">0%</p>
+                <p className="value">{bountiesStats.overallClaimed}%</p>
               </div>
               <div className="stat-item">
                 <h6 className="name">Monthly Claims</h6>
-                <p className="value">0</p>
+                <p className="value">{bountiesStats.monthlyClaims}</p>
               </div>
             </div>
             <Progress color="success" value="0" className="bg-custom-dark progress-xs" />
@@ -93,15 +100,15 @@ class TableRow extends React.Component {
             <div className="stats-row">
               <div className="stat-item">
                 <h6 className="name">My Firmware</h6>
-                <p className="value">0</p>
+                <p className="value">{firmwareStats.firmwareAmount}</p>
               </div>
               <div className="stat-item">
                 <h6 className="name">Overall Downloads</h6>
-                <p className="value">0</p>
+                <p className="value">{firmwareStats.overallDownloads}</p>
               </div>
               <div className="stat-item">
                 <h6 className="name">Monthly Downloads</h6>
-                <p className="value">0</p>
+                <p className="value">{firmwareStats.monthlyDownloads}</p>
               </div>
             </div>
             <Progress color="danger" value="0" className="bg-custom-dark progress-xs" />

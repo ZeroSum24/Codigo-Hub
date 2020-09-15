@@ -13,7 +13,14 @@ import StatusLines from "./DeviceComponents/StatusLines/StatusLines";
 
 class DeviceRow extends React.Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    // TODO this object can then be used to replace the 0 values where appropriate
+    //  - should have the same fields as the return value from the function deviceStats in src/actions/dashboard.js
+    const deviceStats = this.props.devicesStats;
     return (
         <Row>
           <Col lg={7}>

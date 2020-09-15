@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import auth from './auth';
 import alerts from './alerts';
+import dashboard from "./dashboard";
 import ethereum from "./ethereum";
 import navigation from './navigation';
 import register from './register';
@@ -12,6 +13,7 @@ import views from './views'
 export default combineReducers({
   alerts,
   auth,
+  dashboard,
   ethereum,
   navigation,
   register,
