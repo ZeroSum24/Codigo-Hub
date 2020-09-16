@@ -67,8 +67,4 @@ class DeviceRow extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  devicesStats: state.dashboard.devices
-});
-
 export default DeviceRow;

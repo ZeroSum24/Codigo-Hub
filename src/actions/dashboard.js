@@ -106,24 +106,24 @@ function firmwareStats(userFirmwares) {
  * @returns {{deviceDetails: {onMap: number, totalDevices: number}, inactive: {number: number, percent: number}, active: {number: number, percent: number}, unknown: {number: number, percent: number}}}
  */
 function deviceStats(devices) {
-	//Mahbub
 	// TODO retrieve the values around the device status for each
 	// (likely have to get Michael to provide class (and method to produce) to wrap the device in status + location
 	let numberOfDevices = devices.length;
 
-	let activeDevices   = 12;
-	let inactiveDevices = 0;
-	let unknownDevices  = (numberOfDevices-activeDevices-inactiveDevices);
+	let activeDevices       = 12;  //: TODO Michael
+	let inactiveDevices     = 14;  //: TODO Michael
+	let numberOfDeviceOnMap = 15;  //: TODO Michael
+	let unknownDevices      = (numberOfDevices-activeDevices-inactiveDevices);
 
 	let activeDevicesPercentage   = 100 * (activeDevices   / numberOfDevices)
 	let inactiveDevicesPercentage = 100 * (inactiveDevices / numberOfDevices)
 	let unknownDevicesPercentage  = 100 * (unknownDevices  / numberOfDevices)
 
 	return {
-		active:        {number: activeDevices,   percent     : activeDevicesPercentage},
-		unknown:       {number: unknownDevices,  percent     : unknownDevicesPercentage},
-		inactive:      {number: inactiveDevices, percent     : inactiveDevicesPercentage},
-		deviceDetails: {onMap : 0,               totalDevices: numberOfDevices}
+		active:        {number: activeDevices       , percent     : activeDevicesPercentage},
+		unknown:       {number: unknownDevices      , percent     : unknownDevicesPercentage},
+		inactive:      {number: inactiveDevices     , percent     : inactiveDevicesPercentage},
+		deviceDetails: {onMap : numberOfDeviceOnMap , totalDevices: numberOfDevices}
 	}
 }
 
