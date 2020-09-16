@@ -16,6 +16,8 @@ class StatusLines extends React.Component {
 
 
   render() {
+    const deviceStats = this.props.devicesStats;
+
     return (
       <div>
         <div className="row progress-stats">

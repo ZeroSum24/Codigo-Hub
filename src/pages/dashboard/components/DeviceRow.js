@@ -45,12 +45,12 @@ class DeviceRow extends React.Component {
               <div style={{paddingBottom: '13px', marginTop: '-4px' }}>
                 <small style={{color: '#797A8A', fontSize: '9pt'}}>Amount of devices which are active, unknown or inactive on the map.</small>
               </div>
-              <StatusLines/>
+              <StatusLines devicesStats={deviceStats}/>
               <h6 className="fw-semi-bold mt">Map Distribution</h6>
               <p>Tracking: <strong>Active</strong></p>
               <p>
                 <span className="circle bg-default text-white"><i className="glyphicon glyphicon-cog" style={{marginBottom:"0px"}}/></span>
-                &nbsp; 0 device added, 0 devices total
+                &nbsp; {deviceStats.deviceDetails.onMap} device added, {deviceStats.deviceDetails.totalDevices} devices total
               </p>
               <div className="input-group mt">
                 <input type="text" className="form-control bg-custom-dark border-0" placeholder="Search Map" />
@@ -60,12 +60,15 @@ class DeviceRow extends React.Component {
                   </button>
                 </span>
               </div>
-
             </Widget>
           </Col>
         </Row>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  devicesStats: state.dashboard.devices
+});
 
 export default DeviceRow;

@@ -35,13 +35,16 @@ export function retrieveDashboardData(currentUserAddress) {
 
 		// retrieve data values
 		let communityData = communityContributions(firmwareResults, userAddresses, bountyResults);
-		let bountiesData = bountiesClaimed(userBounties);
-		let firmwareData = firmwareStats(userFirmware)
-		let deviceData = deviceStats(userDevices)
+		let bountiesData  = bountiesClaimed       (userBounties);
+		let firmwareData  = firmwareStats         (userFirmware)
+		let deviceData    = deviceStats           (userDevices)
 
 		// trigger the reducer data update
-		dispatch(updateDashboardData({community: communityData, bounties: bountiesData,
-																				firmware: firmwareData, devices: deviceData}))
+		dispatch(updateDashboardData({community: communityData,
+																	bounties: bountiesData,
+										              firmware: firmwareData,
+																	devices: deviceData
+																 }))
 
 	}
 }
@@ -53,10 +56,10 @@ function communityContributions(firmwares, users, bounties) {
 
 	// amount of users; total bounties; total firmware
 	return {
-		userAmount: users.length,
-		totalBounties: bounties.length,
-		totalFirmware: firmwares.length,
-		monthlyContributions: 0
+		userAmount           : users.length,
+		totalBounties        : bounties.length,
+		totalFirmware        : firmwares.length,
+		monthlyContributions : 0
 	}
 }
 
@@ -73,9 +76,9 @@ function bountiesClaimed(userBounties) {
 
 	// Amount Submitted; Overall Claimed; Monthly Claims
 	return {
-		amountSubmitted: userBounties.length,
-		overallClaimed: claimedPercent,
-		monthlyClaims: 0
+		amountSubmitted : userBounties.length,
+		overallClaimed  : claimedPercent,
+		monthlyClaims   : 0
 	}
 }
 
@@ -91,9 +94,9 @@ function firmwareStats(userFirmwares) {
 
 	// Amount Submitted; Overall Claimed; Monthly Claims
 	return {
-		firmwareAmount: userFirmwares.length,
-		overallDownloads: firmwareDownloads,
-		monthlyDownloads: 0
+		firmwareAmount   : userFirmwares.length,
+		overallDownloads : firmwareDownloads,
+		monthlyDownloads : 0
 	}
 }
 
@@ -103,15 +106,24 @@ function firmwareStats(userFirmwares) {
  * @returns {{deviceDetails: {onMap: number, totalDevices: number}, inactive: {number: number, percent: number}, active: {number: number, percent: number}, unknown: {number: number, percent: number}}}
  */
 function deviceStats(devices) {
-
+	//Mahbub
 	// TODO retrieve the values around the device status for each
-	//    (likely have to get Michael to provide class (and method to produce) to wrap the device in status + location
+	// (likely have to get Michael to provide class (and method to produce) to wrap the device in status + location
+	let numberOfDevices = devices.length;
+
+	let activeDevices   = 12;
+	let inactiveDevices = 0;
+	let unknownDevices  = (numberOfDevices-activeDevices-inactiveDevices);
+
+	let activeDevicesPercentage   = 100 * (activeDevices   / numberOfDevices)
+	let inactiveDevicesPercentage = 100 * (inactiveDevices / numberOfDevices)
+	let unknownDevicesPercentage  = 100 * (unknownDevices  / numberOfDevices)
 
 	return {
-		active: {number: 0, percent: 0},
-		unknown: {number: 0, percent: 0},
-		inactive: {number: 0, percent: 0},
-		deviceDetails: {onMap: 0, totalDevices: 0}
+		active:        {number: activeDevices,   percent     : activeDevicesPercentage},
+		unknown:       {number: unknownDevices,  percent     : unknownDevicesPercentage},
+		inactive:      {number: inactiveDevices, percent     : inactiveDevicesPercentage},
+		deviceDetails: {onMap : 0,               totalDevices: numberOfDevices}
 	}
 }
 
