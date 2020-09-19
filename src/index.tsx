@@ -6,14 +6,14 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 // this function detects most providers injected at window.ethereum
 import detectEthereumProvider from '@metamask/detect-provider';
+import { EthereumProvider } from '@metamask/detect-provider'; //TODO: This could probably go somewhere else
 
 import App from './components/App';
 import AuthErrorView from "./pages/error/AuthErrorView";
 import configureStore from "./utils/configureStore";
 import Loader from "./components/Loader";
 
-
-function EthereumApp(props) {
+function EthereumApp(props : { provider : EthereumProvider }) {
     let ethereumApp;
 
     if (props.provider) {
@@ -25,7 +25,7 @@ function EthereumApp(props) {
     return ethereumApp
 }
 
-function startApp(provider) {
+function startApp(provider : EthereumProvider) {
     const redux = configureStore();
     ReactDOM.render(
         <Provider store={redux.store}>
