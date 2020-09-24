@@ -1,32 +1,16 @@
 import { createPow } from '@textile/powergate-client';
 
-const tokenKey = 'token'
-const host = "https://grpcweb.hfs.textile.io";
+const token = '6388cfe6-0d45-49f4-aa7e-b880fa23a113'
+const host = "https://webapi.pow.codigo.textile.io";
 // const host = "http://localhost:6002";
 const PG = createPow( { host } );
 let initialized = false;
 // window.PG = PG;
 
-export async function getPG() {
-  let token = localStorage.getItem(tokenKey) || undefined;
-  if (token == null) {
-    console.log('No cached PG token, creating');
-    const FFS = await PG.ffs.create();
-    token = FFS.token ? FFS.token : null;
-    localStorage[tokenKey] = token;
+export function getPG() {
+  if (!initialized) {
     PG.setToken(token);
-  } else if (!initialized) {
-    console.log('Found cached PG token, initializing client');
-    PG.setToken(token);
-    try {
-      await PG.ffs.info();
-      initialized = true;
-      console.log('PG client successfully initialized');
-    } catch (e) {
-      console.error('PG client couldnt be initialized: '+ e);
-      localStorage.removeItem(tokenKey);
-      return getPG();
-    }
+    initialized = true;
   }
   return PG;
 }
