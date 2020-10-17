@@ -13,7 +13,7 @@ import AuthErrorView from "./pages/error/AuthErrorView";
 import configureStore from "./utils/configureStore";
 import Loader from "./components/Loader";
 
-function EthereumApp(props : { provider : EthereumProvider }) {
+function EthereumApp(props : { provider? : EthereumProvider }) {
     let ethereumApp;
 
     if (props.provider) {
