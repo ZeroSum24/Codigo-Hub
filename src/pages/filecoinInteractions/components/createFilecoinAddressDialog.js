@@ -17,7 +17,7 @@ export default class CreateFilecoinAddressDialog extends React.Component {
 
   _handleCreateAddress = async (e) => {
     e.preventDefault();
-    const PG = await getPG();
+    const PG = getPG();
     const response = await PG.ffs.newAddr(
       this.state.name,
       this.state.type,

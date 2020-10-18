@@ -3,7 +3,6 @@ import Box from "3box";
 
 import {setProfilePassword, setUserProfile} from "./profile";
 import { setBounties, setFirmware } from './model';
-import { getPG } from '../filecoin/client';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -128,8 +127,6 @@ export function enableUserEthereum() {
                 userSpaceName: spaces[0],
                 userSpace: space
             }));
-            // initialize Powergate connection
-            getPG().catch(console.error);
             console.log('eth auth success', ethereumAddress, box, spaces)
 
         } catch (error) {
