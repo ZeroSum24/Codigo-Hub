@@ -7,6 +7,7 @@ import { Row, Col, Container } from 'reactstrap';
 import ThreeBoxComments from '../../external/3box-comments-react';
 import DetailsBox from "./components/DetailsBox";
 import FirmwareButtons from "./components/FirmwareButtons";
+import MarkdownViewer from "./components/MarkdownViewer";
 import ReputationBox from "./components/ReputationBox";
 import {userVotingCallback} from "../../blockchain/userStats";
 import FirmwareUpgradeDialog from './components/firmwareUpgradeDialog';
@@ -17,6 +18,8 @@ class Firmware extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			content: null,
+			urlGitHubFile: "https://bryantson.github.io/reactjs-tutorials/react-markdown-viewer/docs/walkthrough.md",
 			adminEthAddr: '0xf7367F3abDB31428Ed56032AbC14B245fCC95BA2',
 			box: '123',
       showDeployDialog: false
@@ -35,6 +38,7 @@ class Firmware extends React.Component {
 
 	render() {
     console.log(this.props);
+		const { urlGitHubFile, content } = this.state;
 		return (
 			<div>
         {this.state.showDeployDialog &&
@@ -52,12 +56,12 @@ class Firmware extends React.Component {
 				<Container fluid={true}>
 					<Row>
 						<Col xs={12} sm={12} md={8}>
+					 	  <MarkdownViewer firmware={this.props.firmware} />
 							<SyntaxHighlighter
 								language="javascript"
 								showLineNumbers
 								style={atomDark}
-								customStyle={{ height: '500px' }}
-							>
+								customStyle={{ height: '500px' }}>
 								{this.props.source}
 							</SyntaxHighlighter>{' '}
 							<br />

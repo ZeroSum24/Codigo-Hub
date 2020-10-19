@@ -8,6 +8,8 @@ export default class Firmware {
     this.block = block;
     this.developer = developer;
     this.device_type = device_type;
+    //TODO: Needs fixing
+    this.github_URL = "https://bryantson.github.io/reactjs-tutorials/react-markdown-viewer/docs/walkthrough.md";
   }
 }
 
