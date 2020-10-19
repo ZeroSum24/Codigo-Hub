@@ -9,8 +9,11 @@ class MarkdownViewer extends Component {
 
     this.state = {
       content: null,
-      github_URL: this.props.firmware.github_URL
+      //github_URL: this.props.firmware.github_URL
+      github_URL: "https://bryantson.github.io/reactjs-tutorials/react-markdown-viewer/docs/walkthrough.md"
     }
+
+    console.log('hrere', this.state.github_URL, this.props.firmware)
   }
 
   componentDidMount() {
@@ -20,7 +23,7 @@ class MarkdownViewer extends Component {
        this.setState({ content: response.data });
     })
     .catch(error => {
-       console.err("Error in fetching the file from " + this.state.github_URL);
+       console.log("Error in fetching the file from " + this.state.github_URL);
     });
   }
 

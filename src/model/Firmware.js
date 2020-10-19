@@ -18,7 +18,7 @@ export class FirmwareWithThumbs extends Firmware {
     super(hash, IPFS_link, description, block, developer, device_type);
     this.thumbs_up = thumbs_up;
     this.thumbs_down = thumbs_down;
-    this.communityScore = '321';
+    this.communityScore = '322';
     this.amountOfDownloads = '5000';
   }
 }
