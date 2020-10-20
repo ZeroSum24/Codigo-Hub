@@ -8,7 +8,7 @@ export default class Firmware {
     this.block = block;
     this.developer = developer;
     this.device_type = device_type;
-    //TODO: Needs fixing
+    //TODO: Needs fixing, we need this to be stored in the smart contract
     this.github_URL = "https://bryantson.github.io/reactjs-tutorials/react-markdown-viewer/docs/walkthrough.md";
   }
 }

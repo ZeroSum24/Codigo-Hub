@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
+import {dark} from 'react-syntax-highlighter/dist/esm/styles/prism';
+import {render} from 'react-dom'
+
+const renderers = {
+  code: ({language, value}) => {
+    return <SyntaxHighlighter style={dark} children={value} />
+  }
+}
 
 class MarkdownViewer extends Component {
   constructor(props) {
@@ -9,11 +18,8 @@ class MarkdownViewer extends Component {
 
     this.state = {
       content: null,
-      //github_URL: this.props.firmware.github_URL
-      github_URL: "https://bryantson.github.io/reactjs-tutorials/react-markdown-viewer/docs/walkthrough.md"
+      github_URL: this.props.firmware.github_URL
     }
-
-    console.log('hrere', this.state.github_URL, this.props.firmware)
   }
 
   componentDidMount() {
@@ -31,9 +37,10 @@ class MarkdownViewer extends Component {
     const { content } = this.state;
     return (
       <div>
-    	    <ReactMarkdown source={content}/>
+          <ReactMarkdown renderers={renderers} children={content} />
       </div>
     )};
+
 }
 
 export default MarkdownViewer;
