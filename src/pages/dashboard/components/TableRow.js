@@ -4,12 +4,9 @@ import {
   Col,
   Progress,
 } from 'reactstrap';
-
 import Widget from '../../../components/Widget';
 
-
 class TableRow extends React.Component {
-
   constructor(props) {
     super(props);
   }
@@ -29,21 +26,21 @@ class TableRow extends React.Component {
             <div className="stats-row">
               <div className="stat-item">
                 <h6 className="name">Amount of Users</h6>
-                <p className="value">5</p>
+                <p className="value">0</p>
               </div>
               <div className="stat-item">
                 <h6 className="name">Total Bounties</h6>
-                <p className="value">24</p>
+                <p className="value">0</p>
               </div>
               <div className="stat-item">
                 <h6 className="name">Total Firmware</h6>
-                <p className="value">3</p>
+                <p className="value">0</p>
               </div>
             </div>
-            <Progress color="bg-primary" value="60" className="bg-custom-dark progress-xs" />
+            <Progress color="bg-primary" value="0" className="bg-custom-dark progress-xs" />
             <p>
               <small><span className="circle bg-default text-white"><i className="fa fa-plus" /></span></small>
-              <span className="fw-semi-bold">&nbsp;60% more</span>
+              <span className="fw-semi-bold">&nbsp;0% more</span>
               &nbsp;contributions than last month
             </p>
           </Widget>
@@ -61,25 +58,25 @@ class TableRow extends React.Component {
             <div className="stats-row">
               <div className="stat-item">
                 <h6 className="name">Amount Submitted</h6>
-                <p className="value">12</p>
+                <p className="value">0</p>
               </div>
               <div className="stat-item">
                 <h6 className="name">Overall Claimed</h6>
-                <p className="value">16%</p>
+                <p className="value">0%</p>
               </div>
               <div className="stat-item">
                 <h6 className="name">Monthly Claims</h6>
-                <p className="value">2</p>
+                <p className="value">0</p>
               </div>
             </div>
-            <Progress color="success" value="16" className="bg-custom-dark progress-xs" />
+            <Progress color="success" value="0" className="bg-custom-dark progress-xs" />
             <p>
               <small>
                 <span className="circle bg-default text-white">
                   <i className="fa fa-chevron-up" />
                 </span>
               </small>
-              <span className="fw-semi-bold">&nbsp;20% higher</span>
+              <span className="fw-semi-bold">&nbsp;0% higher</span>
               &nbsp;than last month
             </p>
           </Widget>
@@ -96,21 +93,21 @@ class TableRow extends React.Component {
             <div className="stats-row">
               <div className="stat-item">
                 <h6 className="name">My Firmware</h6>
-                <p className="value">3</p>
+                <p className="value">0</p>
               </div>
               <div className="stat-item">
                 <h6 className="name">Overall Downloads</h6>
-                <p className="value">24</p>
+                <p className="value">0</p>
               </div>
               <div className="stat-item">
                 <h6 className="name">Monthly Downloads</h6>
-                <p className="value">6</p>
+                <p className="value">0</p>
               </div>
             </div>
-            <Progress color="danger" value="8" className="bg-custom-dark progress-xs" />
+            <Progress color="danger" value="0" className="bg-custom-dark progress-xs" />
             <p>
               <small><span className="circle bg-default text-white"><i className="fa fa-chevron-down" /></span></small>
-              <span className="fw-semi-bold">&nbsp;8% higher</span>
+              <span className="fw-semi-bold">&nbsp;0% higher</span>
               &nbsp;than last month
             </p>
           </Widget>

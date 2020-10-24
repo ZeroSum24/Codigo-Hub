@@ -32,7 +32,7 @@ class FilecoinInteractions extends React.Component {
     this.setState({ showUpload: false });
     this._refresh();
     if (cid == null || jobId == null) return;
-    (await getPG()).ffs.watchJobs((job) => {
+    getPG().ffs.watchJobs((job) => {
       console.log(job);
       if (job.status === ffsTypes.JobStatus.JOB_STATUS_CANCELED) {
         alert('File storage deal job canceled');
@@ -55,7 +55,7 @@ class FilecoinInteractions extends React.Component {
   };
 
   _refresh = async () => {
-    const PG = await getPG();
+    const PG = getPG();
     const { info } = await PG.ffs.info();
     let storageList = null;
     if (info.balancesList.length > 0) {
