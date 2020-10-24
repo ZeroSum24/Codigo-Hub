@@ -1,14 +1,7 @@
 import { VIEW_FIRMWARE_SET, VIEW_PROFILE_SET, VIEW_BOUNTY_SET } from '../actions/view';
+import { State, defaultState } from '../model/State';
 
-export default function views(state = {
-  firmwareStats: {},
-  firmwareSource: '',
-  mineLike: 0,
-  firmwareDeveloper: {},
-  bountyDetails: {},
-  bountyProposer: {},
-  profileWithStats: {}
-}, action) {
+export default function views(state : State = defaultState, action : any) : State {
   switch (action.type) {
     case VIEW_FIRMWARE_SET:
       return Object.assign({}, state, {

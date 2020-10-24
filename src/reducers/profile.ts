@@ -1,11 +1,7 @@
 import {USER_DEVICES_SET, USER_PASSWORD_SET, USER_PROFILE_SET} from '../actions/profile';
+import { State, defaultState } from '../model/State';
 
-export default function profile(state = {
-  addDeviceSuccess: false,
-  deviceList: [],
-  userProfile: {},
-  userPassword: ''
-}, action) {
+export default function profile(state : State = defaultState, action : any) : State {
   switch (action.type) {
     case USER_DEVICES_SET:
       return Object.assign({}, state, {

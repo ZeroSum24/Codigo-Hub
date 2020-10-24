@@ -1,12 +1,7 @@
 import { REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FIRMWARE_SUCCESS, REGISTER_PENDING_FIRMWARE, REGISTER_PENDING } from '../actions/register';
+import { State, defaultState } from '../model/State';
 
-export default function register(state = {
-    networkAddress: '',
-    isFetching: false,
-    errorMessage: '',
-    linkingDeveloperAccount: false,
-    registerPending: false
-}, action) {
+export default function register(state : State = defaultState, action : any) : State {
     switch (action.type) {
         case REGISTER_REQUEST:
             return Object.assign({}, state, {

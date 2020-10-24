@@ -1,16 +1,9 @@
 import {
     ETHEREUM_SUCCESS, ETHEREUM_FAILURE, ETHEREUM_FETCHING
 } from '../actions/user';
+import { State, defaultState } from '../model/State';
 
-export default function ethereum(state = {
-    isFetching: true,
-    isEthereumEnabled: false,
-    ethereumAddress: '',
-    userBox: null,
-    userSpace: null,
-    userSpaceName: '',
-    errorMessage: ''
-}, action) {
+export default function ethereum(state : State = defaultState, action : any) : State {
     switch (action.type) {
         case ETHEREUM_FETCHING:
             return Object.assign({}, state, {

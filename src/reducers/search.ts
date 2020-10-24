@@ -1,14 +1,7 @@
 import { SEARCH_START, SEARCH_SUCCESS, SEARCH_FAILURE, SearchStatus } from '../actions/search';
+import { State, defaultState } from '../model/State';
 
-export default function search(state = {
-  searchText: '',
-  searchStatus: SearchStatus.LOADING,
-  bountyResults: [],
-  deviceResults: [],
-  firmwareResults: [],
-  userResults: [],
-  errorMessage: ''
-}, action) {
+export default function search(state : State = defaultState, action : any) : State {
   switch (action.type) {
     case SEARCH_START:
       return Object.assign({}, state, {

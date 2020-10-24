@@ -1,12 +1,9 @@
 import {
      LOGIN_SUCCESS, LOGIN_FAILURE
 } from '../actions/user';
+import { State, defaultState} from '../model/State';
 
-const authenticated = localStorage.getItem('authenticated');
-export default function auth(state = {
-    isFetching: false,
-    isAuthenticated: authenticated,
-}, action) {
+export default function auth(state : State = defaultState, action : any) : State {
     switch (action.type) {
         case LOGIN_SUCCESS:
             return Object.assign({}, state, {
