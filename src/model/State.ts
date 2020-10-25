@@ -1,4 +1,10 @@
 import { SearchStatus } from "../actions/search";
+import Bounty from "./Bounty";
+import Firmware, { FirmwareWithThumbs } from "./Firmware";
+import Device from "./Device";
+import Profile, { ProfileWithStats } from "./Profile";
+import Box from '3box';
+import  { Space } from '../types/3box-aux';
 
 export interface State {
     // Used by: alerts.ts
@@ -12,17 +18,17 @@ export interface State {
     // Used by: ethereum.ts
     ethereumAddress : string,
     // Used by: ethereum.ts
-    userBox : unknown,
+    userBox : Box | null,
     // Used by: ethereum.ts
-    userSpace : unknown,
+    userSpace : Space | null,
     // Used by: ethereum.ts
     userSpaceName : string,
     // Used by: ethereum.ts, register.ts, search.ts
     errorMessage : string,
     // Used by: model.ts
-    bountyList : unknown[],
+    bountyList : Bounty[],
     // Used by: model.ts
-    firmwareList : unknown[],
+    firmwareList : Firmware[],
     // Used by: navigation.ts
     sidebarOpened : boolean,
     // Used by: navigation.ts
@@ -36,9 +42,9 @@ export interface State {
     // Used by: profile.ts
     addDeviceSuccess : boolean,
     // Used by: profile.ts
-    deviceList : unknown[],
+    deviceList : Device[],
     // Used by: profile.ts
-    userProfile : unknown,
+    userProfile : Profile | null,
     // Used by: profile.ts
     userPassword : string,
     // Used by: register.ts
@@ -52,27 +58,27 @@ export interface State {
     // Used by: search.ts
     searchStatus : string,
     // Used by: search.ts
-    bountyResults : unknown[],
+    bountyResults : Bounty[],
     // Used by: search.ts
-    deviceResults : unknown[],
+    deviceResults : Device[],
     // Used by: search.ts
-    firmwareResults : unknown[],
+    firmwareResults : Firmware[],
     // Used by: search.ts
-    userResults : unknown[],
+    userResults : ProfileWithStats[],
     // Used by: views.ts
-    firmwareStats : unknown,
+    firmwareStats : FirmwareWithThumbs | null,
     // Used by: views.ts
     firmwareSource : string,
     // Used by: views.ts
     mineLike : number,
     // Used by: views.ts
-    firmwareDeveloper : unknown,
+    firmwareDeveloper : Profile | null,
     // Used by: views.ts
-    bountyDetails : unknown,
+    bountyDetails : Bounty | null,
     // Used by: views.ts
-    bountyProposer : unknown,
+    bountyProposer : Firmware | null,
     // Used by: views.ts
-    profileWithStats : unknown,
+    profileWithStats : ProfileWithStats | null,
 }
 
 const authenticated = localStorage.getItem('authenticated')?.toLowerCase() === "true";
@@ -111,7 +117,7 @@ export const defaultState : State = {
       targetProfileAddress: '',
       addDeviceSuccess : false,
       deviceList : [],
-      userProfile : {},
+      userProfile : null,
       userPassword : '',
       networkAddress : '',
       linkingDeveloperAccount : false,
@@ -122,11 +128,11 @@ export const defaultState : State = {
       deviceResults : [],
       firmwareResults : [],
       userResults : [],
-      firmwareStats : {},
+      firmwareStats : null,
       firmwareSource : '',
       mineLike : 0,
-      firmwareDeveloper : {},
-      bountyDetails : {},
-      bountyProposer : {},
-      profileWithStats : {},
+      firmwareDeveloper : null,
+      bountyDetails : null,
+      bountyProposer : null,
+      profileWithStats : null,
 }
