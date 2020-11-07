@@ -4,7 +4,7 @@ import Firmware, { FirmwareWithThumbs } from "./Firmware";
 import Device from "./Device";
 import Profile, { ProfileWithStats } from "./Profile";
 import Box from '3box';
-import  { Space } from '../types/3box-aux';
+import { Space } from '../types/3box-aux';
 
 export interface State {
     // Used by: alerts.ts
@@ -76,7 +76,7 @@ export interface State {
     // Used by: views.ts
     bountyDetails : Bounty | null,
     // Used by: views.ts
-    bountyProposer : Firmware | null,
+    bountyProposer : ProfileWithStats | null,
     // Used by: views.ts
     profileWithStats : ProfileWithStats | null,
 }
@@ -123,7 +123,7 @@ export const defaultState : State = {
       linkingDeveloperAccount : false,
       registerPending : false,
       searchText : '',
-      searchStatus : SearchStatus.LOADING,
+      searchStatus : SearchStatus.Loading,
       bountyResults : [],
       deviceResults : [],
       firmwareResults : [],

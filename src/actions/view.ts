@@ -1,37 +1,52 @@
 import {retrieveStatsDetails} from "../blockchain/userStats";
-import {FirmwareWithThumbs} from "../model/Firmware";
-import Profile, {ProfileWithStats} from "../model/Profile";
+import Firmware, {FirmwareWithThumbs} from "../model/Firmware";
+import Profile, { ProfileWithStats } from "../model/Profile";
 import { getFirmwareLikes, retrieveAllMyFirmware } from '../blockchain/contracts';
 import { downloadSourceCode } from '../filecoin/client';
 import Box from "3box";
+import { Action, DispatchedAction } from "../model/Action";
+import Bounty from "../model/Bounty";
 
-export const VIEW_FIRMWARE_SET = "VIEW_FIRMWARE_SET";
-export const VIEW_PROFILE_SET = "VIEW_PROFILE_SET";
-export const VIEW_BOUNTY_SET = "VIEW_BOUNTY_SET";
+export const enum ViewAction {
+  FirmwareSet = "VIEW_FIRMWARE_SET",
+  ProfileSet = "VIEW_PROFILE_SET",
+  BountySet = "VIEW_BOUNTY_SET"
+}
 
+export interface FirmwareData {
+  firmwareStats : FirmwareWithThumbs,
+  firmwareSource : string,
+  firmwareDeveloper : ProfileWithStats,
+  mineLike : number
+}
 
-function setFirmware(payload) {
+export interface BountyData {
+  bountyDetails : Bounty,
+  bountyProposer : ProfileWithStats
+}
+
+function setFirmware(payload : FirmwareData) : Action<ViewAction.FirmwareSet, FirmwareData> {
   return {
-    type: VIEW_FIRMWARE_SET,
+    type: ViewAction.FirmwareSet,
     payload,
   }
 }
 
-function setProfile(payload) {
+function setProfile(payload : { profileWithStats : ProfileWithStats }) : Action<ViewAction.ProfileSet, { profileWithStats : ProfileWithStats }> {
   return {
-    type: VIEW_PROFILE_SET,
+    type: ViewAction.ProfileSet,
     payload
   };
 }
 
-function setBounty(payload) {
+function setBounty(payload : BountyData) : Action<ViewAction.BountySet, BountyData> {
   return {
-    type: VIEW_BOUNTY_SET,
+    type: ViewAction.BountySet,
     payload
   }
 }
 
-export function initFirmwareView(payload) {
+export function initFirmwareView(payload : {firmwareObj : Firmware, history : string[]}) : DispatchedAction<ViewAction.FirmwareSet> {
 
   return async (dispatch) => {
     const fw = payload.firmwareObj;
@@ -54,7 +69,7 @@ export function initFirmwareView(payload) {
  * @param payload
  * @returns {function(...[*]=)}
  */
-export function initProfileView(payload) {
+export function initProfileView(payload : { profile : Profile, history : string[] }) : DispatchedAction<ViewAction.ProfileSet> {
 
   return async (dispatch) => {
 
@@ -65,6 +80,7 @@ export function initProfileView(payload) {
       let profileFirmwareHistory = await retrieveAllMyFirmware(payload.profile.address);
       profileWithStats = await retrieveStatsDetails(payload.profile, profileFirmwareHistory);
     } else {
+      //TODO: Never triggered as ProfileWithStats is a subtype of Profile
       profileWithStats = payload.profile
     }
 
@@ -74,12 +90,12 @@ export function initProfileView(payload) {
   }
 }
 
-export function initBountyView(payload) {
+export function initBountyView(payload : {bountyObject : Bounty, history : string[]}) : DispatchedAction<ViewAction.BountySet> {
 
   return async (dispatch) => {
 
     //pulls the user info from the backend necessary for the bounty page
-    let bountyProposer = await getProfileWithStats(payload.bountyObject.bountySetter);
+    let bountyProposer = await getProfileWithStats(payload.bountyObject.bountySetter.toString());
 
     // change the app location and set the firmware page
     dispatch(setBounty({bountyDetails: payload.bountyObject, bountyProposer: bountyProposer}));
@@ -92,7 +108,7 @@ export function initBountyView(payload) {
  * @param profileAddress
  * @returns {Promise<ProfileWithStats>}
  */
-export async function getProfileWithStats(profileAddress) {
+export async function getProfileWithStats(profileAddress : string) : Promise<ProfileWithStats> {
 
   // Get user profile using 3box address and wrap in Profile model object
   const boxProfile = await Box.getProfile(profileAddress);

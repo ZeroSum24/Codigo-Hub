@@ -1,10 +1,10 @@
-import { DISMISS_ALERT } from '../actions/alerts';
+import { AlertsAction } from '../actions/alerts';
 import { State, defaultState } from '../model/State';
 
 export default function alertsReducer(state : State = defaultState, action : any) : State {
   let index = 0;
   switch (action.type) {
-    case DISMISS_ALERT:
+    case AlertsAction.DismissAlert:
       state.alertsList.forEach((alert, alertIndex) => {
         if (alert.id === action.id) {
           index = alertIndex;

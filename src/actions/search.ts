@@ -1,37 +1,52 @@
 import { retrieveAllAvailableFirmware, getAllUsers, retrieveAllBounties } from '../blockchain/contracts';
 import { getProfileWithStats } from './view.js';
+import { Action, DispatchedAction } from '../model/Action';
+import Bounty from '../model/Bounty';
+import Firmware, { FirmwareWithThumbs } from '../model/Firmware';
+import { ProfileWithStats } from '../model/Profile';
+import Device from '../model/Device';
 
-export const SEARCH_START = 'SEARCH_START';
-export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
-export const SEARCH_FAILURE = 'SEARCH_FAILURE';
-export const SearchStatus ={
-  COMPLETED: 'COMPLETED',
-  ERROR: 'ERROR',
-  LOADING: 'LOADING'
+export interface SearchResult {
+  bountyResults : Bounty[],
+  firmwareResults: Firmware[],
+  userResults: ProfileWithStats[],
+  deviceResults: Device[]
+}
+
+export const enum SearchAction {
+  Start = 'SEARCH_START',
+  Success = 'SEARCH_SUCCESS',
+  Failure = 'SEARCH_FAILURE'
 };
 
-export function searchPending(payload) {
+export const enum SearchStatus {
+  Completed = 'COMPLETED',
+  Error = 'ERROR',
+  Loading = 'LOADING'
+}
+
+export function searchPending(payload : string) : Action<SearchAction.Start, string> {
   return {
-    type: SEARCH_START,
+    type: SearchAction.Start,
     payload
   };
 }
 
-function searchSuccess(payload) {
+function searchSuccess(payload : SearchResult) : Action<SearchAction.Success, SearchResult> {
   return {
-    type: SEARCH_SUCCESS,
+    type: SearchAction.Success,
     payload
   };
 }
 
-function searchFailure(payload) {
+function searchFailure(payload : string) : Action<SearchAction.Failure, string> {
   return {
-    type: SEARCH_FAILURE,
+    type: SearchAction.Failure,
     payload
   };
 }
 
-function containsIgnoreCase(string, term) {
+function containsIgnoreCase(string : string, term : string) : boolean {
   if (string == null || term == null) {
     return false;
   }
@@ -44,7 +59,7 @@ function containsIgnoreCase(string, term) {
  * @param {Firmware} firmware
  * @return {boolean}
  */
-function isFirmwareRelevant(term, firmware) {
+function isFirmwareRelevant(term : string, firmware : Firmware) : boolean {
   return containsIgnoreCase(firmware.description, term) ||
     containsIgnoreCase(firmware.developer, term) ||
     containsIgnoreCase(firmware.device_type, term)
@@ -56,26 +71,26 @@ function isFirmwareRelevant(term, firmware) {
  * @param {Bounty} bounty
  * @return {boolean}
  */
-function isBountyRelevant(term, bounty) {
+function isBountyRelevant(term : string, bounty : Bounty) : boolean {
   return containsIgnoreCase(bounty.description, term) ||
     containsIgnoreCase(bounty.model, term) ||
     containsIgnoreCase(bounty.title, term) ||
-    containsIgnoreCase(bounty.bountySetter, term);
+    containsIgnoreCase(bounty.bountySetter.toString(), term);
 
 }
 
-function isDeviceRelevant(term, device) {
+function isDeviceRelevant(term : string, device : Device) : boolean {
   return containsIgnoreCase(device.name, term) ||
   containsIgnoreCase(device.brand, term) ||
   containsIgnoreCase(device.model, term);
 }
 
-function isUserRelevant(term, user) {
+function isUserRelevant(term : string, user : ProfileWithStats) : boolean {
   return containsIgnoreCase(user.address, term) ||
          containsIgnoreCase(user.name, term);
 }
 
-export function startSearch(searchText, devices) {
+export function startSearch(searchText : string, devices : Device[]) : DispatchedAction<SearchAction> {
   return async (dispatch) => {
 
     dispatch(searchPending(searchText));

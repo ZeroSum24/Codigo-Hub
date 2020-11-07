@@ -1,9 +1,9 @@
-import { REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FIRMWARE_SUCCESS, REGISTER_PENDING_FIRMWARE, REGISTER_PENDING } from '../actions/register';
+import { RegisterAction } from '../actions/register';
 import { State, defaultState } from '../model/State';
 
 export default function register(state : State = defaultState, action : any) : State {
     switch (action.type) {
-        case REGISTER_REQUEST:
+        case RegisterAction.Request:
             return Object.assign({}, state, {
                 isFetching: true,
                 networkAddress: state.networkAddress,
@@ -11,7 +11,7 @@ export default function register(state : State = defaultState, action : any) : S
                 linkingDeveloperAccount: state.linkingDeveloperAccount,
                 registerPending: false
             });
-        case REGISTER_SUCCESS:
+        case RegisterAction.Success:
             return Object.assign({}, state, {
                 isFetching: false,
                 errorMessage: '',
@@ -19,7 +19,7 @@ export default function register(state : State = defaultState, action : any) : S
                 linkingDeveloperAccount: false,
                 registerPending: false
             });
-        case REGISTER_FIRMWARE_SUCCESS:
+        case RegisterAction.FirmwareSuccess:
             return Object.assign({}, state, {
                 isFetching: false,
                 errorMessage: '',
@@ -27,7 +27,7 @@ export default function register(state : State = defaultState, action : any) : S
                 linkingDeveloperAccount: false,
                 registerPending: false
             });
-        case REGISTER_PENDING_FIRMWARE:
+        case RegisterAction.PendingFirmware:
             return Object.assign({}, state, {
                 isFetching: state.isFetching,
                 networkAddress: state.networkAddress,
@@ -35,7 +35,7 @@ export default function register(state : State = defaultState, action : any) : S
                 linkingDeveloperAccount: true,
                 registerPending: false
             });
-        case REGISTER_FAILURE:
+        case RegisterAction.Failure:
             return Object.assign({}, state, {
                 isFetching: false,
                 errorMessage: action.payload,
@@ -43,7 +43,7 @@ export default function register(state : State = defaultState, action : any) : S
                 linkingDeveloperAccount: false,
                 registerPending: false
             });
-        case REGISTER_PENDING:
+        case RegisterAction.Pending:
             return Object.assign({}, state, {
                 registerPending: true
             });

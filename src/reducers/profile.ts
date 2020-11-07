@@ -1,19 +1,19 @@
-import {USER_DEVICES_SET, USER_PASSWORD_SET, USER_PROFILE_SET} from '../actions/profile';
+import { ProfileAction } from '../actions/profile';
 import { State, defaultState } from '../model/State';
 
 export default function profile(state : State = defaultState, action : any) : State {
   switch (action.type) {
-    case USER_DEVICES_SET:
+    case ProfileAction.UserDevicesSet:
       return Object.assign({}, state, {
         addDeviceSuccess: true,
         deviceList: action.payload,
       });
-    case USER_PROFILE_SET:
+    case ProfileAction.UserProfileSet:
       console.log("user profile set", action.payload);
       return Object.assign({}, state, {
         userProfile: action.payload.userProfile
       });
-    case USER_PASSWORD_SET:
+    case ProfileAction.UserPasswordSet:
       console.log("user password set", action.payload);
       return Object.assign({}, state, {
         userPassword: action.payload.userPassword

@@ -1,42 +1,49 @@
 // Login Management
 import Box from "3box";
 
-import {setProfilePassword, setUserProfile} from "./profile";
-import { setBounties, setFirmware } from './model';
+import {setProfilePassword, setUserProfile, ProfileAction} from "./profile";
+import { setBounties, setFirmware, ModelAction } from './model';
 import { getPG } from '../filecoin/client';
+import { EmptyAction, Action, DispatchedAction } from "../model/Action";
+import { Space } from "../types/3box-aux";
 
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const enum LoginAction {
+    Success = 'LOGIN_SUCCESS',
+    Failure = 'LOGIN_FAILURE'
+}
 
-export function receiveLogin() {
+export const enum LogoutAction {
+    Request = 'LOGOUT_REQUEST',
+    Success = 'LOGOUT_SUCCESS'
+}
+
+export function receiveLogin() : EmptyAction<LoginAction.Success> {
     return {
-        type: LOGIN_SUCCESS
+        type: LoginAction.Success
     };
 }
 
-function loginError(payload) {
+function loginError(payload : string) : Action<LoginAction.Failure, string> {
     return {
-        type: LOGIN_FAILURE,
+        type: LoginAction.Failure,
         payload,
     };
 }
 
-function requestLogout() {
+function requestLogout() : EmptyAction<LogoutAction.Request> {
     return {
-        type: LOGOUT_REQUEST,
+        type: LogoutAction.Request,
     };
 }
 
-export function receiveLogout() {
+export function receiveLogout() : EmptyAction<LogoutAction.Success> {
     return {
-        type: LOGOUT_SUCCESS,
+        type: LogoutAction.Success,
     };
 }
 
 // Logs the user out
-export function logoutUser() {
+export function logoutUser() : DispatchedAction<LogoutAction> {
     return (dispatch) => {
         dispatch(requestLogout());
         localStorage.removeItem('authenticated');
@@ -44,13 +51,13 @@ export function logoutUser() {
     };
 }
 
-export function loginUser(creds, knownPassword) {
+export function loginUser(creds : { password : string }, knownPassword : string) : DispatchedAction<LoginAction> {
     return async (dispatch) => {
 
         dispatch(receiveLogin());
 
         if (creds.password === knownPassword) {
-            localStorage.setItem('authenticated', true)
+            localStorage.setItem('authenticated', true.toString());
         } else {
             dispatch(loginError('Something was wrong. Try again'));
         }
@@ -59,28 +66,36 @@ export function loginUser(creds, knownPassword) {
 
 // Ethereum Management
 
-export const ETHEREUM_FETCHING = 'ETHEREUM_FETCHING';
-export const ETHEREUM_SUCCESS = 'ETHEREUM_SUCCESS';
-export const ETHEREUM_FAILURE = 'ETHEREUM_FAILURE';
+export const enum EthereumAction {
+    Fetching = 'ETHEREUM_FETCHING',
+    Success = 'ETHEREUM_SUCCESS',
+    Failure = 'ETHEREUM_FAILURE'
+}
 
+export interface EthereumData {
+    ethereumAddress : string,
+    userBox : Box,
+    userSpace : Space,
+    userSpaceName : string
+}
 
-function fetchEthereumAuth() {
+function fetchEthereumAuth() : EmptyAction<EthereumAction.Fetching> {
     // console.log('fetching ethereum auth');
     return {
-        type: ETHEREUM_FETCHING
+        type: EthereumAction.Fetching
     };
 }
 
-function ethereumAuthSuccess(payload) {
+function ethereumAuthSuccess(payload : EthereumData) : Action<EthereumAction.Success, EthereumData> {
     return {
-        type: ETHEREUM_SUCCESS,
+        type: EthereumAction.Success,
         payload
     };
 }
 
-function ethereumAuthError(payload) {
+function ethereumAuthError(payload : string) : Action<EthereumAction.Failure, string> {
     return {
-        type: ETHEREUM_FAILURE,
+        type: EthereumAction.Failure,
         payload,
     };
 }
@@ -90,7 +105,7 @@ function ethereumAuthError(payload) {
  * is false by default to allow for setting by external provider.
  * @returns {function(...[*]=)}
  */
-export function enableUserEthereum() {
+export function enableUserEthereum() : DispatchedAction<EthereumAction | ModelAction.SetFirmware | ModelAction.SetBounties | ProfileAction.UserPasswordSet | ProfileAction.UserProfileSet> {
 
     return async (dispatch) => {
 

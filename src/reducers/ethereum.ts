@@ -1,15 +1,13 @@
-import {
-    ETHEREUM_SUCCESS, ETHEREUM_FAILURE, ETHEREUM_FETCHING
-} from '../actions/user';
+import { EthereumAction } from '../actions/user';
 import { State, defaultState } from '../model/State';
 
 export default function ethereum(state : State = defaultState, action : any) : State {
     switch (action.type) {
-        case ETHEREUM_FETCHING:
+        case EthereumAction.Fetching:
             return Object.assign({}, state, {
                 isFetching: true
             });
-        case ETHEREUM_SUCCESS:
+        case EthereumAction.Success:
             return Object.assign({}, state, {
                 isFetching: false,
                 isEthereumEnabled: true,
@@ -18,7 +16,7 @@ export default function ethereum(state : State = defaultState, action : any) : S
                 userSpace: action.payload.userSpace,
                 userSpaceName: action.payload.userSpaceName,
             });
-        case ETHEREUM_FAILURE:
+        case EthereumAction.Failure:
             return Object.assign({}, state, {
                 isFetching: false,
                 isEthereumEnabled: false,

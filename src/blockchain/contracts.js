@@ -743,7 +743,7 @@ export function getChallenge(addressToClaim) {
 
 /**
  * response_decomposed method on identity contract
- * @param {String} response response value
+ * @param {Sign} response response value
  * @return {Promise<String>} hash of transaction
  */
 export function sendResponse(response) {
