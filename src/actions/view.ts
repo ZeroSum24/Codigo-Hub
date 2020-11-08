@@ -7,7 +7,7 @@ import Box from "3box";
 import { Action, DispatchedAction } from "../model/Action";
 import Bounty from "../model/Bounty";
 
-export const enum ViewActionType {
+export enum ViewActionType {
   FirmwareSet = "VIEW_FIRMWARE_SET",
   ProfileSet = "VIEW_PROFILE_SET",
   BountySet = "VIEW_BOUNTY_SET"

@@ -5,7 +5,7 @@ import { setProfilePassword, ProfileActionType } from "./profile";
 import { Action, DispatchedAction } from '../model/Action';
 import { Space } from '../types/3box-aux';
 
-export const enum RegisterActionType {
+export enum RegisterActionType {
   Request = 'REGISTER_REQUEST',
   Success = 'REGISTER_SUCCESS',
   Failure = 'REGISTER_FAILURE',

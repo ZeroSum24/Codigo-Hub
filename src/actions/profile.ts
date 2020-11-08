@@ -3,7 +3,7 @@ import Profile from "../model/Profile";
 import Device from "../model/Device";
 import { Action, DispatchedAction } from "../model/Action";
 
-export const enum ProfileActionType {
+export enum ProfileActionType {
   UserDevicesSet = 'DEVICES_SET',
   UserProfileSet = 'USER_PROFILE_SET',
   UserPasswordSet = 'USER_PASSWORD_SET'

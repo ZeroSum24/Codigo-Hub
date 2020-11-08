@@ -7,7 +7,7 @@ import { getPG } from '../filecoin/client';
 import { Action, DispatchedAction } from "../model/Action";
 import { Space } from "../types/3box-aux";
 
-export const enum LoginActionType {
+export enum LoginActionType {
     Success = 'LOGIN_SUCCESS',
     Failure = 'LOGIN_FAILURE'
 }
@@ -18,7 +18,7 @@ interface LoginFailure extends Action<LoginActionType.Failure> {
 };
 export type LoginAction = LoginSuccess | LoginFailure;
 
-export const enum LogoutActionType {
+export enum LogoutActionType {
     Request = 'LOGOUT_REQUEST',
     Success = 'LOGOUT_SUCCESS'
 }
@@ -76,7 +76,7 @@ export function loginUser(creds : { password : string }, knownPassword : string)
 
 // Ethereum Management
 
-export const enum EthereumActionType {
+export enum EthereumActionType {
     Fetching = 'ETHEREUM_FETCHING',
     Success = 'ETHEREUM_SUCCESS',
     Failure = 'ETHEREUM_FAILURE'

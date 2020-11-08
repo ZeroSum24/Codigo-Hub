@@ -3,7 +3,7 @@ import Bounty from '../model/Bounty';
 import { Action, DispatchedAction } from '../model/Action';
 import Firmware from "../model/Firmware";
 
-export const enum ModelActionType {
+export enum ModelActionType {
   SetBounties = 'MODEL_SET_BOUNTIES',
   SetFirmware = 'MODEL_SET_FIRMWARE',
 }

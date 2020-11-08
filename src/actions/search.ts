@@ -1,5 +1,5 @@
 import { retrieveAllAvailableFirmware, getAllUsers, retrieveAllBounties } from '../blockchain/contracts';
-import { getProfileWithStats } from './view.js';
+import { getProfileWithStats } from './view';
 import { Action, DispatchedAction } from '../model/Action';
 import Bounty from '../model/Bounty';
 import Firmware from '../model/Firmware';
@@ -13,13 +13,13 @@ export interface SearchResult {
   deviceResults: Device[]
 };
 
-export const enum SearchStatus {
+export enum SearchStatus {
   Completed = 'COMPLETED',
   Error = 'ERROR',
   Loading = 'LOADING'
 };
 
-export const enum SearchActionType {
+export enum SearchActionType {
   Start = 'SEARCH_START',
   Success = 'SEARCH_SUCCESS',
   Failure = 'SEARCH_FAILURE'

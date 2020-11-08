@@ -2,7 +2,7 @@
 
 import { Action } from '../model/Action';
 
-export const enum NavigationActionType {
+export enum NavigationActionType {
   OpenSideBar = 'OPEN_SIDEBAR',
   CloseSideBar = 'CLOSE_SIDEBAR',
   ChangeActiveSideBarItem = 'CHANGE_ACTIVE_SIDEBAR_ITEM',

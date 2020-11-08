@@ -1,6 +1,6 @@
 import { Action } from '../model/Action';
 
-export const enum AlertsActionType {
+export enum AlertsActionType {
   DismissAlert = 'DISMISS_ALERT'
 }
 
