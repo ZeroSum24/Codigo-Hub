@@ -5,80 +5,81 @@ import Device from "./Device";
 import Profile, { ProfileWithStats } from "./Profile";
 import Box from '3box';
 import { Space } from '../types/3box-aux';
+import { Optional, None } from "../types/optional";
 
 export interface State {
     // Used by: alerts.ts
-    alertsList : { id : number, title : string, value : number, color : string, footer : string }[],
+    readonly alertsList : { readonly id : number, readonly title : string, readonly value : number, readonly color : string, readonly footer : string }[],
     // Used by: auth.ts, ethereum.ts, register.ts
-    isFetching : boolean,
+    readonly isFetching : boolean,
     // Used by: auth.ts
-    isAuthenticated : boolean,
+    readonly isAuthenticated : boolean,
     // Used by: ethereum.ts
-    isEthereumEnabled : boolean,
+    readonly isEthereumEnabled : boolean,
     // Used by: ethereum.ts
-    ethereumAddress : string,
+    readonly ethereumAddress : string,
     // Used by: ethereum.ts
-    userBox : Box | null,
+    readonly userBox : Optional<Box>,
     // Used by: ethereum.ts
-    userSpace : Space | null,
+    readonly userSpace : Optional<Space>,
     // Used by: ethereum.ts
-    userSpaceName : string,
+    readonly userSpaceName : string,
     // Used by: ethereum.ts, register.ts, search.ts
-    errorMessage : string,
+    readonly errorMessage : string,
     // Used by: model.ts
-    bountyList : Bounty[],
+    readonly bountyList : Bounty[],
     // Used by: model.ts
-    firmwareList : Firmware[],
+    readonly firmwareList : Firmware[],
     // Used by: navigation.ts
-    sidebarOpened : boolean,
+    readonly sidebarOpened : boolean,
     // Used by: navigation.ts
-    activeItem : string,
+    readonly activeItem : string,
     // Used by: navigation.ts
-    sidebarPosition : string,
+    readonly sidebarPosition : string,
     // Used by: navigation.ts
-    sidebarVisibility : string,
+    readonly sidebarVisibility : string,
     // Used by: navigation.ts
-    targetProfileAddress : string,
+    readonly targetProfileAddress : string,
     // Used by: profile.ts
-    addDeviceSuccess : boolean,
+    readonly addDeviceSuccess : boolean,
     // Used by: profile.ts
-    deviceList : Device[],
+    readonly deviceList : Device[],
     // Used by: profile.ts
-    userProfile : Profile | null,
+    readonly userProfile : Optional<Profile>,
     // Used by: profile.ts
-    userPassword : string,
+    readonly userPassword : string,
     // Used by: register.ts
-    networkAddress : string,
+    readonly networkAddress : string,
     // Used by: register.ts
-    linkingDeveloperAccount : boolean,
+    readonly linkingDeveloperAccount : boolean,
     // Used by: register.ts
-    registerPending : boolean,
+    readonly registerPending : boolean,
     // Used by: search.ts
-    searchText : string,
+    readonly searchText : string,
     // Used by: search.ts
-    searchStatus : string,
+    readonly searchStatus : string,
     // Used by: search.ts
-    bountyResults : Bounty[],
+    readonly bountyResults : Bounty[],
     // Used by: search.ts
-    deviceResults : Device[],
+    readonly deviceResults : Device[],
     // Used by: search.ts
-    firmwareResults : Firmware[],
+    readonly firmwareResults : Firmware[],
     // Used by: search.ts
-    userResults : ProfileWithStats[],
+    readonly userResults : ProfileWithStats[],
     // Used by: views.ts
-    firmwareStats : FirmwareWithThumbs | null,
+    readonly firmwareStats : Optional<FirmwareWithThumbs>,
     // Used by: views.ts
-    firmwareSource : string,
+    readonly firmwareSource : string,
     // Used by: views.ts
-    mineLike : number,
+    readonly mineLike : number,
     // Used by: views.ts
-    firmwareDeveloper : Profile | null,
+    readonly firmwareDeveloper : Optional<Profile>,
     // Used by: views.ts
-    bountyDetails : Bounty | null,
+    readonly bountyDetails : Optional<Bounty>,
     // Used by: views.ts
-    bountyProposer : ProfileWithStats | null,
+    readonly bountyProposer : Optional<ProfileWithStats>,
     // Used by: views.ts
-    profileWithStats : ProfileWithStats | null,
+    readonly profileWithStats : Optional<ProfileWithStats>,
 }
 
 const authenticated = localStorage.getItem('authenticated')?.toLowerCase() === "true";
@@ -104,8 +105,8 @@ export const defaultState : State = {
       isAuthenticated: authenticated,
       isEthereumEnabled: false,
       ethereumAddress: '',
-      userBox: null,
-      userSpace: null,
+      userBox: None,
+      userSpace: None,
       userSpaceName: '',
       errorMessage: '',
       bountyList: [],
@@ -117,7 +118,7 @@ export const defaultState : State = {
       targetProfileAddress: '',
       addDeviceSuccess : false,
       deviceList : [],
-      userProfile : null,
+      userProfile : None,
       userPassword : '',
       networkAddress : '',
       linkingDeveloperAccount : false,
@@ -128,11 +129,11 @@ export const defaultState : State = {
       deviceResults : [],
       firmwareResults : [],
       userResults : [],
-      firmwareStats : null,
+      firmwareStats : None,
       firmwareSource : '',
       mineLike : 0,
-      firmwareDeveloper : null,
-      bountyDetails : null,
-      bountyProposer : null,
-      profileWithStats : null,
+      firmwareDeveloper : None,
+      bountyDetails : None,
+      bountyProposer : None,
+      profileWithStats : None,
 }
