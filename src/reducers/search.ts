@@ -1,25 +1,30 @@
-import { SearchAction, SearchStatus } from '../actions/search';
+import { SearchAction, SearchStatus, SearchResult } from '../actions/search';
 import { State, defaultState } from '../model/State';
+import { Action } from '../model/Action';
 
-export default function search(state : State = defaultState, action : any) : State {
+export default function search(state : State = defaultState, action : Action<SearchAction, string | SearchResult>) : State {
   switch (action.type) {
     case SearchAction.Start:
-      return Object.assign({}, state, {
-        searchText: action.payload,
-      });
+      return {
+        ...state,
+        searchText: action.payload as string,
+      };
     case SearchAction.Success:
-      return Object.assign({}, state, {
-        bountyResults: action.payload.bountyResults,
-        firmwareResults: action.payload.firmwareResults,
-        userResults:  action.payload.userResults,
-        deviceResults: action.payload.deviceResults,
+      const searchResult = action.payload as SearchResult;
+      return {
+        ...state,
+        bountyResults: searchResult.bountyResults,
+        firmwareResults: searchResult.firmwareResults,
+        userResults:  searchResult.userResults,
+        deviceResults: searchResult.deviceResults,
         searchStatus: SearchStatus.Completed
-      });
+      };
     case SearchAction.Failure:
-      return Object.assign({}, state, {
-        errorMessage: action.payload,
+      return {
+        ...state,
+        errorMessage: action.payload as string,
         searchStatus: SearchStatus.Error
-      });
+      };
     default:
       return state;
   }

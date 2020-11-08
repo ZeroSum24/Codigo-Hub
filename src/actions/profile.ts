@@ -21,14 +21,14 @@ function setDevices(payload : Device[]) : Action<ProfileAction.UserDevicesSet, D
 }
 
 
-function setProfile(payload : {userProfile: Profile}) : Action<ProfileAction.UserProfileSet, {userProfile: Profile}> {
+function setProfile(payload : {userProfile: Profile}) : Action<ProfileAction.UserProfileSet, { userProfile : Profile }> {
   return {
     type: ProfileAction.UserProfileSet,
     payload
   };
 }
 
-export function setProfilePassword(payload : {userPassword: string}) : Action<ProfileAction.UserPasswordSet, {userPassword: string}> {
+export function setProfilePassword(payload : {userPassword: string}) : Action<ProfileAction.UserPasswordSet, { userPassword : string }> {
   return {
     type: ProfileAction.UserPasswordSet,
     payload

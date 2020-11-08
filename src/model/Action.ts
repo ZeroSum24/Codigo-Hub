@@ -1,9 +1,9 @@
 export interface EmptyAction<Type> {
-    type : Type
+    readonly type : Type
 }
 
 export interface Action<Type, Payload> extends EmptyAction<Type> {
-    payload : Payload
+    readonly payload : Payload
 }
 
 type Dispatch<Type> = (action : EmptyAction<Type> | DispatchedAction<Type>) => void;
