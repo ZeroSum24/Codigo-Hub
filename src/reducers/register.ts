@@ -1,10 +1,9 @@
-import { RegisterAction } from '../actions/register';
+import { RegisterActionType, RegisterAction } from '../actions/register';
 import { State, defaultState } from '../model/State';
-import { Action } from '../model/Action';
 
-export default function register(state : State = defaultState, action : Action<RegisterAction, string>) : State {
+export default function register(state : State = defaultState, action : RegisterAction) : State {
     switch (action.type) {
-        case RegisterAction.Request:
+        case RegisterActionType.Request:
             return {
                 ...state,
                 isFetching: true,
@@ -13,7 +12,7 @@ export default function register(state : State = defaultState, action : Action<R
                 linkingDeveloperAccount: state.linkingDeveloperAccount,
                 registerPending: false
             };
-        case RegisterAction.Success:
+        case RegisterActionType.Success:
             return {
                 ...state,
                 isFetching: false,
@@ -22,7 +21,7 @@ export default function register(state : State = defaultState, action : Action<R
                 linkingDeveloperAccount: false,
                 registerPending: false
             };
-        case RegisterAction.FirmwareSuccess:
+        case RegisterActionType.FirmwareSuccess:
             return {
                 ...state,
                 isFetching: false,
@@ -31,7 +30,7 @@ export default function register(state : State = defaultState, action : Action<R
                 linkingDeveloperAccount: false,
                 registerPending: false
             };
-        case RegisterAction.PendingFirmware:
+        case RegisterActionType.PendingFirmware:
             return {
                 ...state,
                 isFetching: state.isFetching,
@@ -40,7 +39,7 @@ export default function register(state : State = defaultState, action : Action<R
                 linkingDeveloperAccount: true,
                 registerPending: false
             };
-        case RegisterAction.Failure:
+        case RegisterActionType.Failure:
             return {
                 ...state,
                 isFetching: false,
@@ -49,7 +48,7 @@ export default function register(state : State = defaultState, action : Action<R
                 linkingDeveloperAccount: false,
                 registerPending: false
             };
-        case RegisterAction.Pending:
+        case RegisterActionType.Pending:
             return {
                 ...state,
                 registerPending: true

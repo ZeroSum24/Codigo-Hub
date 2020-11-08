@@ -2,7 +2,7 @@ import { retrieveAllAvailableFirmware, getAllUsers, retrieveAllBounties } from '
 import { getProfileWithStats } from './view.js';
 import { Action, DispatchedAction } from '../model/Action';
 import Bounty from '../model/Bounty';
-import Firmware, { FirmwareWithThumbs } from '../model/Firmware';
+import Firmware from '../model/Firmware';
 import { ProfileWithStats } from '../model/Profile';
 import Device from '../model/Device';
 
@@ -11,37 +11,48 @@ export interface SearchResult {
   firmwareResults: Firmware[],
   userResults: ProfileWithStats[],
   deviceResults: Device[]
-}
-
-export const enum SearchAction {
-  Start = 'SEARCH_START',
-  Success = 'SEARCH_SUCCESS',
-  Failure = 'SEARCH_FAILURE'
 };
 
 export const enum SearchStatus {
   Completed = 'COMPLETED',
   Error = 'ERROR',
   Loading = 'LOADING'
-}
+};
 
-export function searchPending(payload : string) : Action<SearchAction.Start, string> {
+export const enum SearchActionType {
+  Start = 'SEARCH_START',
+  Success = 'SEARCH_SUCCESS',
+  Failure = 'SEARCH_FAILURE'
+};
+
+interface Start extends Action<SearchActionType.Start> {
+  readonly payload : string;
+};
+interface Success extends Action<SearchActionType.Success> {
+  readonly payload : SearchResult
+};
+interface Failure extends Action<SearchActionType.Failure> {
+  readonly payload : string
+};
+export type SearchAction = Start | Success | Failure;
+
+export function searchPending(payload : string) : SearchAction {
   return {
-    type: SearchAction.Start,
+    type: SearchActionType.Start,
     payload
   };
 }
 
-function searchSuccess(payload : SearchResult) : Action<SearchAction.Success, SearchResult> {
+function searchSuccess(payload : SearchResult) : Success {
   return {
-    type: SearchAction.Success,
+    type: SearchActionType.Success,
     payload
   };
 }
 
-function searchFailure(payload : string) : Action<SearchAction.Failure, string> {
+function searchFailure(payload : string) : Failure {
   return {
-    type: SearchAction.Failure,
+    type: SearchActionType.Failure,
     payload
   };
 }
@@ -90,7 +101,7 @@ function isUserRelevant(term : string, user : ProfileWithStats) : boolean {
          containsIgnoreCase(user.name, term);
 }
 
-export function startSearch(searchText : string, devices : Device[]) : DispatchedAction<SearchAction> {
+export function startSearch(searchText : string, devices : Device[]) : DispatchedAction<SearchActionType> {
   return async (dispatch) => {
 
     dispatch(searchPending(searchText));

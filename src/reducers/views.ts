@@ -1,30 +1,26 @@
-import { ViewAction, FirmwareData, BountyData } from '../actions/view';
+import { ViewActionType, ViewAction } from '../actions/view';
 import { State, defaultState } from '../model/State';
-import { Action } from '../model/Action';
-import { ProfileWithStats } from '../model/Profile';
 
-export default function views(state : State = defaultState, action : Action<ViewAction, FirmwareData | BountyData | { profileWithStats : ProfileWithStats }>) : State {
+export default function views(state : State = defaultState, action : ViewAction) : State {
   switch (action.type) {
-    case ViewAction.FirmwareSet:
-      const firmwareData = action.payload as FirmwareData;
+    case ViewActionType.FirmwareSet:
       return {
         ...state,
-        firmwareStats: firmwareData.firmwareStats,
-        firmwareSource: firmwareData.firmwareSource,
-        firmwareDeveloper: firmwareData.firmwareDeveloper,
-        mineLike: firmwareData.mineLike,
+        firmwareStats: action.payload.firmwareStats,
+        firmwareSource: action.payload.firmwareSource,
+        firmwareDeveloper: action.payload.firmwareDeveloper,
+        mineLike: action.payload.mineLike,
       };
-    case ViewAction.ProfileSet:
+    case ViewActionType.ProfileSet:
       return {
         ...state,
-        profileWithStats: (action.payload as { profileWithStats : ProfileWithStats }).profileWithStats
+        profileWithStats: action.payload.profileWithStats
       };
-    case ViewAction.BountySet:
-      const bountyData = action.payload as BountyData;
+    case ViewActionType.BountySet:
       return {
         ...state,
-        bountyDetails: bountyData.bountyDetails,
-        bountyProposer: bountyData.bountyProposer
+        bountyDetails: action.payload.bountyDetails,
+        bountyProposer: action.payload.bountyProposer
       };
     default:
       return state;

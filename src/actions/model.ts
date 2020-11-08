@@ -3,19 +3,27 @@ import Bounty from '../model/Bounty';
 import { Action, DispatchedAction } from '../model/Action';
 import Firmware from "../model/Firmware";
 
-export const enum ModelAction {
+export const enum ModelActionType {
   SetBounties = 'MODEL_SET_BOUNTIES',
   SetFirmware = 'MODEL_SET_FIRMWARE',
 }
 
-function setBounty(payload : Bounty[]) : Action<ModelAction.SetBounties, Bounty[]> {
+interface SetBounties extends Action<ModelActionType.SetBounties> {
+  readonly payload : Bounty[]
+};
+interface SetFirmware extends Action<ModelActionType.SetFirmware> {
+  readonly payload : Firmware[]
+};
+export type ModelAction = SetBounties | SetFirmware;
+
+function setBounty(payload : Bounty[]) : SetBounties {
   return {
-    type: ModelAction.SetBounties,
+    type: ModelActionType.SetBounties,
     payload
   }
 }
 
-export function setBounties() : DispatchedAction<ModelAction.SetBounties> {
+export function setBounties() : DispatchedAction<ModelActionType.SetBounties> {
   return async (dispatch) => {
 
     const bounties = await retrieveAllBounties();
@@ -23,9 +31,9 @@ export function setBounties() : DispatchedAction<ModelAction.SetBounties> {
   }
 }
 
-function setFw(payload : Firmware[]) : Action<ModelAction.SetFirmware, Firmware[]> {
+function setFw(payload : Firmware[]) : SetFirmware {
   return {
-    type: ModelAction.SetFirmware,
+    type: ModelActionType.SetFirmware,
     payload
   };
 }
@@ -36,7 +44,7 @@ function setFw(payload : Firmware[]) : Action<ModelAction.SetFirmware, Firmware[
  * //TODO implement retrieval of data at login
  * @returns {function(...[*]=)}
  */
-export function setFirmware() : DispatchedAction<ModelAction.SetFirmware> {
+export function setFirmware() : DispatchedAction<ModelActionType.SetFirmware> {
   return async (dispatch) => {
     const fw = await retrieveAllAvailableFirmware();
     dispatch(setFw(fw));

@@ -1,11 +1,11 @@
 import { toast } from 'react-toastify';
 import { web3 } from '../blockchain/client';
 import { getChallenge, sendResponse, registerCurrentUser } from '../blockchain/contracts';
-import { setProfilePassword, ProfileAction } from "./profile";
-import { Action, EmptyAction, DispatchedAction } from '../model/Action';
+import { setProfilePassword, ProfileActionType } from "./profile";
+import { Action, DispatchedAction } from '../model/Action';
 import { Space } from '../types/3box-aux';
 
-export const enum RegisterAction {
+export const enum RegisterActionType {
   Request = 'REGISTER_REQUEST',
   Success = 'REGISTER_SUCCESS',
   Failure = 'REGISTER_FAILURE',
@@ -14,40 +14,52 @@ export const enum RegisterAction {
   Pending = 'REGISTER_PENDING'
 }
 
-export function receiveRegister() : EmptyAction<RegisterAction.Success> {
+interface Request extends Action<RegisterActionType.Request> {};
+interface Success extends Action<RegisterActionType.Success> {};
+interface Failure extends Action<RegisterActionType.Failure> {
+  readonly payload : string
+};
+interface FirmwareSuccess extends Action<RegisterActionType.FirmwareSuccess> {
+  readonly payload : string
+};
+interface PendingFirmware extends Action<RegisterActionType.PendingFirmware> {};
+interface Pending extends Action<RegisterActionType.Pending> {};
+export type RegisterAction = Request | Success | Failure | FirmwareSuccess | PendingFirmware | Pending;
+
+export function receiveRegister() : Success {
     return {
-        type: RegisterAction.Success
+        type: RegisterActionType.Success
     };
 }
 
 
-export function registerError(payload : string) : Action<RegisterAction.Failure, string> {
+export function registerError(payload : string) : Failure {
     return {
-        type: RegisterAction.Failure,
+        type: RegisterActionType.Failure,
         payload
     };
 }
 
-function firmareLinkSuccess(payload : string) : Action<RegisterAction.FirmwareSuccess, string> {
+function firmareLinkSuccess(payload : string) : FirmwareSuccess {
     return {
-        type: RegisterAction.FirmwareSuccess,
+        type: RegisterActionType.FirmwareSuccess,
         payload
     };
 }
 
-function firmwareLinkPending() : EmptyAction<RegisterAction.PendingFirmware> {
+function firmwareLinkPending() : PendingFirmware {
     return {
-        type: RegisterAction.PendingFirmware
+        type: RegisterActionType.PendingFirmware
     };
 }
 
-export function registerPending() : EmptyAction<RegisterAction.Pending> {
+export function registerPending() : Pending {
   return {
-    type: RegisterAction.Pending
+    type: RegisterActionType.Pending
   };
 }
 
-export function registerUser(payload : {creds : {password: string}, history: string[]}, userSpace : Space) : DispatchedAction<RegisterAction.Failure | ProfileAction.UserPasswordSet> {
+export function registerUser(payload : {creds : {password: string}, history: string[]}, userSpace : Space) : DispatchedAction<RegisterActionType.Failure | ProfileActionType.UserPasswordSet> {
     return async (dispatch) => {
       try {
 
@@ -65,7 +77,7 @@ export function registerUser(payload : {creds : {password: string}, history: str
     }
 }
 
-function setPassword(userSpace : Space, password : string) : DispatchedAction<ProfileAction.UserPasswordSet> {
+function setPassword(userSpace : Space, password : string) : DispatchedAction<ProfileActionType.UserPasswordSet> {
   return async (dispatch) => {
     await userSpace.private.set('password', password);
     dispatch(setProfilePassword({userPassword: password}));
@@ -77,7 +89,7 @@ function setPassword(userSpace : Space, password : string) : DispatchedAction<Pr
  * is false by default to allow for setting by external provider.
  * @returns {function(...[*]=)}
  */
-export function linkUserToFirmware(devAddress : string, privateKey : string, creds : {creds: {password: string}, history: string[]}, userSpace : Space) : DispatchedAction<RegisterAction.PendingFirmware | RegisterAction.FirmwareSuccess | RegisterAction.Failure | ProfileAction.UserPasswordSet> {
+export function linkUserToFirmware(devAddress : string, privateKey : string, creds : {creds: {password: string}, history: string[]}, userSpace : Space) : DispatchedAction<RegisterActionType.PendingFirmware | RegisterActionType.FirmwareSuccess | RegisterActionType.Failure | ProfileActionType.UserPasswordSet> {
 
     return async (dispatch) => {
 

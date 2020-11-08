@@ -1,20 +1,17 @@
-import { ModelAction } from '../actions/model';
+import { ModelActionType, ModelAction } from '../actions/model';
 import { State, defaultState } from '../model/State';
-import { Action } from '../model/Action';
-import Firmware from '../model/Firmware';
-import Bounty from '../model/Bounty';
 
-export default function model(state : State = defaultState, action : Action<ModelAction, Bounty[] | Firmware[]>) : State {
+export default function model(state : State = defaultState, action : ModelAction) : State {
   switch (action.type) {
-    case ModelAction.SetBounties:
+    case ModelActionType.SetBounties:
       return {
         ...state,
-        bountyList: action.payload as Bounty[]
+        bountyList: action.payload
       }
-    case ModelAction.SetFirmware:
+    case ModelActionType.SetFirmware:
       return {
         ...state,
-        firmwareList: action.payload as Firmware[]
+        firmwareList: action.payload
       }
     default:
       return state;

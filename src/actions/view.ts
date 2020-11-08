@@ -1,5 +1,5 @@
 import {retrieveStatsDetails} from "../blockchain/userStats";
-import Firmware, {FirmwareWithThumbs} from "../model/Firmware";
+import Firmware, { FirmwareWithThumbs } from "../model/Firmware";
 import Profile, { ProfileWithStats } from "../model/Profile";
 import { getFirmwareLikes, retrieveAllMyFirmware } from '../blockchain/contracts';
 import { downloadSourceCode } from '../filecoin/client';
@@ -7,11 +7,22 @@ import Box from "3box";
 import { Action, DispatchedAction } from "../model/Action";
 import Bounty from "../model/Bounty";
 
-export const enum ViewAction {
+export const enum ViewActionType {
   FirmwareSet = "VIEW_FIRMWARE_SET",
   ProfileSet = "VIEW_PROFILE_SET",
   BountySet = "VIEW_BOUNTY_SET"
 }
+
+interface FirmwareSet extends Action<ViewActionType.FirmwareSet> {
+  readonly payload : FirmwareData
+};
+interface ProfileSet extends Action<ViewActionType.ProfileSet> {
+  readonly payload : { profileWithStats : ProfileWithStats }
+};
+interface BountySet extends Action<ViewActionType.BountySet> {
+  readonly payload : BountyData
+};
+export type ViewAction = FirmwareSet | ProfileSet | BountySet;
 
 export interface FirmwareData {
   firmwareStats : FirmwareWithThumbs,
@@ -25,28 +36,28 @@ export interface BountyData {
   bountyProposer : ProfileWithStats
 }
 
-function setFirmware(payload : FirmwareData) : Action<ViewAction.FirmwareSet, FirmwareData> {
+function setFirmware(payload : FirmwareData) : FirmwareSet {
   return {
-    type: ViewAction.FirmwareSet,
+    type: ViewActionType.FirmwareSet,
     payload,
   }
 }
 
-function setProfile(payload : { profileWithStats : ProfileWithStats }) : Action<ViewAction.ProfileSet, { profileWithStats : ProfileWithStats }> {
+function setProfile(payload : { profileWithStats : ProfileWithStats }) : ProfileSet {
   return {
-    type: ViewAction.ProfileSet,
+    type: ViewActionType.ProfileSet,
     payload
   };
 }
 
-function setBounty(payload : BountyData) : Action<ViewAction.BountySet, BountyData> {
+function setBounty(payload : BountyData) : BountySet {
   return {
-    type: ViewAction.BountySet,
+    type: ViewActionType.BountySet,
     payload
   }
 }
 
-export function initFirmwareView(payload : {firmwareObj : Firmware, history : string[]}) : DispatchedAction<ViewAction.FirmwareSet> {
+export function initFirmwareView(payload : {firmwareObj : Firmware, history : string[]}) : DispatchedAction<ViewActionType.FirmwareSet> {
 
   return async (dispatch) => {
     const fw = payload.firmwareObj;
@@ -69,7 +80,7 @@ export function initFirmwareView(payload : {firmwareObj : Firmware, history : st
  * @param payload
  * @returns {function(...[*]=)}
  */
-export function initProfileView(payload : { profile : Profile, history : string[] }) : DispatchedAction<ViewAction.ProfileSet> {
+export function initProfileView(payload : { profile : Profile, history : string[] }) : DispatchedAction<ViewActionType.ProfileSet> {
 
   return async (dispatch) => {
 
@@ -90,7 +101,7 @@ export function initProfileView(payload : { profile : Profile, history : string[
   }
 }
 
-export function initBountyView(payload : {bountyObject : Bounty, history : string[]}) : DispatchedAction<ViewAction.BountySet> {
+export function initBountyView(payload : {bountyObject : Bounty, history : string[]}) : DispatchedAction<ViewActionType.BountySet> {
 
   return async (dispatch) => {
 

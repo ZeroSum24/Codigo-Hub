@@ -1,30 +1,29 @@
-import { NavigationAction } from '../actions/navigation';
+import { NavigationActionType, NavigationAction } from '../actions/navigation';
 import { State, defaultState } from '../model/State';
-import { Action } from '../model/Action';
 
-export default function runtime(state : State = defaultState, action : Action<NavigationAction, string>) : State {
+export default function runtime(state : State = defaultState, action : NavigationAction) : State {
   switch (action.type) {
-    case NavigationAction.OpenSideBar:
+    case NavigationActionType.OpenSideBar:
       return {
         ...state,
         sidebarOpened: true,
       };
-    case NavigationAction.CloseSideBar:
+    case NavigationActionType.CloseSideBar:
       return {
         ...state,
         sidebarOpened: false
       }
-    case NavigationAction.ChangeSiteBarPosition:
+    case NavigationActionType.ChangeSideBarPosition:
       return {
         ...state,
         sidebarPosition: action.payload
       }
-    case NavigationAction.ChangeSidebarVisibility:
+    case NavigationActionType.ChangeSidebarVisibility:
       return {
         ...state,
         sidebarVisibility: action.payload
       }
-    case NavigationAction.ChangeActiveSideBarItem:
+    case NavigationActionType.ChangeActiveSideBarItem:
       return {
         ...state,
         activeItem: action.payload,

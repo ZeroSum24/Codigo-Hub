@@ -1,49 +1,59 @@
 // Login Management
 import Box from "3box";
 
-import {setProfilePassword, setUserProfile, ProfileAction} from "./profile";
-import { setBounties, setFirmware, ModelAction } from './model';
+import {setProfilePassword, setUserProfile, ProfileActionType} from "./profile";
+import { setBounties, setFirmware, ModelActionType } from './model';
 import { getPG } from '../filecoin/client';
-import { EmptyAction, Action, DispatchedAction } from "../model/Action";
+import { Action, DispatchedAction } from "../model/Action";
 import { Space } from "../types/3box-aux";
 
-export const enum LoginAction {
+export const enum LoginActionType {
     Success = 'LOGIN_SUCCESS',
     Failure = 'LOGIN_FAILURE'
 }
 
-export const enum LogoutAction {
+interface LoginSuccess extends Action<LoginActionType.Success> {};
+interface LoginFailure extends Action<LoginActionType.Failure> {
+    readonly payload : string
+};
+export type LoginAction = LoginSuccess | LoginFailure;
+
+export const enum LogoutActionType {
     Request = 'LOGOUT_REQUEST',
     Success = 'LOGOUT_SUCCESS'
 }
 
-export function receiveLogin() : EmptyAction<LoginAction.Success> {
+interface LogoutRequest extends Action<LogoutActionType.Request> {};
+interface LogoutSuccess extends Action<LogoutActionType.Success> {};
+export type LogoutAction = LogoutRequest | LogoutSuccess;
+
+export function receiveLogin() : LoginSuccess {
     return {
-        type: LoginAction.Success
+        type: LoginActionType.Success
     };
 }
 
-function loginError(payload : string) : Action<LoginAction.Failure, string> {
+function loginError(payload : string) : LoginFailure {
     return {
-        type: LoginAction.Failure,
+        type: LoginActionType.Failure,
         payload,
     };
 }
 
-function requestLogout() : EmptyAction<LogoutAction.Request> {
+function requestLogout() : LogoutRequest {
     return {
-        type: LogoutAction.Request,
+        type: LogoutActionType.Request,
     };
 }
 
-export function receiveLogout() : EmptyAction<LogoutAction.Success> {
+export function receiveLogout() : LogoutSuccess {
     return {
-        type: LogoutAction.Success,
+        type: LogoutActionType.Success,
     };
 }
 
 // Logs the user out
-export function logoutUser() : DispatchedAction<LogoutAction> {
+export function logoutUser() : DispatchedAction<LogoutActionType> {
     return (dispatch) => {
         dispatch(requestLogout());
         localStorage.removeItem('authenticated');
@@ -51,7 +61,7 @@ export function logoutUser() : DispatchedAction<LogoutAction> {
     };
 }
 
-export function loginUser(creds : { password : string }, knownPassword : string) : DispatchedAction<LoginAction> {
+export function loginUser(creds : { password : string }, knownPassword : string) : DispatchedAction<LoginActionType> {
     return async (dispatch) => {
 
         dispatch(receiveLogin());
@@ -66,36 +76,45 @@ export function loginUser(creds : { password : string }, knownPassword : string)
 
 // Ethereum Management
 
-export const enum EthereumAction {
+export const enum EthereumActionType {
     Fetching = 'ETHEREUM_FETCHING',
     Success = 'ETHEREUM_SUCCESS',
     Failure = 'ETHEREUM_FAILURE'
-}
+};
+
+interface EthereumFetching extends Action<EthereumActionType.Fetching> {};
+interface EthereumSuccess extends Action<EthereumActionType.Success> {
+    readonly payload : EthereumData
+};
+interface EthereumFailure extends Action<EthereumActionType.Failure> {
+    readonly payload : string
+};
+export type EthereumAction = EthereumFetching | EthereumSuccess | EthereumFailure;
 
 export interface EthereumData {
-    ethereumAddress : string,
-    userBox : Box,
-    userSpace : Space,
-    userSpaceName : string
+    readonly ethereumAddress : string,
+    readonly userBox : Box,
+    readonly userSpace : Space,
+    readonly userSpaceName : string
 }
 
-function fetchEthereumAuth() : EmptyAction<EthereumAction.Fetching> {
+function fetchEthereumAuth() : EthereumFetching {
     // console.log('fetching ethereum auth');
     return {
-        type: EthereumAction.Fetching
+        type: EthereumActionType.Fetching
     };
 }
 
-function ethereumAuthSuccess(payload : EthereumData) : Action<EthereumAction.Success, EthereumData> {
+function ethereumAuthSuccess(payload : EthereumData) : EthereumSuccess {
     return {
-        type: EthereumAction.Success,
+        type: EthereumActionType.Success,
         payload
     };
 }
 
-function ethereumAuthError(payload : string) : Action<EthereumAction.Failure, string> {
+function ethereumAuthError(payload : string) : EthereumFailure {
     return {
-        type: EthereumAction.Failure,
+        type: EthereumActionType.Failure,
         payload,
     };
 }
@@ -105,7 +124,7 @@ function ethereumAuthError(payload : string) : Action<EthereumAction.Failure, st
  * is false by default to allow for setting by external provider.
  * @returns {function(...[*]=)}
  */
-export function enableUserEthereum() : DispatchedAction<EthereumAction | ModelAction.SetFirmware | ModelAction.SetBounties | ProfileAction.UserPasswordSet | ProfileAction.UserProfileSet> {
+export function enableUserEthereum() : DispatchedAction<EthereumActionType | ModelActionType.SetFirmware | ModelActionType.SetBounties | ProfileActionType.UserPasswordSet | ProfileActionType.UserProfileSet> {
 
     return async (dispatch) => {
 

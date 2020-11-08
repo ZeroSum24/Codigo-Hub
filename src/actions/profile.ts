@@ -1,36 +1,47 @@
 import Box from '3box';
-import Profile, { ProfileWithStats } from "../model/Profile";
+import Profile from "../model/Profile";
 import Device from "../model/Device";
 import { Action, DispatchedAction } from "../model/Action";
 
-export const enum ProfileAction {
+export const enum ProfileActionType {
   UserDevicesSet = 'DEVICES_SET',
   UserProfileSet = 'USER_PROFILE_SET',
   UserPasswordSet = 'USER_PASSWORD_SET'
 }
 
+interface UserDevicesSet extends Action<ProfileActionType.UserDevicesSet> {
+  readonly payload : Device[]
+};
+interface UserProfileSet extends Action<ProfileActionType.UserProfileSet> {
+  readonly payload : { userProfile : Profile }
+};
+interface UserPasswordSet extends Action<ProfileActionType.UserPasswordSet> {
+  readonly payload : { userPassword : string }
+};
+export type ProfileAction = UserDevicesSet | UserProfileSet | UserPasswordSet;
+
 const deviceLocalStorageKey = 'devices';
 
-function setDevices(payload : Device[]) : Action<ProfileAction.UserDevicesSet, Device[]> {
+function setDevices(payload : Device[]) : UserDevicesSet {
   // TODO update orbit DB datastore
   localStorage[deviceLocalStorageKey] = JSON.stringify(payload);
   return {
-    type: ProfileAction.UserDevicesSet,
+    type: ProfileActionType.UserDevicesSet,
     payload
   };
 }
 
 
-function setProfile(payload : {userProfile: Profile}) : Action<ProfileAction.UserProfileSet, { userProfile : Profile }> {
+function setProfile(payload : { userProfile : Profile }) : UserProfileSet {
   return {
-    type: ProfileAction.UserProfileSet,
+    type: ProfileActionType.UserProfileSet,
     payload
   };
 }
 
-export function setProfilePassword(payload : {userPassword: string}) : Action<ProfileAction.UserPasswordSet, { userPassword : string }> {
+export function setProfilePassword(payload : { userPassword : string }) : UserPasswordSet {
   return {
-    type: ProfileAction.UserPasswordSet,
+    type: ProfileActionType.UserPasswordSet,
     payload
   };
 }
@@ -42,7 +53,7 @@ export function setProfilePassword(payload : {userPassword: string}) : Action<Pr
  * @param devices
  * @returns {function(...[*]=)}
  */
-export function setUserDevices(devices : Device[]) : DispatchedAction<ProfileAction.UserDevicesSet> {
+export function setUserDevices(devices : Device[]) : DispatchedAction<ProfileActionType.UserDevicesSet> {
   return (dispatch) => {
     dispatch(setDevices(devices));
   }
@@ -51,7 +62,7 @@ export function setUserDevices(devices : Device[]) : DispatchedAction<ProfileAct
 /**
  * Reads available user devices from the browser cache
  */
-export function initUserDevices() : DispatchedAction<ProfileAction.UserDevicesSet> {
+export function initUserDevices() : DispatchedAction<ProfileActionType.UserDevicesSet> {
   return async (dispatch) => {
     let devices = [];
     if (localStorage[deviceLocalStorageKey]) {
@@ -73,7 +84,7 @@ export function initUserDevices() : DispatchedAction<ProfileAction.UserDevicesSe
  * @param device the device to be added to the list of devices
  * @returns {function(...[*]=)}
  */
-export function createUserDevice(devices : Device[], device : Device) : DispatchedAction<ProfileAction.UserDevicesSet> {
+export function createUserDevice(devices : Device[], device : Device) : DispatchedAction<ProfileActionType.UserDevicesSet> {
   return (dispatch) => {
     devices.push(device);
     dispatch(setDevices(devices));
@@ -103,7 +114,7 @@ export function createUserDevice(devices : Device[], device : Device) : Dispatch
  * @param {Device[]} devices
  * @returns {function(...[*]=)}
  */
-export function deleteDevice(device : Device, devices : Device[]) : DispatchedAction<ProfileAction.UserDevicesSet> {
+export function deleteDevice(device : Device, devices : Device[]) : DispatchedAction<ProfileActionType.UserDevicesSet> {
   return (dispatch) => {
     // need to check it is possible to delete that device
     dispatch(setDevices(devices.filter(d => d!== device)));
@@ -111,7 +122,7 @@ export function deleteDevice(device : Device, devices : Device[]) : DispatchedAc
 }
 
 
-export function setUserProfile(payload: {userAddress: string}) : DispatchedAction<ProfileAction.UserProfileSet> {
+export function setUserProfile(payload: {userAddress: string}) : DispatchedAction<ProfileActionType.UserProfileSet> {
   return async (dispatch) => {
 
     // Get user profile using 3box address and wrap in Profile model object
