@@ -1,7 +1,7 @@
 import { RegisterActionType, RegisterAction } from '../actions/register';
-import { State, defaultState } from '../model/State';
+import { RegisterState, defaultState } from '../model/State';
 
-export default function register(state : State = defaultState, action : RegisterAction) : State {
+export default function register(state : RegisterState = defaultState.register, action : RegisterAction) : RegisterState {
     switch (action.type) {
         case RegisterActionType.Request:
             return {

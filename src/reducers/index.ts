@@ -8,8 +8,29 @@ import profile from './profile';
 import search from './search';
 import model from './model';
 import views from './views'
+import { State } from '../model/State';
+import { Reducer } from 'react';
+import { AlertsAction } from '../actions/alerts';
+import { NavigationAction } from '../actions/navigation';
+import { LoginAction, EthereumAction } from '../actions/user';
+import { ModelAction } from '../actions/model';
+import { ProfileAction } from '../actions/profile';
+import { RegisterAction } from '../actions/register';
+import { SearchAction } from '../actions/search';
+import { ViewAction } from '../actions/view';
 
-export default combineReducers({
+type AllActions = 
+  ( AlertsAction 
+  | LoginAction 
+  | EthereumAction 
+  | ModelAction 
+  | NavigationAction 
+  | ProfileAction 
+  | RegisterAction 
+  | SearchAction 
+  | ViewAction );
+
+const rootReducer : Reducer<State, AllActions> = combineReducers({
   alerts,
   auth,
   ethereum,
@@ -20,3 +41,5 @@ export default combineReducers({
   model,
   views
 });
+
+export default rootReducer;

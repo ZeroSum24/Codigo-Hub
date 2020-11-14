@@ -1,7 +1,7 @@
 import { LoginActionType, LoginAction } from '../actions/user';
-import { State, defaultState } from '../model/State';
+import { AuthState, defaultState } from '../model/State';
 
-export default function auth(state : State = defaultState, action : LoginAction) : State {
+export default function auth(state : AuthState = defaultState.auth, action : LoginAction) : AuthState {
     switch (action.type) {
         case LoginActionType.Success:
             return {

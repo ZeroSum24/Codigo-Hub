@@ -1,7 +1,7 @@
 import { EthereumActionType, EthereumAction } from '../actions/user';
-import { State, defaultState } from '../model/State';
+import { EthereumState, defaultState } from '../model/State';
 
-export default function ethereum(state : State = defaultState, action : EthereumAction) : State {
+export default function ethereum(state : EthereumState = defaultState.ethereum, action : EthereumAction) : EthereumState {
     switch (action.type) {
         case EthereumActionType.Fetching:
             return {

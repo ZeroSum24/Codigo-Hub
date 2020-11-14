@@ -1,7 +1,7 @@
 import { ProfileActionType, ProfileAction } from '../actions/profile';
-import { State, defaultState } from '../model/State';
+import { ProfileState, defaultState } from '../model/State';
 
-export default function profile(state : State = defaultState, action : ProfileAction) : State {
+export default function profile(state : ProfileState = defaultState.profile, action : ProfileAction) : ProfileState {
   switch (action.type) {
     case ProfileActionType.UserDevicesSet:
       return {

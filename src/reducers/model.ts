@@ -1,7 +1,7 @@
 import { ModelActionType, ModelAction } from '../actions/model';
-import { State, defaultState } from '../model/State';
+import { ModelState, defaultState } from '../model/State';
 
-export default function model(state : State = defaultState, action : ModelAction) : State {
+export default function model(state : ModelState = defaultState.model, action : ModelAction) : ModelState {
   switch (action.type) {
     case ModelActionType.SetBounties:
       return {

@@ -7,133 +7,167 @@ import Box from '3box';
 import { Space } from '../types/3box-aux';
 import { Optional, None } from "../types/optional";
 
+export interface AlertsState {
+  readonly alertsList : {
+     readonly id : number,
+     readonly title : string, 
+     readonly value : number, 
+     readonly color : string, 
+     readonly footer : string 
+    }[]
+}
+
+export interface AuthState {
+  readonly isFetching : boolean,
+  readonly isAuthenticated : boolean,
+  readonly errorMessage : string
+}
+
+export interface EthereumState {
+  readonly isFetching : boolean,
+  readonly isEthereumEnabled : boolean,
+  readonly ethereumAddress : string,
+  readonly userBox : Optional<Box>,
+  readonly userSpace : Optional<Space>,
+  readonly userSpaceName : string,
+  readonly errorMessage : string
+}
+
+export interface ModelState {
+  readonly bountyList : Bounty[],
+  readonly firmwareList : Firmware[]
+}
+
+export interface NavigationState {
+  readonly sidebarOpened : boolean,
+  readonly activeItem : string,
+  readonly sidebarPosition : string,
+  readonly sidebarVisibility : string,
+  readonly targetProfileAddress : string
+}
+
+export interface ProfileState {
+  readonly addDeviceSuccess : boolean,
+  readonly deviceList : Device[],
+  readonly userProfile : Optional<Profile>,
+  readonly userPassword : string
+}
+
+export interface RegisterState {
+  readonly networkAddress : string,
+  readonly isFetching : boolean,
+  readonly errorMessage : string,
+  readonly linkingDeveloperAccount : boolean,
+  readonly registerPending : boolean
+}
+
+export interface SearchState {
+  readonly searchText : string,
+  readonly searchStatus : SearchStatus,
+  readonly bountyResults : Bounty[],
+  readonly deviceResults : Device[],
+  readonly firmwareResults : Firmware[],
+  readonly userResults : ProfileWithStats[],
+  readonly errorMessage : string
+}
+
+export interface ViewsState {
+  readonly firmwareStats : Optional<FirmwareWithThumbs>,
+  readonly firmwareSource : string,
+  readonly mineLike : number,
+  readonly firmwareDeveloper : Optional<Profile>,
+  readonly bountyDetails : Optional<Bounty>,
+  readonly bountyProposer : Optional<ProfileWithStats>,
+  readonly profileWithStats : Optional<ProfileWithStats>
+}
+
 export interface State {
-    // Used by: alerts.ts
-    readonly alertsList : { readonly id : number, readonly title : string, readonly value : number, readonly color : string, readonly footer : string }[],
-    // Used by: auth.ts, ethereum.ts, register.ts
-    readonly isFetching : boolean,
-    // Used by: auth.ts
-    readonly isAuthenticated : boolean,
-    // Used by: ethereum.ts
-    readonly isEthereumEnabled : boolean,
-    // Used by: ethereum.ts
-    readonly ethereumAddress : string,
-    // Used by: ethereum.ts
-    readonly userBox : Optional<Box>,
-    // Used by: ethereum.ts
-    readonly userSpace : Optional<Space>,
-    // Used by: ethereum.ts
-    readonly userSpaceName : string,
-    // Used by: ethereum.ts, register.ts, search.ts
-    readonly errorMessage : string,
-    // Used by: model.ts
-    readonly bountyList : Bounty[],
-    // Used by: model.ts
-    readonly firmwareList : Firmware[],
-    // Used by: navigation.ts
-    readonly sidebarOpened : boolean,
-    // Used by: navigation.ts
-    readonly activeItem : string,
-    // Used by: navigation.ts
-    readonly sidebarPosition : string,
-    // Used by: navigation.ts
-    readonly sidebarVisibility : string,
-    // Used by: navigation.ts
-    readonly targetProfileAddress : string,
-    // Used by: profile.ts
-    readonly addDeviceSuccess : boolean,
-    // Used by: profile.ts
-    readonly deviceList : Device[],
-    // Used by: profile.ts
-    readonly userProfile : Optional<Profile>,
-    // Used by: profile.ts
-    readonly userPassword : string,
-    // Used by: register.ts
-    readonly networkAddress : string,
-    // Used by: register.ts
-    readonly linkingDeveloperAccount : boolean,
-    // Used by: register.ts
-    readonly registerPending : boolean,
-    // Used by: search.ts
-    readonly searchText : string,
-    // Used by: search.ts
-    readonly searchStatus : string,
-    // Used by: search.ts
-    readonly bountyResults : Bounty[],
-    // Used by: search.ts
-    readonly deviceResults : Device[],
-    // Used by: search.ts
-    readonly firmwareResults : Firmware[],
-    // Used by: search.ts
-    readonly userResults : ProfileWithStats[],
-    // Used by: views.ts
-    readonly firmwareStats : Optional<FirmwareWithThumbs>,
-    // Used by: views.ts
-    readonly firmwareSource : string,
-    // Used by: views.ts
-    readonly mineLike : number,
-    // Used by: views.ts
-    readonly firmwareDeveloper : Optional<Profile>,
-    // Used by: views.ts
-    readonly bountyDetails : Optional<Bounty>,
-    // Used by: views.ts
-    readonly bountyProposer : Optional<ProfileWithStats>,
-    // Used by: views.ts
-    readonly profileWithStats : Optional<ProfileWithStats>,
+  readonly alerts : AlertsState,
+  readonly auth : AuthState,
+  readonly ethereum : EthereumState,
+  readonly model : ModelState,
+  readonly navigation : NavigationState,
+  readonly profile : ProfileState,
+  readonly register : RegisterState,
+  readonly search : SearchState,
+  readonly views : ViewsState
 }
 
 const authenticated = localStorage.getItem('authenticated')?.toLowerCase() === "true";
 
 export const defaultState : State = {
+  alerts: {
     alertsList: [
-        {
-          id: 0,
-          title: 'Sales Report',
-          value: 16,
-          color: 'primary',
-          footer: 'Calculating x-axis bias... 65%',
-        },
-        {
-          id: 1,
-          title: 'Personal Responsibility',
-          value: 23,
-          color: 'danger',
-          footer: 'Provide required notes',
-        },
-      ],
-      isFetching: false,
-      isAuthenticated: authenticated,
-      isEthereumEnabled: false,
-      ethereumAddress: '',
-      userBox: None,
-      userSpace: None,
-      userSpaceName: '',
-      errorMessage: '',
-      bountyList: [],
-      firmwareList: [],
-      sidebarOpened: false,
-      activeItem: window.location.pathname,
-      sidebarPosition: 'left',
-      sidebarVisibility: 'show',
-      targetProfileAddress: '',
-      addDeviceSuccess : false,
-      deviceList : [],
-      userProfile : None,
-      userPassword : '',
-      networkAddress : '',
-      linkingDeveloperAccount : false,
-      registerPending : false,
-      searchText : '',
-      searchStatus : SearchStatus.Loading,
-      bountyResults : [],
-      deviceResults : [],
-      firmwareResults : [],
-      userResults : [],
-      firmwareStats : None,
-      firmwareSource : '',
-      mineLike : 0,
-      firmwareDeveloper : None,
-      bountyDetails : None,
-      bountyProposer : None,
-      profileWithStats : None,
+      {
+        id: 0,
+        title: 'Sales Report',
+        value: 16,
+        color: 'primary',
+        footer: 'Calculating x-axis bias... 65%',
+      },
+      {
+        id: 1,
+        title: 'Personal Responsibility',
+        value: 23,
+        color: 'danger',
+        footer: 'Provide required notes',
+      },
+    ]
+  },
+  auth: {
+    isFetching: false,
+    isAuthenticated: authenticated,
+    errorMessage: ''
+  },
+  ethereum: {
+    isFetching: true,
+    isEthereumEnabled: false,
+    ethereumAddress: '',
+    userBox: None,
+    userSpace: None,
+    userSpaceName: '',
+    errorMessage: ''
+  },
+  model: {
+    bountyList: [],
+    firmwareList: []
+  },
+  navigation: {
+    sidebarOpened: false,
+    activeItem: window.location.pathname,
+    sidebarPosition: 'left',
+    sidebarVisibility: 'show',
+    targetProfileAddress: ''
+  },
+  profile: {
+    addDeviceSuccess : false,
+    deviceList : [],
+    userProfile : None,
+    userPassword : ''
+  },
+  register: {
+    networkAddress: '',
+    isFetching: false,
+    errorMessage: '',    
+    linkingDeveloperAccount : false,
+    registerPending : false
+  },
+  search: {
+    searchText: '',
+    searchStatus: SearchStatus.Loading,
+    bountyResults: [],
+    deviceResults: [],
+    firmwareResults: [],
+    userResults: [],
+    errorMessage: ''
+  },
+  views: {
+    firmwareStats : None,
+    firmwareSource : '',
+    mineLike : 0,
+    firmwareDeveloper : None,
+    bountyDetails : None,
+    bountyProposer : None,
+    profileWithStats : None,
+  }
 }

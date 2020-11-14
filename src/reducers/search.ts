@@ -1,7 +1,7 @@
 import { SearchActionType, SearchStatus, SearchAction } from '../actions/search';
-import { State, defaultState } from '../model/State';
+import { SearchState, defaultState } from '../model/State';
 
-export default function search(state : State = defaultState, action : SearchAction) : State {
+export default function search(state : SearchState = defaultState.search, action : SearchAction) : SearchState {
   switch (action.type) {
     case SearchActionType.Start:
       return {

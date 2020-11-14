@@ -1,7 +1,7 @@
 import { AlertsActionType, AlertsAction } from '../actions/alerts';
-import { State, defaultState } from '../model/State';
+import { AlertsState, defaultState } from '../model/State';
 
-export default function alertsReducer(state : State = defaultState, action : AlertsAction) : State {
+export default function alertsReducer(state : AlertsState = defaultState.alerts, action : AlertsAction) : AlertsState {
   let index = 0;
   switch (action.type) {
     case AlertsActionType.DismissAlert:

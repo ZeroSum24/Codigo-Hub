@@ -1,7 +1,7 @@
 import { ViewActionType, ViewAction } from '../actions/view';
-import { State, defaultState } from '../model/State';
+import { ViewsState, defaultState } from '../model/State';
 
-export default function views(state : State = defaultState, action : ViewAction) : State {
+export default function views(state : ViewsState = defaultState.views, action : ViewAction) : ViewsState {
   switch (action.type) {
     case ViewActionType.FirmwareSet:
       return {

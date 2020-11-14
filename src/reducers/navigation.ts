@@ -1,7 +1,7 @@
 import { NavigationActionType, NavigationAction } from '../actions/navigation';
-import { State, defaultState } from '../model/State';
+import { NavigationState, defaultState } from '../model/State';
 
-export default function runtime(state : State = defaultState, action : NavigationAction) : State {
+export default function runtime(state : NavigationState = defaultState.navigation, action : NavigationAction) : NavigationState {
   switch (action.type) {
     case NavigationActionType.OpenSideBar:
       return {
